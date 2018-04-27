@@ -31,56 +31,50 @@ var RubricsSchema = new Schema({
   updated: {
     type: String,
   },
-  content: {
-    _id: mongoose.Types.ObjectId(),      
-      type: Array,
+  content: [{
+            
+      type: Schema.Types.ObjectId, 
+      ref: 'Content',
       default : [],
-      question: String ,
-      answer: String,
-      views : Number,
-      created: {type : String, default: Date.now() },
-      updated : String 
+    
  
-  },
+  }],
 });
 
-var StyleSchema = new Schema({
-  style: {
-    type: String
-  },
+var RubricContentSchema = new Schema({
+  question: String,
+  answer: String,
+  views: Number,
+  created: { type: String, default: Date.now() },
+  updated: String 
+})
 
 
-});
+var ContactFormSchema = new Schema({
+  toEmail: {type: String},
+  visitorName: {type:String},
+  content: {type: String},
+  created: {type : Date, default: Date.now()}
+})
 
-var AdminSchema = new Schema({
-  createdAt: { type: Date, expires: 3600, default: Date.now },
-  username: {
-    type: String,
-    default: 'admin'
-  },
-  password: {
-    type: String,
-    default: 'admin'
-  },
-  logInKeys: { type: Array, default: []}
+var SearchSchema = new Schema({
+  content: {type: String},
+  created: {type: Date,default: Date.now() }
+})
 
-});
-
-var ChatSchema = new Schema({
-  username :  {
-    type: String
-  },
-  nameSpace: {
-    type: String
-  },
-  messages: {type : Array, default : []},
-  notify : {type: String , default: true}
+var AboutSchema = new Schema({
+  name: {type: String},
+  logoPath: {type: String}, 
+  description: {type: String},
+  slogan: {type: String}
 })
 
 
 module.exports = mongoose.model('Users', UsersSchema);
 module.exports = mongoose.model('Rubrics', RubricsSchema);
-module.exports = mongoose.model('Style', StyleSchema);
-module.exports = mongoose.model('Admin', AdminSchema);
-module.exports = mongoose.model('Chat', ChatSchema  );
+module.exports = mongoose.model('RubricContent', RubricContentSchema  );
+module.exports = mongoose.model('Contact', ContactFormSchema);
+module.exports = mongoose.model('Search', SearchSchema);
+module.exports = mongoose.model('About', AboutSchema);
+
 

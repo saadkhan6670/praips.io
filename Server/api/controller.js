@@ -6,6 +6,9 @@ const nodemailer = require('nodemailer');
 var Schema = mongoose.Schema;
 
 const Rubrics = mongoose.model('Rubrics');
+const RubricContent = mongoose.model('RubricContent');
+
+
 
 
 
@@ -13,7 +16,7 @@ const Rubrics = mongoose.model('Rubrics');
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'vpninsights@gmail.com', // generated ethereal user
+    user: '', // generated ethereal user
     pass: password // generated ethereal password
   }
 });
@@ -34,8 +37,18 @@ exports.postData = (req, res) => {
   }
 
   exports.postContent = (req, res) => {
-    Rubrics.update({_id: req.body._id}, { $push: {content: req.body} }, (data) => {
-      res.send(data);
+    let NewRubricContent = new RubricContent(req.body);
+    NewRubricContent.save( (err,data) => {
+      if(err) {
+        res.send(err)
+      }
+      else {
+        Rubrics.update({ _id: req.query._id }, { $push: { content: data._id } }, (data) => {
+         return
+        })
+      res.send(data)
+
+      }
     })
    
     }
