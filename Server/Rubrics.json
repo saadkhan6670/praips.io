@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Support",
+        "slug": "/potenti",
+        "createdAt": "2017-07-20T14:34:22Z",
+        "updatedAt": "2017-08-12T11:41:46Z"
+    },
+    {
+        "name": "Research and Development",
+        "slug": "/pharetra",
+        "createdAt": "2018-03-21T02:46:33Z",
+        "updatedAt": "2018-01-20T08:45:32Z"
+    },
+    {
+        "name": "Training",
+        "slug": "/odio",
+        "createdAt": "2017-10-19T21:05:51Z",
+        "updatedAt": "2018-01-09T00:27:35Z"
+    },
+    {
+        "name": "Marketing",
+        "slug": "/penatibus",
+        "createdAt": "2017-07-19T20:04:00Z",
+        "updatedAt": "2018-01-02T09:52:33Z"
+    },
+    {
+        "name": "Business Development",
+        "slug": "/rutrum",
+        "createdAt": "2017-10-10T19:08:10Z",
+        "updatedAt": "2017-05-19T16:32:42Z"
+    },
+    {
+        "name": "Engineering",
+        "slug": "/quis",
+        "createdAt": "2018-03-31T21:34:25Z",
+        "updatedAt": "2017-04-29T18:50:03Z"
+    },
+    {
+        "name": "Accounting",
+        "slug": "/metus",
+        "createdAt": "2017-06-13T16:13:25Z",
+        "updatedAt": "2017-07-18T22:05:26Z"
+    },
+    {
+        "name": "Business Development",
+        "slug": "/sit",
+        "createdAt": "2017-05-11T21:13:00Z",
+        "updatedAt": "2017-08-23T02:16:49Z"
+    },
+    {
+        "name": "Research and Development",
+        "slug": "/sapien",
+        "createdAt": "2017-06-14T19:53:49Z",
+        "updatedAt": "2018-01-15T00:43:00Z"
+    },
+    {
+        "name": "Marketing",
+        "slug": "/faucibus",
+        "createdAt": "2018-04-12T00:24:10Z",
+        "updatedAt": "2017-07-22T06:26:36Z"
+    }
+]

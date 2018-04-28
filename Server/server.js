@@ -36,10 +36,10 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
-// app.use(express.static((path.resolve(__dirname, '../client/build'))));
+app.use(express.static('public'));
 
 // app.set('views', [
-//   path.resolve(__dirname, '../client/build')
+//   path.resolve(__dirname, '/public')
 // ]);
 
 
@@ -48,6 +48,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/api', require('./api'));
 
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 
 app.listen(process.env.PORT, function () {

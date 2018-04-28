@@ -1,56 +1,184 @@
 
-var axios = require('axios');
-var password = "tH,3]>YRyjBE";
 var mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 var Schema = mongoose.Schema;
 
+//Models
 const Rubrics = mongoose.model('Rubrics');
 const RubricContent = mongoose.model('RubricContent');
+const Users = mongoose.model('Users');
+const Contact = mongoose.model('Contact');
+const Search = mongoose.model('Search');
+const About = mongoose.model('About');
 
 
 
-
-
-// create reusable transporter object using the default SMTP transport
+//create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: '', // generated ethereal user
-    pass: password // generated ethereal password
+    user: '', 
+    pass: ''
   }
 });
 
 
-exports.HTTPHeaders = (req, res) => {
-  res.send(req.headers)
+exports.adminLogIn = (req, res) => {
+  Users.findOne({ email: req.body.email, password: req.body.password }, (err, data) => {
+
+    if (!data) {
+      res.send(false)
+    }
+    else {
+      res.send(true)
+    }
+  })
 }
 
-exports.postData = (req, res) => {
+exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)
 
-  New_Rubrics.save( (err , rubric) => {
+  New_Rubrics.save((err, rubric) => {
 
     res.send(rubric)
   })
- 
-  }
 
-  exports.postContent = (req, res) => {
-    let NewRubricContent = new RubricContent(req.body);
-    NewRubricContent.save( (err,data) => {
-      if(err) {
-        res.send(err)
-      }
-      else {
-        Rubrics.update({ _id: req.query._id }, { $push: { content: data._id } }, (data) => {
-         return
-        })
+}
+
+
+exports.updateRubcric = (req, res) => {
+
+  Rubrics.findByIdAndUpdate(req.query.id, { $set: {name : req.body.name} }, {new: true}, (err , data) => {
+
+    if(!data) {
+      res.send("No rubric found to update")
+    }
+
+    else {
+      res.send("Rubric updated");
+    }
+  })
+}
+
+exports.getAllRubrics = (req, res) => {
+
+  Rubrics.find({}).populate('content').exec( (err , data) => {
+
+    if(!data) {
+      res.send(err)
+    }
+
+    else {
+      res.send(data);
+    }
+  })
+}
+
+
+
+
+
+exports.createRubcricContent = (req, res) => {
+  let NewRubricContent = new RubricContent(req.body);
+  NewRubricContent.save((err, data) => {
+    if (err) {
+      res.send(err)
+    }
+    else {
+      Rubrics.update({ _id: mongoose.Types.ObjectId( req.query.id) }, { $push: { content: data._id } }, (data) => {
+        return
+      })
       res.send(data)
 
-      }
-    })
-   
     }
-    
+  })
+
+}
+
+exports.updateRubcricContent = (req, res) => {
+  RubricContent.findByIdAndUpdate(req.query.id, { $set: {name : req.body.name} }, {new: true}, (err , data) => {
+
+    if(!data) {
+      res.send("No rubric found to update")
+    }
+
+    else {
+      res.send("Rubric updated");
+    }
+  })
+
+}
+
+exports.createAbout = (req, res) => {
+  let NewAbout = new About(req.body);
+  NewRubricContent.save((err, data) => {
+    if (!data) {
+      res.send(err);
+    }
+    else {
+      res.send(data);
+
+    }
+  })
+
+}
+
+exports.updateAbout = (req, res) => {
+  About.findOneAndUpdate({name: req.body.name}, {new: true}, (err, doc) => {
+
+    if(!doc) {
+      res.send(err);
+    }
+
+    else {
+    res.send("About updated successfully !");
+    }
+  })
+
+}
+
+exports.getAbout = (req, res) => {
+
+  About.find({} , (err , data) => {
+
+    if(!data) {
+      res.send(err)
+    }
+
+    else {
+      
+      res.send(data);
+    }
+  })
+}
+
+
+exports.createContact = (req, res) => {
+  let NewContact = new Contact(req.body);
   
+  
+
+  NewContact.save((err, data) => {
+    if (!data) {
+      res.send(err);
+    }
+    else {
+      let mailOptions = {
+        from: 'abc@gmail.com', // sender address
+        to: 'abc@gmail.com', // list of receivers
+        subject: 'New Contact Request', // Subject line
+        html: "<h1>New Contact Request </h1>   <p><b>Name: </b>" + req.body.name + "</p> <p><b>Email: </b>" + req.body.email + "</p> <p><b>Department: </b>" + req.body.dept + "</p>" + "</p> <p><b>Mesage: </b>" + req.body.message + "</p>"
+      };
+    
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return res.send(error);
+        }
+        res.send(info);
+      });
+      res.send(data);
+
+    }
+  })
+
+}
