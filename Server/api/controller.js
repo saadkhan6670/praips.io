@@ -47,8 +47,10 @@ exports.createRubric = (req, res) => {
 
 
 exports.updateRubcric = (req, res) => {
+  let date = new Date();
+  console.log(date.getUTCDate())
 
-  Rubrics.findByIdAndUpdate(req.query.id, { $set: {name : req.body.name} }, {new: true}, (err , data) => {
+  Rubrics.findByIdAndUpdate(req.query.id, { $set: {name : req.body.name, updatedAt: Date.now()} }, {new: true}, (err , data) => {
 
     if(!data) {
       res.send("No rubric found to update")
@@ -96,14 +98,17 @@ exports.createRubcricContent = (req, res) => {
 }
 
 exports.updateRubcricContent = (req, res) => {
-  RubricContent.findByIdAndUpdate(req.query.id, { $set: {name : req.body.name} }, {new: true}, (err , data) => {
+  RubricContent.findByIdAndUpdate(req.query.id, { $set:
+    {name : req.body.name, question: req.body.question, answer: req.body.answer}},
+    
+    {new: true}, (err , data) => {
 
     if(!data) {
-      res.send("No rubric found to update")
+      res.send("Rubric content not found to update")
     }
 
     else {
-      res.send("Rubric updated");
+      res.send("Rubric content updated");
     }
   })
 
