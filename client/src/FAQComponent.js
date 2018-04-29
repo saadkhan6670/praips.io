@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { observer, inject } from 'mobx-react';
 
-let dummyArr = [ "Lorem Ipsum1", "Lorem Ipsum2","Lorem Ipsum3","Lorem Ipsum4","Lorem Ipsum5","Lorem Ipsum6",]
+
+let dummyArr = ["Lorem Ipsum1", "Lorem Ipsum2", "Lorem Ipsum3", "Lorem Ipsum4", "Lorem Ipsum5", "Lorem Ipsum6",]
 
 class FAQComponent extends Component {
 
+    async getRubricsData() {
+        await this.props.store.getRubrics()
+    }
+    componentDidMount() {
+        this.getRubricsData()
+    }
 
     render() {
         return (
@@ -25,35 +33,35 @@ class FAQComponent extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row" style= {{ padding:" 0 65px 0 65px"}}>
-                        <div className="col-lg-12">
-                            <div className="input-group">
-                                <input type="text" className="form-control" placeholder="How can we help"/>
-                                <span className="input-group-btn">
-                                    <button className="btn btn-default searchBtn" type="button" ><i className="fa fa-search" aria-hidden="true"></i></button>
-                                </span>
+                    <div className="row search_row">
+                        <div class="form-group has-success has-feedback">
+
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="inputSuccess" placeholder="How can we help" />
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
 
                     <div className="row">
-                    {dummyArr.map (data => {
-                        return (
-                        <div className="col-md-6 col-sm-6">
-                        <div className="right_btn">
-                            <Link to={`/faq/${data}`} className="btn btn-lg">{data}</Link>
-                        </div>
-                    </div>
-                        )
-                    })}
-                        
-                    </div>
+                        {this.props.store.Rubrics.map((data, key) => {
+                            return (
+                                <div className="col-md-6 col-sm-6" key={key}>
+                                    <div className="right_btn">
+                                        <button className="btn btn-lg" >
+                                            <Link style={{ textDecoration: "none" }} to={`/faq${data.slug}`} >{data.name}</Link>
+                                        </button>
+                                    </div>
+                                </div>
+                            )
+                        })}
 
+                    </div>
                 </div>
             </div>
-            
+
         )
     }
 }
 
-export default FAQComponent;
+export default observer(FAQComponent);

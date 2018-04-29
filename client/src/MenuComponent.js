@@ -12,6 +12,7 @@ class MenuComponent extends Component {
                         <img src={require('./images/p-logo.png')} alt="" />
                     </div>
                 </div>
+                <Link to="/faq">
                 <div className="faq">
                     <div className="question-wrapper">
                         <div className="question">
@@ -20,15 +21,11 @@ class MenuComponent extends Component {
                     </div>
 
                     <div className="faqText">
-                        FAQ
+                     FAQ 
                     </div>
-
-                    <div>
-                        <Link to="/faq"> Faq Copm </Link>
-                        {/* <Link to="/faq/:slugName"> Faq Info </Link> */}
-                    </div>
-
                 </div>
+                </Link>
+                
             </div>
         )
     }

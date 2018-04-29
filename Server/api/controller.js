@@ -144,7 +144,7 @@ exports.updateAbout = (req, res) => {
 
 exports.getAbout = (req, res) => {
 
-  About.find({} , (err , data) => {
+  About.findOne({} , (err , data) => {
 
     if(!data) {
       res.send(err)
