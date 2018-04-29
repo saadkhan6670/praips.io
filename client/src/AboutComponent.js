@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 
+
 class AboutComponent extends Component {
 
 
@@ -13,7 +14,7 @@ class AboutComponent extends Component {
                     <div className="col-md-12 col-sm-12">
                         <div className="about_text">
                             <h4>ABOUT</h4>
-                            <hr/>
+                            <hr className="hr_about"/>
                             </div>
                         </div>
                     </div>

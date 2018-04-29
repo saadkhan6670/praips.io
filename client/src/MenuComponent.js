@@ -20,13 +20,13 @@ class MenuComponent extends Component {
                     </div>
 
                     <div className="faqText">
-                        FAQ
+                        <a href="">FAQ</a>
                     </div>
 
-                    <div>
+                {/*<div>
                         <Link to="/faq"> Faq Copm </Link>
-                        {/* <Link to="/faq/:slugName"> Faq Info </Link> */}
-                    </div>
+                        {<Link to="/faq/:slugName"> Faq Info </Link> }
+                    </div>*/}
 
                 </div>
             </div>
