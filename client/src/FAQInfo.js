@@ -16,7 +16,6 @@ class FAQInfo extends Component {
 
                     </div>
                 </div>
-                {console.log(this.props.match.params.slugName)}
                 <div className="row">
                     <div className="col-md-12 col-sm-12">
                         <div className="subText">

@@ -41,7 +41,9 @@ class FAQComponent extends Component {
                         return (
                         <div className="col-md-6 col-sm-6">
                         <div className="right_btn">
-                            <Link to={`/faq/${data}`} className="btn btn-lg">{data}</Link>
+                        <button  className="btn btn-lg" >
+                            <Link style={{ textDecoration : "none"}} to={`/faq/${data}`} >{data}</Link>
+                            </button>
                         </div>
                     </div>
                         )

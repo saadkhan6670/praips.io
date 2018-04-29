@@ -15,7 +15,10 @@ body {
 
 #sidebar-wrapper {
     width: 6.76%;
-    height: 750px;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
+
     float: left;
     margin-right: 16px;
     border-radius: 8px;
@@ -61,7 +64,9 @@ body {
 
 .content-wrapper {
     background-color: white;
-    height: 750px;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
     border-radius: 8px;
     float: left;
     width: 55.59%;
@@ -93,8 +98,10 @@ body {
 
 .right-wrapper {
     background-color: white;
-    height: 750px;
-    float: left;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
+        float: left;
     border-radius: 8px;
     width: 30.26%;
     display: inline-block;
@@ -140,6 +147,25 @@ body {
     color: white;
     font-weight: bold;
     border-radius: 10px;
+}
+
+.content-wrapper .right_btn{
+    text-align: center;
+    margin-top: 58px;
+}
+.content-wrapper .right_btn button{
+    /* width: 231px; */
+    background-color: #7fc857;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.input-group{
+    margin-top: 24px;
+
+}
+.input-group input{
+    height: 51px;
 }
 .right-wrapper .content_text{
     margin-top: 70px;
