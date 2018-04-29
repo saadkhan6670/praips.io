@@ -25,16 +25,16 @@ var RubricsSchema = new Schema({
     type: String,
 
   },
-  created: {
-    type: String,
+  createdAt: {
+    type: Date, default: Date.now,
   },
-  updated: {
-    type: String,
+  updatedAt: {
+    type: Date , default: null ,
   },
   content: [{
             
       type: Schema.Types.ObjectId, 
-      ref: 'Content',
+      ref: 'RubricContent',
       default : [],
     
  
@@ -44,9 +44,13 @@ var RubricsSchema = new Schema({
 var RubricContentSchema = new Schema({
   question: String,
   answer: String,
-  views: Number,
-  created: { type: String, default: Date.now() },
-  updated: String 
+  views: {type: Number, default: null},
+  createdAt: { 
+    type: Date, default: Date.now 
+  },
+  updatedAt:{
+    type: Date, default: null
+  } 
 })
 
 
@@ -54,12 +58,12 @@ var ContactFormSchema = new Schema({
   toEmail: {type: String},
   visitorName: {type:String},
   content: {type: String},
-  created: {type : Date, default: Date.now()}
+  createdAt: {type : Date, default: Date.now}
 })
 
 var SearchSchema = new Schema({
   content: {type: String},
-  created: {type: Date,default: Date.now() }
+  createdAt: {type: Date,default: Date.now }
 })
 
 var AboutSchema = new Schema({
