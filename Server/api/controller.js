@@ -99,7 +99,7 @@ exports.createRubcricContent = (req, res) => {
 
 exports.updateRubcricContent = (req, res) => {
   RubricContent.findByIdAndUpdate(req.query.id, { $set:
-    {name : req.body.name, question: req.body.question, answer: req.body.answer}},
+    {name : req.body.name, question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }},
     
     {new: true}, (err , data) => {
 
