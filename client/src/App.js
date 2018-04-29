@@ -1,48 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import Async from 'react-code-splitting';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const FAQComponent = () => <Async load={import('./FAQComponent')} />;
-const FAQInfo = () => <Async load={import('./FAQInfo')} />;
-
-
+import AboutComponent from './AboutComponent'
+import FAQComponent from './FAQComponent'
+import FAQInfo from './FAQInfo'
+import MenuComponent from './MenuComponent'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <div className="container-fluid">
-          <div class="row">
 
-            <div style={{ backgroundColor: "white", marginRight: "1%" }} className="col-md-1">
-            
-            <a href="/faq-component" > faq cop </a> <br/>
-            <a href="/faq-info" > faq Info </a>
-            
-            </div>
+      <div id="wrapper">
+        
 
-            <div style={{ backgroundColor: "white", marginRight: "1%" }} className="col-md-6">
+        <BrowserRouter>
+          <div>
 
-              <BrowserRouter>
-                <div>
-                  <Switch>
+          <MenuComponent/>
 
-                    <Route path="/faq-component" component={FAQComponent} />
-                    <Route exact path="/faq-info" component={FAQInfo} />
-
-                  </Switch>
-                </div>
-              </BrowserRouter>
-
-            </div>
-
-            <div style={{ backgroundColor: "white" }} className="col-md-4">
-
-            </div>
-
+            <Switch>
+              <Route exact path="/" component={FAQComponent} />
+              <Route exact path="/faq" component={FAQComponent} />
+              <Route path="/faq/:slugName" component={FAQInfo} />
+            </Switch>
           </div>
-        </div>
+        </BrowserRouter>
+
+        <AboutComponent />
       </div>
     );
   }
