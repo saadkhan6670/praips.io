@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
-class MenuComponent extends Component {
+@observer class MenuComponent extends Component {
 
     render() {
         return (

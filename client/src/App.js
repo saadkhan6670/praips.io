@@ -10,7 +10,7 @@ import MenuComponent from './MenuComponent'
 import {observer} from 'mobx-react';
 
 
-  class App extends Component {
+  @observer class App extends Component {
 
   render() {
     return (
@@ -31,7 +31,7 @@ import {observer} from 'mobx-react';
           </div>
         </BrowserRouter>
       <AboutComponent  store={this.props.store}/>
-      +        </div>
+             </div>
 
         <div className="container footer_text">
           <div className="row">
@@ -52,4 +52,4 @@ import {observer} from 'mobx-react';
 
 }
 
-export default observer(App);
+export default App;

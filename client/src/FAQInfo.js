@@ -6,7 +6,7 @@ var slideIndex = 1;
 var x = document.getElementsByClassName("mySlides");
 
 
-class FAQInfo extends Component {
+@observer class FAQInfo extends Component {
 
     async getRubricsData() {
         await this.props.store.getRubrics()
@@ -123,9 +123,9 @@ class FAQInfo extends Component {
 
                                 </div>
                             </div>
-                    {this.props.store.Rubrics.map(data => {
+                    {this.props.store.Rubrics.map((data, key)=> {
 
-                        return (<div>
+                        return (<div key={key}>
                             <div className="col-md-4 col-sm-4 mySlides">
 
                                 <div>
@@ -139,7 +139,7 @@ class FAQInfo extends Component {
 
 
                     <div className="col-md-2 col-sm-2">
-                        <a class="right" >
+                        <a className="right" >
                             <span className="glyphicon glyphicon-chevron-right" style={{ background: "#83C75A", textDecoration: "none" }} onClick={() => this.plusDivs(1)}></span>
                         </a>
                     </div>
@@ -153,4 +153,4 @@ class FAQInfo extends Component {
     }
 }
 
-export default observer(FAQInfo);
+export default FAQInfo;

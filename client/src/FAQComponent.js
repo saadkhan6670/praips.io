@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 
 
-class FAQComponent extends Component {
+@observer class FAQComponent extends Component {
 
     async getRubricsData() {
         await this.props.store.getRubrics()
@@ -67,4 +67,4 @@ class FAQComponent extends Component {
     }
 }
 
-export default observer(FAQComponent);
+export default FAQComponent;

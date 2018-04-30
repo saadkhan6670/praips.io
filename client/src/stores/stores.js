@@ -1,23 +1,25 @@
-import {observable, decorate } from 'mobx';
+import {observable ,action } from 'mobx';
 import axios from 'axios'
 
 class PraipsStore {
 
 
-     Rubrics = observable([] ) ;
-     About = observable([] );
+    @observable Rubrics = []  ;
+    @observable About = [] ;
 
 
-  async  getRubrics  ()  {
+   async getRubrics  ()  {
 
-       await axios.get('http://localhost:5000/api/getAllRubrics').then((response) => {
+    await    axios.get('http://localhost:5000/api/getAllRubrics').then((response) => {
            console.log("from getRubs",this.Rubrics)
            
-           if(response.data.length !== this.Rubrics.length ) {
- response.data.forEach(element => {
-              this.Rubrics.push(element) 
-           });
-           }
+//            if(response.data.length !== this.Rubrics.length ) {
+//  response.data.forEach(element => {
+//               this.Rubrics.push(element) 
+//            });
+//            }
+
+      this.Rubrics = response.data
           
 
         })
@@ -27,14 +29,11 @@ class PraipsStore {
         })
     }
 
-    async getAbout () {
+   async getAbout () {
 
         await  axios.get('http://localhost:5000/api/getAbout').then((response) => {
-           if(response.data.length !== this.About.length ) {
-        this.About.push(response.data)
-             
-           }
        
+         this.About = response.data
  
          })
          .catch((error) => {
@@ -44,10 +43,7 @@ class PraipsStore {
     }
 
 }
-decorate(PraipsStore, {
 
-    
-})
-// const store = new PraipsStore() ;
+const store = new PraipsStore() ;
 
-export default new PraipsStore();
+export default store;
