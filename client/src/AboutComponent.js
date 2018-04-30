@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { observer } from 'mobx-react';
 
+
 class AboutComponent extends Component {
      getAboutData() {
          this.props.store.getAbout()
@@ -13,9 +14,7 @@ class AboutComponent extends Component {
     }
 
     render() {
-   
-            return (
-
+        return (
                 <div className="right-wrapper" id="intro">
 
                     <div className="container-fluid">
@@ -23,7 +22,7 @@ class AboutComponent extends Component {
                             <div className="col-md-12 col-sm-12">
                                 <div className="about_text">
                                     <h4>ABOUT</h4>
-                                    <hr />
+                                    <hr className="hr_about"/>
                                 </div>
                             </div>
                         </div>{
