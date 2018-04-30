@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+ import {observer} from 'mobx-react';
 
-
-class FAQInfo extends Component {
+ class FAQInfo extends Component {
     
+   
+    async getRubricsData() {
+        await this.props.store.getRubrics()
+    }
+    componentDidMount () {
+        this.getRubricsData()
+            }
+
 
     render() {
+        let content =  this.props.store.Rubrics.find( (data => {return  data.slug === `/${this.props.match.params.slugName}`} ));
         return (
             <div className="content-wrapper" id="intro">
             <div className="container-fluid">
@@ -33,10 +42,25 @@ class FAQInfo extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="row" style= {{ padding:" 0 65px 0 65px" ,overflowY : "scroll", height: "500px"}}>
+                
+                     <h4 style={{color : "grey"}}>{content === undefined ? null : content.name }</h4>
+                {          
+                  content === undefined ? null :   content.content.map( (data, key) => {
+                        return (
+                    <div className="col-lg-12" key={key}>
+                     <h5>{data.question}</h5>
+                     <p>{data.answer}</p>
+                     <hr/>
+                    </div>
+                      )})
+                }
+            
+                </div>
             </div>
         </div>
         )
     }
 }
 
-export default FAQInfo;
+export default observer(FAQInfo);

@@ -15,9 +15,8 @@ body {
 
 #sidebar-wrapper {
     width: 6.76%;
-    height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
+    height: 826px;
+
 
     float: left;
     margin-right: 16px;
@@ -64,9 +63,8 @@ body {
 
 .content-wrapper {
     background-color: white;
-    height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
+    height: 826px;
+
     border-radius: 8px;
     float: left;
     width: 55.59%;
@@ -98,9 +96,7 @@ body {
 
 .right-wrapper {
     background-color: white;
-    height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
+    height: 826px;
         float: left;
     border-radius: 8px;
     width: 30.26%;
@@ -216,7 +212,7 @@ body {
     
 }
 
-hr{
+.about_text hr{
     margin-top: 0px;
     border: 2px solid #87BB4C;
      width: 180px; 

@@ -6,8 +6,12 @@ import AboutComponent from './AboutComponent'
 import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
 import MenuComponent from './MenuComponent'
+import {observer, inject} from 'mobx-react';
+import store from './stores/stores';
 
-class App extends Component {
+
+  class App extends Component {
+
   render() {
     return (
 
@@ -20,17 +24,17 @@ class App extends Component {
           <MenuComponent/>
 
             <Switch>
-              <Route exact path="/" component={FAQComponent} />
-              <Route exact path="/faq" component={FAQComponent} />
-              <Route path="/faq/:slugName" component={FAQInfo} />
+              <Route exact path="/"  render ={ (props ) => { return <FAQComponent store={this.props.store} {...props}/>} }/>
+              <Route exact path="/faq" render ={ (props) => {  return <FAQComponent store={this.props.store} {...props}/>} } />
+              <Route path="/faq/:slugName"    render ={ (props) => {  return <FAQInfo store={this.props.store} {...props}/>} }/>   
             </Switch>
           </div>
         </BrowserRouter>
-
-        <AboutComponent />
+  <AboutComponent  store={this.props.store}/>
+     
       </div>
     );
   }
 }
 
-export default App;
+export default observer(App);

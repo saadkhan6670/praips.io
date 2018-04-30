@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {observer, inject} from 'mobx-react';
+
 
 let dummyArr = [ "Lorem Ipsum1", "Lorem Ipsum2","Lorem Ipsum3","Lorem Ipsum4","Lorem Ipsum5","Lorem Ipsum6",]
 
 class FAQComponent extends Component {
 
+    async getRubricsData() {
+        await this.props.store.getRubrics()
+    }
+    componentDidMount () {
+        this.getRubricsData()
+            }
 
     render() {
         return (
@@ -37,12 +45,12 @@ class FAQComponent extends Component {
                     </div>
 
                     <div className="row">
-                    {dummyArr.map (data => {
+                    { this.props.store.Rubrics.map ((data, key) => {
                         return (
-                        <div className="col-md-6 col-sm-6">
+                        <div className="col-md-6 col-sm-6" key={key}>
                         <div className="right_btn">
                         <button  className="btn btn-lg" >
-                            <Link style={{ textDecoration : "none"}} to={`/faq/${data}`} >{data}</Link>
+                            <Link style={{ textDecoration : "none"}} to={`/faq${data.slug}`} >{data.name}</Link>
                             </button>
                         </div>
                     </div>
@@ -50,7 +58,6 @@ class FAQComponent extends Component {
                     })}
                         
                     </div>
-
                 </div>
             </div>
             
@@ -58,4 +65,4 @@ class FAQComponent extends Component {
     }
 }
 
-export default FAQComponent;
+export default observer(FAQComponent);
