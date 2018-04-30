@@ -356,7 +356,6 @@ body {
 
 .left { 
 background-color: #7fc857;
-/*background-repeat: */
     position: absolute;
     top: 0;
     bottom: 0;
@@ -373,7 +372,6 @@ background-color: #7fc857;
 
 .right { 
 background-color: #7fc857;
-/*background-repeat: */
     position: absolute;
     top: 0;
     bottom: 0;
@@ -394,3 +392,16 @@ background-color: #7fc857;
     padding: 5px;
     border-radius: 15px;
 }
+
+.sliderBtn {
+    background-color: #83C75A ; 
+    color: white;
+    width: 170px;
+}
+.sliderBtn:hover {
+    background-color: white ; 
+    color: #83C75A;
+    border: 1px  #83C75A solid;
+    
+}
+

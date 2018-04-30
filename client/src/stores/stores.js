@@ -1,4 +1,4 @@
-import {observable } from 'mobx';
+import {observable, decorate } from 'mobx';
 import axios from 'axios'
 
 class PraipsStore {
@@ -44,7 +44,10 @@ class PraipsStore {
     }
 
 }
+decorate(PraipsStore, {
 
+    
+})
 // const store = new PraipsStore() ;
 
 export default new PraipsStore();
