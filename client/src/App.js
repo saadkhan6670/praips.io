@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 // import '../src/bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import AboutComponent from './AboutComponent'
 import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
 import MenuComponent from './MenuComponent'
-import {observer, inject} from 'mobx-react';
-import store from './stores/stores';
+import {observer} from 'mobx-react';
 
 
   class App extends Component {

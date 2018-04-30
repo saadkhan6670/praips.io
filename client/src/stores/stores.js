@@ -11,9 +11,14 @@ class PraipsStore {
   async  getRubrics  ()  {
 
        await axios.get('http://localhost:5000/api/getAllRubrics').then((response) => {
-           response.data.forEach(element => {
+           console.log("from getRubs",this.Rubrics)
+           
+           if(response.data.length !== this.Rubrics.length ) {
+ response.data.forEach(element => {
               this.Rubrics.push(element) 
            });
+           }
+          
 
         })
         .catch((error) => {
@@ -25,8 +30,10 @@ class PraipsStore {
     async getAbout () {
 
         await  axios.get('http://localhost:5000/api/getAbout').then((response) => {
-           
+           if(response.data.length !== this.About.length ) {
         this.About.push(response.data)
+             
+           }
        
  
          })
@@ -38,6 +45,6 @@ class PraipsStore {
 
 }
 
-const store = new PraipsStore() ;
+// const store = new PraipsStore() ;
 
-export default store;
+export default new PraipsStore();
