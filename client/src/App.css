@@ -13,7 +13,7 @@ body {
 
 #wrapper {
     padding-top: 52px;
-    padding-left: 60px;
+    padding-left: 12%;
     padding-bottom: 52px;
     background: #252525;
 }
@@ -24,8 +24,8 @@ body {
 }
 
 #sidebar-wrapper {
-    width: 6.76%;
-    height: 750px;
+    width: 5.76%;
+    height: 675px;
     float: left;
     margin-right: 16px;
     border-radius: 8px;
@@ -79,10 +79,10 @@ body {
 
 .content-wrapper {
     background-color: white;
-    height: 750px;
+    height: 675px;
     border-radius: 8px;
     float: left;
-    width: 55.59%;
+    width: 51.59%;
     margin-right: 16px;
     display: inline-block;
 }
@@ -156,11 +156,11 @@ body {
 
 .right-wrapper {
     background-color: white;
-    height: 750px;
+    height:675px;
     float: left;
     border-radius: 8px;
-    width: 30.26%;
-    display: inline-block;
+    width: 24.26%;
+        display: inline-block;
 }
 
 .right-wrapper .about_text {
@@ -169,8 +169,7 @@ body {
 }
 
 .right-wrapper .about_text h4 {
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 16px;    font-weight: 700;
     font-stretch: expanded;
 }
 
@@ -193,7 +192,7 @@ body {
 }
 
 .right-wrapper .right_text h4 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -221,7 +220,7 @@ body {
 
 .content-wrapper .right_btn {
     text-align: center;
-    margin-top: 58px;
+    margin-top: 45px;
 }
 
 .content-wrapper .right_btn button {
@@ -269,7 +268,7 @@ body {
 .hr_about {
     margin-top: 0px;
     border: 2px solid #87BB4C;
-    width: 180px;
+    width: 149px;
     background: #87BB4C;
 }
 

@@ -37,7 +37,7 @@ import {observer} from 'mobx-react';
           <div className="row">
             <div className="col-md-12 col-sm-12">
               <div className="text">
-               <p>Are you an admin of this page? <a href=""> Login In</a></p>
+               <p style={{margin: "0 49px 10px"}}>Are you an admin of this page? <a href=""> Login In</a></p>
               </div>
             </div>
             </div>

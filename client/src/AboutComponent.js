@@ -14,6 +14,7 @@ import { observer } from 'mobx-react';
     }
 
     render() {
+        console.log()
         return (
                 <div className="right-wrapper" id="intro">
 

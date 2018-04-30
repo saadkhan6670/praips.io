@@ -9,6 +9,7 @@ import { observer } from 'mobx-react';
     async getRubricsData() {
         await this.props.store.getRubrics()
     }
+    
     componentDidMount() {
         this.getRubricsData()
     }

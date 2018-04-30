@@ -1,4 +1,4 @@
-import {observable ,action } from 'mobx';
+import {observable  } from 'mobx';
 import axios from 'axios'
 
 class PraipsStore {
@@ -10,14 +10,8 @@ class PraipsStore {
 
    async getRubrics  ()  {
 
-    await    axios.get('http://localhost:5000/api/getAllRubrics').then((response) => {
-           console.log("from getRubs",this.Rubrics)
+    await    axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
            
-//            if(response.data.length !== this.Rubrics.length ) {
-//  response.data.forEach(element => {
-//               this.Rubrics.push(element) 
-//            });
-//            }
 
       this.Rubrics = response.data
           
@@ -31,7 +25,7 @@ class PraipsStore {
 
    async getAbout () {
 
-        await  axios.get('http://localhost:5000/api/getAbout').then((response) => {
+        await  axios.get(`${process.env.apiURL}/api/getAbout`).then((response) => {
        
          this.About = response.data
  

@@ -55,8 +55,8 @@ var x = document.getElementsByClassName("mySlides");
     
 
     render() {
-        let array = this.props.store.Rubrics.map( d => {return d})
-        // console.log(array[1])
+   
+        console.log("from reder",this.props.store.Rubrics)
         console.log(this.props.store.Rubrics.map( d => {return d.slug}).indexOf(`/${this.props.match.params.slugName}`))
 
         let content = this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }));
@@ -105,14 +105,14 @@ var x = document.getElementsByClassName("mySlides");
                     }
 
                 </div>
-                <div className="row" style={{ height: "150px" }}>
+                <div className="row" style={{ height: "81px" }}>
                     <div className="col-md-12 col-sm-12"></div>
                 </div>
 
 
                 <div className="row" style={{ padding: "35px 65px 0 65px", height: "100px" }}>
                     <div className="col-md-2 col-sm-2">
-                        <a className="left" href="#" >
+                        <a className="left"  >
                             <span className="glyphicon glyphicon-chevron-left" style={{ background: "#83C75A" }} onClick={() => this.plusDivs(-1)}></span>
                         </a>
                     </div>
@@ -147,7 +147,7 @@ var x = document.getElementsByClassName("mySlides");
 
 
                 </div>
-                <div className="row" style={{ height: '10px', textAlign: "center" }}>Can't find what you looking for? <a style={{ color: "#83C75A" }} href="#">Submit a feature request</a></div>
+                <div className="row" style={{ height: '10px', textAlign: "center" }}>Can't find what you looking for? <a style={{ color: "#83C75A" }} >Submit a feature request</a></div>
             </div>
         )
     }
