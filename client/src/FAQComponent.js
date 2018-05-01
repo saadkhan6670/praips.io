@@ -7,6 +7,8 @@ import { observer } from 'mobx-react';
 @observer class FAQComponent extends Component {
 
     async getRubricsData() {
+     await   this.props.store.getAbout()
+        
         await this.props.store.getRubrics()
     }
     
@@ -19,7 +21,7 @@ import { observer } from 'mobx-react';
 
         return (
             <div className="content-wrapper" id="intro">
-                <div className="container-  ">
+                <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="head_text">
@@ -31,7 +33,7 @@ import { observer } from 'mobx-react';
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="subText">
-                                <p>Tips and Answer from the Lorum Ipsum Team</p>
+                                <p>Tips and Answer from the {this.props.store.About.name} Team</p>
                             </div>
                         </div>
                     </div>

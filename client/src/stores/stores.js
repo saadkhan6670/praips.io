@@ -6,6 +6,7 @@ class PraipsStore {
 
     @observable Rubrics = []  ;
     @observable About = [] ;
+    @observable searchInput = '';
 
 
    async getRubrics  ()  {
@@ -35,8 +36,16 @@ class PraipsStore {
              console.log(error)
          })
     }
+    
+    createContact (data) {
+
+       return axios.post(`${process.env.apiURL}/api/createContact`, data)
+    }
+  
 
 }
+
+
 
 const store = new PraipsStore() ;
 
