@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 
-
-let dummyArr = ["Lorem Ipsum1", "Lorem Ipsum2", "Lorem Ipsum3", "Lorem Ipsum4", "Lorem Ipsum5", "Lorem Ipsum6",]
-
 class FAQComponent extends Component {
 
     async getRubricsData() {
@@ -12,6 +9,11 @@ class FAQComponent extends Component {
     }
     componentDidMount() {
         this.getRubricsData()
+    }
+
+    componentWillUnmount() {
+        this.props.store.Rubrics = []
+        console.log("component unmounted" , this.props.store.Rubrics)
     }
 
     render() {

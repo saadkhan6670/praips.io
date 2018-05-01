@@ -4,8 +4,8 @@ import axios from 'axios'
 class PraipsStore {
 
 
-     Rubrics = observable([] ) ;
-     About = observable([] );
+     Rubrics = observable([]) ;
+     About = observable([]);
 
 
   async  getRubrics  ()  {

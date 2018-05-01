@@ -13,6 +13,7 @@ router.post('/createContact', controller.createContact);
 
 //APIs for Admin
 router.post('/adminLogIn', controller.adminLogIn);
+router.get('/loginRandNo', controller.LoginRandNo);
 
 //APIs for Rubrics
 
@@ -29,14 +30,6 @@ router.post('/createAbout', controller.createAbout);
 router.post('/updateAbout', controller.updateAbout);
 router.get('/getAbout', controller.getAbout);
 
-
-
 // router.get('/getRubricContent/:slugName', controller.getRubricContent);
-    
-
-
-
-
-
 
 module.exports = router;

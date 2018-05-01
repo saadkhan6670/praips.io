@@ -11,7 +11,7 @@ const Contact = mongoose.model('Contact');
 const Search = mongoose.model('Search');
 const About = mongoose.model('About');
 
-
+const uuidv1 = require('uuid/v1');
 
 //create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
@@ -22,7 +22,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-
+// Admin Login API
 exports.adminLogIn = (req, res) => {
   Users.findOne({ email: req.body.email, password: req.body.password }, (err, data) => {
 
@@ -33,6 +33,17 @@ exports.adminLogIn = (req, res) => {
       res.send(true)
     }
   })
+}
+
+exports.LoginRandNo = (req, res) => {
+  var LogInKey = uuidv1()
+  var NewLogKey = new LogKey({
+    logInKey: LogInKey
+  });
+  NewLogKey.save((err, data) => {
+    res.send(data);
+  })
+
 }
 
 exports.createRubric = (req, res) => {
@@ -75,10 +86,6 @@ exports.getAllRubrics = (req, res) => {
     }
   })
 }
-
-
-
-
 
 exports.createRubcricContent = (req, res) => {
   let NewRubricContent = new RubricContent(req.body);
@@ -160,9 +167,6 @@ exports.getAbout = (req, res) => {
 
 exports.createContact = (req, res) => {
   let NewContact = new Contact(req.body);
-  
-  
-
   NewContact.save((err, data) => {
     if (!data) {
       res.send(err);
