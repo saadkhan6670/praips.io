@@ -13,7 +13,8 @@ router.post('/createContact', controller.createContact);
 
 //APIs for Admin
 router.post('/adminLogIn', controller.adminLogIn);
-router.get('/loginRandNo', controller.LoginRandNo);
+router.get('/loginKey', controller.LoginKey);
+router.get('/LogKeyAuth', controller.LogKeyAuth);
 
 //APIs for Rubrics
 

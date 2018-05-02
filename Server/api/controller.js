@@ -10,6 +10,7 @@ const Users = mongoose.model('Users');
 const Contact = mongoose.model('Contact');
 const Search = mongoose.model('Search');
 const About = mongoose.model('About');
+const LogKey = mongoose.model('LogKey');
 
 const uuidv1 = require('uuid/v1');
 
@@ -35,7 +36,7 @@ exports.adminLogIn = (req, res) => {
   })
 }
 
-exports.LoginRandNo = (req, res) => {
+exports.LoginKey = (req, res) => {
   var LogInKey = uuidv1()
   var NewLogKey = new LogKey({
     logInKey: LogInKey
@@ -45,6 +46,23 @@ exports.LoginRandNo = (req, res) => {
   })
 
 }
+
+
+//Authenticating LogIn Key
+exports.LogKeyAuth = (req, res) => {
+  LogKey.findOne({
+    logInKey: req.query.LogKey
+  }, (err, data) => {
+    if (!data) {
+      res.send(false)
+    } else {
+      res.send(true);
+    }
+  })
+}
+
+// Admin Api Ends
+
 
 exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)

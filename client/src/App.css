@@ -25,7 +25,7 @@ body {
 
 #sidebar-wrapper {
     width: 5.76%;
-    height: 675px;
+    height: 815px;
     float: left;
     margin-right: 16px;
     border-radius: 8px;
@@ -79,7 +79,7 @@ body {
 
 .content-wrapper {
     background-color: white;
-    height: 675px;
+    height: 815px;
     border-radius: 8px;
     float: left;
     width: 51.59%;
@@ -156,7 +156,7 @@ body {
 
 .right-wrapper {
     background-color: white;
-    height:675px;
+    height:815px;
     float: left;
     border-radius: 8px;
     width: 24.26%;
