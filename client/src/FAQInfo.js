@@ -5,6 +5,15 @@ import { Link } from 'react-router-dom';
 var slideIndex = 1;
 var slideIndex2 = 2;
 
+var searchBtnStyles = {
+    background: "white", 
+    color: "#ccc", 
+    borderLeft: "none",
+     borderColor: "#ccc", 
+    boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
+    borderTopRightRadius: "10px", 
+    borderBottomRightRadius: "10px"
+}
 
 var x = document.getElementsByClassName("mySlides");
 
@@ -58,7 +67,8 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     componentDidMount() {
-
+        var query = new URLSearchParams(this.props.location.search).get('search');
+        this.props.store.searchInput  =   query ? query : '';
         this.getRubricsData()
 
     }
@@ -81,8 +91,8 @@ var x = document.getElementsByClassName("mySlides");
         this.showDivs(slideIndex += n, slideIndex2 += n);
     }
 
-    handleChange(e) {
-        this.props.store.searchInput = e.target.value
+    handleClick(searchInput) {
+        this.props.store.searchInput = searchInput
     }
 
     render() {
@@ -108,13 +118,31 @@ var x = document.getElementsByClassName("mySlides");
                         </div>
                     </div>
                     <div className="row search_row">
-                        <div className="form-group has-success has-feedback">
+                        {/* <div className="form-group has-success has-feedback btn-group">
 
                             <div className="col-md-12">
-                                <input type="text" className="form-control" onChange={(e) => this.handleChange(e)} placeholder="How can we help" />
-                                <span className="glyphicon glyphicon-search form-control-feedback"></span>
+                                <input type="text" className="form-control" ref="searchInput"  placeholder="How can we help" 
+                                onClick={() => this.handleClick(this.refs.searchInput.value)} 
+                                onKeyDown={(e) => {e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) :  null}}
+                                />
+                            </div>
+                            
+                        </div> */}
+
+                        <div class="input-group" id="adv-search">
+                            <input type="text" class="form-control" placeholder="How can we help"  ref="searchInput"
+                            
+                            
+                            onKeyDown={(e) => {e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) :  null}}
+                            />
+                            <div class="input-group-btn">
+                                <div class="btn-group" role="group">
+
+                                    <button title="Click to Search.." type="button" onClick={() => this.handleClick(this.refs.searchInput.value)}  class="btn btn-primary" style={searchBtnStyles}><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <h4 style={{ color: "grey", padding: "14px 65px 0px" }}>{content === undefined ? null : content.name}</h4>
@@ -123,7 +151,7 @@ var x = document.getElementsByClassName("mySlides");
 
                     {
                         filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
-                          <h4>  We didn't find results for {this.props.store.searchInput} </h4>
+                            <h4>  We didn't find results for {this.props.store.searchInput} </h4>
 
                             <b>These tips might help :</b>
                             <ul>

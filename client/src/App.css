@@ -251,7 +251,7 @@ h2 {
     margin-top: 24px;
 }
 
-.input-group input {
+.input-group input , button {
     height: 51px;
 }
 
@@ -398,7 +398,7 @@ background-color: #7fc857;
     background-color: white ; 
     color: #83C75A;
     border: 1px  #83C75A solid;
-  
+    transition: opacity 1s ease-out;
     width: 170px;
 }
 .sliderBtn:hover {
@@ -465,4 +465,6 @@ input[type=submit] {
           display: none;
       }
 
-      
+      #mySlides {
+        
+      }
