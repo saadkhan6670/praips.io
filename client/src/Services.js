@@ -15,10 +15,21 @@ export var getCookie = (cname) => {
     return "";
 }
 
+//Find all the white spaces and replace it with single space and make the letters with alpha uper case 
+// we used this regex
 export var toTitleCase = (str) => {
-    return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    // to convert first aplha to upper
+     str = str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    //  remove first and end white space
+    return str.replace(/\s+/g,' ').trim()
 }
 
+//Find all the white spaces and replace it with dash and then remove the frist and last dash with empty string 
+// we used this regex
 export var removeWhitespaces = (str) => {
-    return str.replace(/\s/g, '-')
+         str = str.replace(/\s+/g,'-')
+    //  remove first and end white space         
+    return str.replace(/(^-+)*(-+$)*/g,'')
 }
+
+// export var 

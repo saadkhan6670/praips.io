@@ -220,7 +220,8 @@ body {
 
 .content-wrapper .right_btn {
     text-align: center;
-    margin-top: 45px;
+    margin-top: 4px;
+    margin-bottom: 15px;
 }
 
 .content-wrapper .right_btn button {
@@ -402,5 +403,9 @@ background-color: #7fc857;
     color: #83C75A;
     border: 1px  #83C75A solid;
     
+}
+
+  .AdminIcons{
+    display: none
 }
 

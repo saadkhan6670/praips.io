@@ -71,9 +71,7 @@ exports.createRubric = (req, res) => {
 
     res.send(rubric)
   })
-
 }
-
 
 exports.updateRubcric = (req, res) => {
   let date = new Date();

@@ -39,13 +39,13 @@ class PraipsStore {
     }
 
     async createRubric(rubricName , rubricSlug) {
-        console.log("from store" ,rubricName , rubricSlug)
         
-        // await axios.post(`${process.env.apiURL}/api/createRubric`,{name:rubricName , slug : rubricSlug}).then((response) => {
+        await axios.post(`${process.env.apiURL}/api/createRubric`,{name:rubricName , slug : rubricSlug}).then((response) => {
+            return response.data
             
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
 }
