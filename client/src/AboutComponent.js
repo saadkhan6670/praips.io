@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 
-class AboutComponent extends Component {
+@observer class AboutComponent extends Component {
      getAboutData() {
          this.props.store.getAbout()
     }
@@ -14,6 +14,7 @@ class AboutComponent extends Component {
     }
 
     render() {
+        console.log()
         return (
                 <div className="right-wrapper" id="intro">
 
@@ -25,19 +26,17 @@ class AboutComponent extends Component {
                                     <hr className="hr_about"/>
                                 </div>
                             </div>
-                        </div>{
-                            this.props.store.About.map((data, key) => {
-                                return (
-                                    <div key={key}>
+                        </div>
+                                    <div >
                                         <div className="row">
                                             <div className="right_log">
-                                                <img src={data.logoPath} alt="" />
+                                                <img src={this.props.store.About.logoPath} alt="" />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="right_text">
-                                                <h4>{data.name}</h4>
-                                                <p>{data.slogan}</p>
+                                                <h4>{this.props.store.About.name}</h4>
+                                                <p>{this.props.store.About.slogan}</p>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -53,16 +52,13 @@ class AboutComponent extends Component {
                                                 <div className="content_text">
                                                     <div className="desc">
                                                         <h4>Description</h4>
-                                                        <p>{data.description}</p>
+                                                        <p>{this.props.store.About.description}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                )
-                            })
 
-                        }
                     </div>
 
                 </div>
@@ -72,4 +68,4 @@ class AboutComponent extends Component {
     }
 
 
-export default observer(AboutComponent);
+export default AboutComponent;

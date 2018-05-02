@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
 
+<<<<<<< HEAD
 class FAQComponent extends Component {
+=======
+
+
+@observer class FAQComponent extends Component {
+>>>>>>> 060d98bf80b86b1e675ce46e33957b2d2246671b
 
     async getRubricsData() {
         await this.props.store.getRubrics()
     }
+    
     componentDidMount() {
         this.getRubricsData()
     }
 
+<<<<<<< HEAD
     componentWillUnmount() {
         this.props.store.Rubrics = []
         console.log("component unmounted" , this.props.store.Rubrics)
     }
+=======
+>>>>>>> 060d98bf80b86b1e675ce46e33957b2d2246671b
 
     render() {
+
         return (
             <div className="content-wrapper" id="intro">
-                <div className="container-fluid">
+                <div className="container-  ">
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="head_text">
@@ -36,11 +47,11 @@ class FAQComponent extends Component {
                         </div>
                     </div>
                     <div className="row search_row">
-                        <div class="form-group has-success has-feedback">
+                        <div className="form-group has-success has-feedback">
 
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" id="inputSuccess" placeholder="How can we help" />
-                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            <div className="col-md-12">
+                                <input type="text" className="form-control" id="inputSuccess" placeholder="How can we help" />
+                                <span className="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
@@ -50,9 +61,11 @@ class FAQComponent extends Component {
                             return (
                                 <div className="col-md-6 col-sm-6" key={key}>
                                     <div className="right_btn">
+                                         <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
                                         <button className="btn btn-lg" >
-                                            <Link style={{ textDecoration: "none" }} to={`/faq${data.slug}`} >{data.name}</Link>
+                                           {data.name}
                                         </button>
+                                        </Link>
                                     </div>
                                 </div>
                             )
@@ -66,4 +79,4 @@ class FAQComponent extends Component {
     }
 }
 
-export default observer(FAQComponent);
+export default FAQComponent;

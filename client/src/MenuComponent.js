@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
-class MenuComponent extends Component {
+@observer class MenuComponent extends Component {
 
     render() {
         return (
@@ -9,14 +10,14 @@ class MenuComponent extends Component {
             <div id="sidebar-wrapper">
                 <div className="logo-wrapper">
                     <div className="logo">
-                        <img src={require('./images/p-logo.png')} alt="" />
+                        <img src='./images/p-logo.png' alt="" />
                     </div>
                 </div>
                 <Link to="/faq">
                 <div className="faq">
                     <div className="question-wrapper">
                         <div className="question">
-                            <img src={require('./images/question.png')} alt="" />
+                            <img src='./images/question.png' alt="" />
                         </div>
                     </div>
 
