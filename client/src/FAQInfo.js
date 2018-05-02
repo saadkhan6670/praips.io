@@ -14,28 +14,28 @@ var x = document.getElementsByClassName("mySlides");
         super();
 
         this.state = {
-            
+
         }
     }
 
 
     async getRubricsData() {
-    
+
         await this.props.store.getRubrics()
-       await  this.showDivs(slideIndex , slideIndex2)
+        await this.showDivs(slideIndex, slideIndex2)
 
 
     }
- 
-     showDivs(n1, n2) {
-        
-         
+
+    showDivs(n1, n2) {
+
+
         var i;
         if (n1 > x.length) {
             slideIndex = 1;
-            
-        }    
-        if(n2 > x.length) {
+
+        }
+        if (n2 > x.length) {
             slideIndex2 = 1;
         }
         if (n1 < 1) {
@@ -43,24 +43,24 @@ var x = document.getElementsByClassName("mySlides");
             // slideIndex2 = x.length -1
         }
         if (n2 < 1) {
-            slideIndex2 = x.length 
+            slideIndex2 = x.length
             // slideIndex2 = x.length -1
         }
         for (i = 0; i < x.length; i++) {
-           x[i].style.display = "none";  
+            x[i].style.display = "none";
         }
 
 
-        x[slideIndex - 1].style.display = "block";  
-        x[slideIndex2 -1].style.display = "block";      
-        
-        
-      }
+        x[slideIndex - 1].style.display = "block";
+        x[slideIndex2 - 1].style.display = "block";
+
+
+    }
 
     componentDidMount() {
-   
+
         this.getRubricsData()
-        
+
     }
 
     handleContentOnOff(spanref, pRef) {
@@ -78,14 +78,16 @@ var x = document.getElementsByClassName("mySlides");
 
     plusDivs(n) {
 
-       this.showDivs(slideIndex += n, slideIndex2 += n);
+        this.showDivs(slideIndex += n, slideIndex2 += n);
     }
 
-    
+    handleChange(e) {
+        this.props.store.searchInput = e.target.value
+    }
 
     render() {
-
-        let content = this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }));
+        let content = this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
+        let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
 
         return (
             <div className="content-wrapper" id="intro">
@@ -93,7 +95,7 @@ var x = document.getElementsByClassName("mySlides");
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="head_text">
-                                <h1>Frenquently Asked Questions</h1>
+                                <h1 onClick={this.checking}>Frenquently Asked Questions</h1>
                             </div>
 
                         </div>
@@ -109,18 +111,28 @@ var x = document.getElementsByClassName("mySlides");
                         <div className="form-group has-success has-feedback">
 
                             <div className="col-md-12">
-                                <input type="text" className="form-control" ref="searchInput" placeholder="How can we help" />
+                                <input type="text" className="form-control" onChange={(e) => this.handleChange(e)} placeholder="How can we help" />
                                 <span className="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h4 style={{ color: "grey" ,padding: "14px 65px 0px"}}>{content === undefined ? null : content.name}</h4>
-                
+                <h4 style={{ color: "grey", padding: "14px 65px 0px" }}>{content === undefined ? null : content.name}</h4>
+
                 <div className="row" style={{ padding: "0px 65px 0 65px", overflowY: "scroll", height: "250px", marginRight: "0px" }}>
 
                     {
-                        content === undefined ? <p>getting data...</p> : content.content.map((data, key) => {
+                        filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
+                          <h4>  We didn't find results for {this.props.store.searchInput} </h4>
+
+                            <b>These tips might help :</b>
+                            <ul>
+                                <li>  Try fewer words. Ex: Time delivery </li>
+                                <li> Try different keywords.   </li>
+                                <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
+                            </ul>
+
+                        </div> : filteredContent.map((data, key) => {
                             return (
                                 <div className="col-lg-12" key={key}>
 
@@ -144,13 +156,13 @@ var x = document.getElementsByClassName("mySlides");
                             <span className="glyphicon glyphicon-chevron-left" style={{ background: "#83C75A" }} onClick={() => this.plusDivs(-1)}></span>
                         </a>
                     </div>
-                    {this.props.store.Rubrics.map((data, key)=> {
+                    {this.props.store.Rubrics.map((data, key) => {
 
                         return (<div key={key}>
                             <div className="col-md-4 col-sm-4 mySlides">
 
                                 <div>
-                                  <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" > {data.name} </button> </Link>
+                                    <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" > {data.name} </button> </Link>
 
                                 </div>
                             </div>
