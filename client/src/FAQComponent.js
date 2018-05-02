@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
-<<<<<<< HEAD
-class FAQComponent extends Component {
-=======
 
 
 @observer class FAQComponent extends Component {
->>>>>>> 060d98bf80b86b1e675ce46e33957b2d2246671b
 
     async getRubricsData() {
         await this.props.store.getRubrics()
@@ -18,13 +14,6 @@ class FAQComponent extends Component {
         this.getRubricsData()
     }
 
-<<<<<<< HEAD
-    componentWillUnmount() {
-        this.props.store.Rubrics = []
-        console.log("component unmounted" , this.props.store.Rubrics)
-    }
-=======
->>>>>>> 060d98bf80b86b1e675ce46e33957b2d2246671b
 
     render() {
 

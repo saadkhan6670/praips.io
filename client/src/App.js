@@ -3,7 +3,6 @@ import './App.css';
 // import '../src/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// Components
 import AboutComponent from './AboutComponent'
 import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
@@ -29,21 +28,21 @@ import {observer} from 'mobx-react';
               <Route exact path="/faq" render ={ (props) => {  return <FAQComponent store={this.props.store} {...props}/>} } />
               <Route path="/faq/:slugName"    render ={ (props) => {  return <FAQInfo store={this.props.store} {...props}/>} }/>   
             </Switch>
+          </div>
+        </BrowserRouter>
       <AboutComponent  store={this.props.store}/>
-      <div className="container footer_text">
+             </div>
+
+        <div className="container footer_text">
           <div className="row">
             <div className="col-md-12 col-sm-12">
               <div className="text">
                <p style={{margin: "0 49px 10px"}}>Are you an admin of this page? <a href=""> Login In</a></p>
               </div>
+            </div>
+            </div>
 
-            </div>
-            </div>
-            </div>
-             </div>
-            
-          </BrowserRouter>
-        </div>
+      </div>
       </div>
     );
 
