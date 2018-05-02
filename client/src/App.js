@@ -13,10 +13,11 @@ import MenuComponent from './MenuComponent'
 import AdminLogin from './AdminLogin'
 
 @observer class App extends Component {
-
+ 
   render() {
     return (
-      <div className="footer">
+      <div className="app container-fluid">
+      <div className="row">
         <div id="wrapper">
 
 
@@ -48,8 +49,9 @@ import AdminLogin from './AdminLogin'
               </div>
             </div>
           </BrowserRouter>
+       
         </div>
-
+        </div>
       </div>
     );
 

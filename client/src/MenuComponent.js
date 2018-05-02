@@ -1,69 +1,75 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import store from './stores/stores'
+import store from './stores/stores';
+
 
 @observer class MenuComponent extends Component {
-
+    constructor(props){
+        super(props);
+        this.state = {isToggle: false};
+        this.handleClick =  this.handleClick.bind(this);
+      }
+      handleClick(e){
+        this.setState({isToggle: !this.state.isToggle});
+      }
     render() {
         return (
 
-            <div id="sidebar-wrapper">
-                <div className="logo-wrapper">
-                    <div className="logo">
-                        <img src='./images/praips Logo.png' alt="" />
-                    </div>
+            // toggle 
+            <div>
+                <div id="btn" className="toggle" onClick= {this.handleClick}>
+                    <i className="fa fa-bars menu" aria-hidden="true"></i>
                 </div>
-                <Link to="/faq">
-                <div className="faq">
-                    <div >
-                        <div className="question">
-                            <img src='./images/info.png' alt="info icon" />
-                        </div>
-                    </div>
 
-                    <div className="faqText">
-                     FAQ 
-                    </div>
+             {/*toggle*/}
+                <div id="sidebar-wrapper" style={{display: this.state.isToggle ? 'block': 'block'}}>
+                    <div></div>
+
+                    <ul className="sidebar_nav">
+                        <li>
+                            <a href="index.html">
+                                <div className="logo-wrapper">
+                                    <div className="logo">
+                                        <img src={'../public/images/praipsLogo.png'} alt="" />
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li className="faq_li">
+                            <a href="index.html">
+                                <div className="faq">
+                                    <div className="question-wrapper">
+                                        <div className="question">
+                                            <img src="./assets/images/question.png" alt="" />
+                                        </div>
+                                    </div>
+
+                                    <div className="faqText">FAQ</div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="index.html">About</a>
+                        </li>
+
+                        <li>
+                            <a href="index.html">Faq</a>
+                        </li>
+
+                        <li>
+                            <a href="index.html">Contact</a>
+                        </li>
+                    </ul>
                 </div>
-                </Link>
-                <hr/>
-
-                    {  store.redirect === true ?
-                    <div>
-                     <Link to="/install">
-                     <div className="faq">
-                         <div >
-                             <div className="question">
-                                 <img src='./images/script icon.png' alt="script icon" />
-                             </div>
-                         </div>
-     
-                         <div className="faqText">
-                          INSTALL 
-                         </div>
-                     </div>
-                     </Link>
-                     <hr/>
-     
-                      <Link to="/dashboard">
-                     <div className="faq">
-                         <div>
-                             <div className="question">
-                                 <img src='./images/analytics icon.png' alt="analytics icon" />
-                             </div>
-                         </div>
-     
-                         <div className="faqText">
-                          ANALYTICS 
-                         </div>
-                     </div>
-                     </Link>
-                     </div>  : null
-                    }
-                
-                
             </div>
+            // ./left col
         )
     }
 }
