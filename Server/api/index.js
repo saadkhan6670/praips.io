@@ -15,11 +15,13 @@ router.post('/createContact', controller.createContact);
 router.post('/adminLogIn', controller.adminLogIn);
 router.get('/loginKey', controller.LoginKey);
 router.get('/LogKeyAuth', controller.LogKeyAuth);
+router.post('/DelLogKey', controller.DelLogKey);
 
 //APIs for Rubrics
 
 router.post('/createRubric', controller.createRubric);
 router.post('/updateRubcric', controller.updateRubcric);
+router.post('/removeRubrics', controller.removeRubrics);
 router.get('/getAllRubrics', controller.getAllRubrics);
 
 //APIs for Rucric Content

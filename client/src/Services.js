@@ -17,7 +17,7 @@ export var getCookie = (cname) => {
 
 //Find all the white spaces and replace it with single space and make the letters with alpha uper case 
 // we used this regex
-export var toTitleCase = (str) => {
+export var CreateRubric = (str) => {
     // to convert first aplha to upper
      str = str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
     //  remove first and end white space
@@ -26,10 +26,10 @@ export var toTitleCase = (str) => {
 
 //Find all the white spaces and replace it with dash and then remove the frist and last dash with empty string 
 // we used this regex
-export var removeWhitespaces = (str) => {
-         str = str.replace(/\s+/g,'-')
+export var CreateRubricSlug = (str) => {
+         str = str.replace(/\s+/g,'-').replace(/(^-+)*(-+$)*/g,'')
     //  remove first and end white space         
-    return str.replace(/(^-+)*(-+$)*/g,'')
+    return '/' + str.toLowerCase()
 }
 
 // export var 

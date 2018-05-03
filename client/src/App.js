@@ -21,12 +21,9 @@ import Dashboard from './Dashboard'
       <div className="footer">
         <div id="wrapper">
 
-
           <BrowserRouter>
             <div>
-
-              <MenuComponent />
-
+              <MenuComponent redirect={this.props.store.redirect} />
               <Switch>
                 <Route exact path="/" render={(props) => { return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route exact path="/faq" render={(props) => { return <FAQComponent store={this.props.store} {...props} /> }} />
@@ -37,9 +34,9 @@ import Dashboard from './Dashboard'
                 
                 
               </Switch>
-
-              <AboutComponent store={this.props.store} />
-
+              <AboutComponent store={this.props.store}/>
+              
+              {this.props.store.redirect ? null :
               <div className="container footer_text">
                 <div className="row">
                   <div className="col-md-12 col-sm-12">
@@ -49,7 +46,7 @@ import Dashboard from './Dashboard'
                   </div>
                 </div>
 
-              </div>
+              </div> }
             </div>
           </BrowserRouter>
         </div>
