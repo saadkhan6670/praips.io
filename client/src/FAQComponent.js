@@ -24,20 +24,20 @@ import { Modal , Button , OverlayTrigger, FormGroup, FormControl} from 'react-bo
         // Hover Component
         this.setState({
             Hover: <div className="row AdminIcons ">
-                <div className="col-md-3 col-sm-3  " >
+                <div className="col-md-1 col-sm-1" >
                     <img onClick={(e) => this.editHandle(e)} style={{cursor: "pointer"}} src='./images/edit icon.png' onClick={this.handleShow} alt="" />
                 </div>
-                <div className="col-md-3 col-sm-3 " >
+                <div className="col-md-1 col-sm-1" >
 
                     <img onClick={(e) => this.deleteHandle(e)} style={{cursor: "pointer"}} src='./images/trash.png' alt="" />
 
                 </div>
-                <div className="col-md-3 col-sm-3" >
+                <div className="col-md-1 col-sm-1" >
 
                     <img onClick={(e) => this.upHandle(e)} style={{cursor: "pointer"}} src='./images/up icon.png' alt="" />
 
                 </div>
-                <div className="col-md-3 col-sm-3" >
+                <div className="col-md-1 col-sm-1" >
                     <img onClick={(e) => this.downHandle(e)}  style={{cursor: "pointer"}} src='./images/down icon.png' alt="" />
 
                 </div>
@@ -104,10 +104,10 @@ import { Modal , Button , OverlayTrigger, FormGroup, FormControl} from 'react-bo
         document.getElementsByClassName("AdminIcons")[id].style.display = "block"
     }
 
-    mouseOut(event, id) {
-        document.getElementsByClassName("AdminIcons")[id].style.display = "none"
+    // mouseOut(event, id) {
+    //     document.getElementsByClassName("AdminIcons")[id].style.display = "none"
 
-    }
+    // }
 
     handleClose = () => {
         this.setState({
@@ -186,7 +186,7 @@ import { Modal , Button , OverlayTrigger, FormGroup, FormControl} from 'react-bo
                                     <div className="col-md-6 col-sm-6" key={key}>
 
                                         <div onMouseOver={(e) => { this.mouseHover(e, key) }}
-                                            onMouseLeave={(e) => { this.mouseOut(e, key) }}
+                                            // onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                             className="right_btn">
                                             {this.state.Hover}
                                             <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
