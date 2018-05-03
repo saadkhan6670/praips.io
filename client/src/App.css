@@ -409,3 +409,10 @@ background-color: #7fc857;
     display: none
 }
 
+.RubricStyles {
+    margin-top: 9%;
+    overflow: visible;
+    overflow-y: auto;
+    height: 310px;
+}
+
