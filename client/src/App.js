@@ -11,6 +11,8 @@ import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
 import MenuComponent from './MenuComponent'
 import AdminLogin from './AdminLogin'
+import Dashboard from './Dashboard'
+
 
 @observer class App extends Component {
 
@@ -31,6 +33,8 @@ import AdminLogin from './AdminLogin'
                 <Route path="/faq/:slugName" render={(props) => { return <FAQInfo store={this.props.store} {...props} /> }} />
                 <Route path="/faq/:slugName" render={(props) => { return <FAQInfo store={this.props.store} {...props} /> }} />
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
+                <Route path="/dashboard" render={(props) => { return <Dashboard store={this.props.store} {...props} /> }} />
+                
                 
               </Switch>
 
