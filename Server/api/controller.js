@@ -63,7 +63,6 @@ exports.updateRubcric = (req, res) => {
 }
 
 exports.getAllRubrics = (req, res) => {
-
   Rubrics.find({}).populate('content').exec((err, data) => {
 
     if (!data) {
@@ -188,3 +187,50 @@ exports.createContact = (req, res) => {
   })
 
 }
+
+exports.updateViews = (req, res) => {
+
+RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
+
+  if(err) {
+    res.send(err)
+  }
+
+  else {
+    res.send(doc)
+  }
+})
+
+}
+
+exports.updateViews = (req, res) => {
+
+  RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
+  
+    if(err) {
+      res.send(err)
+    }
+  
+    else {
+      res.send(doc)
+    }
+  })
+  
+  }
+
+  exports.createResearch = (req, res) => {
+    let NewSearchQuery = new Search(req.body);
+    NewSearchQuery.save( (err , doc) => {
+
+      if(!doc) {
+        res.send(err);
+      }
+
+      else {
+        res.send(doc)
+      }
+    })
+
+    
+    
+    }

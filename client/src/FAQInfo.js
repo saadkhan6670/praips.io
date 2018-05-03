@@ -6,12 +6,12 @@ var slideIndex = 1;
 var slideIndex2 = 2;
 
 var searchBtnStyles = {
-    background: "white", 
-    color: "#ccc", 
+    background: "white",
+    color: "#ccc",
     borderLeft: "none",
-     borderColor: "#ccc", 
+    borderColor: "#ccc",
     boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
-    borderTopRightRadius: "10px", 
+    borderTopRightRadius: "10px",
     borderBottomRightRadius: "10px"
 }
 
@@ -67,23 +67,32 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     componentDidMount() {
-        var query = new URLSearchParams(this.props.location.search).get('search');
-        this.props.store.searchInput  =   query ? query : '';
+
         this.getRubricsData()
 
     }
 
-    handleContentOnOff(spanref, pRef) {
-        if (this.refs[spanref].className === "glyphicon glyphicon-minus contentToggle") {
-            this.refs[spanref].className = "glyphicon glyphicon-plus contentToggle"
-            this.refs[pRef].style.display = "none"
+    handleContentOnOff(spanref, pRef, viewId, views) {
+        if (this.refs[spanref].className === "glyphicon glyphicon-plus contentToggle view") {
+            this.refs[spanref].className = "glyphicon glyphicon-minus contentToggle"
+            this.refs[pRef].style.display = "block"
+            views += 1;
+            this.props.store.updateViews(viewId, views)
         }
-        else {
+        else if (this.refs[spanref].className === "glyphicon glyphicon-plus contentToggle") {
             this.refs[spanref].className = "glyphicon glyphicon-minus contentToggle"
             this.refs[pRef].style.display = "block"
         }
+        else {
+            this.refs[spanref].className = "glyphicon glyphicon-plus contentToggle"
+            this.refs[pRef].style.display = "none"
+        }
     }
 
+    componentWillUnmount() {
+        this.props.store.searchInput = '';
+
+    }
 
 
     plusDivs(n) {
@@ -93,10 +102,18 @@ var x = document.getElementsByClassName("mySlides");
 
     handleClick(searchInput) {
         this.props.store.searchInput = searchInput
+        this.props.history.push({
+            pathname: '/faq/penatibus',
+            search: `search="helloo"`
+        })
+
+        this.props.store.createResearch(searchInput)
     }
 
+
+
     render() {
-        let content = this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
+        let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
         let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
 
         return (
@@ -118,27 +135,18 @@ var x = document.getElementsByClassName("mySlides");
                         </div>
                     </div>
                     <div className="row search_row">
-                        {/* <div className="form-group has-success has-feedback btn-group">
 
-                            <div className="col-md-12">
-                                <input type="text" className="form-control" ref="searchInput"  placeholder="How can we help" 
-                                onClick={() => this.handleClick(this.refs.searchInput.value)} 
-                                onKeyDown={(e) => {e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) :  null}}
-                                />
-                            </div>
-                            
-                        </div> */}
-
-                        <div class="input-group" id="adv-search">
-                            <input type="text" class="form-control" placeholder="How can we help"  ref="searchInput"
-                            
-                            
-                            onKeyDown={(e) => {e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) :  null}}
+                        <div className="input-group" id="adv-search">
+                            <input type="text" className="form-control" placeholder="How can we help" ref="searchInput"
+                                onKeyDown={(e) => { return e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) : null }}
                             />
-                            <div class="input-group-btn">
-                                <div class="btn-group" role="group">
+                            <div className="input-group-btn">
+                                <div className="btn-group" role="group">
 
-                                    <button title="Click to Search.." type="button" onClick={() => this.handleClick(this.refs.searchInput.value)}  class="btn btn-primary" style={searchBtnStyles}><span class="glyphicon glyphicon-search"></span></button>
+                                    <button title="Click to Search.." type="button"
+                                        onClick={() => this.handleClick(this.refs.searchInput.value)} className="btn btn-primary" style={searchBtnStyles}>
+                                        <span className="glyphicon glyphicon-search"></span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +161,7 @@ var x = document.getElementsByClassName("mySlides");
                         filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
                             <h4>  We didn't find results for {this.props.store.searchInput} </h4>
 
-                            <b>These tips might help :</b>
+                            <b style={{textAlign : "centre"}}>These tips might help :</b>
                             <ul>
                                 <li>  Try fewer words. Ex: Time delivery </li>
                                 <li> Try different keywords.   </li>
@@ -164,7 +172,12 @@ var x = document.getElementsByClassName("mySlides");
                             return (
                                 <div className="col-lg-12" key={key}>
 
-                                    <h5><b>{data.question}</b>         <span style={{ cursor: "pointer" }} ref={`plus${key}`} onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`)} className="glyphicon glyphicon-plus contentToggle"></span>       </h5>
+                                    <h5><b>{data.question}</b>
+                                        <span style={{ cursor: "pointer" }} ref={`plus${key}`}
+                                            // handling the answer toggle and view update with its id
+                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
+                                            className="glyphicon glyphicon-plus contentToggle view"></span>
+                                    </h5>
                                     <p style={{ display: "none" }} ref={`answer${key}`}>{data.answer}</p>
                                     <hr />
                                 </div>

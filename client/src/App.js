@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AboutComponent from './AboutComponent'
 import MenuComponent from './MenuComponent'
@@ -7,8 +8,6 @@ import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
 import Contact from './Contact'
 import {observer} from 'mobx-react';
-
-
 
 
   @observer class App extends Component {
@@ -30,6 +29,7 @@ import {observer} from 'mobx-react';
               <Route exact path="/faq" render ={ (props) => {  return <FAQComponent store={this.props.store} {...props}/>} } />
               <Route path="/faq/:slugName"    render ={ (props) => {  return <FAQInfo store={this.props.store} {...props}/>} }/>   
               <Route path="/contact"    render ={ (props) => {  return <Contact store={this.props.store} {...props}/>} }/>   
+              
               
             </Switch>
           </div>
