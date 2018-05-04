@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './stores/stores';
-import { Provider } from 'mobx-react';
 
 
-ReactDOM.render(<Provider>
+ReactDOM.render(
     <App store={store} />
-</Provider>, document.getElementById('root'));
+, document.getElementById('root'));
 registerServiceWorker();

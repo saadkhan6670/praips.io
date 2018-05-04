@@ -3,20 +3,19 @@ import axios from 'axios'
 import {getCookie} from '../Services'
 
 class PraipsStore {
-
-
     @observable Rubrics = [];
     @observable About = [];
     @observable LoginKey = getCookie('key');
     @observable redirect = Boolean(getCookie('redirect'));
     @observable id = ''
+    @observable searchInput = '';
+
 
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
             this.Rubrics = response.data
         })
             .catch((error) => {
-
                 console.log(error)
             })
     }
@@ -33,6 +32,7 @@ class PraipsStore {
     async checkKey() {
         await axios.get(`${process.env.apiURL}/api/LogKeyAuth?LogKey=${this.LoginKey}`).then((response) => {
                 this.redirect = response.data
+               document.cookie = `redirect=${this.redirect}; path=/`;
         }).catch((error) => {
             console.log(error)
         })
@@ -44,9 +44,29 @@ class PraipsStore {
             
         }).catch((error) => {
             console.log(error)
-        })
+
+            .catch((error) => {
+
+                console.log(error)
+            })
     }
 
+    createContact(data) {
+        return axios.post(`${process.env.apiURL}/api/createContact`, data)
+    }
+
+
+    updateViews(id, views) {
+        axios.post(`${process.env.apiURL}/api/updateViews`, { id: id, views: views }).then((response) => {
+
+
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+      
     UpdateRubric(id,name,slug){
          axios.post(`${process.env.apiURL}/api/updateRubcric`,{id: id , name:name , slug : slug})
          .then((response) => {
@@ -84,8 +104,18 @@ class PraipsStore {
      })
    } 
 
-}
+    createResearch(content) {
 
+        return axios.post(`${process.env.apiURL}/api/createResearch`, {content : content}).then((response) => {
+
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+}
 
 const store = new PraipsStore();
 

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-// import '../src/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch,Link } from 'react-router-dom';
-
 import { observer } from 'mobx-react';
 
 // COmponents
 import AboutComponent from './AboutComponent'
+import MenuComponent from './MenuComponent'
 import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
 import MenuComponent from './MenuComponent'
 import AdminLogin from './AdminLogin'
 import Dashboard from './Dashboard'
-
+import Contact from './Contact'
 
 @observer class App extends Component {
 
@@ -23,16 +22,14 @@ import Dashboard from './Dashboard'
 
           <BrowserRouter>
             <div>
+
               <MenuComponent redirect={this.props.store.redirect} />
               <Switch>
-                <Route exact path="/" render={(props) => { return <FAQComponent store={this.props.store} {...props} /> }} />
-                <Route exact path="/faq" render={(props) => { return <FAQComponent store={this.props.store} {...props} /> }} />
-                <Route path="/faq/:slugName" render={(props) => { return <FAQInfo store={this.props.store} {...props} /> }} />
-                <Route path="/faq/:slugName" render={(props) => { return <FAQInfo store={this.props.store} {...props} /> }} />
+               <Route exact path="/" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
+                <Route exact path="/faq" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
+                <Route path="/faq/:slugName" render={(props) => { this.props.store.checkKey(); return <FAQInfo store={this.props.store} {...props} /> }} />
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
-                <Route path="/dashboard" render={(props) => { return <Dashboard store={this.props.store} {...props} /> }} />
-                
-                
+                <Route path="/dashboard" render={(props) => { this.props.store.checkKey(); return <Dashboard store={this.props.store} {...props} /> }} />
               </Switch>
               <AboutComponent store={this.props.store}/>
               

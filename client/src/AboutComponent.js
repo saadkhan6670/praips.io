@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 
 @observer class AboutComponent extends Component {
 
+
     constructor(props) {
         super(props)
         this.state = {
@@ -38,10 +39,8 @@ import { observer } from 'mobx-react';
 
                 </div>
                 <button onClick={() => this.handleLogOut()} className="btn btn-md"><span>LOGOUT</span></button>
-            
                 </div> : null }
-                
-
+           
                 <div className={this.props.store.redirect ? "AdminRight-wrapper" : "right-wrapper"} id="intro">
 
                     <div className={this.state.cssToggle ? "container-fluid AdminAboutContainer" : "container-fluid"}>
@@ -83,11 +82,11 @@ import { observer } from 'mobx-react';
                                             <h4>Description</h4>
                                             <p>{this.props.store.About.description}</p>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     {/* Modal component */}
@@ -125,6 +124,7 @@ import { observer } from 'mobx-react';
                     {/* Modal component */}
                 </div>
             </div>
+
         )
     }
 }

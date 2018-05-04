@@ -10,7 +10,9 @@ body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     height: 100%;
 }
-
+h2 {
+    font-weight: bold;
+}
 #wrapper {
     padding-top: 52px;
     padding-left: 12%;
@@ -250,7 +252,7 @@ body {
     margin-top: 24px;
 }
 
-.input-group input {
+.input-group input , button {
     height: 51px;
 }
 
@@ -398,14 +400,15 @@ background-color: #7fc857;
 }
 
 .sliderBtn {
-    background-color: #83C75A ; 
-    color: white;
-    width: 170px;
-}
-.sliderBtn:hover {
     background-color: white ; 
     color: #83C75A;
     border: 1px  #83C75A solid;
+    transition: opacity 1s ease-out;
+    width: 170px;
+}
+.sliderBtn:hover {
+    background-color: #83C75A ; 
+    color: white;
     
 }
 
@@ -529,4 +532,67 @@ background-color: #7fc857;
 .logout_btn:hover {
     background: #63a952;
 }
+
+
+/* Contact CSS */
+
+input[type=submit] {
+    background-color: #83C75A;
+        padding: 9px 53px;
+ 
+     color: white;
+     border: none;
+     border-radius: 9px;
+     cursor: pointer;
+     
+ 
+     }
+      input[type=submit]:hover {
+    background-color:  white;
+        padding: 9px 53px;
+ 
+     color: #83C75A;
+     border: 1px #83C75A solid ;
+     border-radius: 9px;
+     cursor: pointer;
+    
+ 
+     }
+     input[type="button"] {
+    background-color: #ccc;
+          padding: 9px 53px;
+ 
+     color: white;
+     border: none;
+     border-radius: 9px;
+     cursor: pointer;
+   
+     
+ 
+     }
+     .submit_btn {
+         text-align: center;
+     margin-top: 40px;
+     word-spacing: 1em;
+ 
+    }
+
+    .reqMsg {
+        color: red;
+        font-size: 12px;
+        /* display: block; */
+        text-align: center;
+      }
+
+      #request-process {
+          display: none;
+      }
+
+      #contactAlert {
+          display: none;
+      }
+
+      #mySlides {
+        
+      }
 

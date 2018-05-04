@@ -5,7 +5,7 @@
         "createdAt": "2017-07-20T14:34:22Z"
     },
     {
-        "name": "Research and Development",
+        "name": "Research",
         "slug": "/pharetra",
         "createdAt": "2018-03-21T02:46:33Z"
     },
@@ -20,7 +20,7 @@
         "createdAt": "2017-07-19T20:04:00Z"
     },
     {
-        "name": "Business Development",
+        "name": "Business",
         "slug": "/rutrum",
         "createdAt": "2017-10-10T19:08:10Z"
     },
@@ -35,17 +35,17 @@
         "createdAt": "2017-06-13T16:13:25Z"
     },
     {
-        "name": "Business Development",
+        "name": "Technology",
         "slug": "/sit",
         "createdAt": "2017-05-11T21:13:00Z"
     },
     {
-        "name": "Research and Development",
+        "name": "Mechanism",
         "slug": "/sapien",
         "createdAt": "2017-06-14T19:53:49Z"
     },
     {
-        "name": "Marketing",
+        "name": "Employees",
         "slug": "/faucibus",
         "createdAt": "2018-04-12T00:24:10Z"
     }

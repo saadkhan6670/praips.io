@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { observer } from 'mobx-react';
+
 import { CreateRubric, CreateRubricSlug } from './Services'
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
 
+import Search from './Search'
+
+var searchBtnStyles = {
+    background: "white",
+    color: "#ccc",
+    borderLeft: "none",
+    borderColor: "#ccc",
+    boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
+    borderTopRightRadius: "10px",
+    borderBottomRightRadius: "10px"
+}
+
+
 
 @observer class FAQComponent extends Component {
+    constructor(props) {
+        super();
+
+        this.state = {
+            redirect: false
+        }
+    }
 
     constructor(props) {
         super(props)
@@ -21,9 +42,19 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
         }
     }
 
-    componentDidMount() {
+  componentDidMount() {
+        var query = new URLSearchParams(this.props.location.search).get('search');
+        this.props.store.searchInput = query ? query : '';
+        if(this.props.store.searchInput.length) {
+            this.setState({
+                redirect: true
+            })
+        }
         this.props.store.checkKey()
         this.props.store.getRubrics()
+    }
+    componentWillUnmount() {
+        this.props.store.searchInput = '';
     }
 
 
@@ -104,47 +135,80 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
         this.props.store.RemoveRubric(data._id)
     }
 
-    upHandle(event, data, index) {
+    upHandle(event, data, index) { }
+
+   downHandle(event, data, index) {
 
     }
+    handleSearchClick(searchInput) {
+        if (searchInput.length === 0) {
+            this.setState({
+                redirect: false
+            })
+            this.props.history.push({
+                pathname: '/faq',
+                search:''
+              })
+        }
+        else {
+            this.props.store.searchInput = searchInput;
+            this.setState({
+                redirect: true
+            })
+            this.props.history.push({
+                pathname: '/faq',
+                search: `search=${this.props.store.searchInput}`
+              })
 
-    downHandle(event, data, index) {
+            this.props.store.createResearch(searchInput)
+
+        }
+
+
 
     }
-
     render() {
-
+        console.log(this.state.redirect)
         return (
-            <div className="content-wrapper" id="intro">
-                <div className="container-fluid">
+                <div className="content-wrapper" id="intro">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-md-12 col-sm-12">
+                                <div className="head_text">
+                                    <h1>Frenquently Asked Questions</h1>
+                                </div>
 
-                    <div className="row">
-                        <div className="col-md-12 col-sm-12">
-                            <div className="head_text">
-                                <h1>Frenquently Asked Questions</h1>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-md-12 col-sm-12">
-                            <div className="subText">
-                                <p>Tips and Answer from the Lorum Ipsum Team</p>
                             </div>
                         </div>
-                    </div>
-                    <div className="row search_row">
-
-                        <div className="form-group has-success has-feedback">
-
-                            <div className="col-md-12">
-                                <input type="text" className="form-control" id="inputSuccess" placeholder="How can we help" />
-                                <span className="glyphicon glyphicon-search form-control-feedback"></span>
+                        <div className="row">
+                            <div className="col-md-12 col-sm-12">
+                                <div className="subText">
+                                    <p>Tips and Answer from the {this.props.store.About.name} Team</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div className="row search_row">
+                            <div className="input-group" id="adv-search">
+                                <input type="text" className="form-control" ref="searchInput"
+                                    onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(this.refs.searchInput.value) : null }}
+                                    placeholder="How can we help" />
+                                <div className="input-group-btn">
+                                    <div className="btn-group" >
 
+                                        <button title="Click to Search.."
+                                            onClick={(e) => { this.handleSearchClick(this.refs.searchInput.value) }} type="button" className="btn btn-primary" style={searchBtnStyles}>
+                                            <span className="glyphicon glyphicon-search">
+                                            </span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div className="row" style={{ height: "40px" }}></div>
+
+                        {  this.state.redirect  ?  <Search store={this.props.store} /> :
                     <div className="RubricStyles">
                         {this.props.store.Rubrics.map((data, key) => {
                             return (
@@ -178,6 +242,7 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
                                     </div>
                                     )
                                 })}
+}
         
                     </div>
                     {

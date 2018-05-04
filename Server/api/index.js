@@ -9,7 +9,7 @@ var controller = require('./controller');
 //APIs for User
 router.post('/createContact', controller.createContact);
 
-// router.post('/createResearch', controller.createResearch);
+router.post('/createResearch', controller.createResearch);
 
 //APIs for Admin
 router.post('/adminLogIn', controller.adminLogIn);
@@ -27,6 +27,8 @@ router.get('/getAllRubrics', controller.getAllRubrics);
 //APIs for Rucric Content
 router.post('/createRubcricContent', controller.createRubcricContent);
 router.post('/updateRubcricContent', controller.updateRubcricContent);
+router.post('/updateViews', controller.updateViews);
+
 
 //APS for About
 router.post('/createAbout', controller.createAbout);
