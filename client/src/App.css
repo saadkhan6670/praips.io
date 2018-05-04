@@ -14,20 +14,20 @@ h2 {
     font-weight: bold;
 }
 #wrapper {
-    padding-top: 52px;
+    padding-top: 16px;
     padding-left: 12%;
-    padding-bottom: 52px;
+    padding-bottom: 0px;
     background: #252525;
 }
 
 #wrapper .footer p {
     color: white;
-    text-align: right;
+    text-align: center;
 }
 
 #sidebar-wrapper {
     width: 5.76%;
-    height: 815px;
+    height: 690px;
     float: left;
     margin-right: 16px;
     border-radius: 8px;
@@ -81,7 +81,7 @@ h2 {
 
 .content-wrapper {
     background-color: white;
-    height: 815px;
+    height: 690px;
     border-radius: 8px;
     float: left;
     width: 51.59%;
@@ -157,7 +157,7 @@ h2 {
 
 .right-wrapper {
     background-color: white;
-    height:815px;
+    height:690px;
     float: left;
     border-radius: 8px;
     width: 24.26%;
@@ -415,7 +415,7 @@ background-color: #7fc857;
 }
 
 .RubricStyles {
-    margin-top: 9%;
+    margin-top: 2%;
     overflow: visible;
     overflow-y: auto;
     height: 310px;
