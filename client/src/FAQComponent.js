@@ -190,6 +190,7 @@ var searchBtnStyles = {
                                     <button title="Click to Search.."
                                         onClick={(e) => { this.handleSearchClick(this.refs.searchInput.value) }} type="button" className="btn btn-primary" style={searchBtnStyles}>
                                         <span className="glyphicon glyphicon-search">
+                                        
                                         </span>
                                     </button>
 
@@ -203,7 +204,7 @@ var searchBtnStyles = {
                             {
                                 this.props.store.Rubrics.map((data, key) => {
                                     return (
-                                        <div key={key} className="col-md-6" style={{ marginTop: "30px" }}>
+                                        <div key={key} className="col-md-6" style={{ marginTop: "10px" }}>
                                             <div
                                                 style={{ padding: '2%' }}
                                                 key={key}>
