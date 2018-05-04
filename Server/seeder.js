@@ -65,10 +65,10 @@ NewUser.save((err , data) => {
 
 console.log("Test User Created")
 
-let NewAbout = new About({name: 'ABC Company', 
-                        logoPath : '/images/p-logo-right.png', 
-                        description: 'Dummy discription', 
-                        slogan: 'dummy slogan'
+let NewAbout = new About({name: 'Lorem Ipsum', 
+                        logoPath : '/images/praips Logo.png', 
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur nibh ligula, et scelerisque nisl lobortis vel. Vestibulum id tortor urna. Phasellus quis purus vel quam convallis efficitur', 
+                        slogan: 'Lorem ipsum dolor sit amet consectetur'
                     })
 NewAbout.save((err, data) => {
     if(err) {

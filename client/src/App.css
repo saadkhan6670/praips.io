@@ -108,7 +108,6 @@ h2 {
 
 .content-wrapper .subText p {
     font-size: 17px;
-    font-weight: lighter;
 }
 
 .content-wrapper .form-group {
@@ -171,7 +170,8 @@ h2 {
 }
 
 .right-wrapper .about_text h4 {
-    font-size: 16px;    font-weight: 700;
+     
+    font-weight: 900;
     font-stretch: expanded;
 }
 

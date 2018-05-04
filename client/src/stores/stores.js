@@ -44,12 +44,9 @@ class PraipsStore {
             
         }).catch((error) => {
             console.log(error)
+    })
+}
 
-            .catch((error) => {
-
-                console.log(error)
-            })
-    }
 
     createContact(data) {
         return axios.post(`${process.env.apiURL}/api/createContact`, data)

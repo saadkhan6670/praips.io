@@ -10,7 +10,7 @@ import { observer } from 'mobx-react';
             <div id="sidebar-wrapper">
                 <div className="logo-wrapper">
                     <div className="logo">
-                        <img src='./images/praips Logo.png' alt="" />
+                        <img src='./images/praips Logo.png' alt="praips Logo" />
                     </div>
                 </div>
                 <Link to="/faq">
