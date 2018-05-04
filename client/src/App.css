@@ -206,8 +206,8 @@ body {
 }
 
 .right-wrapper .right_btn button:hover {
-    background-color: lightgreen;
-    color: black;
+    background: #63a952;
+
 }
 
 .right-wrapper .right_btn button {
@@ -322,6 +322,10 @@ body {
         width: 100%;
         margin-top: 20px;
     }
+    AdminRight-wrapper{
+        width: 100%;
+        margin-top: 20px;
+    }
     .search_row {
         padding: 0 30px 0 30px!important;
     }
@@ -414,5 +418,115 @@ background-color: #7fc857;
     overflow: visible;
     overflow-y: auto;
     height: 310px;
+}
+
+/* Admin About container Css */
+.AdminAboutContainer{
+    top: 8px;
+    position: relative;
+}
+
+.AdminRight-wrapper{
+    background-color: white;
+    height: 741px;
+    float: left;
+    border-radius: 8px;
+    width: 24.26%;
+    display: inline-block;
+    position: relative;
+    top: 40px;
+    right: 14.1%;
+}
+
+.AdminRight-wrapper .about_text {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.AdminRight-wrapper .about_text h4 {
+    font-size: 16px;    font-weight: 700;
+    font-stretch: expanded;
+}
+
+.AdminRight-wrapper .right_log {
+    text-align: center;
+    flex: 1;
+    margin-top: 54px;
+}
+
+.AdminRight-wrapper .right_log img {
+    height: 48px;
+}
+
+.AdminRight-wrapper .right_text {
+    margin-top: 23px;
+    flex: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.AdminRight-wrapper .right_text h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.AdminRight-wrapper .right_text p {
+    font-size: 15px;
+}
+
+.AdminRight-wrapper .right_btn {
+    text-align: center;
+    margin-top: 58px;
+}
+
+.AdminRight-wrapper .right_btn button:hover {
+    background: #63a952;
+
+}
+
+.AdminRight-wrapper .right_btn button {
+    /* width: 231px; */
+    background-color: #83C75A;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.AdminRight-wrapper .content_text {
+    margin-top: 70px;
+    margin-left: 40px;
+}
+
+.AdminRight-wrapper .content_text .desc h4 {
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #A1D180;
+}
+
+.AdminRight-wrapper .content_text .desc p {
+    line-height: 26px;
+    margin-top: 12px;
+}
+
+.AdminProfile-wrapper {
+    background-color: white;
+    height: 57px;
+    float: left;
+    border-radius: 8px;
+    width: 14.26%;
+    display: inline-block;
+}
+.logout_btn{
+    background-color: #83C75A;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    
+}
+
+.logout_btn:hover {
+    background: #63a952;
 }
 

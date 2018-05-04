@@ -29,7 +29,6 @@ import { Redirect } from 'react-router-dom';
                             this.props.store.redirect = true
                             this.props.store.id = response.data._id
                             
-                             
                             var now = new Date();
                             var time = now.getTime();
                             var expireTime = time + 1000 * 100000;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import store from './stores/stores'
 
 @observer class MenuComponent extends Component {
 
@@ -29,7 +28,7 @@ import store from './stores/stores'
                 </Link>
                 <hr/>
 
-                    {  store.redirect === true ?
+                    {  this.props.redirect ?
                     <div>
                      <Link to="/install">
                      <div className="faq">
@@ -61,8 +60,6 @@ import store from './stores/stores'
                      </Link>
                      </div>  : null
                     }
-                
-                
             </div>
         )
     }

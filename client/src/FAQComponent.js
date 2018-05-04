@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import { toTitleCase, removeWhitespaces } from './Services'
+import { CreateRubric, CreateRubricSlug } from './Services'
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
-
 
 
 @observer class FAQComponent extends Component {
@@ -14,56 +13,25 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
             RubricInput: '',
             RubricSlug: '',
             Message: '',
-            Hover: '',
+            ModalComponent: '',
             Show: false,
-
+            Modalvalue: '',
+            RubricIndex: '',
+            RubricId: '',
         }
     }
 
     componentDidMount() {
-
-        // Hover Component
-        this.setState({
-            Hover: <div className="AdminIcons ">
-                
-                    <img onClick={(e) => this.editHandle(e)} style={{ cursor: "pointer" ,marginRight : "10px"}} src='./images/edit icon.png'  alt="" />
-               
-                    <img onClick={(e) => this.deleteHandle(e)} style={{ cursor: "pointer",marginRight : "10px"}} src='./images/trash.png' alt="" />
-
-              
-                    <img onClick={(e) => this.upHandle(e)} style={{ cursor: "pointer",marginRight : "10px"}} src='./images/up icon.png' alt="" />
-
-               
-                    <img onClick={(e) => this.downHandle(e)} style={{ cursor: "pointer" }} src='./images/down icon.png' alt="" />
-            </div>
-        })
-
         this.props.store.checkKey()
         this.props.store.getRubrics()
     }
 
-    editHandle() {
-        this.handleShow()
-    }
-
-
-    deleteHandle() {
-
-    }
-
-    upHandle() {
-
-    }
-
-    downHandle() {
-
-    }
 
     async HandleChange(e) {
 
         await this.setState({
-            RubricInput: toTitleCase(e.target.value),
-            RubricSlug: removeWhitespaces(e.target.value)
+            RubricInput: CreateRubric(e.target.value),
+            RubricSlug: CreateRubricSlug(e.target.value)
         })
 
     }
@@ -74,10 +42,15 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
         if (this.state.RubricInput.length === 0) {
             this.setState({
                 Message: <div className="alert alert-danger">
-                    <strong>Warning: Rubric Name Can't be empty </strong>
+                    <strong >Warning: Rubric Name Can't be empty </strong>
                 </div>
             })
 
+            setTimeout(() => {
+                this.setState({
+                    Message: ''
+                });
+            }, 3000);
         }
         else {
             await this.props.store.createRubric(this.state.RubricInput, this.state.RubricSlug)
@@ -89,12 +62,16 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
                 </div>
             })
 
+            setTimeout(() => {
+                this.setState({
+                    Message: ''
+                });
+            }, 3000);
         }
         // Logic ends
     }
 
     mouseHover(event, id) {
-
         document.getElementsByClassName("AdminIcons")[id].style.display = "block"
     }
 
@@ -102,48 +79,44 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
         document.getElementsByClassName("AdminIcons")[id].style.display = "none"
     }
 
-    handleClose = () => {
+    handleModalClose = () => {
         this.setState({
             Show: false
         })
     }
 
-    handleShow = () => {
+    handleModalShow = () => {
         this.setState({ Show: true });
+    }
+
+    editHandle(event, data, index) {
+        this.handleModalShow()
+        this.setState({
+            RubricIndex: index,
+            Modalvalue: this.props.store.Rubrics[index].name,
+            RubricId: data._id
+        })
+    }
+
+
+    deleteHandle(event, data, index) {
+        this.props.store.Rubrics.splice(index, 1)
+        this.props.store.RemoveRubric(data._id)
+    }
+
+    upHandle(event, data, index) {
+
+    }
+
+    downHandle(event, data, index) {
+
     }
 
     render() {
 
         return (
             <div className="content-wrapper" id="intro">
-                {/* <Button bsStyle="primary" bsSize="medium" onClick={this.handleShow}>
-          Launch demo modal
-        </Button> */}
                 <div className="container-fluid">
-
-                    <Modal show={this.state.Show} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <form>
-                                <FormGroup
-                                    controlId="formBasicText"
-                                >
-                                    <FormControl
-                                        type="text"
-                                        value={this.state.value}
-                                        placeholder="Enter text"
-                                        onChange={this.handleChange}
-                                    />
-                                    <FormControl.Feedback />
-                                </FormGroup>
-                            </form>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={this.handleClose}>Close</Button>
-                        </Modal.Footer>
-                    </Modal>
 
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
@@ -175,65 +148,113 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
                     <div className="RubricStyles">
                         {this.props.store.Rubrics.map((data, key) => {
                             return (
-                                <div className="col-md-6" style={{marginTop : "30px"}}>
-                                    <div 
-                                    style={{ padding: '2%' }}
-                                    key={key}>
+                                <div key={key} className="col-md-6" style={{ marginTop: "30px" }}>
+                                    <div
+                                        style={{ padding: '2%' }}
+                                        key={key}>
 
                                         <div
                                             onMouseOver={(e) => { this.mouseHover(e, key) }}
                                             onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                             className="right_btn">
-                                            {this.state.Hover}
-                                            <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
-                                                <button
-                                                    className="btn btn-lg" >
-                                                    {data.name}
-                                                </button>
-                                            </Link>
+                                                <div className="AdminIcons ">
+                                            {this.props.store.redirect ?
+                                                    <div>
+                                                    <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/edit icon.png' alt="" />
+                                                    <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/trash.png' alt="" />
+                                                    <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/up icon.png' alt="" />
+                                                    <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src='./images/down icon.png' alt="" />
+                                                    </div>
+                                                    : null }
+                                                    </div>
+                                                <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
+                                                    <button
+                                                        className="btn btn-lg" >
+                                                        {data.name}
+                                                    </button>
+                                                </Link>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        })}
-
+                                    </div>
+                                    )
+                                })}
+        
                     </div>
+                    {
+                                this.props.store.redirect ?
+                                <div className="col-md-12 ">
+                                    <div className="col-md-8 col-sm-8">
 
-                    <div className="col-md-12 ">
-                    <div className="col-md-8 col-sm-8">
-                    
-                        <div className="form-group has-success has-feedback">
+                                        <div className="form-group has-success has-feedback">
 
-                                <input onChange={(e) => { this.HandleChange(e) }} type="text" className="form-control" placeholder="enter the name of Rubric" />
-                            </div>
-                        </div>
+                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" className="form-control" placeholder="enter the name of Rubric" />
+                                        </div>
+                                    </div>
 
-                        <div className="col-md-4 col-sm-64" >
-                            <div className="right_btn">
+                                    <div className="col-md-4 col-sm-64" >
+                                        <div className="right_btn">
 
-                                <button onClick={(e) => this.handleAddBtn(e)} style={{ width: "140px" }} className="btn btn-lg" >
-                                    ADD
+                                            <button onClick={(e) => this.handleAddBtn(e)} style={{ width: "140px" }} className="btn btn-lg" >
+                                                ADD
                                         </button>
+                                        </div>
+                                    </div>
+
+                                </div> : null
+                            }
+
+                            <div className="row">
+
+
+                                <div className="col-md-6 col-sm-6" >
+                                    <div className="right_btn">
+                                        {this.state.Message}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                    </div>
-
-                    <div className="row">
-
-                        
-                        <div className="col-md-6 col-sm-6" >
-                            <div className="right_btn">
-
-                                {this.state.Message}
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
+        
+                {/* Modal component */}
+                        <Modal show={this.state.Show} onHide={this.handleModalClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Enter The Name Of Rubric</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form>
+                                    <FormGroup
+                                        controlId="formBasicText"
+                                    >
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.Modalvalue}
+                                            placeholder="Enter text"
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    Modalvalue: e.target.value
+                                                })
+                                            }}
+                                        />
+                                        <FormControl.Feedback />
+                                    </FormGroup>
+                                </form>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={(e) => {
+                                    this.props.store.Rubrics[this.state.RubricIndex].name = this.state.Modalvalue
+                                    this.props.store.UpdateRubric(this.state.RubricId, this.state.Modalvalue, CreateRubricSlug(this.state.Modalvalue))
+                                    this.setState({
+                                        Show: false,
+                                        Modalvalue: ''
+                                    })
+                                }}>Change</Button>
+                            </Modal.Footer>
+                        </Modal>
+                        {/* Modal component */}
 
-        )
-    }
-}
+                    </div>
 
-export default FAQComponent;
+                    )
+                }
+            }
+            
+            export default FAQComponent;

@@ -19,23 +19,18 @@ import AdminLogin from './AdminLogin'
       <div className="footer">
         <div id="wrapper">
 
-
           <BrowserRouter>
             <div>
-
-              <MenuComponent />
-
+              <MenuComponent redirect={this.props.store.redirect} />
               <Switch>
-                <Route exact path="/" render={(props) => { return <FAQComponent store={this.props.store} {...props} /> }} />
-                <Route exact path="/faq" render={(props) => { return <FAQComponent store={this.props.store} {...props} /> }} />
-                <Route path="/faq/:slugName" render={(props) => { return <FAQInfo store={this.props.store} {...props} /> }} />
-                <Route path="/faq/:slugName" render={(props) => { return <FAQInfo store={this.props.store} {...props} /> }} />
-                <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
-                
+                <Route exact path="/" render={(props) => {  this.props.store.checkKey() ; return <FAQComponent store={this.props.store}  {...props} /> }} />
+                <Route exact path="/faq" render={(props) => { this.props.store.checkKey() ; return <FAQComponent store={this.props.store}  {...props} /> }} />
+                <Route path="/faq/:slugName" render={(props) => { this.props.store.checkKey() ; return <FAQInfo store={this.props.store}  {...props} /> }} />
+                <Route path="/login" render={(props) => { this.props.store.checkKey() ; return <AdminLogin store={this.props.store} {...props} /> }} />
               </Switch>
-
-              <AboutComponent store={this.props.store} />
-
+              <AboutComponent store={this.props.store}/>
+              
+              {this.props.store.redirect ? null :
               <div className="container footer_text">
                 <div className="row">
                   <div className="col-md-12 col-sm-12">
@@ -45,7 +40,7 @@ import AdminLogin from './AdminLogin'
                   </div>
                 </div>
 
-              </div>
+              </div> }
             </div>
           </BrowserRouter>
         </div>

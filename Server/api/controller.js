@@ -61,9 +61,21 @@ exports.LogKeyAuth = (req, res) => {
   })
 }
 
+// Logout logic
+exports.DelLogKey = (req, res) => {
+  LogKey.findByIdAndRemove(req.body.id, (err, data) => {
+    if (data) {
+      res.send(data)
+    } else {
+      res.send(err)
+
+    }
+  })
+}
+
 // Admin Api Ends
 
-
+// API for Rubrics
 exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)
 
@@ -74,10 +86,10 @@ exports.createRubric = (req, res) => {
 }
 
 exports.updateRubcric = (req, res) => {
+  
   let date = new Date();
-  console.log(date.getUTCDate())
 
-  Rubrics.findByIdAndUpdate(req.query.id, { $set: {name : req.body.name, updatedAt: Date.now()} }, {new: true}, (err , data) => {
+  Rubrics.findByIdAndUpdate(req.body.id, { $set: {name : req.body.name, slug: req.body.slug, updatedAt: Date.now()} }, {new: true}, (err , data) => {
 
     if(!data) {
       res.send("No rubric found to update")
@@ -88,6 +100,22 @@ exports.updateRubcric = (req, res) => {
     }
   })
 }
+
+exports.removeRubrics = (req, res) => {
+  console.log(req.body)
+  
+  Rubrics.findByIdAndRemove( req.body._id, (err , data) => {
+
+    if(!data) {
+      res.send("No rubric found to update")
+    }
+
+    else {
+      res.send("Rubric Removed");
+    }
+  })
+}
+
 
 exports.getAllRubrics = (req, res) => {
 
