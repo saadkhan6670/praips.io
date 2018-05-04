@@ -10,8 +10,9 @@ const Users = mongoose.model('Users');
 const Contact = mongoose.model('Contact');
 const Search = mongoose.model('Search');
 const About = mongoose.model('About');
+const LogKey = mongoose.model('LogKey');
 
-
+const uuidv1 = require('uuid/v1');
 
 //create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
@@ -22,7 +23,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-
+// Admin Login API
 exports.adminLogIn = (req, res) => {
   Users.findOne({ email: req.body.email, password: req.body.password }, (err, data) => {
 
@@ -35,6 +36,46 @@ exports.adminLogIn = (req, res) => {
   })
 }
 
+exports.LoginKey = (req, res) => {
+  var LogInKey = uuidv1()
+  var NewLogKey = new LogKey({
+    logInKey: LogInKey
+  });
+  NewLogKey.save((err, data) => {
+    res.send(data);
+  })
+
+}
+
+
+//Authenticating LogIn Key
+exports.LogKeyAuth = (req, res) => {
+  LogKey.findOne({
+    logInKey: req.query.LogKey
+  }, (err, data) => {
+    if (!data) {
+      res.send(false)
+    } else {
+      res.send(true);
+    }
+  })
+}
+
+// Logout logic
+exports.DelLogKey = (req, res) => {
+  LogKey.findByIdAndRemove(req.body.id, (err, data) => {
+    if (data) {
+      res.send(data)
+    } else {
+      res.send(err)
+
+    }
+  })
+}
+
+// Admin Api Ends
+
+// API for Rubrics
 exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)
 
@@ -42,16 +83,13 @@ exports.createRubric = (req, res) => {
 
     res.send(rubric)
   })
-
 }
 
-
 exports.updateRubcric = (req, res) => {
+  
   let date = new Date();
-  console.log(date.getUTCDate())
-
-  Rubrics.findByIdAndUpdate(req.query.id, { $set: { name: req.body.name, updatedAt: Date.now() } }, { new: true }, (err, data) => {
-
+  
+  Rubrics.findByIdAndUpdate(req.body.id, { $set: {name : req.body.name, slug: req.body.slug, updatedAt: Date.now()} }, {new: true}, (err , data) => {
     if (!data) {
       res.send("No rubric found to update")
     }
@@ -61,6 +99,22 @@ exports.updateRubcric = (req, res) => {
     }
   })
 }
+
+exports.removeRubrics = (req, res) => {
+  console.log(req.body)
+  
+  Rubrics.findByIdAndRemove( req.body._id, (err , data) => {
+
+    if(!data) {
+      res.send("No rubric found to update")
+    }
+
+    else {
+      res.send("Rubric Removed");
+    }
+  })
+}
+
 
 exports.getAllRubrics = (req, res) => {
   Rubrics.find({}).populate('content').exec((err, data) => {
@@ -74,10 +128,6 @@ exports.getAllRubrics = (req, res) => {
     }
   })
 }
-
-
-
-
 
 exports.createRubcricContent = (req, res) => {
   let NewRubricContent = new RubricContent(req.body);
@@ -161,9 +211,6 @@ exports.getAbout = (req, res) => {
 
 exports.createContact = (req, res) => {
   let NewContact = new Contact(req.body);
-
-
-
   NewContact.save((err, data) => {
     if (!data) {
       res.send(err);
@@ -189,7 +236,6 @@ exports.createContact = (req, res) => {
 }
 
 exports.updateViews = (req, res) => {
-
 RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
 
   if(err) {
@@ -230,7 +276,5 @@ exports.updateViews = (req, res) => {
         res.send(doc)
       }
     })
-
-    
-    
     }
+

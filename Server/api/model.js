@@ -73,6 +73,19 @@ var AboutSchema = new Schema({
   slogan: {type: String}
 })
 
+var LogKeySchema = new Schema({
+  logInKey: {
+    type: String,
+    unique: true
+  },
+  createdAt: {
+    type: Date,
+    expires: 86400,
+    default: Date.now
+  }
+
+})
+
 
 module.exports = mongoose.model('Users', UsersSchema);
 module.exports = mongoose.model('Rubrics', RubricsSchema);
@@ -80,5 +93,7 @@ module.exports = mongoose.model('RubricContent', RubricContentSchema  );
 module.exports = mongoose.model('Contact', ContactFormSchema);
 module.exports = mongoose.model('Search', SearchSchema);
 module.exports = mongoose.model('About', AboutSchema);
+module.exports = mongoose.model('LogKey', LogKeySchema);
+
 
 

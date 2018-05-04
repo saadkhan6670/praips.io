@@ -10,14 +10,14 @@ import { observer } from 'mobx-react';
             <div id="sidebar-wrapper">
                 <div className="logo-wrapper">
                     <div className="logo">
-                        <img src='/images/p-logo.png' alt="" />
+                        <img src='./images/praips Logo.png' alt="" />
                     </div>
                 </div>
                 <Link to="/faq">
                 <div className="faq">
-                    <div className="question-wrapper">
+                    <div >
                         <div className="question">
-                            <img src='/images/question.png' alt="" />
+                            <img src='./images/info.png' alt="info icon" />
                         </div>
                     </div>
 
@@ -26,7 +26,40 @@ import { observer } from 'mobx-react';
                     </div>
                 </div>
                 </Link>
-                
+                <hr/>
+
+                    {  this.props.redirect ?
+                    <div>
+                     <Link to="/install">
+                     <div className="faq">
+                         <div >
+                             <div className="question">
+                                 <img src='./images/script icon.png' alt="script icon" />
+                             </div>
+                         </div>
+     
+                         <div className="faqText">
+                          INSTALL 
+                         </div>
+                     </div>
+                     </Link>
+                     <hr/>
+     
+                      <Link to="/dashboard">
+                     <div className="faq">
+                         <div>
+                             <div className="question">
+                                 <img src='./images/analytics icon.png' alt="analytics icon" />
+                             </div>
+                         </div>
+     
+                         <div className="faqText">
+                          ANALYTICS 
+                         </div>
+                     </div>
+                     </Link>
+                     </div>  : null
+                    }
             </div>
         )
     }
