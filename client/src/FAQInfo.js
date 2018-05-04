@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
+
 var slideIndex = 1;
 var slideIndex2 = 2;
 
@@ -72,19 +73,23 @@ var x = document.getElementsByClassName("mySlides");
 
     }
 
-    handleContentOnOff(spanref, pRef, viewId, views) {
-        if (this.refs[spanref].className === "glyphicon glyphicon-plus contentToggle view") {
-            this.refs[spanref].className = "glyphicon glyphicon-minus contentToggle"
+    handleContentOnOff(imgref, pRef, viewId, views) {
+       
+        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className ===  "view") 
+        {
+            this.refs[imgref].setAttribute('src', "/images/minu icon.png") 
+            this.refs[imgref].className = ""
             this.refs[pRef].style.display = "block"
             views += 1;
-            this.props.store.updateViews(viewId, views)
+          return  this.props.store.updateViews(viewId, views)
         }
-        else if (this.refs[spanref].className === "glyphicon glyphicon-plus contentToggle") {
-            this.refs[spanref].className = "glyphicon glyphicon-minus contentToggle"
+        else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
+            this.refs[imgref].setAttribute('src', "/images/minu icon.png") 
             this.refs[pRef].style.display = "block"
         }
         else {
-            this.refs[spanref].className = "glyphicon glyphicon-plus contentToggle"
+            this.refs[imgref].className = ""
+            this.refs[imgref].setAttribute('src', "/images/plus icon.png") 
             this.refs[pRef].style.display = "none"
         }
     }
@@ -101,10 +106,18 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     handleClick(searchInput) {
+        console.log("from search")
+        if (searchInput.length === 0) {
+
+            this.props.history.push({
+                pathname: '/faq',
+                search: ''
+            })
+        }
         this.props.store.searchInput = searchInput
         this.props.history.push({
             pathname: '/faq/penatibus',
-            search: `search="helloo"`
+            search: `search=${this.props.store.searchInput}`
         })
 
         this.props.store.createResearch(searchInput)
@@ -161,7 +174,7 @@ var x = document.getElementsByClassName("mySlides");
                         filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
                             <h4>  We didn't find results for {this.props.store.searchInput} </h4>
 
-                            <b style={{textAlign : "centre"}}>These tips might help :</b>
+                            <b style={{ textAlign: "centre" }}>These tips might help :</b>
                             <ul>
                                 <li>  Try fewer words. Ex: Time delivery </li>
                                 <li> Try different keywords.   </li>
@@ -171,13 +184,17 @@ var x = document.getElementsByClassName("mySlides");
                         </div> : filteredContent.map((data, key) => {
                             return (
                                 <div className="col-lg-12" key={key}>
+                                
+                                    <h5 style={{ width: "90%" }}><b>{data.question}</b> </h5>
 
-                                    <h5><b>{data.question}</b>
-                                        <span style={{ cursor: "pointer" }} ref={`plus${key}`}
-                                            // handling the answer toggle and view update with its id
-                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
-                                            className="glyphicon glyphicon-plus contentToggle view"></span>
-                                    </h5>
+                                                <img src="/images/plus icon.png" 
+                                                style={{ cursor: "pointer", 
+                                                position: "sticky",float:"right" , bottom: "87%" }} ref={`plus${key}`}
+                                                    handling the answer toggle and view update with its id
+                                                    onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
+                                                    className="view" 
+                                                    />
+
                                     <p style={{ display: "none" }} ref={`answer${key}`}>{data.answer}</p>
                                     <hr />
                                 </div>

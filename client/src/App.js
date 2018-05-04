@@ -28,6 +28,7 @@ import Contact from './Contact'
                 <Route exact path="/faq" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route path="/faq/:slugName" render={(props) => { this.props.store.checkKey(); return <FAQInfo store={this.props.store} {...props} /> }} />
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
+                <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />                
                 <Route path="/dashboard" render={(props) => { this.props.store.checkKey(); return <Dashboard store={this.props.store} {...props} /> }} />
               </Switch>
               <AboutComponent store={this.props.store}/>

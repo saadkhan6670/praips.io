@@ -393,10 +393,8 @@ background-color: #7fc857;
 }
 
 .contentToggle {
-    float: right;
-    border: 2px solid black;
-    padding: 5px;
-    border-radius: 15px;
+     float: right;
+   
 }
 
 .sliderBtn {
@@ -590,9 +588,5 @@ input[type=submit] {
 
       #contactAlert {
           display: none;
-      }
-
-      #mySlides {
-        
       }
 
