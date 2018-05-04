@@ -12,7 +12,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 
             <div className="content-wrapper" style={{ background: "#ccc" }}>
                 <div className="container-fluid" style={{ paddingRight: "30px", paddingLeft: "32px" }}>
-                    <div className="row" style={{ background: "#ccc", height: "50px" }}>
+                    <div className="row" style={{ background: "#ccc", height: "45px" }}>
                         <div className="col-md-12 col-sm-12">
                             <div className="head_text">
                                 <h1>Dashboard</h1>
@@ -21,7 +21,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 
                         </div>
                     </div>
-                    <div className="row" style={{ height: "80px" }}>
+                    <div className="row" style={{ height: "60px" }}>
                         <div className="col-md-12 col-sm-12">
                             <div className="subText">
                                 <p>Follow in real time the performance of your FAQ</p>
@@ -35,7 +35,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 
 
                         </div>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid" }}>
+                        <div  className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid" }}>
 
                             <h4 >328</h4>
                             <p style={{ fontSize: "12px" }}>Message Sent</p>
@@ -49,7 +49,7 @@ import CircularProgressbar from 'react-circular-progressbar';
                     </div>
 
 
-                    <div className="row" style={{ minHeight: "50px", paddingLeft: "0px" }}> </div>
+                    <div className="row" style={{ minHeight: "20px", paddingLeft: "0px" }}> </div>
 
 
                     <div className="row" style={{ minHeight: "400px", backgroundColor: "white", padding: "14px 1px 0px" }}>
