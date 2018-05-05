@@ -78,8 +78,7 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
-        apiURL: `http://203.212.28.126:5000`
-        // process.env.NODE_ENV === 'development' ? `http://${ip.address()}:5000` : ''
+        apiURL: process.env.NODE_ENV === 'development' ? `http://${ip.address()}:5000` : ''
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

@@ -15,7 +15,6 @@ import Contact from './Contact'
 @observer class App extends Component {
 
   render() {
-    console.log(process.env.apiURL)
     return (
       <div className="footer">
         <div id="wrapper">
@@ -28,6 +27,9 @@ import Contact from './Contact'
                <Route exact path="/" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route exact path="/faq" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route path="/faq/:slugName" render={(props) => { this.props.store.checkKey(); return <FAQInfo store={this.props.store} {...props} /> }} />
+                
+                {/* <Route path="/faqinfo" render={(props) => { this.props.store.checkKey(); return <FAQInfo store={this.props.store} {...props} /> }} /> */}
+                
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
                 <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />                
                 <Route path="/dashboard" render={(props) => { this.props.store.checkKey(); return <Dashboard store={this.props.store} {...props} /> }} />

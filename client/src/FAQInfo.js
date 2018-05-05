@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
-
 var slideIndex = 1;
 var slideIndex2 = 2;
 
@@ -33,7 +32,6 @@ var x = document.getElementsByClassName("mySlides");
 
         await this.props.store.getRubrics()
         await this.showDivs(slideIndex, slideIndex2)
-
 
     }
 
@@ -75,19 +73,20 @@ var x = document.getElementsByClassName("mySlides");
 
     handleContentOnOff(imgref, pRef, viewId, views) {
 
-        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className === "view") {
+        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className === "view Plus") {
             this.refs[imgref].setAttribute('src', "/images/minu icon.png")
-            this.refs[imgref].className = ""
+            this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
             views += 1;
             return this.props.store.updateViews(viewId, views)
         }
         else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
             this.refs[imgref].setAttribute('src', "/images/minu icon.png")
+            this.refs[imgref].className = "Minus"            
             this.refs[pRef].style.display = "block"
         }
         else {
-            this.refs[imgref].className = ""
+            this.refs[imgref].className = "Plus"
             this.refs[imgref].setAttribute('src', "/images/plus icon.png")
             this.refs[pRef].style.display = "none"
         }
@@ -105,9 +104,7 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     handleClick(searchInput) {
-        console.log("from search")
         if (searchInput.length === 0) {
-
             this.props.history.push({
                 pathname: '/faq',
                 search: ''
@@ -122,11 +119,22 @@ var x = document.getElementsByClassName("mySlides");
         this.props.store.createResearch(searchInput)
     }
 
+    mouseHover(event, id) {
+        document.getElementsByClassName("AdminIcons")[id].style.display = "block"
+    }
+
+    mouseOut(event, id) {
+        document.getElementsByClassName("AdminIcons")[id].style.display = "none"
+    }
+
 
 
     render() {
         let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
         let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
+
+        // let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/odio` }))
+        // let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
 
         return (
             <div className="content-wrapper" id="intro">
@@ -182,24 +190,35 @@ var x = document.getElementsByClassName("mySlides");
 
                         </div> : filteredContent.map((data, key) => {
                             return (
-                                <div className="col-lg-12" key={key}>
+                                <div className="col-md-12"
+                                    // onMouseOver={(e) => { this.mouseHover(e, key) }}
+                                    // onMouseLeave={(e) => { this.mouseOut(e, key) }}
+                                    key={key}>
 
-                                    <h5 style={{ width: "90%" }}><b>{data.question}</b> </h5>
+                                       {/* <div className="AdminIcons "> */}
+                                                        {/* {this.props.store.redirect ? */}
+                                                            <div>
+                                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/trash.png' alt="" />
+                                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/up icon.png' alt="" />
+                                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src='./images/down icon.png' alt="" />
+                                                            </div>
+                                                            {/* : null}
+                                                    </div> */}
 
-                                    <img src="/images/plus icon.png"
-                                        style={{
-                                            cursor: "pointer",
-                                            position: "sticky", float: "right", bottom: "87%"
-                                        }}
+                                    <h5 style={{ width: "70%" }}><b>{data.question}</b> 
+                                     </h5>
+                                
+                                     <img src="/images/plus icon.png" alt="plus icon"
+                                        
                                         ref={`plus${key}`}
                                         // handling the answer toggle and view update with its id
                                         onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
-                                        className="view"
+                                        className="view Plus"
                                     />
-
-
+                                    
                                     <p style={{ display: "none" }} ref={`answer${key}`}>{data.answer}</p>
-                                    <hr />
+                                    <hr className="FaqInfoHr" />
                                 </div>
                             )
                         })

@@ -46,7 +46,7 @@ app.get('/*', function(req, res) {
 });
 
 
-app.listen(process.env.PORT,"192.168.1.104", function () {
+app.listen(process.env.PORT, function () {
   console.log('Running server on ' + process.env.PORT);
 });
 

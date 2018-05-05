@@ -52,7 +52,7 @@ h2 {
     height: 34px;
 }
 
-#sidebar-wrapper .faq {
+#sidebar-wrapper .menuitems {
     float: left;
     width: 100%;
     text-align: center;
@@ -60,22 +60,18 @@ h2 {
     background-color: #76CC61;
 }
 
-#sidebar-wrapper .faq .question {
+#sidebar-wrapper .menuitems .menuimage {
     margin-top: 19px;
 }
 
-#sidebar-wrapper .faq .faqText {
+#sidebar-wrapper .menuitems .menutext {
     margin-top: 8px;
-    color: white;
+    color: #CCCCCC;
     font-family: sans-serif;
-    font-weight: bold;
+    font-weight: lighter;
 }
 
-#sidebar-wrapper .faq .faqText a {
-    color: white;
-}
-
-#sidebar-wrapper .faq:hover {
+#sidebar-wrapper .menuitems:hover {
     background: #63a952;
 }
 
@@ -650,6 +646,25 @@ input[type=submit] {
 
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
   stroke: transparent;
+}
+
+.FaqInfoHr{
+
+}
+
+.Plus{
+    cursor: pointer;
+    position: absolute;
+    right: 2%;
+    bottom: 48%;
+}
+
+.Minus{
+    cursor: pointer;
+    position: absolute;
+    right: 2%;
+    bottom: 79%;
+    
 }
 
 

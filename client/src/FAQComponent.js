@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-
 import { CreateRubric, CreateRubricSlug } from './Services'
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
-
 import Search from './Search'
+var {sortBy} = require('lodash')
 
 var searchBtnStyles = {
     background: "white",
@@ -128,10 +127,41 @@ var searchBtnStyles = {
         this.props.store.RemoveRubric(data._id)
     }
 
-    upHandle(event, data, index) { }
+     upHandle(event, data, index) { 
+        if(index !== 0){          
+        var sortFrom = data.sort; 
+        var sortTo = data.sort - 1 ; 
+        var sortFromIndex = index;
+        var sortToindex = sortFromIndex - 1 
+        var sortToId = this.props.store.Rubrics[sortToindex]._id;
+
+        this.props.store.Rubrics[sortToindex].sort = sortFrom;
+        this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+
+        this.props.store.SortRubric(data._id , sortTo , sortToId , sortFrom )
+        this.props.store.Rubrics = sortBy(this.props.store.Rubrics,[function(o){return o.sort;}])
+        
+    }
+            
+    }
 
     downHandle(event, data, index) {
-
+        
+        if(index !== this.props.store.Rubrics.length-1){          
+            var sortFrom = data.sort; //3
+            var sortTo = data.sort + 1 ; //4 
+            var sortFromIndex = index;//2
+            var sortToindex = sortFromIndex + 1 //3 
+            var sortToId = this.props.store.Rubrics[sortToindex]._id;
+    
+            this.props.store.Rubrics[sortToindex].sort = sortFrom;
+            this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+    
+            this.props.store.SortRubric(data._id , sortTo , sortToId , sortFrom )
+            this.props.store.Rubrics = sortBy(this.props.store.Rubrics,[function(o){return o.sort;}])
+            
+        }
+        
     }
     handleSearchClick(searchInput) {
         if (this.state.SearchValue.length === 0) {
@@ -152,9 +182,7 @@ var searchBtnStyles = {
                 pathname: '/faq',
                 search: `search=${this.props.store.searchInput}`
             })
-
             this.props.store.createResearch(this.state.SearchValue)
-
         }
     }
     render() {
@@ -204,14 +232,13 @@ var searchBtnStyles = {
                     <div className="row" style={{ height: "40px" }}></div>
                     {this.props.store.searchInput.length !== 0 ? <Search store={this.props.store} /> :
                         <div className="RubricStyles">
-                            {
-                                this.props.store.Rubrics.map((data, key) => {
+                            {   
+                               this.props.store.Rubrics.map((data, key) => {                                        
                                     return (
                                         <div key={key} className="col-md-6" style={{ marginTop: "10px" }}>
                                             <div
                                                 style={{ padding: '2%' }}
                                                 key={key}>
-
                                                 <div
                                                     onMouseOver={(e) => { this.mouseHover(e, key) }}
                                                     onMouseLeave={(e) => { this.mouseOut(e, key) }}
@@ -219,14 +246,15 @@ var searchBtnStyles = {
                                                     <div className="AdminIcons ">
                                                         {this.props.store.redirect ?
                                                             <div>
-                                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/edit icon.png' alt="" />
-                                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/trash.png' alt="" />
-                                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/up icon.png' alt="" />
-                                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src='./images/down icon.png' alt="" />
+                                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`}  alt="" />
+                                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`}  alt="" />
                                                             </div>
                                                             : null}
                                                     </div>
                                                     <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
+                                                    
                                                         <button
                                                             className="btn btn-lg" >
                                                             {data.name}

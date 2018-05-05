@@ -129,6 +129,16 @@ exports.getAllRubrics = (req, res) => {
   })
 }
 
+exports.sortRubrics = (req,res)=> {
+  Rubrics.findByIdAndUpdate(req.body.toId, { $set: {sort :req.body.toSort} }, {new: true}, (err , data) => {
+    Rubrics.findByIdAndUpdate(req.body.fromId, { $set: {sort :req.body.fromSort} }, {new: true}, (err , data2) => {
+      res.send("Rubric Updated")
+    })
+  })
+}
+
+// Api for Rubric ends
+
 exports.createRubcricContent = (req, res) => {
   let NewRubricContent = new RubricContent(req.body);
   NewRubricContent.save((err, data) => {
