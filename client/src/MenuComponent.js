@@ -13,7 +13,7 @@ import { observer } from 'mobx-react';
                         <img src='./images/praips Logo.png' alt="praips Logo" />
                     </div>
                 </div>
-                <Link to="/faq">
+                <Link onClick ={ () => {this.props.store.searchInput = ""}} to="/faq">
                 <div className="faq">
                     <div >
                         <div className="question">
@@ -28,7 +28,7 @@ import { observer } from 'mobx-react';
                 </Link>
                 <hr/>
 
-                    {  this.props.redirect ?
+                    {  this.props.store.redirect ?
                     <div>
                      <Link to="/install">
                      <div className="faq">

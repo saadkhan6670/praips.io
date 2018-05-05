@@ -38,13 +38,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(express.static('public'));
 
-// app.set('views', [
-//   path.resolve(__dirname, '/public')
-// ]);
-
-
-
-
 app.use('/api', require('./api'));
 
 
@@ -53,7 +46,7 @@ app.get('/*', function(req, res) {
 });
 
 
-app.listen(process.env.PORT, function () {
+app.listen(process.env.PORT,"192.168.1.104", function () {
   console.log('Running server on ' + process.env.PORT);
 });
 

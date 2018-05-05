@@ -30,11 +30,12 @@ var searchBtnStyles = {
             Modalvalue: '',
             RubricIndex: '',
             RubricId: '',
-            redirect: false            
+            redirect: false ,
+            SearchValue : ''           
         }
     }
 
-    componentDidMount() {
+    componentDidMount() {        
         var query = new URLSearchParams(this.props.location.search).get('search');
         this.props.store.searchInput = query ? query : '';
         if (this.props.store.searchInput.length) {
@@ -133,7 +134,7 @@ var searchBtnStyles = {
 
     }
     handleSearchClick(searchInput) {
-        if (searchInput.length === 0) {
+        if (this.state.SearchValue.length === 0) {
             this.setState({
                 redirect: false
             })
@@ -143,7 +144,7 @@ var searchBtnStyles = {
             })
         }
         else {
-            this.props.store.searchInput = searchInput;
+            this.props.store.searchInput = this.state.SearchValue;
             this.setState({
                 redirect: true
             })
@@ -152,15 +153,11 @@ var searchBtnStyles = {
                 search: `search=${this.props.store.searchInput}`
             })
 
-            this.props.store.createResearch(searchInput)
+            this.props.store.createResearch(this.state.SearchValue)
 
         }
-
-
-
     }
     render() {
-        console.log(this.state.redirect)
         return (
             <div className="content-wrapper" id="intro">
                 <div className="container-fluid">
@@ -182,13 +179,19 @@ var searchBtnStyles = {
                     <div className="row search_row">
                         <div className="input-group" id="adv-search">
                             <input type="text" className="form-control" ref="searchInput"
-                                onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(this.refs.searchInput.value) : null }}
+                            value={this.state.SearchValue}
+                            onChange={(e) => {
+                                this.setState({
+                                    SearchValue : e.target.value
+                                })
+                            }}
+                                onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(e) : null }}
                                 placeholder="How can we help" />
                             <div className="input-group-btn">
                                 <div className="btn-group" >
 
                                     <button title="Click to Search.."
-                                        onClick={(e) => { this.handleSearchClick(this.refs.searchInput.value) }} type="button" className="btn btn-primary" style={searchBtnStyles}>
+                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn btn-primary" style={searchBtnStyles}>
                                         <span className="glyphicon glyphicon-search">
                                         
                                         </span>
@@ -199,7 +202,7 @@ var searchBtnStyles = {
                         </div>
                     </div>
                     <div className="row" style={{ height: "40px" }}></div>
-                    {this.state.redirect ? <Search store={this.props.store} /> :
+                    {this.props.store.searchInput.length !== 0 ? <Search store={this.props.store} /> :
                         <div className="RubricStyles">
                             {
                                 this.props.store.Rubrics.map((data, key) => {
