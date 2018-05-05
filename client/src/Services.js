@@ -32,4 +32,16 @@ export var CreateRubricSlug = (str) => {
     return '/' + str.toLowerCase()
 }
 
+
+export var RemoveOverflow = (str, strlength)  => {
+    if(str.length > strlength) {
+        str =     str.substring(0, strlength) + "..."
+        return str;
+    }
+    else {
+        return str
+    }
+    
+
+}
 // export var 

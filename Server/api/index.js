@@ -8,8 +8,12 @@ var controller = require('./controller');
 
 //APIs for User
 router.post('/createContact', controller.createContact);
+router.get('/getAllContacts', controller.getAllContacts);
+
 
 router.post('/createResearch', controller.createResearch);
+router.get('/getAllResearches', controller.getAllResearches);
+
 
 //APIs for Admin
 router.post('/adminLogIn', controller.adminLogIn);

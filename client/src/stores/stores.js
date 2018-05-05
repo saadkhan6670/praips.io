@@ -5,6 +5,10 @@ import {getCookie} from '../Services'
 class PraipsStore {
     @observable Rubrics = [];
     @observable About = [];
+    @observable Researches= [];
+    @observable Contacts= [];
+    
+    
     @observable LoginKey = getCookie('key');
     @observable redirect = Boolean(getCookie('redirect'));
     @observable id = ''
@@ -50,6 +54,20 @@ class PraipsStore {
 
     createContact(data) {
         return axios.post(`${process.env.apiURL}/api/createContact`, data)
+    }
+
+    getAllContacts () {
+
+        axios.get(`${process.env.apiURL}/api/getAllContacts`).then((response) => {
+
+            this.Contacts = response.data
+        
+                })
+                    .catch((error) => {
+        
+                        console.log(error)
+                    })
+
     }
 
 
@@ -104,6 +122,19 @@ class PraipsStore {
     createResearch(content) {
 
         return axios.post(`${process.env.apiURL}/api/createResearch`, {content : content}).then((response) => {
+
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+    getAllResearches(content) {
+
+         axios.get(`${process.env.apiURL}/api/getAllResearches`).then((response) => {
+
+    this.Researches = response.data
 
         })
             .catch((error) => {

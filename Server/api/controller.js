@@ -86,10 +86,10 @@ exports.createRubric = (req, res) => {
 }
 
 exports.updateRubcric = (req, res) => {
-  
+
   let date = new Date();
-  
-  Rubrics.findByIdAndUpdate(req.body.id, { $set: {name : req.body.name, slug: req.body.slug, updatedAt: Date.now()} }, {new: true}, (err , data) => {
+
+  Rubrics.findByIdAndUpdate(req.body.id, { $set: { name: req.body.name, slug: req.body.slug, updatedAt: Date.now() } }, { new: true }, (err, data) => {
     if (!data) {
       res.send("No rubric found to update")
     }
@@ -102,10 +102,10 @@ exports.updateRubcric = (req, res) => {
 
 exports.removeRubrics = (req, res) => {
   console.log(req.body)
-  
-  Rubrics.findByIdAndRemove( req.body._id, (err , data) => {
 
-    if(!data) {
+  Rubrics.findByIdAndRemove(req.body._id, (err, data) => {
+
+    if (!data) {
       res.send("No rubric found to update")
     }
 
@@ -235,46 +235,70 @@ exports.createContact = (req, res) => {
 
 }
 
+exports.getAllContacts = (req, res) => {
+  Contact.find({}, (err, doc) => {
+
+    if (!doc) {
+      res.send(err)
+    }
+    else {
+      res.send(doc)
+    }
+  })
+}
+
 exports.updateViews = (req, res) => {
-RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
+  RubricContent.findByIdAndUpdate(req.body.id, { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
 
-  if(err) {
-    res.send(err)
-  }
+    if (err) {
+      res.send(err)
+    }
 
-  else {
-    res.send(doc)
-  }
-})
+    else {
+      res.send(doc)
+    }
+  })
 
 }
 
 exports.updateViews = (req, res) => {
 
-  RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
-  
-    if(err) {
+  RubricContent.findByIdAndUpdate(req.body.id, { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
+
+    if (err) {
       res.send(err)
     }
-  
+
     else {
       res.send(doc)
     }
   })
-  
-  }
 
-  exports.createResearch = (req, res) => {
-    let NewSearchQuery = new Search(req.body);
-    NewSearchQuery.save( (err , doc) => {
+}
 
-      if(!doc) {
-        res.send(err);
-      }
+exports.createResearch = (req, res) => {
+  let NewSearchQuery = new Search(req.body);
+  NewSearchQuery.save((err, doc) => {
 
-      else {
-        res.send(doc)
-      }
-    })
+    if (!doc) {
+      res.send(err);
     }
+
+    else {
+      res.send(doc)
+    }
+  })
+}
+
+exports.getAllResearches = (req, res) => {
+  Search.find({}, (err, doc) => {
+
+    if (!doc) {
+      res.send(err)
+    }
+    else {
+      res.send(doc)
+    }
+  })
+}
 

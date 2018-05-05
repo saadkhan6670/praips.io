@@ -13,8 +13,12 @@ body {
 h2 {
     font-weight: bold;
 }
+
+td {
+    border: none;
+}
 #wrapper {
-    padding-top: 16px;
+    padding-top: 38px;
     padding-left: 12%;
     padding-bottom: 0px;
     background: #252525;
@@ -604,7 +608,7 @@ input[type=submit] {
 
 .CircularProgressbar {
  
-  width: 13%;
+  width: 10%;
 }
 
 .CircularProgressbar .CircularProgressbar-path {

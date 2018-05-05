@@ -55,7 +55,7 @@ import { observer } from 'mobx-react';
                         <div >
                             <div className="row">
                             {this.props.store.redirect ? 
-                                <img onClick={(e) => this.editHandle(e)} style={{ cursor: "pointer", position: "absolute", right: "19%" }} src='./images/edit icon.png' alt="" />
+                                <img onClick={(e) => this.editHandle(e)} style={{ cursor: "pointer", position: "absolute", right: "19%" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
                                 : null }
                                 <div className="right_log">
                                     <img src={this.props.store.About.logoPath} alt="" />
