@@ -26,12 +26,15 @@ h2 {
 }
 
 #sidebar-wrapper {
-    width: 5.76%;
-    height: 690px;
+    width: 5.7%;
+    height: 888px;
     float: left;
     margin-right: 16px;
     border-radius: 8px;
     display: inline-block;
+    /* padding: 0px 0 0 0; */
+    margin-top: 1.3%;
+    margin-left: 4.5%;
     background-color: #FFFFFF;
 }
 
@@ -77,33 +80,33 @@ h2 {
 
 .content-wrapper {
     background-color: white;
-    height: 690px;
+    height: 888px;
     border-radius: 8px;
     float: left;
-    width: 51.59%;
+    width: 44.59%;
     margin-right: 16px;
-    display: inline-block;
+    margin-top: 1.3%;
+    display: inline-block
 }
 
 .content-wrapper .head_text {
-    margin-top: 32px;
-    margin-left: 39px;
+    margin-top: 28px;
+    margin-left: 16px;
 }
 
 .content-wrapper .head_text h1 {
-    font-size: 30px;
-    font-weight: 700;
-    font-stretch: expanded;
+    font-size: 27px;
+    font-weight: 800;
 }
 
 .content-wrapper .subText {
-    margin-left: 39px;
+    margin-left: 16px;
     margin-top: 10px;
-    widows: 80%;
+
 }
 
 .content-wrapper .subText p {
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .content-wrapper .form-group {
@@ -111,7 +114,7 @@ h2 {
 }
 
 .content-wrapper .search_row {
-    padding: 0 65px 0 65px;
+    padding: 0px 61px 0 51px;
 }
 
 .content-wrapper .form-group input {
@@ -153,15 +156,16 @@ h2 {
 
 .right-wrapper {
     background-color: white;
-    height:690px;
+    height: 888px;
     float: left;
     border-radius: 8px;
-    width: 24.26%;
-        display: inline-block;
+    width: 25.26%;
+    margin-top: 1.3%;
+    display: inline-block
 }
 
 .right-wrapper .about_text {
-    margin-top: 32px;
+    margin-top: 39px;
     text-align: center;
 }
 
@@ -174,7 +178,7 @@ h2 {
 .right-wrapper .right_log {
     text-align: center;
     flex: 1;
-    margin-top: 54px;
+    margin-top: 41px;
 }
 
 .right-wrapper .right_log img {
@@ -190,17 +194,18 @@ h2 {
 }
 
 .right-wrapper .right_text h4 {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .right-wrapper .right_text p {
-    font-size: 15px;
+    font-size: 14px;
+    margin-top: 4%;
 }
 
 .right-wrapper .right_btn {
     text-align: center;
-    margin-top: 58px;
+    margin-top: 55px;
 }
 
 .right-wrapper .right_btn button:hover {
@@ -218,17 +223,18 @@ h2 {
 
 .content-wrapper .right_btn {
     text-align: center;
-    margin-top: 4px;
-    margin-bottom: 15px;
+    margin-top: 62px;
 }
 
 .content-wrapper .right_btn button {
-    width: 248px;
+    width: 274px;
     background-color: white;
-        color: #7fc857;
+    font-size: 127%;
+    margin-right: 7%;
+    margin-left: 12%;
+    color: #7fc857;
     border: 1px solid #7fc857;
-    font-weight: light;
-    border-radius: 10px;
+    border-radius: 17px;
 }
 
 .content-wrapper .right_btn button a {
@@ -245,7 +251,7 @@ h2 {
 }
 
 .input-group {
-    margin-top: 24px;
+    margin-top: 15px;
 }
 
 .input-group input , button {
@@ -253,8 +259,8 @@ h2 {
 }
 
 .right-wrapper .content_text {
-    margin-top: 70px;
-    margin-left: 40px;
+    margin-top: 76px;
+    margin-left: 23px;
 }
 
 .right-wrapper .content_text .desc h4 {
@@ -267,21 +273,26 @@ h2 {
 .hr_about {
     margin-top: 0px;
     border: 2px solid #87BB4C;
-    width: 149px;
+    width: 160px;
     background: #87BB4C;
 }
 
 .right-wrapper .content_text .desc p {
-    line-height: 26px;
-    margin-top: 12px;
+    line-height: 29px;
+    margin-top: 9px;
 }
 
 .footer .footer_text .text {
     margin-top: 10px;
-}
+    /* margin-left: 3px; */
+    /* float: right; */
+    position: absolute;
+    right: 11%;
+    /* left: 55%; */
+    font-size: 107%;}
 
 .footer .footer_text .text p {
-    text-align: right;
+    /* text-align: right; */
     color: white;
 }
 
@@ -407,14 +418,14 @@ background-color: #7fc857;
 }
 
   .AdminIcons{
-    display: none
+    display: block
 }
 
 .RubricStyles {
     margin-top: 2%;
     overflow: visible;
     overflow-y: auto;
-    height: 310px;
+    height: 377px;
 }
 
 /* Admin About container Css */
@@ -586,11 +597,6 @@ input[type=submit] {
           display: none;
       }
 
-      #mySlides {
-        
-      }
-
-
 
       /*
  * react-circular-progressbar styles
@@ -649,21 +655,22 @@ input[type=submit] {
 }
 
 .FaqInfoHr{
-
+    margin-top: 22px;
+    margin-bottom: 37px;
+    margin-right: 97px;
+    /* border: 0; */
+    width: 96%;
+    border-top: 1px solid #eee;
 }
 
 .Plus{
     cursor: pointer;
     position: absolute;
-    right: 2%;
-    bottom: 48%;
 }
 
 .Minus{
     cursor: pointer;
     position: absolute;
-    right: 2%;
-    bottom: 79%;
     
 }
 

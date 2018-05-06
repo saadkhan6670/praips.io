@@ -41,7 +41,7 @@ import Contact from './Contact'
                 <div className="row">
                   <div className="col-md-12 col-sm-12">
                     <div className="text">
-                      <p style={{ margin: "0 137px 10px" }}>Are you an admin of this page? <Link to="/login"> Login In</Link></p>
+                      <p>Are you an admin of this page? <Link to="/login"> Login In</Link></p>
                     </div>
                   </div>
                 </div>
