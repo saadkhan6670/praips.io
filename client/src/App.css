@@ -587,16 +587,24 @@ input[type=submit] {
       }
 
       #request-process {
+        text-align: center;
           display: none;
       }
 
       #contactAlert {
           display: none;
+        text-align: center;
+          
       }
 
-      #mySlides {
-        
+      #contactForm { 
+        display: block;
       }
+      #spacingDiv    {
+        display: none;
+      }
+
+    
 
 
 

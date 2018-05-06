@@ -11,8 +11,15 @@ const Contact = mongoose.model('Contact');
 const Search = mongoose.model('Search');
 const About = mongoose.model('About');
 const LogKey = mongoose.model('LogKey');
-
 const uuidv1 = require('uuid/v1');
+var server = require('http').createServer()
+const socketIO = require('socket.io')
+
+server.listen(8080)
+
+var io = socketIO.listen(server)
+
+
 
 //create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
@@ -83,6 +90,8 @@ exports.createRubric = (req, res) => {
 
     res.send(rubric)
   })
+  io.emit('update', {api: 'RubricsChanged'})
+  
 }
 
 exports.updateRubcric = (req, res) => {
@@ -98,6 +107,8 @@ exports.updateRubcric = (req, res) => {
       res.send("Rubric updated");
     }
   })
+  io.emit('update', {api: 'RubricsChanged'})
+  
 }
 
 exports.removeRubrics = (req, res) => {
@@ -113,6 +124,9 @@ exports.removeRubrics = (req, res) => {
       res.send("Rubric Removed");
     }
   })
+
+  io.emit('update', {api: 'RubricsChanged'})
+  
 }
 
 
@@ -127,6 +141,8 @@ exports.getAllRubrics = (req, res) => {
       res.send(data);
     }
   })
+
+  
 }
 
 exports.createRubcricContent = (req, res) => {
@@ -143,6 +159,8 @@ exports.createRubcricContent = (req, res) => {
 
     }
   })
+  io.emit('update', {api: 'RubricsChanged'})
+  
 
 }
 
@@ -162,6 +180,9 @@ exports.updateRubcricContent = (req, res) => {
         res.send("Rubric content updated");
       }
     })
+
+  io.emit('update', {api: 'RubricsChanged'})
+    
 
 }
 
@@ -232,6 +253,7 @@ exports.createContact = (req, res) => {
 
     }
   })
+  io.emit('update', {api: 'ContactChanged'})
 
 }
 
@@ -245,6 +267,7 @@ exports.getAllContacts = (req, res) => {
       res.send(doc)
     }
   })
+  
 }
 
 exports.updateViews = (req, res) => {
@@ -258,23 +281,10 @@ exports.updateViews = (req, res) => {
       res.send(doc)
     }
   })
+  io.emit('update', {api: 'RubricsChanged'})
 
 }
 
-exports.updateViews = (req, res) => {
-
-  RubricContent.findByIdAndUpdate(req.body.id, { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
-
-    if (err) {
-      res.send(err)
-    }
-
-    else {
-      res.send(doc)
-    }
-  })
-
-}
 
 exports.createResearch = (req, res) => {
   let NewSearchQuery = new Search(req.body);
@@ -288,6 +298,8 @@ exports.createResearch = (req, res) => {
       res.send(doc)
     }
   })
+  io.emit('update', {api: 'ResearchChanged'})
+  
 }
 
 exports.getAllResearches = (req, res) => {
@@ -300,5 +312,6 @@ exports.getAllResearches = (req, res) => {
       res.send(doc)
     }
   })
+  
 }
 
