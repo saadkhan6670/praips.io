@@ -261,7 +261,7 @@ var searchBtnStyles = {
 
                                                         <button
                                                             className="btn btn-lg" >
-                                                            {data.name}
+                                                            {data.name.toUpperCase()}
                                                         </button>
                                                     </Link>
                                                 </div>

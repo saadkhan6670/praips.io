@@ -131,18 +131,30 @@ import { observer } from 'mobx-react';
 
                 <div className="container-fluid">
                     <form id="contactForm" onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
-                    <h2>Submit a Feature Request</h2>
+                    <h2 style={{ padding : "16px 0 0 15px" , fontSize:"224%"}}>Submit a Feature Request</h2>
                         <div className="form-group">
-                            <label >How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq"   className="reqMsg"></span>
-                            <textarea name="message" className="form-control" ref='Message' style={{ height: "200px" }} onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
+                            <label style={{
+                                fontSize:"134%",
+                                margin:"65px 0px 12px 16px" 
+                            }}>How can we help? <span style={{ color: "#1eace2"}}>*</span></label> <span ref="messageReq"   className="reqMsg"></span>
+                            <textarea name="message" className="form-control" ref='Message' 
+                            style={{height: "269px" , backgroundColor:"#fdfdfd" }} onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
                         </div>
                         <div className="form-group">
-                            <label >Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span  ref="nameReq" className="reqMsg"></span>
-                            <input type="text"  name="name" className="form-control" ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
+                            <label style={{
+                                fontSize:"134%",
+                                marginLeft:"16px"
+                            }} >Your name <span style={{ color: "#1eace2" , fontSize: "134%" }}>*</span> </label> <span  ref="nameReq" className="reqMsg"></span>
+                            <input type="text" style={{marginTop:"11px" , height:"38px" , backgroundColor:"#fdfdfd"}} name="name" className="form-control" ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
                         </div>
                         <div className="form-group">
-                            <label >Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
-                            <input type="text" name="email"  className="form-control" ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
+                            <label style={{
+                                fontSize:"134%",
+                                marginLeft:"16px",
+                                marginTop:"15px"
+                                
+                            }}>Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
+                            <input type="text" style={{marginTop:"5px" , height:"38px" , backgroundColor:"#fdfdfd"}} name="email"  className="form-control" ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
                         </div>
                         <div className="submit_btn">
                         <Link to="/faq">    <input type="button" className="btn btn-lg" value="BACK TO FAQ" />  </Link>

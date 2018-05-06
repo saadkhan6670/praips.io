@@ -13,8 +13,8 @@ var searchBtnStyles = {
     boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
     borderTopRightRadius: "10px",
     borderBottomRightRadius: "10px",
-    fontSize : "19px",
-    
+    fontSize: "19px",
+
 }
 
 var x = document.getElementsByClassName("mySlides");
@@ -161,8 +161,8 @@ var x = document.getElementsByClassName("mySlides");
                         <div className="input-group" id="adv-search">
                             <input type="text" className="form-control" placeholder="How can we help" ref="searchInput"
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) : null }}
-                                style={{fontSize : "124%", backgroundColor: "#fdfdfd"}}
-                                
+                                style={{ fontSize: "124%", backgroundColor: "#fdfdfd" }}
+
                             />
                             <div className="input-group-btn">
                                 <div className="btn-group" role="group">
@@ -177,9 +177,9 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
                 </div>
-                <h4 style={{ color: "grey", fontSize:"138%" , padding: "61px 0 0px 35px" }}>{content === undefined ? null : content.name.toUpperCase()}</h4>
+                <h4 style={{ color: "grey", fontSize: "138%", padding: "61px 0 0px 35px" }}>{content === undefined ? null : content.name.toUpperCase()}</h4>
 
-                <div className="row" style={{ padding: "25px 25px 0px 49px", overflowY: "scroll", height: "250px", marginRight: "0px" }}>
+                <div className="row" style={{ padding: "18px 25px 0px 28px", overflowY: "scroll", height: "250px", marginRight: "0px" }}>
 
                     {
                         filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
@@ -193,7 +193,7 @@ var x = document.getElementsByClassName("mySlides");
                             </ul>
 
                         </div> : filteredContent.map((data, key) => {
-                            return ( <div>
+                            return (<div>
                                 <div className="col-md-12"
                                     // onMouseOver={(e) => { this.mouseHover(e, key) }}
                                     // onMouseLeave={(e) => { this.mouseOut(e, key) }}
@@ -201,9 +201,9 @@ var x = document.getElementsByClassName("mySlides");
 
                                     <div className="col-md-8" >
 
-                                    <h5 style={{ fontSize:"122%" }}><b>{data.question}</b>  </h5>
+                                        <h5 style={{ fontSize: "122%" }}><b>{data.question}</b>  </h5>
                                     </div>
-                                    <div className="AdminIcons col-md-3" style={{padding : "3px 0 0 6%"}}>
+                                    <div className="AdminIcons col-md-3" style={{ padding: "3px 0 0 6%" }}>
                                         {this.props.store.redirect ?
                                             <div>
                                                 <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
@@ -213,34 +213,32 @@ var x = document.getElementsByClassName("mySlides");
                                             </div>
                                             : null}
                                     </div>
-                                    <div className="col-md-1" style={{padding : "0.5% 0 0px 1%"}}>
-                                    <img src="/images/plus icon.png" alt="plus icon"
-                                        ref={`plus${key}`}
-                                        // handling the answer toggle and view update with its id
-                                        onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
-                                        className="view Plus"
-                                    />
+                                    <div className="col-md-1" style={{ padding: "0.5% 0 0px 1%" }}>
+                                        <img src="/images/plus icon.png" alt="plus icon"
+                                            ref={`plus${key}`}
+                                            // handling the answer toggle and view update with its id
+                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
+                                            className="view Plus"
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-md-12">
-                                
-                                <p style={{ display: "none" , fontSize: "116%" ,lineHeight : "164%" ,padding: "4.5% 0 0 2.5%" }} ref={`answer${key}`}>{data.answer}</p>
-                                <hr className="FaqInfoHr" />
+
+                                    <p style={{ display: "none", fontSize: "116%", lineHeight: "164%", padding: "2.5% 0 0 2.5%" }} ref={`answer${key}`}>{data.answer}</p>
+                                    <hr className="FaqInfoHr" />
                                 </div>
-                                </div>
+                            </div>
                             )
                         })
                     }
-
                 </div>
-
-
-                <div className="col-md-12" style={{     /* padding: 35px 65px 0px; */ 
-    position: "absolute",
-    bottom: "17%" }}>
+                <div className="col-md-12" style={{     /* padding: 35px 65px 0px; */
+                    position: "absolute",
+                    bottom: "17%"
+                }}>
                     <div className="col-md-1 col-sm-1">
                         <a className="left"  >
-                            <span className="glyphicon glyphicon-chevron-left" style={{ background: "#83C75A", margin: "0px 0 0 27px", borderRadius: "50%", fontSize: "172%" ,height: "50px", width: "50px" }} onClick={() => this.plusDivs(-1)}></span>
+                            <span className="glyphicon glyphicon-chevron-left" style={{ background: "#83C75A", margin: "0px 0 0 27px", borderRadius: "50%", fontSize: "172%", height: "50px", width: "50px" }} onClick={() => this.plusDivs(-1)}></span>
                         </a>
                     </div>
                     {this.props.store.Rubrics.map((data, key) => {
@@ -258,12 +256,12 @@ var x = document.getElementsByClassName("mySlides");
 
                     <div className="col-md-1 col-sm-1">
                         <a className="right" >
-                            <span className="glyphicon glyphicon-chevron-right" style={{ background: "#83C75A", margin: "0px 0 0 27px", borderRadius: "50%", fontSize: "172%" ,height: "50px", width: "50px" }} onClick={() => this.plusDivs(1)}></span>
+                            <span className="glyphicon glyphicon-chevron-right" style={{ background: "#83C75A", margin: "0px 0 0 27px", borderRadius: "50%", fontSize: "172%", height: "50px", width: "50px" }} onClick={() => this.plusDivs(1)}></span>
                         </a>
                     </div>
 
                 </div>
-                <div className="row" style={{ height: '10px', textAlign: "center" , marginTop: "12%",fontSize: "119%" }}>Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
+                <div className="row" style={{ height: '10px', textAlign: "center", marginTop: "12%", fontSize: "119%" }}>Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
             </div>
         )
     }

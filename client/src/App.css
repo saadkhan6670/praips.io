@@ -109,17 +109,13 @@ h2 {
     font-size: 18px;
 }
 
-.content-wrapper .form-group {
-    margin-top: 30px;
-}
-
 .content-wrapper .search_row {
     padding: 0px 61px 0 51px;
 }
 
 .content-wrapper .form-group input {
     text-indent: 20px;
-    border-radius: 10px;
+    border-radius: 4px;
     height: 51px;
     background-color: #FBFBFB;
     border: 2px solid #E2E2E2;
@@ -355,7 +351,9 @@ h2 {
 }
 
 .form-control {
-    height: 50px;
+    height: 269px;
+    width: 679px;
+    margin: 3px 0px 0px 16px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -418,7 +416,7 @@ background-color: #7fc857;
 }
 
   .AdminIcons{
-    display: block
+    display: none
 }
 
 .RubricStyles {
@@ -577,7 +575,7 @@ input[type=submit] {
      }
      .submit_btn {
          text-align: center;
-     margin-top: 40px;
+     margin-top: 66px;
      word-spacing: 1em;
  
     }
@@ -655,11 +653,11 @@ input[type=submit] {
 }
 
 .FaqInfoHr{
-    margin-top: 22px;
-    margin-bottom: 37px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     margin-right: 97px;
     /* border: 0; */
-    width: 96%;
+    width: 102%;
     border-top: 1px solid #eee;
 }
 
