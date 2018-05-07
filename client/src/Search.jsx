@@ -62,7 +62,7 @@ import { observer } from 'mobx-react';
                                 <div className="col-lg-12" key={key}>
 
                                     <h5 style={{ width: "90%" }}><b>{data.question}</b>  </h5>
-                                    <img src="/images/plus icon.png"
+                                    <img src="/images/plus icon.png" alt="plus icon"
                                         style={{
                                             cursor: "pointer",
                                             position: "sticky", float: "right", bottom: "87%"

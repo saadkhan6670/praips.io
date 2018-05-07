@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-
 import { CreateRubric, CreateRubricSlug } from './Services'
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
-
 import Search from './Search'
+var { sortBy } = require('lodash')
 
-var searchBtnStyles = {
-    background: "white",
-    color: "#ccc",
-    borderLeft: "none",
-    borderColor: "#ccc",
-    boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
-    borderTopRightRadius: "10px",
-    borderBottomRightRadius: "10px"
-}
 
 @observer class FAQComponent extends Component {
 
@@ -30,12 +20,12 @@ var searchBtnStyles = {
             Modalvalue: '',
             RubricIndex: '',
             RubricId: '',
-            redirect: false ,
-            SearchValue : ''           
+            redirect: false,
+            SearchValue: ''
         }
     }
 
-    componentDidMount() {        
+    componentDidMount() {
         var query = new URLSearchParams(this.props.location.search).get('search');
         this.props.store.searchInput = query ? query : '';
         if (this.props.store.searchInput.length) {
@@ -127,9 +117,40 @@ var searchBtnStyles = {
         this.props.store.RemoveRubric(data._id)
     }
 
-    upHandle(event, data, index) { }
+    upHandle(event, data, index) {
+        if (index !== 0) {
+            var sortFrom = data.sort;
+            var sortTo = data.sort - 1;
+            var sortFromIndex = index;
+            var sortToindex = sortFromIndex - 1
+            var sortToId = this.props.store.Rubrics[sortToindex]._id;
+
+            this.props.store.Rubrics[sortToindex].sort = sortFrom;
+            this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+
+            this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
+            this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
+
+        }
+
+    }
 
     downHandle(event, data, index) {
+
+        if (index !== this.props.store.Rubrics.length - 1) {
+            var sortFrom = data.sort; //3
+            var sortTo = data.sort + 1; //4 
+            var sortFromIndex = index;//2
+            var sortToindex = sortFromIndex + 1 //3 
+            var sortToId = this.props.store.Rubrics[sortToindex]._id;
+
+            this.props.store.Rubrics[sortToindex].sort = sortFrom;
+            this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+
+            this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
+            this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
+
+        }
 
     }
     handleSearchClick(searchInput) {
@@ -151,14 +172,13 @@ var searchBtnStyles = {
                 pathname: '/faq',
                 search: `search=${this.props.store.searchInput}`
             })
-
             this.props.store.createResearch(this.state.SearchValue)
-
         }
     }
     render() {
         return (
             <div className="content-wrapper" id="intro">
+
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
@@ -175,42 +195,42 @@ var searchBtnStyles = {
                             </div>
                         </div>
                     </div>
+
                     <div className="row search_row">
                         <div className="input-group" id="adv-search">
-                            <input type="text" className="form-control" ref="searchInput"
-                            value={this.state.SearchValue}
-                            onChange={(e) => {
-                                this.setState({
-                                    SearchValue : e.target.value
-                                })
-                            }}
+                            <input type="text" className="form-control searchInput" ref="searchInput"
+                                value={this.state.SearchValue}
+                                onChange={(e) => {
+                                    this.setState({
+                                        SearchValue: e.target.value
+                                    })
+                                }}
+
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(e) : null }}
                                 placeholder="How can we help" />
                             <div className="input-group-btn">
                                 <div className="btn-group" >
 
                                     <button title="Click to Search.."
-                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn btn-primary" style={searchBtnStyles}>
-                                        <span className="glyphicon glyphicon-search">
-                                        
-                                        </span>
+                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn btn-primary searchBtn">
+                                        <span className="glyphicon glyphicon-search"> </span>
                                     </button>
 
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div className="row" style={{ height: "40px" }}></div>
                     {this.props.store.searchInput.length !== 0 ? <Search store={this.props.store} /> :
-                        <div className="RubricStyles">
+                        <div className=" row RubricStyles scrollbar" id="style-3">
                             {
                                 this.props.store.Rubrics.map((data, key) => {
                                     return (
-                                        <div key={key} className="col-md-6" style={{ marginTop: "10px" }}>
+                                        <div key={key} className="col-md-6">
                                             <div
-                                                style={{ padding: '2%' }}
-                                                key={key}>
 
+                                                key={key}>
                                                 <div
                                                     onMouseOver={(e) => { this.mouseHover(e, key) }}
                                                     onMouseLeave={(e) => { this.mouseOut(e, key) }}
@@ -218,17 +238,18 @@ var searchBtnStyles = {
                                                     <div className="AdminIcons ">
                                                         {this.props.store.redirect ?
                                                             <div>
-                                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/edit icon.png' alt="" />
-                                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/trash.png' alt="" />
-                                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src='./images/up icon.png' alt="" />
-                                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src='./images/down icon.png' alt="" />
+                                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
+                                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
                                                             </div>
                                                             : null}
                                                     </div>
                                                     <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
+
                                                         <button
                                                             className="btn btn-lg" >
-                                                            {data.name}
+                                                            {data.name.toUpperCase()}
                                                         </button>
                                                     </Link>
                                                 </div>

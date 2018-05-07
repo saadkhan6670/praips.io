@@ -15,7 +15,6 @@ import Contact from './Contact'
   
 
   render() {
-    console.log(process.env.apiURL)
     return (
       <div className="footer">
         <div id="wrapper">
@@ -24,10 +23,12 @@ import Contact from './Contact'
             <div>
 
               <MenuComponent store={this.props.store} />
-              <Switch>
+             <Switch>
+
                <Route exact path="/" render={(props) => {  return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route exact path="/faq" render={(props) => {  return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route path="/faq/:slugName" render={(props) => {  return <FAQInfo store={this.props.store} {...props} /> }} />
+
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
                 <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />                
                 <Route path="/dashboard" render={(props) => {  return <Dashboard store={this.props.store} {...props} /> }} />
@@ -39,7 +40,7 @@ import Contact from './Contact'
                 <div className="row">
                   <div className="col-md-12 col-sm-12">
                     <div className="text">
-                      <p style={{ margin: "0 137px 10px" }}>Are you an admin of this page? <Link to="/login"> Login In</Link></p>
+                      <p>Are you an admin of this page? <Link to="/login"> Login In</Link></p>
                     </div>
                   </div>
                 </div>

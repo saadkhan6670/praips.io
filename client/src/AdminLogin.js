@@ -94,6 +94,7 @@ import { Redirect } from 'react-router-dom';
                         <div className="col-md-12 col-sm-12">
                             <div className="subText">
                                 <p>Are You an admin of Lorem Ipsum?</p>
+
                             </div>
                         </div>
                         <div className="row">

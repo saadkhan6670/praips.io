@@ -43,9 +43,8 @@ var RubricsSchema = new Schema({
       type: Schema.Types.ObjectId, 
       ref: 'RubricContent',
       default : [],
-    
- 
   }],
+  sort:{ type : Number},
 });
 
 var RubricContentSchema = new Schema({
@@ -57,7 +56,9 @@ var RubricContentSchema = new Schema({
   },
   updatedAt:{
     type: Date, default: null
-  } 
+  }, 
+  sort:{ type : Number},
+  
 })
 
 

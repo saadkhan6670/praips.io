@@ -102,12 +102,12 @@ import { observer } from 'mobx-react';
             
             
 
-             var  data = {
+            var data = {
                 visitorName: this.refs.Name.value,
                 toEmail: this.refs.Email.value,
                 content: this.refs.Message.value,
-             }
-       this.props.store.createContact(data).then((response) => {
+            }
+            this.props.store.createContact(data).then((response) => {
 
                 document.getElementById("request-process").style.display = "none"
                 document.getElementById('contactAlert').style.display = "block"
@@ -125,8 +125,8 @@ import { observer } from 'mobx-react';
         }
 
     }
-    handleEnterKey (e) {
-        if(e.keyCode === 13) {
+    handleEnterKey(e) {
+        if (e.keyCode === 13) {
             this.contactSubmit(e)
         }
     }
@@ -134,26 +134,31 @@ import { observer } from 'mobx-react';
     render() {
         return (
             <div className="content-wrapper" id="intro">
-
                 <div className="container-fluid">
                 <h2 id="headingMsg">Submit a Feature Request</h2>
                 
                     <form id="contactForm" onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
                         <div className="form-group">
-                            <label >How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq"   className="reqMsg"></span>
-                            <textarea name="message" className="form-control" ref='Message' style={{ height: "200px" }} onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
+                            <label className="label1">How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" className="reqMsg"></span>
+                            <textarea name="message" className="form-control textarea" ref='Message'
+                                onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
                         </div>
-                        <div className="form-group">
-                            <label >Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span  ref="nameReq" className="reqMsg"></span>
-                            <input type="text"  name="name" className="form-control" ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
-                        </div>
-                        <div className="form-group">
-                            <label >Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
-                            <input type="text" name="email"  className="form-control" ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
-                        </div>
-                        <div className="submit_btn">
-                        <Link to="/faq">    <input type="button" className="btn btn-lg" value="BACK TO FAQ" />  </Link>
 
+                        <div className="form-group">
+                            <label className="label2">Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" className="reqMsg"></span>
+                            <input type="text" style={{ marginTop: "11px", height: "38px", backgroundColor: "#fdfdfd" }} name="name" className="form-control" ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="label3">Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
+                            <input type="text" style={{ marginTop: "5px", height: "38px", backgroundColor: "#fdfdfd" }} name="email" className="form-control" ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
+                        </div>
+
+                        <div className="submit_btn">
+
+                            <Link to="/faq" style={{ textDecoration: "none" }}>
+                                <input type="button" className="btn btn-lg backToFaq" value="BACK TO FAQ" />
+                            </Link>
                             <input type="submit" className="btn btn-lg" value="SEND" />
 
                         </div>
@@ -163,11 +168,13 @@ import { observer } from 'mobx-react';
                         <span className="fa fa-spinner fa-spin fa-3x fa-fw"></span>
                     </div>
                     <div id="contactAlert">
+
                     <span  ><p>One of our agent will contact you shortly by email <br />
                         <strong> Thank You </strong></p>
                      <Link to="/faq">   <input type="submit" className="btn btn-lg" value="BACK TO FAQ"  /> </Link>
                         
                     </span>
+
                     </div>
                 </div>
             </div>

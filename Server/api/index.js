@@ -36,6 +36,7 @@ router.post('/createRubric', controller.createRubric);
 router.post('/updateRubcric', controller.updateRubcric);
 router.post('/removeRubrics', controller.removeRubrics);
 router.get('/getAllRubrics', controller.getAllRubrics);
+router.post('/sortRubrics' , controller.sortRubrics)
 
 //APIs for Rucric Content
 router.post('/createRubcricContent', controller.createRubcricContent);

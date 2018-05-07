@@ -2,19 +2,8 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
-
 var slideIndex = 1;
 var slideIndex2 = 2;
-
-var searchBtnStyles = {
-    background: "white",
-    color: "#ccc",
-    borderLeft: "none",
-    borderColor: "#ccc",
-    boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
-    borderTopRightRadius: "10px",
-    borderBottomRightRadius: "10px"
-}
 
 var x = document.getElementsByClassName("mySlides");
 
@@ -33,7 +22,6 @@ var x = document.getElementsByClassName("mySlides");
 
         await this.props.store.getRubrics()
         await this.showDivs(slideIndex, slideIndex2)
-
 
     }
 
@@ -75,19 +63,20 @@ var x = document.getElementsByClassName("mySlides");
 
     handleContentOnOff(imgref, pRef, viewId, views) {
 
-        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className === "view") {
+        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className === "view Plus") {
             this.refs[imgref].setAttribute('src', "/images/minu icon.png")
-            this.refs[imgref].className = ""
+            this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
             views += 1;
             return this.props.store.updateViews(viewId, views)
         }
         else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
             this.refs[imgref].setAttribute('src', "/images/minu icon.png")
+            this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
         }
         else {
-            this.refs[imgref].className = ""
+            this.refs[imgref].className = "Plus"
             this.refs[imgref].setAttribute('src', "/images/plus icon.png")
             this.refs[pRef].style.display = "none"
         }
@@ -105,9 +94,7 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     handleClick(searchInput) {
-        console.log("from search")
         if (searchInput.length === 0) {
-
             this.props.history.push({
                 pathname: '/faq',
                 search: ''
@@ -122,12 +109,23 @@ var x = document.getElementsByClassName("mySlides");
         this.props.store.createResearch(searchInput)
     }
 
+    mouseHover(event, id) {
+        document.getElementsByClassName("AdminIcons")[id].style.display = "block"
+    }
+
+    mouseOut(event, id) {
+        document.getElementsByClassName("AdminIcons")[id].style.display = "none"
+    }
+
 
 
     render() {
         console.log("re render")
         let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
         let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
+
+        // let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/odio` }))
+        // let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
 
         return (
             <div className="content-wrapper" id="intro">
@@ -150,14 +148,15 @@ var x = document.getElementsByClassName("mySlides");
                     <div className="row search_row">
 
                         <div className="input-group" id="adv-search">
-                            <input type="text" className="form-control" placeholder="How can we help" ref="searchInput"
+                            <input type="text" className="form-control searchInput" placeholder="How can we help" ref="searchInput"
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) : null }}
+                        
                             />
                             <div className="input-group-btn">
                                 <div className="btn-group" role="group">
 
                                     <button title="Click to Search.." type="button"
-                                        onClick={() => this.handleClick(this.refs.searchInput.value)} className="btn btn-primary" style={searchBtnStyles}>
+                                        onClick={() => this.handleClick(this.refs.searchInput.value)} className="btn btn-primary searchBtn">
                                         <span className="glyphicon glyphicon-search"></span>
                                     </button>
                                 </div>
@@ -166,9 +165,9 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
                 </div>
-                <h4 style={{ color: "grey", padding: "14px 65px 0px" }}>{content === undefined ? null : content.name}</h4>
+                <h4 className="RubricName">{content === undefined ? null : content.name.toUpperCase()}</h4>
 
-                <div className="row" style={{ padding: "0px 65px 0 65px", overflowY: "scroll", height: "250px", marginRight: "0px" }}>
+                <div className="row RubricContent scrollbar" id="style-3" >
 
                     {
                         filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
@@ -182,67 +181,78 @@ var x = document.getElementsByClassName("mySlides");
                             </ul>
 
                         </div> : filteredContent.map((data, key) => {
-                            return (
-                                <div className="col-lg-12" key={key}>
+                            return (<div>
+                                <div className="col-md-12"
+                                    // onMouseOver={(e) => { this.mouseHover(e, key) }}
+                                    // onMouseLeave={(e) => { this.mouseOut(e, key) }}
+                                    key={key}>
 
-                                    <h5 style={{ width: "90%" }}><b>{data.question}</b> </h5>
+                                    <div className="col-md-8" >
 
-                                    <img src="/images/plus icon.png"
-                                        style={{
-                                            cursor: "pointer",
-                                            position: "sticky", float: "right", bottom: "87%"
-                                        }}
-                                        ref={`plus${key}`}
-                                        // handling the answer toggle and view update with its id
-                                        onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
-                                        className="view"
-                                    />
-
-
-                                    <p style={{ display: "none" }} ref={`answer${key}`}>{data.answer}</p>
-                                    <hr />
+                                        <h5><b>{data.question}</b>  </h5>
+                                    </div>
+                                    <div className="col-md-3">
+                                    <div className="AdminIcons" style={{ padding: "3px 0 0 6%" }}>
+                                        {this.props.store.redirect ?
+                                            <div>
+                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
+                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
+                                            </div>
+                                            : null}
+                                    </div>
+                                    </div>
+                                    <div className="col-md-1" style={{ padding: "0.5% 0 0px 1%" }}>
+                                        <img src="/images/plus icon.png" alt="plus icon"
+                                            ref={`plus${key}`}
+                                            // handling the answer toggle and view update with its id
+                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
+                                            className="view Plus"
+                                        />
+                                    </div>
                                 </div>
+                                <div className="col-md-12">
+
+                                    <p ref={`answer${key}`}>{data.answer}</p>
+                                    <hr className="FaqInfoHr" />
+                                </div>
+                            </div>
                             )
                         })
                     }
-
-                </div>
-                <div className="row" style={{ height: "39px" }}>
-                    <div className="col-md-12 col-sm-12"></div>
                 </div>
 
-
-                <div className="row" style={{ padding: "35px 65px 0 65px", height: "100px" }}>
-                    <div className="col-md-2 col-sm-2">
-                        <a className="left"  >
-                            <span className="glyphicon glyphicon-chevron-left" style={{ background: "#83C75A" }} onClick={() => this.plusDivs(-1)}></span>
-                        </a>
+                <div className="col-md-12" style={{
+                    width:"100%",
+                    
+                    marginTop: "25%",
+                }}>
+                    <div className="col-md-1 col-sm-1" style = {{ cursor : "pointer"}}>
+                        
+                        <img onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/left arrow.png`} alt="left arrow" />
+                    
                     </div>
+
                     {this.props.store.Rubrics.map((data, key) => {
-
                         return (<div key={key}>
-                            <div className="col-md-4 col-sm-4 mySlides">
-
+                            <div className="col-md-4 col-sm-4 mySlides" style={{marginLeft : "5%"}}>
                                 <div>
-                                    <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" > {data.name} </button> </Link>
-
+                                    <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" style={{}} > {data.name} </button> </Link>
                                 </div>
                             </div>
                         </div>)
                     })}
 
-
-
-                    <div className="col-md-2 col-sm-2">
-                        <a className="right" >
-                            <span className="glyphicon glyphicon-chevron-right" style={{ background: "#83C75A", textDecoration: "none" }} onClick={() => this.plusDivs(1)}></span>
-                        </a>
+                    <div className="col-md-1 col-sm-1" style = {{ cursor : "pointer" , marginLeft:"2%" }}>
+                        
+                        <img onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/right arrow.png`} alt="right arrow" />
+                    
                     </div>
-
-
+                    
 
                 </div>
-                <div className="row" style={{ height: '10px', textAlign: "center" }}>Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
+                <div className="row contactbtn">Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
             </div>
         )
     }
