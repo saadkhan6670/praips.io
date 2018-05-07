@@ -136,7 +136,7 @@ import { Redirect } from 'react-router-dom';
 
                     </div>
                 </div>
-
+        </div>
         )
     }
 }
