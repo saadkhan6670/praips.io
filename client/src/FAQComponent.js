@@ -6,16 +6,6 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
 import Search from './Search'
 var { sortBy } = require('lodash')
 
-var searchBtnStyles = {
-    background: "#fdfdfd",
-    color: "#ccc",
-    borderLeft: "none",
-    borderColor: "#ccc",
-    boxShadow: "inset 0 1px 1px rgba(0,0,0,.075)",
-    borderTopRightRadius: "10px",
-    borderBottomRightRadius: "10px",
-    fontSize: "19px",
-}
 
 @observer class FAQComponent extends Component {
 
@@ -189,6 +179,7 @@ var searchBtnStyles = {
     render() {
         return (
             <div className="content-wrapper" id="intro">
+
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
@@ -205,16 +196,16 @@ var searchBtnStyles = {
                             </div>
                         </div>
                     </div>
+
                     <div className="row search_row">
                         <div className="input-group" id="adv-search">
-                            <input type="text" className="form-control" ref="searchInput"
+                            <input type="text" className="form-control searchInput" ref="searchInput"
                                 value={this.state.SearchValue}
                                 onChange={(e) => {
                                     this.setState({
                                         SearchValue: e.target.value
                                     })
                                 }}
-                                style={{ fontSize: "124%", backgroundColor: "#fdfdfd" }}
 
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(e) : null }}
                                 placeholder="How can we help" />
@@ -222,20 +213,18 @@ var searchBtnStyles = {
                                 <div className="btn-group" >
 
                                     <button title="Click to Search.."
-
-                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn btn-primary" style={searchBtnStyles}>
-                                        <span className="glyphicon glyphicon-search">
-
-                                        </span>
+                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn btn-primary searchBtn">
+                                        <span className="glyphicon glyphicon-search"> </span>
                                     </button>
 
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div className="row" style={{ height: "40px" }}></div>
                     {this.props.store.searchInput.length !== 0 ? <Search store={this.props.store} /> :
-                        <div className=" row RubricStyles">
+                        <div className=" row RubricStyles scrollbar" id="style-3">
                             {
                                 this.props.store.Rubrics.map((data, key) => {
                                     return (
