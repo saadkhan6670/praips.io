@@ -13,8 +13,12 @@ body {
 h2 {
     font-weight: bold;
 }
+
+td {
+    border: none;
+}
 #wrapper {
-    padding-top: 16px;
+    padding-top: 38px;
     padding-left: 12%;
     padding-bottom: 0px;
     background: #252525;
@@ -324,7 +328,7 @@ h2 {
         width: 100%;
         margin-top: 20px;
     }
-    AdminRight-wrapper{
+    .AdminRight-wrapper{
         width: 100%;
         margin-top: 20px;
     }
@@ -425,6 +429,14 @@ background-color: #7fc857;
 .AdminAboutContainer{
     top: 8px;
     position: relative;
+    display: none;
+}
+/* #aboutData {
+    display: none;
+} */
+
+#aboutForm {
+    display: none;
 }
 
 .AdminRight-wrapper{
@@ -434,9 +446,9 @@ background-color: #7fc857;
     border-radius: 8px;
     width: 24.26%;
     display: inline-block;
-    position: relative;
+    /*position: relative;
     top: 40px;
-    right: 14.1%;
+    right: 14.1%;*/
 }
 
 .AdminRight-wrapper .about_text {
@@ -516,7 +528,7 @@ background-color: #7fc857;
     height: 57px;
     float: left;
     border-radius: 8px;
-    width: 14.26%;
+    width: 17.66%;
     display: inline-block;
 }
 .logout_btn{
@@ -534,7 +546,7 @@ background-color: #7fc857;
 
 /* Contact CSS */
 
-input[type=submit] {
+.submit_btn input[type=submit] {
     background-color: #83C75A;
         padding: 9px 53px;
  
@@ -545,7 +557,7 @@ input[type=submit] {
      
  
      }
-      input[type=submit]:hover {
+     .submit_btn  input[type=submit]:hover {
     background-color:  white;
         padding: 9px 53px;
  
@@ -556,7 +568,7 @@ input[type=submit] {
     
  
      }
-     input[type="button"] {
+     .submit_btn  input[type="button"] {
     background-color: #ccc;
           padding: 9px 53px;
  
@@ -575,6 +587,47 @@ input[type=submit] {
  
     }
 
+    .about_btns {
+        text-align: center;
+        margin-top: 40px;
+        word-spacing: 1em;
+    }
+
+    .about_btns input[type=submit] {
+        background-color: #83C75A;
+            padding: 9px 45px;
+     
+         color: white;
+         border: none;
+         border-radius: 9px;
+         cursor: pointer;
+         
+     
+         }
+
+    .about_btns  input[type=submit]:hover {
+        background-color:  white;
+        padding: 9px 45px;
+     
+         color: #83C75A;
+         border: 1px #83C75A solid ;
+         border-radius: 9px;
+         cursor: pointer;
+        
+     
+         }
+         .about_btns  input[type="button"] {
+        background-color: #ccc;
+     
+         color: white;
+         border: none;
+         border-radius: 9px;
+         cursor: pointer;
+       
+         
+     
+         }
+
     .reqMsg {
         color: red;
         font-size: 12px;
@@ -583,16 +636,24 @@ input[type=submit] {
       }
 
       #request-process {
+        text-align: center;
           display: none;
       }
 
       #contactAlert {
           display: none;
+        text-align: center;
+          
       }
 
-      #mySlides {
-        
+      #contactForm { 
+        display: block;
       }
+      #spacingDiv    {
+        display: none;
+      }
+
+    
 
 
 
@@ -604,7 +665,7 @@ input[type=submit] {
 
 .CircularProgressbar {
  
-  width: 13%;
+  width: 10%;
 }
 
 .CircularProgressbar .CircularProgressbar-path {

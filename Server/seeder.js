@@ -54,7 +54,7 @@ RubricsContentJson.forEach( (element) => {
 })
 console.log(RubricsContentJson.length + "contents saved in RubricsContent")
 
-let NewUser = new Users({email: 'abc@gmail.com', password: '12345678', role: 'Administrator'});
+let NewUser = new Users({email: 'abc@gmail.com', password: '12345678', username: 'Johny Sins',role: 'Administrator'});
 
 NewUser.save((err , data) => {
 
@@ -68,7 +68,8 @@ console.log("Test User Created")
 let NewAbout = new About({name: 'Lorem Ipsum', 
                         logoPath : '/images/praips Logo.png', 
                         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur nibh ligula, et scelerisque nisl lobortis vel. Vestibulum id tortor urna. Phasellus quis purus vel quam convallis efficitur', 
-                        slogan: 'Lorem ipsum dolor sit amet consectetur'
+                        slogan: 'Lorem ipsum dolor sit amet consectetur',
+                        siteUrl: 'www.website.io'
                     })
 NewAbout.save((err, data) => {
     if(err) {

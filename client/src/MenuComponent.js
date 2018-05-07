@@ -10,14 +10,14 @@ import { observer } from 'mobx-react';
             <div id="sidebar-wrapper">
                 <div className="logo-wrapper">
                     <div className="logo">
-                        <img src='./images/praips Logo.png' alt="praips Logo" />
+                        <img src={`${process.env.PUBLIC_URL}/images/praips Logo.png`} alt="praips Logo" />
                     </div>
                 </div>
                 <Link onClick ={ () => {this.props.store.searchInput = ""}} to="/faq">
                 <div className="faq">
                     <div >
                         <div className="question">
-                            <img src='./images/info.png' alt="info icon" />
+                            <img src={`${process.env.PUBLIC_URL}/images/info.png`} alt="info icon" />
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@ import { observer } from 'mobx-react';
                      <div className="faq">
                          <div >
                              <div className="question">
-                                 <img src='./images/script icon.png' alt="script icon" />
+                                 <img src={`${process.env.PUBLIC_URL}/images/script icon.png`} alt="script icon" />
                              </div>
                          </div>
      
@@ -49,7 +49,7 @@ import { observer } from 'mobx-react';
                      <div className="faq">
                          <div>
                              <div className="question">
-                                 <img src='./images/analytics icon.png' alt="analytics icon" />
+                                 <img src={`${process.env.PUBLIC_URL}/images/analytics icon.png`} alt="analytics icon" />
                              </div>
                          </div>
      
