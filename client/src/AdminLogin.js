@@ -24,19 +24,19 @@ import { Redirect } from 'react-router-dom';
             .then((response) => {                
                 if (response.data) {
                     axios.get(`${process.env.apiURL}/api/loginKey`)
-                        .then((response) => {
-                            this.props.store.LoginKey = response.data.logInKey;
+                        .then((response2) => {
+                            this.props.store.LoginKey = response2.data.logInKey;
                             this.props.store.redirect = true
-                            this.props.store.id = response.data._id
+                            this.props.store.id = response2.data._id
                             
                             var now = new Date();
                             var time = now.getTime();
                             var expireTime = time + 1000 * 100000;
                             now.setTime(expireTime);
-                            console.log("Login")
                             
                             document.cookie = `key=${this.props.store.LoginKey};  expires=${now.toGMTString()} path=/`;
-                            document.cookie = `redirect=${this.props.store.redirect}; expires=${now.toGMTString()} path=/`;
+                            document.cookie = `user_id=${response.data._id};  expires=${now.toGMTString()} path=/`;
+                            
                             
                         }).catch(() => {
                             this.setState({
@@ -65,7 +65,7 @@ import { Redirect } from 'react-router-dom';
 
 
     render() {
-
+console.log(this.props.store.redirect)
         return (
             this.props.store.redirect === true ? <Redirect to="/faq"/> :
             <div className="content-wrapper" id="intro">

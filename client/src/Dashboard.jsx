@@ -4,6 +4,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 import { RemoveOverflow } from './Services';
 import { orderBy } from 'lodash'
 import io from 'socket.io-client';
+import {Redirect} from 'react-router-dom'
 
 @observer class Dashboard extends Component {
 
@@ -87,7 +88,7 @@ import io from 'socket.io-client';
         }, this.state.sortOrder)
 
 
-        return (
+        return   this.props.store.redirect ?  (
 
             <div className="content-wrapper" style={{ background: "#eee" }}>
                 <div className="container-fluid" style={{ paddingRight: "30px", paddingLeft: "32px" }}>
@@ -177,25 +178,7 @@ import io from 'socket.io-client';
                                                 </tr>
                                             )
                                         })}
-                                    {/* <tr>
-                                   <td style={{ borderTop: "none" ,  padding: '0px 0px 14px'   }}>Doesdaasas</td>
                                    
-                                   <td style={{ borderTop: "none" ,padding: '0px 0px 14px'  }}>Doeasdasdadasasdaasdas</td>
-                                            <td style={{ borderTop: "none" , padding: '0px 7px 14px'  }}>23</td>
-                                      </tr>
-                                        
-                                      <tr>
-                                   <td style={{ borderTop: "none" ,  padding: '0px 0px 14px'   }}>Doesdaasas</td>
-                                   
-                                   <td style={{ borderTop: "none" ,padding: '0px 0px 14px'  }}>Doeasdasdadasasdaasdas</td>
-                                            <td style={{ borderTop: "none" , padding: '0px 7px 14px'  }}>23</td>
-                                      </tr>
-                                      <tr>
-                                   <td style={{ borderTop: "none" ,  padding: '0px 0px 14px'   }}>Doesdaasas</td>
-                                   
-                                   <td style={{ borderTop: "none" ,padding: '0px 0px 14px'  }}>Doeasdasdadasasdaasdas</td>
-                                            <td style={{ borderTop: "none" , padding: '0px 7px 14px'  }}>23</td>
-                                      </tr> */}
 
 
                                 </tbody>
@@ -245,7 +228,7 @@ import io from 'socket.io-client';
                     </div>
                 </div>
             </div>
-        )
+        ) : <Redirect to="/login"/>
     }
 }
 

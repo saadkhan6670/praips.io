@@ -4,19 +4,19 @@ import {getCookie} from '../Services'
 
 class PraipsStore {
     @observable Rubrics = [];
-    @observable About = [];
+    @observable About = {};
     @observable Researches= [];
     @observable Contacts= [];
-    
-    
+    @observable User = {};  
     @observable LoginKey = getCookie('key');
-    @observable redirect = Boolean(getCookie('redirect'));
+    @observable redirect = false
     @observable id = ''
     @observable searchInput = '';
 
 
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
+            
             this.Rubrics = response.data
         })
             .catch((error) => {
@@ -33,14 +33,7 @@ class PraipsStore {
             })
     }
 
-    async checkKey() {
-        await axios.get(`${process.env.apiURL}/api/LogKeyAuth?LogKey=${this.LoginKey}`).then((response) => {
-                this.redirect = response.data
-               document.cookie = `redirect=${this.redirect}; path=/`;
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
+   
 
     async createRubric(rubricName , rubricSlug) {
         await axios.post(`${process.env.apiURL}/api/createRubric`,{name:rubricName , slug : rubricSlug}).then((response) => {
@@ -135,6 +128,19 @@ class PraipsStore {
          axios.get(`${process.env.apiURL}/api/getAllResearches`).then((response) => {
 
     this.Researches = response.data
+
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+     getUserData() {
+
+         axios.get(`${process.env.apiURL}/api/getUserData/${getCookie('user_id')}`).then((response) => {
+                   console.log("from API", response.data)
+    this.User = response.data
 
         })
             .catch((error) => {

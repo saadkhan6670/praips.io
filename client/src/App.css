@@ -328,7 +328,7 @@ td {
         width: 100%;
         margin-top: 20px;
     }
-    AdminRight-wrapper{
+    .AdminRight-wrapper{
         width: 100%;
         margin-top: 20px;
     }
@@ -429,6 +429,10 @@ background-color: #7fc857;
 .AdminAboutContainer{
     top: 8px;
     position: relative;
+    display: none;
+}
+.aboutData {
+    display: none;
 }
 
 .AdminRight-wrapper{
@@ -438,9 +442,9 @@ background-color: #7fc857;
     border-radius: 8px;
     width: 24.26%;
     display: inline-block;
-    position: relative;
+    /*position: relative;
     top: 40px;
-    right: 14.1%;
+    right: 14.1%;*/
 }
 
 .AdminRight-wrapper .about_text {
@@ -520,7 +524,7 @@ background-color: #7fc857;
     height: 57px;
     float: left;
     border-radius: 8px;
-    width: 14.26%;
+    width: 17.66%;
     display: inline-block;
 }
 .logout_btn{

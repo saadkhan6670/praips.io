@@ -12,6 +12,7 @@ import Dashboard from './Dashboard'
 import Contact from './Contact'
 
 @observer class App extends Component {
+  
 
   render() {
     return (
@@ -23,12 +24,12 @@ import Contact from './Contact'
 
               <MenuComponent redirect={this.props.store.redirect} />
               <Switch>
-               <Route exact path="/" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
-                <Route exact path="/faq" render={(props) => { this.props.store.checkKey(); return <FAQComponent store={this.props.store} {...props} /> }} />
-                <Route path="/faq/:slugName" render={(props) => { this.props.store.checkKey(); return <FAQInfo store={this.props.store} {...props} /> }} />
+               <Route exact path="/" render={(props) => {  return <FAQComponent store={this.props.store} {...props} /> }} />
+                <Route exact path="/faq" render={(props) => {  return <FAQComponent store={this.props.store} {...props} /> }} />
+                <Route path="/faq/:slugName" render={(props) => {  return <FAQInfo store={this.props.store} {...props} /> }} />
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
                 <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />                
-                <Route path="/dashboard" render={(props) => { this.props.store.checkKey(); return <Dashboard store={this.props.store} {...props} /> }} />
+                <Route path="/dashboard" render={(props) => {  return <Dashboard store={this.props.store} {...props} /> }} />
               </Switch>
               <AboutComponent store={this.props.store}/>
               
