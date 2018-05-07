@@ -15,6 +15,7 @@ import Contact from './Contact'
   
 
   render() {
+    console.log(process.env.apiURL)
     return (
       <div className="footer">
         <div id="wrapper">
@@ -22,7 +23,7 @@ import Contact from './Contact'
           <BrowserRouter>
             <div>
 
-              <MenuComponent redirect={this.props.store.redirect} />
+              <MenuComponent store={this.props.store} />
               <Switch>
                <Route exact path="/" render={(props) => {  return <FAQComponent store={this.props.store} {...props} /> }} />
                 <Route exact path="/faq" render={(props) => {  return <FAQComponent store={this.props.store} {...props} /> }} />

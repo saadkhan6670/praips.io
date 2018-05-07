@@ -74,22 +74,21 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     handleContentOnOff(imgref, pRef, viewId, views) {
-       
-        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className ===  "view") 
-        {
-            this.refs[imgref].setAttribute('src', "/images/minu icon.png") 
+
+        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className === "view") {
+            this.refs[imgref].setAttribute('src', "/images/minu icon.png")
             this.refs[imgref].className = ""
             this.refs[pRef].style.display = "block"
             views += 1;
-          return  this.props.store.updateViews(viewId, views)
+            return this.props.store.updateViews(viewId, views)
         }
         else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
-            this.refs[imgref].setAttribute('src', "/images/minu icon.png") 
+            this.refs[imgref].setAttribute('src', "/images/minu icon.png")
             this.refs[pRef].style.display = "block"
         }
         else {
             this.refs[imgref].className = ""
-            this.refs[imgref].setAttribute('src', "/images/plus icon.png") 
+            this.refs[imgref].setAttribute('src', "/images/plus icon.png")
             this.refs[pRef].style.display = "none"
         }
     }
@@ -185,16 +184,20 @@ var x = document.getElementsByClassName("mySlides");
                         </div> : filteredContent.map((data, key) => {
                             return (
                                 <div className="col-lg-12" key={key}>
-                                
+
                                     <h5 style={{ width: "90%" }}><b>{data.question}</b> </h5>
 
-                                                <img src="/images/plus icon.png" 
-                                                style={{ cursor: "pointer", 
-                                                position: "sticky",float:"right" , bottom: "87%" }} ref={`plus${key}`}
-                                                    handling the answer toggle and view update with its id
-                                                    onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
-                                                    className="view" 
-                                                    />
+                                    <img src="/images/plus icon.png"
+                                        style={{
+                                            cursor: "pointer",
+                                            position: "sticky", float: "right", bottom: "87%"
+                                        }}
+                                        ref={`plus${key}`}
+                                        // handling the answer toggle and view update with its id
+                                        onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
+                                        className="view"
+                                    />
+
 
                                     <p style={{ display: "none" }} ref={`answer${key}`}>{data.answer}</p>
                                     <hr />
