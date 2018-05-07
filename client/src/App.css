@@ -431,7 +431,11 @@ background-color: #7fc857;
     position: relative;
     display: none;
 }
-.aboutData {
+/* #aboutData {
+    display: none;
+} */
+
+#aboutForm {
     display: none;
 }
 
@@ -542,7 +546,7 @@ background-color: #7fc857;
 
 /* Contact CSS */
 
-input[type=submit] {
+.submit_btn input[type=submit] {
     background-color: #83C75A;
         padding: 9px 53px;
  
@@ -553,7 +557,7 @@ input[type=submit] {
      
  
      }
-      input[type=submit]:hover {
+     .submit_btn  input[type=submit]:hover {
     background-color:  white;
         padding: 9px 53px;
  
@@ -564,7 +568,7 @@ input[type=submit] {
     
  
      }
-     input[type="button"] {
+     .submit_btn  input[type="button"] {
     background-color: #ccc;
           padding: 9px 53px;
  
@@ -582,6 +586,47 @@ input[type=submit] {
      word-spacing: 1em;
  
     }
+
+    .about_btns {
+        text-align: center;
+        margin-top: 40px;
+        word-spacing: 1em;
+    }
+
+    .about_btns input[type=submit] {
+        background-color: #83C75A;
+            padding: 9px 45px;
+     
+         color: white;
+         border: none;
+         border-radius: 9px;
+         cursor: pointer;
+         
+     
+         }
+
+    .about_btns  input[type=submit]:hover {
+        background-color:  white;
+        padding: 9px 45px;
+     
+         color: #83C75A;
+         border: 1px #83C75A solid ;
+         border-radius: 9px;
+         cursor: pointer;
+        
+     
+         }
+         .about_btns  input[type="button"] {
+        background-color: #ccc;
+     
+         color: white;
+         border: none;
+         border-radius: 9px;
+         cursor: pointer;
+       
+         
+     
+         }
 
     .reqMsg {
         color: red;

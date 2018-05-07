@@ -31,7 +31,7 @@ import Contact from './Contact'
                 <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />                
                 <Route path="/dashboard" render={(props) => {  return <Dashboard store={this.props.store} {...props} /> }} />
               </Switch>
-              <AboutComponent store={this.props.store}/>
+             <AboutComponent store={this.props.store}/>
               
               {this.props.store.redirect ? null :
               <div className="container footer_text">

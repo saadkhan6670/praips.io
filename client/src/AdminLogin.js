@@ -36,8 +36,13 @@ import { Redirect } from 'react-router-dom';
                             
                             document.cookie = `key=${this.props.store.LoginKey};  expires=${now.toGMTString()} path=/`;
                             document.cookie = `user_id=${response.data._id};  expires=${now.toGMTString()} path=/`;
+                        this.props.store.getUserData()
                             
-                            
+                       this.props.history.push({
+                           pathname : '/'
+                       })
+
+                  
                         }).catch(() => {
                             this.setState({
                                 reqFlag : true,
@@ -65,9 +70,7 @@ import { Redirect } from 'react-router-dom';
 
 
     render() {
-console.log(this.props.store.redirect)
         return (
-            this.props.store.redirect === true ? <Redirect to="/faq"/> :
             <div className="content-wrapper" id="intro">
                 <div className="container-  ">
                     <div className="row">
