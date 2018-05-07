@@ -5,9 +5,12 @@ var { sortBy } = require('lodash')
 
 class PraipsStore {
     @observable Rubrics = [];
-    @observable About = [];
+    @observable About = {};
+    @observable Researches= [];
+    @observable Contacts= [];
+    @observable User = {};  
     @observable LoginKey = getCookie('key');
-    @observable redirect = Boolean(getCookie('redirect'));
+    @observable redirect = false
     @observable id = ''
     @observable searchInput = '';
 
@@ -15,6 +18,7 @@ class PraipsStore {
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
             this.Rubrics = sortBy(response.data, [function (o) { return o.sort; }])
+
 
         })
             .catch((error) => {
@@ -31,6 +35,7 @@ class PraipsStore {
             })
     }
 
+
     async checkKey() {
         await axios.get(`${process.env.apiURL}/api/LogKeyAuth?LogKey=${this.LoginKey}`).then((response) => {
             this.redirect = response.data
@@ -39,6 +44,7 @@ class PraipsStore {
             console.log(error)
         })
     }
+
 
     async createRubric(rubricName, rubricSlug) {
         await axios.post(`${process.env.apiURL}/api/createRubric`, { name: rubricName, slug: rubricSlug }).then((response) => {
@@ -52,6 +58,23 @@ class PraipsStore {
     createContact(data) {
         return axios.post(`${process.env.apiURL}/api/createContact`, data)
     }
+
+
+    getAllContacts () {
+
+        axios.get(`${process.env.apiURL}/api/getAllContacts`).then((response) => {
+
+            this.Contacts = response.data
+        
+                })
+                    .catch((error) => {
+        
+                        console.log(error)
+                    })
+
+    }
+
+
 
     updateViews(id, views) {
         axios.post(`${process.env.apiURL}/api/updateViews`, { id: id, views: views }).then((response) => {
@@ -113,9 +136,63 @@ class PraipsStore {
         })
     }
 
+
+    RemoveRubric(id){
+        axios.post(`${process.env.apiURL}/api/removeRubrics`,{_id: id})
+        .then((response) => {
+           return
+           
+       }).catch((error) => {
+           console.log(error)
+       }) 
+   }
+
+   async LogOutandDelKey() {
+    await axios.post(`${process.env.apiURL}/api/DelLogKey`, { id: this.id}).then((response) => {
+     var cookies = document.cookie.split(";");
+ 
+     for (var i = 0; i < cookies.length; i++) {
+         var cookie = cookies[i];
+         var eqPos = cookie.indexOf("=");
+         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+     }
+       window.location.reload();
+ 
+     }).catch((error) => {
+       console.log(error)
+     })
+   } 
+
     createResearch(content) {
 
         return axios.post(`${process.env.apiURL}/api/createResearch`, { content: content }).then((response) => {
+
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+    getAllResearches(content) {
+
+         axios.get(`${process.env.apiURL}/api/getAllResearches`).then((response) => {
+
+    this.Researches = response.data
+
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+     getUserData() {
+
+         axios.get(`${process.env.apiURL}/api/getUserData/${getCookie('user_id')}`).then((response) => {
+                   console.log("from API", response.data)
+    this.User = response.data
 
         })
             .catch((error) => {

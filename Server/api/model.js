@@ -7,12 +7,19 @@ var UsersSchema = new Schema({
     type: String,
     unique: true
   },
+  username : {
+    type: String
+  },
   password: {
     type: String,
   },
   role: {
     type: String,
   },
+
+  profilePath : {type : String , default: '/images/default-profile.jpg'},
+  
+  
  
 });
 
@@ -68,10 +75,11 @@ var SearchSchema = new Schema({
 })
 
 var AboutSchema = new Schema({
-  name: {type: String},
-  logoPath: {type: String}, 
-  description: {type: String},
-  slogan: {type: String}
+  name: {type: String  , default: 'Name here..'},
+  logoPath: {type: String , default: null}, 
+  description: {type: String , default: 'Description here..'},
+  slogan: {type: String , default: 'Slogan here..'},
+  siteUrl : {type : String , default: 'WEbsite url here..' }
 })
 
 var LogKeySchema = new Schema({

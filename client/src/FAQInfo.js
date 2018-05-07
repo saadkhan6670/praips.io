@@ -120,6 +120,7 @@ var x = document.getElementsByClassName("mySlides");
 
 
     render() {
+        console.log("re render")
         let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
         let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
 

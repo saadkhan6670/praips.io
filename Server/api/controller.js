@@ -2,6 +2,9 @@
 var mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 var Schema = mongoose.Schema;
+var server = require('http').createServer()
+const socketIO = require('socket.io')
+const uuidv1 = require('uuid/v1');
 
 //Models
 const Rubrics = mongoose.model('Rubrics');
@@ -12,7 +15,14 @@ const Search = mongoose.model('Search');
 const About = mongoose.model('About');
 const LogKey = mongoose.model('LogKey');
 
-const uuidv1 = require('uuid/v1');
+
+
+
+server.listen(8080)
+
+var io = socketIO.listen(server)
+
+
 
 //create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
@@ -25,13 +35,14 @@ var transporter = nodemailer.createTransport({
 
 // Admin Login API
 exports.adminLogIn = (req, res) => {
-  Users.findOne({ email: req.body.email, password: req.body.password }, (err, data) => {
+  Users.findOne({ email: req.body.email, password: req.body.password }).select('_id role profilePath username redirect').exec((err, data) => {
 
     if (!data) {
       res.send(false)
     }
     else {
-      res.send(true)
+   
+      res.send(data)
     }
   })
 }
@@ -83,13 +94,15 @@ exports.createRubric = (req, res) => {
 
     res.send(rubric)
   })
+  io.emit('update', { api: 'RubricsChanged' })
+
 }
 
 exports.updateRubcric = (req, res) => {
-  
+
   let date = new Date();
-  
-  Rubrics.findByIdAndUpdate(req.body.id, { $set: {name : req.body.name, slug: req.body.slug, updatedAt: Date.now()} }, {new: true}, (err , data) => {
+
+  Rubrics.findByIdAndUpdate(req.body.id, { $set: { name: req.body.name, slug: req.body.slug, updatedAt: Date.now() } }, { new: true }, (err, data) => {
     if (!data) {
       res.send("No rubric found to update")
     }
@@ -98,14 +111,16 @@ exports.updateRubcric = (req, res) => {
       res.send("Rubric updated");
     }
   })
+  io.emit('update', { api: 'RubricsChanged' })
+
 }
 
 exports.removeRubrics = (req, res) => {
   console.log(req.body)
-  
-  Rubrics.findByIdAndRemove( req.body._id, (err , data) => {
 
-    if(!data) {
+  Rubrics.findByIdAndRemove(req.body._id, (err, data) => {
+
+    if (!data) {
       res.send("No rubric found to update")
     }
 
@@ -113,6 +128,9 @@ exports.removeRubrics = (req, res) => {
       res.send("Rubric Removed");
     }
   })
+
+  io.emit('update', { api: 'RubricsChanged' })
+
 }
 
 
@@ -127,6 +145,8 @@ exports.getAllRubrics = (req, res) => {
       res.send(data);
     }
   })
+
+
 }
 
 exports.sortRubrics = (req,res)=> {
@@ -153,13 +173,15 @@ exports.createRubcricContent = (req, res) => {
 
     }
   })
+  io.emit('update', { api: 'RubricsChanged' })
+
 
 }
 
 exports.updateRubcricContent = (req, res) => {
   RubricContent.findByIdAndUpdate(req.query.id, {
     $set:
-      { name: req.body.name, question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
+    { name: req.body.name, question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
   },
 
     { new: true }, (err, data) => {
@@ -172,6 +194,9 @@ exports.updateRubcricContent = (req, res) => {
         res.send("Rubric content updated");
       }
     })
+
+  io.emit('update', { api: 'RubricsChanged' })
+
 
 }
 
@@ -242,49 +267,91 @@ exports.createContact = (req, res) => {
 
     }
   })
+  io.emit('update', { api: 'ContactChanged' })
 
 }
 
-exports.updateViews = (req, res) => {
-RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
+exports.getAllContacts = (req, res) => {
+  Contact.find({}, (err, doc) => {
 
-  if(err) {
-    res.send(err)
-  }
-
-  else {
-    res.send(doc)
-  }
-})
-
-}
-
-exports.updateViews = (req, res) => {
-
-  RubricContent.findByIdAndUpdate(req.body.id, {$set: {views : req.body.views}} , {new: true} , (err, doc) => {
-  
-    if(err) {
+    if (!doc) {
       res.send(err)
     }
-  
     else {
       res.send(doc)
     }
   })
-  
-  }
 
-  exports.createResearch = (req, res) => {
-    let NewSearchQuery = new Search(req.body);
-    NewSearchQuery.save( (err , doc) => {
+}
 
-      if(!doc) {
-        res.send(err);
-      }
+exports.updateViews = (req, res) => {
+  RubricContent.findByIdAndUpdate(req.body.id, { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
 
-      else {
-        res.send(doc)
-      }
-    })
+    if (err) {
+      res.send(err)
     }
 
+    else {
+      res.send(doc)
+    }
+  })
+  io.emit('update', { api: 'RubricsChanged' })
+
+}
+
+
+exports.createResearch = (req, res) => {
+  let NewSearchQuery = new Search(req.body);
+  NewSearchQuery.save((err, doc) => {
+
+    if (!doc) {
+      res.send(err);
+    }
+
+    else {
+      res.send(doc)
+    }
+  })
+  io.emit('update', { api: 'ResearchChanged' })
+
+}
+
+exports.getAllResearches = (req, res) => {
+  Search.find({}, (err, doc) => {
+
+    if (!doc) {
+      res.send(err)
+    }
+    else {
+      res.send(doc)
+    }
+  })
+
+}
+
+
+exports.uploadImg = (req, res) => {
+  console.log(req.body)
+if(req.file) {
+  console.log(req.file)
+}
+
+else {
+  console.log("No file uploaded")
+}
+ 
+}
+
+exports.getUserData = (req, res) => {
+ Users.findById(req.params.user_id).select('_id role profilePath username').exec( (err, user) => {
+
+   if(!user ) {
+     res.send("No user found ")
+   }
+
+   else {
+     res.send(user)
+   }
+ } )
+ 
+}

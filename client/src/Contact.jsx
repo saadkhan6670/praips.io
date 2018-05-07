@@ -97,6 +97,10 @@ import { observer } from 'mobx-react';
         if (this.refs.Name.value !== "" && this.refs.Email.value !== "" && this.refs.Message.value !== "" && isEmail(this.refs.Email.value)) {
             document.getElementById("contactForm").style.display = "none"
             document.getElementById("request-process").style.display = "block"
+            document.getElementById("spacingDiv").style.display = "block"
+            document.getElementById("headingMsg").innerHTML = ""
+            
+            
 
             var data = {
                 visitorName: this.refs.Name.value,
@@ -107,6 +111,8 @@ import { observer } from 'mobx-react';
 
                 document.getElementById("request-process").style.display = "none"
                 document.getElementById('contactAlert').style.display = "block"
+                document.getElementById("headingMsg").innerHTML = "Message Sent"
+                
 
 
             }).catch((error) => {
@@ -128,10 +134,10 @@ import { observer } from 'mobx-react';
     render() {
         return (
             <div className="content-wrapper" id="intro">
-
-                <div className="container-fluid contact">
+                <div className="container-fluid">
+                <h2 id="headingMsg">Submit a Feature Request</h2>
+                
                     <form id="contactForm" onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
-                        <h2 >Submit a Feature Request</h2>
                         <div className="form-group">
                             <label className="label1">How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" className="reqMsg"></span>
                             <textarea name="message" className="form-control textarea" ref='Message'
@@ -157,16 +163,18 @@ import { observer } from 'mobx-react';
 
                         </div>
                     </form>
+                    <div className="row" id="spacingDiv"style={{minHeight: "250px"}}></div>
                     <div id="request-process"><h4>Processing your request</h4>
                         <span className="fa fa-spinner fa-spin fa-3x fa-fw"></span>
                     </div>
                     <div id="contactAlert">
-                        <h2>Message sent</h2>
-                        <span className="alert-decline" ><p>One of our agent will contact you shortly by email <br />
-                            <strong> Thank You </strong></p>
-                            <Link to="/faq">   <input type="submit" className="btn btn-lg" value="BACK TO FAQ" /> </Link>
 
-                        </span>
+                    <span  ><p>One of our agent will contact you shortly by email <br />
+                        <strong> Thank You </strong></p>
+                     <Link to="/faq">   <input type="submit" className="btn btn-lg" value="BACK TO FAQ"  /> </Link>
+                        
+                    </span>
+
                     </div>
                 </div>
             </div>

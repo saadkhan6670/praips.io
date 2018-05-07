@@ -32,20 +32,26 @@ import { Redirect } from 'react-router-dom';
             .then((response) => {
                 if (response.data) {
                     axios.get(`${process.env.apiURL}/api/loginKey`)
-                        .then((response) => {
-                            this.props.store.LoginKey = response.data.logInKey;
+                        .then((response2) => {
+                            this.props.store.LoginKey = response2.data.logInKey;
                             this.props.store.redirect = true
-                            this.props.store.id = response.data._id
+
+                            this.props.store.id = response2.data._id
+                            
 
                             var now = new Date();
                             var time = now.getTime();
                             var expireTime = time + 1000 * 100000;
-                            now.setTime(expireTime);
-                            console.log("Login")
-
+                            now.setTime(expireTime);                           
                             document.cookie = `key=${this.props.store.LoginKey};  expires=${now.toGMTString()} path=/`;
-                            document.cookie = `redirect=${this.props.store.redirect}; expires=${now.toGMTString()} path=/`;
+                            document.cookie = `user_id=${response.data._id};  expires=${now.toGMTString()} path=/`;
+                        this.props.store.getUserData()
+                            
+                       this.props.history.push({
+                           pathname : '/'
+                       })
 
+             
                         }).catch(() => {
                             this.setState({
 
@@ -81,16 +87,14 @@ import { Redirect } from 'react-router-dom';
 
 
     render() {
-
         return (
-            this.props.store.redirect === true ? <Redirect to="/faq" /> :
-                <div className="content-wrapper" id="intro">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-md-12 col-sm-12">
-                                <div className="subText">
-                                    <p>Are You an admin of Lorem Ipsum?</p>
-                                </div>
+            <div className="content-wrapper" id="intro">
+                <div className="container-  ">
+                    <div className="row">
+                        <div className="col-md-12 col-sm-12">
+                            <div className="subText">
+                                <p>Are You an admin of Lorem Ipsum?</p>
+
                             </div>
                         </div>
                         <div className="row">
@@ -131,11 +135,9 @@ import { Redirect } from 'react-router-dom';
                         </div>
                         {this.state.Message}
 
-
-
                     </div>
                 </div>
-
+        </div>
         )
     }
 }

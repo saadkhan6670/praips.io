@@ -33,7 +33,6 @@ var { sortBy } = require('lodash')
                 redirect: true
             })
         }
-        this.props.store.checkKey()
         this.props.store.getRubrics()
     }
     componentWillUnmount() {

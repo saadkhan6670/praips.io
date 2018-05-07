@@ -13,6 +13,7 @@ import { observer } from 'mobx-react';
                     <div className="logo-wrapper">
                         <div className="logo">
                             <img src={`${process.env.PUBLIC_URL}/images/praips Logo.png`} alt="praips Logo" />
+
                         </div>
                     </div>
                 </Link>
@@ -35,6 +36,7 @@ import { observer } from 'mobx-react';
 
                 {this.props.store.redirect ?
                     <div>
+
                         <Link title="FAQ Widget" to="/install">
                             <div className="menuitems">
                                 <div >

@@ -3,12 +3,26 @@ var app = express();
 const requestIp = require('request-ip');
 var router = express.Router();
 var controller = require('./controller');
-
+var multer = require('multer')
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
 
 
 //APIs for User
 router.post('/createContact', controller.createContact);
+router.get('/getAllContacts', controller.getAllContacts);
 router.post('/createResearch', controller.createResearch);
+router.get('/getAllResearches', controller.getAllResearches);
+router.get('/getUserData/:user_id', controller.getUserData);
+
+
 
 //APIs for Admin
 router.post('/adminLogIn', controller.adminLogIn);
@@ -34,6 +48,9 @@ router.post('/updateViews', controller.updateViews);
 router.post('/createAbout', controller.createAbout);
 router.post('/updateAbout', controller.updateAbout);
 router.get('/getAbout', controller.getAbout);
+
+router.post('/uploadImg',upload.single('profile'), controller.uploadImg);
+
 
 // router.get('/getRubricContent/:slugName', controller.getRubricContent);
 
