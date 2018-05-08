@@ -342,7 +342,7 @@ button {
     }
 }
 
-@media (max-width: 1550px) {
+@media (max-width: 1650px) {
 
     .RubricStyles {
         height: 300px !important;
@@ -592,8 +592,9 @@ button.logoutbtn{
    
     #wrapper {
         margin-right: 0px;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
     }
     #sidebar-wrapper {
         display: none;
@@ -603,7 +604,9 @@ button.logoutbtn{
     }
     .content-wrapper {
         width: 100%;
-        margin-top: 20px;
+    border-radius: 0px;
+    margin-top: 0px;        
+    
     }
     .content-wrapper .subText {
         width: 80%;
@@ -1067,3 +1070,6 @@ button.logoutbtn{
     background-color: rgb(131, 199, 90);
     color: white;
 }
+
+/* Nav bar Css */
+
