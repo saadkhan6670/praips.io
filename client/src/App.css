@@ -1089,24 +1089,13 @@ button.logoutbtn {
 .CircularProgressbar .CircularProgressbar-text {
     fill: #2e2d2f;
     font-size: 20px;
-    dominant-baseline: middle;
+    /* dominant-baseline: middle; */
     text-anchor: middle;
 }
 
 .CircularProgressbar .CircularProgressbar-background {
     fill: #d6d6d6;
 }
-
-/*
- * Sample background styles. Use these with e.g.:
- *
- *   <CircularProgressbar
- *     className="CircularProgressbar-inverted"
- *     background
- *     percentage={50}
- *   />
- */
-
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
     fill: #3e98c7;
 }
@@ -1225,10 +1214,7 @@ button.logoutbtn {
 .AdminProfile-wrapper div.profileImage{
     width: 21%;
 }
-.AdminProfile-wrapper div.profileName {
-    /* margin-top: 4% !important;
-    margin-left: 6% !important; */
-}
+
 .AdminProfile-wrapper span.profileRole {
     font-size: 13px !important;
     color: lightgray;
