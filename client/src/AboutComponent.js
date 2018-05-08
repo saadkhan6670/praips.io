@@ -64,7 +64,7 @@ import { observer } from 'mobx-react';
              <div className="col-md-3 col-sm-3 profileImage" style={{ backgroundSize : "cover",  backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}${this.props.store.User.profilePath})`, height: "inherit" , borderTopLeftRadius : "inherit", borderBottomLeftRadius : "inherit"}}>
 
              </div>
-             <div className="col-md-6 col-sm-6" style={{ height: "inherit"   ,  fontSize: "18px"}}>
+             <div className="col-md-6 col-sm-6" style={{ height: "inherit"   ,  fontSize: "18px" , padding:"6px 0 0 8px" , marginRight: "3%"}}>
              < div className="profileName">{this.props.store.User.username}</div>
                   <br/>
                  <span className="profileRole">{this.props.store.User.role}</span>
@@ -88,7 +88,7 @@ import { observer } from 'mobx-react';
                         <div >
                             <div className="row">
                             {this.props.store.redirect ? 
-                                <img onClick={(e) => this.editHandle(e)} style={{ cursor: "pointer", position: "absolute", right: "19%" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                <img onClick={(e) => this.editHandle(e)} className="aboutedit" src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
                                 : null }
                                 <div className="right_log">
                                     <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`} alt="" />

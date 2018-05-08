@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
         console.log(this.props)
         return (
 
-            <div id="sidebar-wrapper">
+            <div className="sidebar-wrapper">
                 <Link to="/" title="Papris Logo">
 
                     <div className="logo-wrapper">
@@ -19,7 +19,7 @@ import { withRouter } from 'react-router-dom';
                         </div>
                     </div>
                 </Link>
-
+                <hr/>
                 <Link title="Frenquently Asked Questions" id="Frenquently Asked Questions" onClick={() => { this.props.store.searchInput = "" }} to="/faq">
                     <div className={this.props.location.pathname === "/faq" ? "menuitemsActive" :"menuitems" } >
                         <div >
@@ -38,7 +38,7 @@ import { withRouter } from 'react-router-dom';
                             <div className={this.props.location.pathname === "/install" ? "menuitemsActive" :"menuitems" }>
                                 <div >
                                     <div className= {this.props.location.pathname === "/install" ? "menuimageActive" : "menuimage"}>
-                                        <img src={`${process.env.PUBLIC_URL}/images/script icon.png`} alt="script icon" width="64%"/>
+                                        <img src={`${process.env.PUBLIC_URL}/images/script icon.png`} alt="script icon" className ="installimg" />
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@ import { withRouter } from 'react-router-dom';
                             <div className={this.props.location.pathname === "/dashboard" ? "menuitemsActive" :"menuitems" }>
                                 <div>
                                     <div className= {this.props.location.pathname === "/dashboard" ? "menuimageActive" : "menuimage"}>
-                                        <img src={`${process.env.PUBLIC_URL}/images/analytics icon.png`} alt="analytics icon" width="83%"/>
+                                        <img src={`${process.env.PUBLIC_URL}/images/analytics icon.png`} alt="analytics icon" className="analyticsimg"/>
                                     </div>
                                 </div>
                             </div>
