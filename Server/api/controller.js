@@ -6,7 +6,7 @@ var server = require('http').createServer()
 const socketIO = require('socket.io')
 const uuidv1 = require('uuid/v1');
 
-//Models
+//Modelsw
 const Rubrics = mongoose.model('Rubrics');
 const RubricContent = mongoose.model('RubricContent');
 const Users = mongoose.model('Users');

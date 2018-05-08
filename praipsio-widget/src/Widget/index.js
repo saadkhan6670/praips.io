@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Contact from './components/Contact'
 
 
 var helpdivStyles = {
@@ -13,7 +14,9 @@ var helpbtnStyles = {
     padding: "13px 50px",
     borderRadius: "14px",
     border: "1px solid #83C75A",
-    fontSize: "20px"
+    fontSize: "19px",
+
+    
 }
 var widgetContainerStyle = {
     position: "fixed",
@@ -22,23 +25,24 @@ var widgetContainerStyle = {
     backgroundColor: "#ebedefa3",
     width: "20%",
     textAlign: "center",
-    display: "none",
 
 }
 
 
 var widgetHeaderStyle = {
-    height: "30px",
+    height: "28px",
     width: "auto",
     backgroundColor: "#83C75A",
     textAlign: "center",
-    fontSize: "21px",
+    fontSize: "19px",
     color: "white",
-    padding: "10px 10px"
+    padding: "10px 10px",
+    display: "none",
 
 }
 
 var searchDivStyle = {
+    display: "none",
 
     width: "auto",
     padding: "14px"
@@ -70,18 +74,105 @@ var askBtnStyles = {
     borderRadius: "19px",
     border: "1px solid #83C75A",
     fontSize: "14px"
+  
+}
+
+var questionAnswer = {
+    textAlign : "left",
+    padding: "0px 10px",
+    display: "none"
+}
+
+var searchResultStyle = {
+    display: "none",
+    padding: "0px 5px",
+    textAlign: "left"
+}
+
+var askQuestionDiv = {
+    textAlign: "right",
+    display: "none"
+}
+
+var contactDivStyles = {
+    padding: "11px 19px",
+    textAlign: "left",
+    lineHeight: "29px",
+    display: "none",
     
+}
+
+var minimizeStyles = {
+    
+    backgroundImage : `url(${process.env.PUBLIC_URL}/images/minimize-icon.png)`,
+
+ display: "inline-block",
+    backgroundSize: "15px",
+    backgroundRepeat: "no-repeat",
+  
+    height : "18px",
+    width : "22px",
+    float : "right",
+    marginTop: "12px",
+    cursor : "pointer"
 }
 
 class Widget extends Component {
 
-    handleSearch() {
-        console.log("running")
-    }
+    constructor (props) {
+        super(props);
 
+        this.state ={
+            testState: ""
+        }
+    }
     handleHelp() {
+     
         this.refs.widgetHelpBtn.style.display = "none"
         this.refs.widgetContainer.style.display = "block"
+        this.refs.widgetHeaderDiv.style.display = "block"
+        this.refs.helpText.innerHTML = "Help"
+        this.refs.widgetSearchInput.style.display = "block"
+    }
+
+
+    handleSearch() {
+        this.refs.searchResultDiv.style.display = "block"
+        this.refs.askQuestionBtnDiv.style.display = "block"
+        this.refs.widgetContainer.style.width= "25%"
+     
+      
+    }
+
+  
+
+    handleQuestionClick () {
+        
+        this.refs.searchResultDiv.style.display = "none"
+        this.refs.questionAnswerDiv.style.display = "block"
+        
+    }
+
+    handleAskQuestionClick () {
+        this.refs.widgetSearchInput.style.display = "none"
+        
+        this.refs.searchResultDiv.style.display = "none"
+        this.refs.questionAnswerDiv.style.display = "none"
+        this.refs.askQuestionBtnDiv.style.display = "none"
+        this.refs.helpText.innerHTML = "Submit a Feature Request"
+        
+        this.refs.contactDiv.style.display = "block"
+        
+    }
+
+    handleMinimize () {
+        this.refs.widgetSearchInput.style.display = "none"
+        this.refs.widgetHeaderDiv.style.display = "none"        
+        this.refs.searchResultDiv.style.display = "none"
+        this.refs.questionAnswerDiv.style.display = "none"
+        this.refs.askQuestionBtnDiv.style.display = "none"
+        this.refs.widgetContainer.style.width= "20%"
+        this.refs.widgetHelpBtn.style.display = "block"
     }
     render() {
         return (
@@ -109,16 +200,16 @@ class Widget extends Component {
 
                 </div>
                 <div ref="widgetContainer" style={widgetContainerStyle}>
-                    <div style={widgetHeaderStyle}> Help  </div>
+                    <div ref="widgetHeaderDiv" style={widgetHeaderStyle}> <span ref="helpText"></span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span> </div>
 
                     <div ref="widgetSearchInput" style={searchDivStyle}>
                     
                         <input className="widGetInput" type="text" placeholder="How can we help ?" onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearch() : null }} style={searchInputStyle} />
                     </div>
-                    <div ref="searchResultDiv">
-                        <h5 style={{ padding: "0px 176px 0px 0px" }}>Best Asnwers</h5>
+                    <div ref="searchResultDiv" style={searchResultStyle}>
+                        <h5 style={{ padding: "0px 0px 0px 22px" }}>Best Asnwers</h5>
                         <ol >
-                            <li>  <a style={listAnchorStyle} href="#">Sed eleifend ac lorem in hendrerit. Morbi mattis luctus massa </a></li>
+                            <li>  <a onClick={() => this.handleQuestionClick()} style={listAnchorStyle} href="#">Sed eleifend ac lorem in hendrerit. Morbi mattis luctus massa </a></li>
                             <li>  <a style={listAnchorStyle} href="#">Sed eleifend ac lorem in hendrerit. Morbi mattis luctus massa </a> </li>
 
                             <li>  <a style={listAnchorStyle} href="#">Sed eleifend ac lorem in hendrerit. Morbi mattis luctus massa </a> </li>
@@ -126,10 +217,28 @@ class Widget extends Component {
                         </ol>
 
                     </div>
-                    <hr />
-                    <div ref="askQuestionBtnDiv" style={{textAlign: "right"}}>
-                        <button style={askBtnStyles}>Ask a question</button>
+                    <div ref="questionAnswerDiv" style={questionAnswer}>
+                       <h5>Sed eu dictum est, a rhoncus lorem. In a turpis nunc. Fusce rutrum imperdiet eros, a vehicula justo viverra non</h5>
+                 <p style={{fontSize: "13px"}}>Nulla pulvinar erat sed mi laoreet, eget aliquam leo hendrerit. Ut lacinia ultricies augue, vitae congue arcu tempus ut.</p>
+                   <hr/>
+                   <h6 style={{color: "darkgray"}}>Related Articles</h6>
+                   <ul>
+                   <li style={{fontSize: "13px"}}> Donec sed massa vitae est feugiat consequat et at purus. Quisque dapibus, diam in finibus congue</li>
+                   <li style={{fontSize: "13px"}}> Donec sed massa vitae est feugiat consequat et at purus. Quisque dapibus, diam in finibus congue</li>
+                   </ul>
+                 
+                   
                     </div>
+                    
+                    <div ref="contactDiv" style={contactDivStyles}>
+                    <Contact/>
+                    </div>
+                    <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
+                   <hr />
+
+                        <button style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
+                    </div>
+
                 </div>
 
             </div>
