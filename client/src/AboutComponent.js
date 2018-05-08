@@ -56,23 +56,22 @@ import { observer } from 'mobx-react';
     handleChange(event, fieldName) {
  this.props.store[fieldName] = event.target.value
     }
-    render() {
-    console.log("from Abut",this.props.store.User.username)
-        
+    render() {        
         return (
             <div>
                 {this.props.store.redirect ? <div className ="">
                 <div className="AdminProfile-wrapper">
-             <div className="col-md-3 col-sm-3" style={{ backgroundSize : "cover",  backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}${this.props.store.User.profilePath})`, height: "inherit" , borderTopLeftRadius : "inherit", borderBottomLeftRadius : "inherit"}}>
+             <div className="col-md-3 col-sm-3 profileImage" style={{ backgroundSize : "cover",  backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}${this.props.store.User.profilePath})`, height: "inherit" , borderTopLeftRadius : "inherit", borderBottomLeftRadius : "inherit"}}>
 
              </div>
              <div className="col-md-6 col-sm-6" style={{ height: "inherit"   ,  fontSize: "18px"}}>
-                 {this.props.store.User.username} <br/>
-                 <span style={{    fontSize: "13px" ,  color: "lightgray"}}>{this.props.store.User.role}</span>
+             < div className="profileName">{this.props.store.User.username}</div>
+                  <br/>
+                 <span className="profileRole">{this.props.store.User.role}</span>
                  </div> 
-               <div className="col-md-3 col-sm-3" style={{  cursor: "pointer" ,  borderLeft: "1px solid lightgrey", height: "inherit" , borderTopRightRadius : "inherit", borderBottomRightRadius : "inherit", backgroundSize : "35px 31px",backgroundPosition: "center",  backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}/images/camera.png)`}}></div> 
+               <div className="col-md-3 col-sm-3" style={{  cursor: "pointer" ,  borderLeft: "1px solid lightgrey", height: "inherit" , borderTopRightRadius : "inherit", borderBottomRightRadius : "inherit",backgroundPosition: "center",  backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}/images/camera.png)`}}></div> 
                 </div>
-                <button style={{backgroundColor: "#83C75A" , color: "white"}} onClick={() => this.handleLogOut()} className="btn"><span>LOGOUT</span></button>
+                <button  onClick={() => this.handleLogOut()} className="btn logoutbtn"><span>LOGOUT</span></button>
                 </div> : null }
            
                 <div className={this.props.store.redirect ? "AdminRight-wrapper" : "right-wrapper"} id="intro">

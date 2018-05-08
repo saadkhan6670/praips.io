@@ -34,7 +34,10 @@ import {Redirect} from 'react-router-dom'
 
         case 'ResearchChanged': 
         this.props.store.getAllResearches();
+        break; 
         
+        default:
+        return
       }
     })
 

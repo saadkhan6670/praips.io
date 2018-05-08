@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import axios from 'axios'
-import { Redirect } from 'react-router-dom';
-
 
 @observer class AdminLogin extends Component {
 
@@ -89,42 +87,42 @@ import { Redirect } from 'react-router-dom';
     render() {
         return (
             <div className="content-wrapper" id="intro">
-                <div className="container-  ">
+                <div className="container-fluid" style={{ textAlign: "center" , padding: "171px 153px 0 167px"}}>
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="subText">
-                                <p>Are You an admin of Lorem Ipsum?</p>
+                                <p>Are You an administrator of Lorem Ipsum?</p>
 
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-12 col-sm-12">
-                                <div className="head_text">
+                                <div className="">
                                     <h1>Log In</h1>
                                 </div>
 
                             </div>
                         </div>
 
-                        <div className="row search_row">
+                        <div className="row">
                             <div className="form-group has-success has-feedback">
 
                                 <div className="col-md-12">
-                                    <input id="email" type="text" className="form-control" placeholder="Email Address" />
+                                    <input id="email" type="text" className="" placeholder="Email Address" />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="row search_row">
+                        <div className="row">
                             <div className="form-group has-success has-feedback">
 
                                 <div className="col-md-12">
-                                    <input id="password" type="text" className="form-control" placeholder="Password" />
+                                    <input id="password" type="text" className="" placeholder="Password" />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="row search_row">
+                        <div className="row">
                             <div className="form-group has-success has-feedback">
 
                                 <div className="col-md-12">

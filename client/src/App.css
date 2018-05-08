@@ -6,10 +6,11 @@ body {
     overflow-x: hidden;
     margin: 0px;
     padding: 0px;
-    background-color: #252525!important;
+    background-color: #252525 !important;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     height: 100%;
 }
+
 h2 {
     font-weight: bold;
 }
@@ -17,9 +18,10 @@ h2 {
 td {
     border: none;
 }
+
 #wrapper {
     padding-top: 38px;
-    padding-left: 12%;
+    padding-left: 11%;
     padding-bottom: 0px;
     background: #252525;
 }
@@ -45,21 +47,28 @@ td {
 #sidebar-wrapper .logo-wrapper {
     float: left;
     width: 100%;
-    height: 94px;
+    height: 86px;
     text-align: center;
 }
 
 #sidebar-wrapper .logo-wrapper .logo {
     margin-top: 27px;
     margin-bottom: 30px;
+    
 }
 
-/* #sidebar-wrapper .logo-wrapper .logo img {
-    width: 29px;
-    height: 34px;
-} */
-
 #sidebar-wrapper .menuitems {
+    padding-top: 19%;
+    float: left;
+    width: 100%;
+    text-align: center;
+    height: 95px;
+    /* background-color: #76CC61; */
+        
+}
+
+#sidebar-wrapper .menuitemsActive {
+    padding-top: 19%;
     float: left;
     width: 100%;
     text-align: center;
@@ -68,18 +77,21 @@ td {
 }
 
 #sidebar-wrapper .menuitems .menuimage {
-    margin-top: 19px;
+    /* margin-top: 19px; */
+    -webkit-filter: invert(30%);
+    filter: invert(30%);
 }
 
-#sidebar-wrapper .menuitems .menutext {
-    margin-top: 8px;
-    color: #CCCCCC;
-    font-family: sans-serif;
-    font-weight: lighter;
+#sidebar-wrapper .menuitems .menuimageActive {
+    /* margin-top: 19px; */
+}
+
+#sidebar-wrapper .menuitemsActive:hover {
+    background: #63a952;
 }
 
 #sidebar-wrapper .menuitems:hover {
-    background: #63a952;
+    background: #f2f2f2;
 }
 
 .content-wrapper {
@@ -106,7 +118,6 @@ td {
 .content-wrapper .subText {
     margin-left: 16px;
     margin-top: 10px;
-
 }
 
 .content-wrapper .subText p {
@@ -170,7 +181,6 @@ td {
 }
 
 .right-wrapper .about_text h4 {
-     
     font-weight: 900;
     font-stretch: expanded;
 }
@@ -210,7 +220,6 @@ td {
 
 .right-wrapper .right_btn button:hover {
     background: #63a952;
-
 }
 
 .right-wrapper .right_btn button {
@@ -243,7 +252,7 @@ td {
 
 .content-wrapper .right_btn button:hover {
     background-color: #7fc857;
-    color: white!important;
+    color: white !important;
 }
 
 .content-wrapper .right_btn button a:hover {
@@ -254,7 +263,8 @@ td {
     margin-top: 15px;
 }
 
-.input-group input , button {
+.input-group input,
+button {
     height: 51px;
 }
 
@@ -289,7 +299,8 @@ td {
     position: absolute;
     right: 11%;
     /* left: 55%; */
-    font-size: 107%;}
+    font-size: 107%;
+}
 
 .footer .footer_text .text p {
     /* text-align: right; */
@@ -301,101 +312,99 @@ td {
     color: white;
 }
 
-.searchInput{
+.searchInput {
     font-size: 124%;
-     background-color: "#fdfdfd";
+    background-color: "#fdfdfd";
 }
 
-.searchBtn{
+.searchBtn {
     background: #fdfdfd;
     color: #ccc;
     border-left: none;
     border-color: #ccc;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.searchBtn:hover{
+
+.searchBtn:hover {
     background: white;
     color: #ccc;
-    border-color : #ccc
+    border-color: #ccc
 }
-
 
 /* end content wrapper */
 
 @media (max-width: 1290px) {
+ 
     .content-wrapper .right_btn button {
         width: 230px;
     }
 }
 
 @media (max-width: 1550px) {
-    .RubricStyles{
+
+    .RubricStyles {
         height: 300px !important;
     }
-   #sidebar-wrapper{
-    height: 700px;
-       
-   }
+    #sidebar-wrapper {
+        height: 700px;
+    }
     .content-wrapper {
         width: 45.59%;
         height: 700px;
     }
-    .content-wrapper .head_text{
+    .content-wrapper .head_text {
         margin-top: 24px;
         margin-left: 8px;
     }
-    .content-wrapper .head_text h1{
+    .content-wrapper .head_text h1 {
         font-size: 26px;
-    font-weight: 700;
+        font-weight: 700;
     }
-    .content-wrapper .subText{
+    .content-wrapper .subText {
         margin-left: 7px;
         margin-top: 2px;
     }
-    .content-wrapper .subText p{
+    .content-wrapper .subText p {
         font-size: 15px;
     }
-    .content-wrapper .search_row{
+    .content-wrapper .search_row {
         padding: 0px 44px 0 23px;
     }
-    .input-group{
+    .input-group {
         margin-top: 9px;
     }
-    .searchInput{
+    .searchInput {
         width: 104.5% !important;
         height: 47px !important;
         margin-top: 0 !important;
         font-size: 15px;
         background-color: rgb(253, 253, 253);
     }
-    .searchBtn{
+    .searchBtn {
         font-size: 17px;
         height: 47px;
         padding: 4px 22px 0 0;
-
     }
-    .content-wrapper .right_btn{
+    .content-wrapper .right_btn {
         text-align: center;
         margin-top: 48px;
     }
-    .content-wrapper .right_btn button{
+    .content-wrapper .right_btn button {
         width: 201px;
-    font-size: 14px;
-    margin-right: 0;
-    margin-left: 0;
-    height: 44px;
-    border-radius: 15px;
+        font-size: 14px;
+        margin-right: 0;
+        margin-left: 0;
+        height: 44px;
+        border-radius: 15px;
     }
-
-    .right-wrapper{
+    .right-wrapper {
         width: 25.6%;
-        height: 700px;        
+        height: 700px;
     }
-
-    .footer .footer_text .text{
-        margin-top: 10px;
+    .footer .footer_text .text {
+        margin-top: 7px;
         position: absolute;
         right: 17%;
         font-size: 13px;
@@ -403,48 +412,48 @@ td {
     #wrapper {
         padding-top: 3px;
     }
-    .right-wrapper .right_log{
+    .right-wrapper .right_log {
         margin-top: 25px;
     }
-    .right-wrapper .right_text{
+    .right-wrapper .right_text {
         margin-top: 11px;
     }
-    .right-wrapper .right_text h4{
+    .right-wrapper .right_text h4 {
         font-size: 18px;
     }
-    .right-wrapper .right_text p{
+    .right-wrapper .right_text p {
         font-size: 12px;
     }
-    .right-wrapper .right_btn{
+    .right-wrapper .right_btn {
         margin-top: 43px;
     }
-    .right-wrapper .right_btn button{
+    .right-wrapper .right_btn button {
         font-size: 16px;
         height: 41px;
     }
-    .right-wrapper .content_text .desc h4{
+    .right-wrapper .content_text .desc h4 {
         font-size: 17px;
-    letter-spacing: 0px;
+        letter-spacing: 0px;
     }
-    .right-wrapper .content_text .desc p{
+    .right-wrapper .content_text .desc p {
         line-height: 25px;
-    margin-top: 9px;
+        margin-top: 9px;
     }
-    .right-wrapper .content_text{
+    .right-wrapper .content_text {
         margin-top: 60px;
-    margin-left: 13px;
+        margin-left: 13px;
     }
-    .hr_about{
+    .hr_about {
         width: 137px;
     }
-    .right-wrapper .about_text{
+    .right-wrapper .about_text {
         margin-top: 30px;
     }
-    .RubricName{
+    .RubricName {
         font-size: 19px !important;
-        padding: 41px 0 0px 26px !important ;
+        padding: 41px 0 0px 26px !important;
     }
-    .RubricContent{
+    .RubricContent {
         padding: 7px 25px 0px 28px !important;
         height: 188px !important;
     }
@@ -452,60 +461,135 @@ td {
         margin-top: 12px;
         font-size: 13px !important;
     }
-    .RubricContent p{
+    .RubricContent p {
         font-size: 13px !important;
         padding: 1.5% 0px 0px 2.5% !important;
     }
-
-.contact h2{
-    padding: 9px 0px 0px 7px !important;
-    font-size: 27px !important;
-}
-.contact .label1{ 
-    font-size: 16px !important;
-    margin: 48px 0px 12px 8px !important;
-}
-
-.contact .label2{ 
-    font-size: 17px !important ;
-    margin-left: 7px !important;
-}
-.contact .label3{ 
-    font-size: 17px !important ;
-    margin-left: 10px !important;
-    margin-top: 0 !important;
-}
-.contact .textarea{ 
-    height: 214px !important;
-}
-.contact .form-control{
-    width: 96%;
-    margin: 0 0px 0px 10px;
-    border-top-left-radius: 2px !important;
-    border-bottom-left-radius: 2px !important;
-    border-top-right-radius: 2px !important;
-    border-bottom-right-radius: 2px !important;
-}
-.submit_btn{
-    margin-top: 43px !important; 
-}
-input[type=submit]{
-font-size: 16px;
-font-weight: bold;
-}
-input[type="button"]{
-    font-size: 16px;
-font-weight: bold;
-}
-.contactbtn
-{
-    margin-top: 37% !important;
-     font-size: 14px !important;
-}
+    .contact h2 {
+        padding: 9px 0px 0px 7px !important;
+        font-size: 27px !important;
+    }
+    .contact .label1 {
+        font-size: 16px !important;
+        margin: 48px 0px 12px 8px !important;
+    }
+    .contact .label2 {
+        font-size: 17px !important;
+        margin-left: 7px !important;
+    }
+    .contact .label3 {
+        font-size: 17px !important;
+        margin-left: 10px !important;
+        margin-top: 0 !important;
+    }
+    .contact .textarea {
+        height: 214px !important;
+    }
+    .contact .form-control {
+        width: 96%;
+        margin: 0 0px 0px 10px;
+        border-top-left-radius: 2px !important;
+        border-bottom-left-radius: 2px !important;
+        border-top-right-radius: 2px !important;
+        border-bottom-right-radius: 2px !important;
+    }
+    .submit_btn {
+        margin-top: 43px !important;
+    }
+    input[type=submit] {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    input[type="button"] {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .contactbtn {
+        margin-top: 37% !important;
+        font-size: 14px !important;
+    }
+    .AdminRight-wrapper {
+        height: 665px  !important;
+        margin-top: 1.5% !important;
+        width: 25.6% !important;
+        margin-right: 1% !important;
+    }
+    .AdminRight-wrapper .about_text {
+        margin-top: 22px !important;
+    }
+    .AdminRight-wrapper .right_log {
+        margin-top: 24px !important;
+    }
+    .AdminRight-wrapper .right_text {
+        margin-top: 15px !important;
+    }
+    .AdminRight-wrapper .right_btn button {
+        width: 54% !important;
+        height: 46px !important;
+        font-size: 13px !important;
+    }
+    .AdminRight-wrapper .right_btn {
+        margin-top: 39px !important;
+    }
+    .AdminRight-wrapper .content_text {
+        margin-top: 58px !important;
+        margin-left: 13px !important;
+    }
+    .AdminRight-wrapper .content_text .desc h4 {
+        font-size: 17px !important;
+    }
+    .AdminProfile-wrapper{
+        height: 43px !important ;
+        margin-top: 1.4% !important;
+        width: 15.66% !important;
+    }
     
+.AdminProfile-wrapper div.profileImage{
+    width: 21%;
+}
+.AdminProfile-wrapper div.profileName {
+    margin-top: 4% !important;
+    margin-left: 6% !important;
+}
+.AdminProfile-wrapper span.profileRole {
+    font-size: 10px !important;
+    color: lightgray;
+    position: absolute !important;
+    bottom: 11% !important;
+    left: 6% !important;
+}
+button.logoutbtn{
+    background-color: rgb(131, 199, 90);
+    color: white;
+    width: 9.1% !important;
+   
+    margin-left: 0.8% !important ;
+   
+    margin-top: 1.4% !important;
+    height: 42px !important;
+}
+
+.Success{
+    position: absolute;
+    bottom: 36%;
+    left: 131%;
+}
+.Successpara{
+    position: absolute;
+    top: 89%;
+    left: 54%;
+    font-size: 16px;
+    width: 182%;
+}
+.Successbtn{
+    position: absolute;
+    top: 128%;
+    left: 113%;
+}
 }
 
 @media( max-width: 768px) {
+   
     #wrapper {
         margin-right: 0px;
         padding-left: 15px;
@@ -526,16 +610,15 @@ font-weight: bold;
     }
     .right-wrapper {
         display: none;
-        
         width: 100%;
         margin-top: 20px;
     }
-    .AdminRight-wrapper{
+    .AdminRight-wrapper {
         width: 100%;
         margin-top: 20px;
     }
     .search_row {
-        padding: 0 30px 0 30px!important;
+        padding: 0 30px 0 30px !important;
     }
     .content-wrapper .right_btn {
         text-align: center;
@@ -546,7 +629,8 @@ font-weight: bold;
     }
 }
 
-@media only screen and (max-width: 1200px) and (min-width: 769px) {
+@media (max-width: 1200px) and (min-width: 769px) {
+   
     .content-wrapper .right_btn {
         text-align: center;
         margin-top: 15px;
@@ -554,19 +638,8 @@ font-weight: bold;
     }
 }
 
-.form-control {
-    height: 269px;
-    width: 96%;
-    margin: 3px 0px 0px 16px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-top-right-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
-    
-}
-
-.left { 
-background-color: #7fc857;
+.left {
+    background-color: #7fc857;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -575,14 +648,14 @@ background-color: #7fc857;
     font-size: 25px;
     color: #fff;
     text-align: center;
-    text-shadow: 0 1px 2px rgba(0,0,0,.6);
-    background-color: rgba(0,0,0,0);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0);
     filter: alpha(opacity=50);
     opacity: .5;
 }
 
-.right { 
-background-color: #7fc857;
+.right {
+    background-color: #7fc857;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -591,15 +664,14 @@ background-color: #7fc857;
     font-size: 25px;
     color: #fff;
     text-align: center;
-    text-shadow: 0 1px 2px rgba(0,0,0,.6);
-    background-color: rgba(0,0,0,0);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0);
     filter: alpha(opacity=50);
     opacity: .5;
 }
 
 .contentToggle {
-     float: right;
-   
+    float: right;
 }
 
 .sliderBtn {
@@ -613,13 +685,13 @@ background-color: #7fc857;
     width: 165px;
     height: 47px;
 }
+
 .sliderBtn:hover {
-    background-color: #83C75A ; 
+    background-color: #83C75A;
     color: white;
-    
 }
 
-  .AdminIcons{
+.AdminIcons {
     display: none
 }
 
@@ -631,29 +703,24 @@ background-color: #7fc857;
 }
 
 /* Admin About container Css */
-.AdminAboutContainer{
+
+.AdminAboutContainer {
     top: 8px;
     position: relative;
     display: none;
 }
-/* #aboutData {
-    display: none;
-} */
 
 #aboutForm {
     display: none;
 }
 
-.AdminRight-wrapper{
+.AdminRight-wrapper {
     background-color: white;
     height: 741px;
     float: left;
     border-radius: 8px;
     width: 24.26%;
     display: inline-block;
-    /*position: relative;
-    top: 40px;
-    right: 14.1%;*/
 }
 
 .AdminRight-wrapper .about_text {
@@ -662,7 +729,8 @@ background-color: #7fc857;
 }
 
 .AdminRight-wrapper .about_text h4 {
-    font-size: 16px;    font-weight: 700;
+    font-size: 16px;
+    font-weight: 700;
     font-stretch: expanded;
 }
 
@@ -700,7 +768,6 @@ background-color: #7fc857;
 
 .AdminRight-wrapper .right_btn button:hover {
     background: #63a952;
-
 }
 
 .AdminRight-wrapper .right_btn button {
@@ -736,159 +803,139 @@ background-color: #7fc857;
     width: 17.66%;
     display: inline-block;
 }
-.logout_btn{
+
+.logout_btn {
     background-color: #83C75A;
     color: white;
     font-weight: bold;
     border-radius: 10px;
-    
 }
 
 .logout_btn:hover {
     background: #63a952;
 }
 
-
 /* Contact CSS */
 
 .submit_btn input[type=submit] {
     background-color: #83C75A;
-        padding: 9px 53px;
- 
-     color: white;
-     border: 1px #83C75A solid;
-     border-radius: 9px;
-     cursor: pointer;
-     
- 
-     }
-     .submit_btn  input[type=submit]:hover {
-    background-color:  white;
-        padding: 9px 53px;
- 
-     color: #83C75A;
-     border: 1px #83C75A solid ;
-     border-radius: 9px;
-     cursor: pointer;
-    
- 
-     }
-     .submit_btn  input[type="button"] {
+    padding: 9px 53px;
+    color: white;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.submit_btn input[type=submit]:hover {
+    background-color: white;
+    padding: 9px 53px;
+    color: #83C75A;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.submit_btn input[type="button"] {
     background-color: #ccc;
-          padding: 9px 53px;
-          margin-right: 29px;
-     color: white;
-     border: none;
-     border-radius: 9px;
-     cursor: pointer;
-   
-     
- 
-     }
-     .submit_btn {
-         text-align: center;
-     margin-top: 66px;
-     word-spacing: 1em;
- 
-    }
+    padding: 9px 53px;
+    margin-right: 29px;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
 
-    .about_btns {
-        text-align: center;
-        margin-top: 40px;
-        word-spacing: 1em;
-    }
+.submit_btn {
+    text-align: center;
+    margin-top: 66px;
+    word-spacing: 1em;
+}
 
-    .about_btns input[type=submit] {
-        background-color: #83C75A;
-            padding: 9px 45px;
-     
-         color: white;
-         border: none;
-         border-radius: 9px;
-         cursor: pointer;
-         
-     
-         }
+.about_btns {
+    text-align: center;
+    margin-top: 40px;
+    word-spacing: 1em;
+}
 
-    .about_btns  input[type=submit]:hover {
-        background-color:  white;
-        padding: 9px 45px;
-     
-         color: #83C75A;
-         border: 1px #83C75A solid ;
-         border-radius: 9px;
-         cursor: pointer;
-        
-     
-         }
-         .about_btns  input[type="button"] {
-        background-color: #ccc;
-     
-         color: white;
-         border: none;
-         border-radius: 9px;
-         cursor: pointer;
-       
-         
-     
-         }
+.about_btns input[type=submit] {
+    background-color: #83C75A;
+    padding: 9px 45px;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
 
-    .reqMsg {
-        color: red;
-        font-size: 12px;
-        /* display: block; */
-        text-align: center;
-      }
+.about_btns input[type=submit]:hover {
+    background-color: white;
+    padding: 9px 45px;
+    color: #83C75A;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+}
 
-      #request-process {
-        text-align: center;
-          display: none;
-      }
+.about_btns input[type="button"] {
+    background-color: #ccc;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
 
-      #contactAlert {
-          display: none;
-        text-align: center;
-          
-      }
+.reqMsg {
+    color: red;
+    font-size: 12px;
+    /* display: block; */
+    text-align: center;
+}
 
+#request-process {
+    text-align: center;
+    display: none;
+}
 
-      #contactForm { 
-        display: block;
-      }
-      #spacingDiv    {
-        display: none;
-      }
+#contactAlert {
+    display: none;
+    text-align: center;
+}
 
-  
-      /*
+#contactForm {
+    display: block;
+}
+
+#spacingDiv {
+    display: none;
+}
+
+/*
  * react-circular-progressbar styles
  *
  * All of the styles in this file are optional and configurable!
  */
 
 .CircularProgressbar {
- 
-  width: 10%;
+    width: 10%;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-  stroke: #83C75A;
-  transition: stroke-dashoffset 0.5s ease 0s;
+    stroke: #83C75A;
+    transition: stroke-dashoffset 0.5s ease 0s;
 }
 
 .CircularProgressbar .CircularProgressbar-trail {
-  stroke: #d6d6d6;
+    stroke: #d6d6d6;
 }
 
 .CircularProgressbar .CircularProgressbar-text {
-  fill: #2e2d2f;
-  font-size: 20px;
-  dominant-baseline: middle;
-  text-anchor: middle;
+    fill: #2e2d2f;
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
 }
 
 .CircularProgressbar .CircularProgressbar-background {
-  fill: #d6d6d6;
+    fill: #d6d6d6;
 }
 
 /*
@@ -900,23 +947,24 @@ background-color: #7fc857;
  *     percentage={50}
  *   />
  */
+
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
-  fill: #3e98c7;
+    fill: #3e98c7;
 }
 
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
-  fill: #fff;
+    fill: #fff;
 }
 
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
-  stroke: #fff;
+    stroke: #fff;
 }
 
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
-  stroke: transparent;
+    stroke: transparent;
 }
 
-.FaqInfoHr{
+.FaqInfoHr {
     margin-top: 12px;
     margin-bottom: 12px;
     margin-right: 97px;
@@ -925,92 +973,97 @@ background-color: #7fc857;
     border-top: 1px solid #eee;
 }
 
-.Plus{
+.Plus {
     cursor: pointer;
     position: absolute;
 }
 
-.Minus{
+.Minus {
     cursor: pointer;
     position: absolute;
-    
 }
 
 /* Scroll bar css */
-.scrollbar
-{
+
+.scrollbar {
     height: 300px;
     overflow-y: scroll;
 }
 
-#style-3::-webkit-scrollbar
-{
-	width: 6px;
+#style-3::-webkit-scrollbar {
+    width: 6px;
 }
 
-#style-3::-webkit-scrollbar-thumb
-{
-	background-color: #7fc857;
+#style-3::-webkit-scrollbar-thumb {
+    background-color: #7fc857;
 }
 
-.RubricName{
+.RubricName {
     color: grey;
-     font-size: 138%; 
-     padding: 61px 0 0px 35px;
+    font-size: 138%;
+    padding: 61px 0 0px 35px;
 }
-.RubricContent{
+
+.RubricContent {
     padding: 18px 25px 0px 28px;
-     height: 250px;
-      margin-right: 0px;
+    height: 250px;
+    margin-right: 0px;
 }
-.RubricContent h5{
-     font-size: 122%;
+
+.RubricContent h5 {
+    font-size: 122%;
 }
-.RubricContent p{
+
+.RubricContent p {
     display: none;
-    font-size: 116%; 
-    line-height: 164%; 
+    font-size: 116%;
+    line-height: 164%;
     padding: 2.5% 0 0 2.5%;
 }
-.contact h2{
+
+.contact h2 {
     padding: 16px 0px 0px 15px;
     font-size: 224%;
 }
 
-.contact .label1{
+.contact .label1 {
     font-size: 134%;
     margin: 65px 0px 12px 16px;
 }
 
-.contact .label2{
-    font-size:134%;
-    margin-left:16px;
+.contact .label2 {
+    font-size: 134%;
+    margin-left: 16px;
 }
 
-.contact .label3{
-    font-size:134%;
-margin-left:16px;
-margin-top:15px;
+.contact .label3 {
+    font-size: 134%;
+    margin-left: 16px;
+    margin-top: 15px;
 }
-.contact .textarea{
+
+.contact .textarea {
     height: 269px;
     background-color: #fdfdfd;
 }
 
-.backToFaq:hover{
+.backToFaq:hover {
     background-color: #a9a8a8;
     color: white;
 }
-.leftarrow{
+
+.leftarrow {
     cursor: pointer
 }
-.contactbtn{
+
+.contactbtn {
     height: 10px;
-     text-align: center;
-      margin-top: 12%;
-       font-size:119% ;
+    text-align: center;
+    margin-top: 12%;
+    font-size: 119%;
 }
 
-
-
-
+button.logoutbtn{
+    background-color: rgb(131, 199, 90);
+    color: white;
+}
