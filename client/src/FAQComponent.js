@@ -226,12 +226,15 @@ var { sortBy } = require('lodash')
                             {
                                 this.props.store.Rubrics.map((data, key) => {
                                     return (
-                                        <div key={key} className="col-md-6">
+                                        <div key={key} className="col-md-6 col-sm-6 col-xs-6 ">
                                             <div
 
                                                 key={key}>
                                                 <div
-                                                    onMouseOver={(e) => { this.mouseHover(e, key) }}
+
+                                                    onMouseOverCapture={(e) => { this.mouseHover(e, key) }}
+
+                                                    // onMouseOver={(e) => { this.mouseHover(e, key) }}
                                                     onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                                     className="right_btn">
                                                     <div className="AdminIcons ">

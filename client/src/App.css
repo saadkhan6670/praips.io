@@ -44,18 +44,6 @@ td {
     background-color: #FFFFFF;
 }
 
-.sidebar-wrapper .logo-wrapper {
-    float: left;
-    width: 100%;
-    height: 86px;
-    text-align: center;
-}
-
-.sidebar-wrapper .logo-wrapper .logo {
-    margin-top: 27px;
-    margin-bottom: 30px; 
-}
-
 .sidebar-wrapper .menuitems {
     padding-top: 19%;
     float: left;
@@ -63,7 +51,6 @@ td {
     text-align: center;
     height: 108px;
     /* background-color: #76CC61; */
-        
 }
 
 .sidebar-wrapper .menuitemsActive {
@@ -76,9 +63,13 @@ td {
 }
 
 .sidebar-wrapper .menuitems .menuimage {
-    /* margin-top: 19px; */
+    margin-top: 8px;
     -webkit-filter: invert(30%);
     filter: invert(30%);
+}
+
+.sidebar-wrapper .menuitemsActive .menuimageActive {
+    margin-top: 8px;
 }
 
 .sidebar-wrapper .menuitemsActive:hover {
@@ -88,6 +79,7 @@ td {
 .sidebar-wrapper .menuitems:hover {
     background: #f2f2f2;
 }
+
 .sidebar-wrapper .logo-wrapper {
     float: left;
     width: 100%;
@@ -97,15 +89,71 @@ td {
 
 .sidebar-wrapper .logo-wrapper .logo {
     margin-top: 36px;
+    margin-bottom: 30px;
 }
 
-/* .analyticsimg{
+.analyticsimg {
     width: 83%
 }
 
-.installimg{
+.installimg {
     width: 64%;
-} */
+}
+
+/* Mobile styles */
+
+.mobile-sidebar-wrapper {
+    transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+    /* Safari 3.1 to 6.0 */
+    display: none;
+}
+
+.mobile-sidebar-wrapper .menuitems {
+    /* padding-top: 4%;
+    float: left; */
+    width: 100%;
+    text-align: center;
+    /* height: 108px; */
+    /* background-color: #76CC61; */
+}
+
+.mobile-sidebar-wrapper .menuitemsActive {
+    /* padding-top: 4%;
+    float: left; */
+    width: 100%;
+    text-align: center;
+    /* height: 108px; */
+    /* background-color: #76CC61; */
+    background-color: #76CC61;
+}
+
+.mobile-sidebar-wrapper .menuitems .menuimage {
+    /* margin-top: 19px; */
+    -webkit-filter: invert(30%);
+    filter: invert(30%);
+}
+
+.mobile-sidebar-wrapper .menuitemsActive:hover {
+    background: #63a952;
+}
+
+.mobile-sidebar-wrapper .menuitems:hover {
+    background: #f2f2f2;
+}
+
+.mobile-sidebar-wrapper .logo-wrapper {
+    float: left;
+    width: 100%;
+    height: 104px;
+    text-align: center;
+}
+
+.mobile-sidebar-wrapper .logo-wrapper .logo {
+    margin-top: 36px;
+    margin-bottom: 30px;
+}
+
 .content-wrapper {
     background-color: white;
     height: 888px;
@@ -177,7 +225,7 @@ td {
     line-height: 50px;
 }
 
-button.logoutbtn{
+button.logoutbtn {
     background-color: rgb(131, 199, 90);
     color: white;
     width: 8.8% !important;
@@ -301,11 +349,13 @@ button {
     font-weight: bold;
     color: #A1D180;
 }
-.aboutedit{
+
+.aboutedit {
     cursor: pointer;
-    position : absolute; 
+    position: absolute;
     right: 22%;
 }
+
 .hr_about {
     margin-top: 0px;
     border: 2px solid #87BB4C;
@@ -323,7 +373,7 @@ button {
     /* margin-left: 3px; */
     /* float: right; */
     position: absolute;
-    right: 11%;
+    right: 149px;
     /* left: 55%; */
     font-size: 107%;
 }
@@ -357,516 +407,6 @@ button {
     background: white;
     color: #ccc;
     border-color: #ccc
-}
-
-/* end content wrapper */
-
-
-@media (max-width: 1650px) {
-    .sidebar-wrapper .logo-wrapper {
-        float: left;
-        width: 100%;
-        height: 86px;
-        text-align: center;
-    }
-    .sidebar-wrapper .menuitems {
-        padding-top: 19%;
-        float: left;
-        width: 100%;
-        text-align: center;
-        height: 95px;
-        /* background-color: #76CC61; */
-            
-    }
-    
-    .sidebar-wrapper .menuitemsActive {
-        padding-top: 19%;
-        float: left;
-        width: 100%;
-        text-align: center;
-        height: 95px;
-        background-color: #76CC61;
-    }
-    
-    .sidebar-wrapper .logo-wrapper .logo {
-        margin-top: 27px;
-        margin-bottom: 30px; 
-    }
-    .RubricStyles {
-        height: 300px !important;
-    }
-    .sidebar-wrapper {
-        height: 700px;
-    }
-    .content-wrapper {
-        width: 45.59%;
-        height: 700px;
-    }
-    .content-wrapper .head_text {
-        margin-top: 24px;
-        margin-left: 8px;
-    }
-    .content-wrapper .head_text h1 {
-        font-size: 26px;
-        font-weight: 700;
-    }
-    .content-wrapper .subText {
-        margin-left: 7px;
-        margin-top: 2px;
-    }
-    .content-wrapper .subText p {
-        font-size: 15px;
-    }
-    .content-wrapper .search_row {
-        padding: 0px 44px 0 23px;
-    }
-    .input-group {
-        margin-top: 9px;
-    }
-    .searchInput {
-        width: 104.5% !important;
-        height: 47px !important;
-        margin-top: 0 !important;
-        font-size: 15px;
-        background-color: rgb(253, 253, 253);
-    }
-    .searchBtn {
-        font-size: 17px;
-        height: 47px;
-        padding: 4px 22px 0 0;
-    }
-    .content-wrapper .right_btn {
-        text-align: center;
-        margin-top: 48px;
-    }
-    .content-wrapper .right_btn button {
-        width: 87%;
-        font-size: 14px;
-        margin-right: 0;
-        margin-left: 0;
-        height: 44px;
-        border-radius: 15px;
-    }
-    .right-wrapper {
-        width: 25.6%;
-        height: 700px;
-    }
-    .footer .footer_text .text {
-        margin-top: 7px;
-        position: absolute;
-        right: 17%;
-        font-size: 13px;
-    }
-    #wrapper {
-        padding-top: 3px;
-    }
-    .right-wrapper .right_log {
-        margin-top: 25px;
-    }
-    .right-wrapper .right_text {
-        margin-top: 11px;
-    }
-    .right-wrapper .right_text h4 {
-        font-size: 18px;
-    }
-    .right-wrapper .right_text p {
-        font-size: 12px;
-    }
-    .right-wrapper .right_btn {
-        margin-top: 43px;
-    }
-    .right-wrapper .right_btn button {
-        font-size: 16px;
-        height: 41px;
-    }
-    .right-wrapper .content_text .desc h4 {
-        font-size: 17px;
-        letter-spacing: 0px;
-    }
-    .right-wrapper .content_text .desc p {
-        line-height: 25px;
-        margin-top: 9px;
-    }
-    .right-wrapper .content_text {
-        margin-top: 60px;
-        margin-left: 13px;
-    }
-    .hr_about {
-        width: 137px;
-    }
-    .right-wrapper .about_text {
-        margin-top: 30px;
-    }
-    .RubricName {
-        font-size: 19px !important;
-        padding: 41px 0 0px 26px !important;
-    }
-    .RubricContent {
-        padding: 7px 25px 0px 28px !important;
-        height: 188px !important;
-    }
-    .RubricContent h5 {
-        margin-top: 12px;
-        font-size: 13px !important;
-    }
-    .RubricContent p {
-        font-size: 13px !important;
-        padding: 1.5% 0px 0px 2.5% !important;
-    }
-    .contact h2 {
-        padding: 9px 0px 0px 7px !important;
-        font-size: 27px !important;
-    }
-    .contact .label1 {
-        font-size: 16px !important;
-        margin: 48px 0px 12px 8px !important;
-    }
-    .contact .label2 {
-        font-size: 17px !important;
-        margin-left: 7px !important;
-    }
-    .contact .label3 {
-        font-size: 17px !important;
-        margin-left: 10px !important;
-        margin-top: 0 !important;
-    }
-    .contact .textarea {
-        height: 214px !important;
-    }
-    .contact .form-control {
-        width: 96%;
-        margin: 0 0px 0px 10px;
-        border-top-left-radius: 2px !important;
-        border-bottom-left-radius: 2px !important;
-        border-top-right-radius: 2px !important;
-        border-bottom-right-radius: 2px !important;
-    }
-    .submit_btn {
-        margin-top: 43px !important;
-    }
-    input[type=submit] {
-        font-size: 16px;
-        font-weight: bold;
-    }
-    input[type="button"] {
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .contactbtn {
-        margin-top: 37% !important;
-        font-size: 14px !important;
-    }
-    .AdminRight-wrapper {
-        height: 635px  !important;
-        margin-top: 1.5% !important;
-        width: 25.6% !important;
-        margin-right: 1% !important;
-    }
-    .AdminRight-wrapper .about_text {
-        margin-top: 22px !important;
-    }
-    .AdminRight-wrapper .right_log {
-        margin-top: 24px !important;
-    }
-    .AdminRight-wrapper .right_text {
-        margin-top: 15px !important;
-    }
-    .AdminRight-wrapper .right_btn button {
-        width: 54% !important;
-        height: 46px !important;
-        font-size: 13px !important;
-    }
-    .AdminRight-wrapper .right_btn {
-        margin-top: 39px !important;
-    }
-    .AdminRight-wrapper .content_text {
-        margin-top: 58px !important;
-        margin-left: 13px !important;
-    }
-    .AdminRight-wrapper .content_text .desc h4 {
-        font-size: 17px !important;
-    }
-    .AdminProfile-wrapper{
-        height: 43px !important ;
-        margin-top: 1.4% !important;
-        width: 15.66% !important;
-    }
-    
-.AdminProfile-wrapper div.profileImage{
-    width: 21%;
-}
-.AdminProfile-wrapper div.profileName {
-    margin-top: 4% !important;
-    margin-left: 6% !important;
-}
-.AdminProfile-wrapper span.profileRole {
-    font-size: 10px !important;
-    color: lightgray;
-    position: absolute !important;
-    bottom: 11% !important;
-    left: 6% !important;
-}
-button.logoutbtn{
-    background-color: rgb(131, 199, 90);
-    color: white;
-    width: 9.1% !important;
-    font-size: 14px;
-    /* margin-left: 0.8% !important ; */
-    margin-top: 1.4% !important;
-    height: 42px !important;
-}
-
-.Success{
-    position: absolute;
-    bottom: 36%;
-    left: 131%;
-}
-.Successpara{
-    position: absolute;
-    top: 89%;
-    left: 54%;
-    font-size: 16px;
-    width: 182%;
-}
-.Successbtn{
-    position: absolute;
-    top: 128%;
-    left: 113%;
-}
-.analyticsimg{
-    width: 83%
-}
-
-.installimg{
-    width: 64%;
-}
-}
-
-@media( max-width: 768px) {
-   
-    
-}
-
-@media screen and (max-width: 2560px) and (min-width : 1921px) {
-    
-    .AdminProfile-wrapper div.profileImage{
-        width: 21% !important;
-    }
-
-    .AdminProfile-wrapper{
-        height: 71px !important;
-    }
-
-.AdminRight-wrapper {
-    height: 803px !important;
-    margin-top: 0.7% !important;
-    
-}
-button.logoutbtn {
-    width: 8.7% !important;
-    height: 71px !important;
-    font-size: 20px !important;
-}
-.sidebar-wrapper .menuitemsActive{
-    height: 108px;
-
-}
-.sidebar-wrapper .menuitems{
-    height: 108px;
-    
-}
-.aboutedit{
-    right: 22%;
-
-}
-    }
-
-
-@media screen and (max-width: 991px) {
-       
-    #wrapper {
-       
-        background-color: red;
-       
-    }
-    /* start of large tablet styles */
-    .content-wrapper .head_text{
-        margin-top: 89px;
-    }
-
-
-    #wrapper {
-        margin-right: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-top: 0px;
-    }
-    .sidebar-wrapper {
-        display: none;
-        width: 100%;
-        height: auto;
-        margin-top: 20px;
-    }
-    .content-wrapper {
-        width: 100%;
-    border-radius: 0px;
-    margin-top: 0px;        
-    
-    }
-    .content-wrapper .subText {
-        width: 80%;
-    }
-    .right-wrapper {
-        display: none;
-        width: 100%;
-        margin-top: 20px;
-    }
-    .AdminRight-wrapper {
-        width: 100%;
-        margin-top: 20px;
-    }
-    .search_row {
-        padding: 0 30px 0 30px !important;
-    }
-    .content-wrapper .right_btn {
-        text-align: center;
-        margin-top: 25px;
-    }
-    .footer .footer_text .text p {
-        text-align: center;
-    }
-
-    .toggle-left {
-        display: block !important;
-    }
-    .toggle-right {
-        display: block !important;
-
-    }
-
-    .toggle-logo {
-        width: 100%;
-    position: absolute;
-    padding: 16px 20px;
-    text-align: center;
-    display: block !important ;
-    }
-
-
-    .sidebar-wrapper {
-        display: none;
-        width: 100%;
-        height: auto;
-        margin-top: 20px;
-    }
-    .right-wrapper {
-        display: none;
-        width: 100%;
-        margin-top: 20px;
-    }
-
-}
-
-.toggle-left {
-    width: 100%;
-    position: absolute;
-    padding: 16px 20px;
-    text-align: left;
-    box-sizing: border-box;
-    color: #76CC61;
-    font-size: 30px;
-    display: none;
-}
-.toggle-logo{
-    display: none;
-}
-
-.toggle-right {
-    position: absolute;
-
-    width: 100%;
-    padding: 16px 20px;
-    text-align: right;
-    box-sizing: border-box;
-    color: #76CC61;
-    font-size: 30px;
-    display: none;
-}
-
-.left {
-    background-color: #7fc857;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 18%;
-    font-size: 25px;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
-    background-color: rgba(0, 0, 0, 0);
-    filter: alpha(opacity=50);
-    opacity: .5;
-}
-
-.right {
-    background-color: #7fc857;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 18%;
-    font-size: 25px;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
-    background-color: rgba(0, 0, 0, 0);
-    filter: alpha(opacity=50);
-    opacity: .5;
-}
-
-.contentToggle {
-    float: right;
-}
-
-.sliderBtn {
-    background-color: white;
-    color: #83C75A;
-    border-radius: 16px;
-    border: 1px #83C75A solid;
-    -webkit-transition: opacity 1s ease-out;
-    -o-transition: opacity 1s ease-out;
-    transition: opacity 1s ease-out;
-    width: 165px;
-    height: 47px;
-}
-
-.sliderBtn:hover {
-    background-color: #83C75A;
-    color: white;
-}
-
-.AdminIcons {
-    display: none
-}
-
-.RubricStyles {
-    margin-top: 2%;
-    overflow: visible;
-    overflow-y: auto;
-    height: 377px;
-}
-
-/* Admin About container Css */
-
-.AdminAboutContainer {
-    top: 8px;
-    position: relative;
-    display: none;
-}
-
-#aboutForm {
-    display: none;
 }
 
 .AdminRight-wrapper {
@@ -950,6 +490,23 @@ button.logoutbtn {
 .AdminRight-wrapper .content_text .desc p {
     line-height: 26px;
     margin-top: 12px;
+}
+
+.profileName {
+    margin-top: 0%;
+    margin-left: 0%;
+}
+
+/* Admin About container Css */
+
+.AdminAboutContainer {
+    top: 8px;
+    position: relative;
+    display: none;
+}
+
+#aboutForm {
+    display: none;
 }
 
 .AdminProfile-wrapper {
@@ -1067,6 +624,575 @@ button.logoutbtn {
     display: none;
 }
 
+/* end content wrapper */
+
+@media screen and (max-width: 2560px) and (min-width: 1921px) {
+    .AdminProfile-wrapper div.profileImage {
+        width: 21%;
+    }
+    #wrapper {
+        padding-left: 11%;
+    }
+    .AdminProfile-wrapper {
+        height: 71px !important;
+    }
+    .AdminRight-wrapper {
+        height: 803px !important;
+        margin-top: 0.7% !important;
+    }
+    button.logoutbtn {
+        width: 8.7% !important;
+        height: 71px !important;
+        font-size: 20px !important;
+    }
+    .sidebar-wrapper {
+        width: 4.5%;
+    }
+    .right-wrapper {
+        width: 24.26%;
+    }
+    .footer .footer_text .text {
+        right: 126px;
+    }
+    .content-wrapper {
+        width: 46.59%;
+    }
+    .sidebar-wrapper .menuitemsActive {
+        height: 108px;
+    }
+    .sidebar-wrapper .menuitems {
+        height: 108px;
+    }
+    .aboutedit {
+        right: 22%;
+    }
+}
+
+@media (max-width: 1650px) {
+    .profileNamediv {
+        height: inherit;
+        font-size: 14px;
+        padding: 2px 0px 0px 5px;
+        margin-right: 3%;
+    }
+    .sidebar-wrapper .logo-wrapper {
+        float: left;
+        width: 100%;
+        height: 86px;
+        text-align: center;
+    }
+    .sidebar-wrapper .menuitems {
+        padding-top: 19%;
+        float: left;
+        width: 100%;
+        text-align: center;
+        height: 95px;
+        /* background-color: #76CC61; */
+    }
+    .sidebar-wrapper .menuitemsActive {
+        padding-top: 19%;
+        float: left;
+        width: 100%;
+        text-align: center;
+        height: 95px;
+        background-color: #76CC61;
+    }
+    .sidebar-wrapper .logo-wrapper .logo {
+        margin-top: 27px;
+        margin-bottom: 30px;
+    }
+    .RubricStyles {
+        height: 300px !important;
+    }
+    .sidebar-wrapper {
+        height: 700px;
+    }
+    .content-wrapper {
+        width: 45.59%;
+        height: 700px;
+    }
+    .content-wrapper .head_text {
+        margin-top: 24px;
+        margin-left: 8px;
+    }
+    .content-wrapper .head_text h1 {
+        font-size: 26px;
+        font-weight: 700;
+    }
+    .content-wrapper .subText {
+        margin-left: 7px;
+        margin-top: 2px;
+    }
+    .content-wrapper .subText p {
+        font-size: 15px;
+    }
+    .content-wrapper .search_row {
+        padding: 0px 44px 0 23px;
+    }
+    .input-group {
+        margin-top: 9px;
+    }
+    .searchInput {
+        width: 104.5% !important;
+        height: 47px !important;
+        margin-top: 0 !important;
+        font-size: 15px;
+        background-color: rgb(253, 253, 253);
+    }
+    .searchBtn {
+        font-size: 17px;
+        height: 47px;
+        padding: 4px 22px 0 0;
+    }
+    .content-wrapper .right_btn {
+        text-align: center;
+        margin-top: 48px;
+    }
+    .content-wrapper .right_btn button {
+        width: 87%;
+        font-size: 14px;
+        margin-right: 0;
+        margin-left: 0;
+        height: 44px;
+        border-radius: 15px;
+    }
+    .right-wrapper {
+        width: 25.6%;
+        height: 700px;
+    }
+    .footer .footer_text .text {
+        margin-top: 7px;
+        position: absolute;
+        right: 200px;
+        font-size: 13px;
+    }
+    #wrapper {
+        padding-top: 3px;
+    }
+    .right-wrapper .right_log {
+        margin-top: 25px;
+    }
+    .right-wrapper .right_text {
+        margin-top: 11px;
+    }
+    .right-wrapper .right_text h4 {
+        font-size: 18px;
+    }
+    .right-wrapper .right_text p {
+        font-size: 12px;
+    }
+    .right-wrapper .right_btn {
+        margin-top: 43px;
+    }
+    .right-wrapper .right_btn button {
+        font-size: 16px;
+        height: 41px;
+    }
+    .right-wrapper .content_text .desc h4 {
+        font-size: 17px;
+        letter-spacing: 0px;
+    }
+    .right-wrapper .content_text .desc p {
+        line-height: 25px;
+        margin-top: 9px;
+    }
+    .right-wrapper .content_text {
+        margin-top: 60px;
+        margin-left: 13px;
+    }
+    .hr_about {
+        width: 137px;
+    }
+    .right-wrapper .about_text {
+        margin-top: 30px;
+    }
+    .RubricName {
+        font-size: 19px !important;
+        padding: 41px 0 0px 26px !important;
+    }
+    .RubricContent {
+        padding: 7px 25px 0px 28px !important;
+        height: 188px !important;
+    }
+    .RubricContent h5 {
+        margin-top: 12px;
+        font-size: 13px !important;
+    }
+    .RubricContent p {
+        font-size: 13px !important;
+        padding: 1.5% 0px 0px 2.5% !important;
+    }
+    .contact h2 {
+        padding: 9px 0px 0px 7px !important;
+        font-size: 27px !important;
+    }
+    .contact .label1 {
+        font-size: 16px !important;
+        margin: 48px 0px 12px 8px !important;
+    }
+    .contact .label2 {
+        font-size: 17px !important;
+        margin-left: 7px !important;
+    }
+    .contact .label3 {
+        font-size: 17px !important;
+        margin-left: 10px !important;
+        margin-top: 0 !important;
+    }
+    .contact .textarea {
+        height: 214px !important;
+    }
+    .contact .form-control {
+        width: 96%;
+        margin: 0 0px 0px 10px;
+        border-top-left-radius: 2px !important;
+        border-bottom-left-radius: 2px !important;
+        border-top-right-radius: 2px !important;
+        border-bottom-right-radius: 2px !important;
+    }
+    .submit_btn {
+        margin-top: 43px !important;
+    }
+    input[type=submit] {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    input[type="button"] {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .contactbtn {
+        margin-top: 37% !important;
+        font-size: 14px !important;
+    }
+    .AdminRight-wrapper {
+        height: 635px;
+        margin-top: 1.5%;
+        width: 25.6%;
+        margin-right: 1%;
+    }
+    .AdminRight-wrapper .about_text {
+        margin-top: 22px !important;
+    }
+    .AdminRight-wrapper .right_log {
+        margin-top: 24px !important;
+    }
+    .AdminRight-wrapper .right_text {
+        margin-top: 15px !important;
+    }
+    .AdminRight-wrapper .right_btn button {
+        width: 54% !important;
+        height: 46px !important;
+        font-size: 13px !important;
+    }
+    .AdminRight-wrapper .right_btn {
+        margin-top: 39px !important;
+    }
+    .AdminRight-wrapper .content_text {
+        margin-top: 58px !important;
+        margin-left: 13px !important;
+    }
+    .AdminRight-wrapper .content_text .desc h4 {
+        font-size: 17px !important;
+    }
+    .AdminProfile-wrapper {
+        height: 43px !important;
+        margin-top: 1.4% !important;
+        width: 15.66%;
+    }
+    .AdminProfile-wrapper div.profileImage {
+        width: 21%;
+    }
+    .AdminProfile-wrapper span.profileRole {
+        font-size: 10px !important;
+        color: lightgray;
+        position: absolute !important;
+        bottom: 11% !important;
+        left: 6% !important;
+    }
+    button.logoutbtn {
+        background-color: rgb(131, 199, 90);
+        color: white;
+        width: 9.1% !important;
+        font-size: 14px;
+        /* margin-left: 0.8% !important ; */
+        margin-top: 1.4% !important;
+        height: 42px !important;
+    }
+    .Success {
+        position: absolute;
+        bottom: 36%;
+        left: 131%;
+    }
+    .Successpara {
+        position: absolute;
+        top: 89%;
+        left: 54%;
+        font-size: 16px;
+        width: 182%;
+    }
+    .Successbtn {
+        position: absolute;
+        top: 128%;
+        left: 113%;
+    }
+}
+
+@media (max-width: 1500px) {
+    .profileNamediv {
+        font-size: 13px;
+    }
+    .right-wrapper {
+        width: 29.6%;
+        height: 700px;
+    }
+    .profileRole {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .sidebar-wrapper {
+        width: 6.7%;
+    }
+    .right-wrapper {
+        width: 29.6%;
+        height: 700px;
+    }
+    .AdminRight-wrapper {
+        height: 637px;
+        width: 28.6%;
+    }
+    .AdminProfile-wrapper {
+        width: 18.66%;
+    }
+}
+
+@media (max-width: 1270px) {
+    .sidebar-wrapper {
+        width: 6.7%;
+    }
+    .AdminRight-wrapper {
+        height: 637px;
+        width: 28.6%;
+    }
+    .AdminProfile-wrapper {
+        width: 18.66%;
+    }
+    .installimg {
+        width: 70%;
+    }
+    .analyticsimg {
+        width: 87%;
+    }
+    .footer .footer_text .text {
+        right: 247px;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 1000px) {
+    .footer .footer_text .text {
+        font-size: 11px;
+        right: 109px;
+    }
+    .AdminRight-wrapper {
+        height: 642px;
+        width: 31.6%;
+    }
+    .AdminProfile-wrapper {
+        width: 21.66%;
+    }
+    .sidebar-wrapper {
+        width: 6.7%;
+        margin-left: 0;
+    }
+    .content-wrapper {
+        width: 54.59%;
+    }
+    .installimg {
+        width: 70%;
+    }
+    .analyticsimg {
+        width: 87%;
+    }
+}
+
+@media( max-width: 768px) {}
+
+@media screen and (max-width: 991px) {
+    .mobile-sidebar-wrapper {
+        width: 100%;
+        display: none;
+        transition: height 2s;
+        -webkit-transition: height 2s;
+        background-color: #FFFFFF;
+    }
+    .toggle-nav {
+        background-color: white;
+        height: 63px;
+        padding-top: 2%;
+    }
+    #wrapper {
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+    }
+    .sidebar-wrapper {
+        display: none;
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+    .AdminRight-wrapper {
+        width: 100%;
+        margin-top: 20px;
+        display: none;
+    }
+    .AdminProfile {
+        display: none;
+    }
+    .content-wrapper {
+        width: 100%;
+        height: 0%;
+        border-radius: 0px;
+        margin-top: 0px;
+        margin-right: 0px
+    }
+    .content-wrapper .subText {
+        width: 80%;
+    }
+    .right-wrapper {
+        display: none;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .search_row {
+        padding: 0 30px 0 30px !important;
+    }
+    .content-wrapper .right_btn {
+        text-align: center;
+        margin-top: 25px;
+    }
+    .footer .footer_text .text p {
+        text-align: center;
+    }
+    .toggle-left {
+        display: inline !important;
+    }
+    .toggle-right {
+        display: inline !important;
+    }
+    .toggle-logo {
+        /* width: 100%; */
+        /* position: absolute;
+    padding: 16px 20px; */
+        text-align: center;
+        display: inline !important;
+    }
+    .sidebar-wrapper {
+        display: none;
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+    .right-wrapper {
+        display: none;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.toggle-left {
+    /* width: 100%; */
+    /* position: absolute; */
+    /* padding: 16px 20px; */
+    text-align: left;
+    box-sizing: border-box;
+    color: #76CC61;
+    font-size: 30px;
+    display: none;
+}
+
+.toggle-logo {
+    display: none;
+}
+
+.toggle-right {
+    /* position: absolute; */
+    /* width: 100%; */
+    /* padding: 16px 20px; */
+    text-align: right;
+    box-sizing: border-box;
+    color: #76CC61;
+    font-size: 30px;
+    display: none;
+}
+
+.left {
+    background-color: #7fc857;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 18%;
+    font-size: 25px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0);
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.right {
+    background-color: #7fc857;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 18%;
+    font-size: 25px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0);
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.contentToggle {
+    float: right;
+}
+
+.sliderBtn {
+    background-color: white;
+    color: #83C75A;
+    border-radius: 16px;
+    border: 1px #83C75A solid;
+    -webkit-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+    width: 165px;
+    height: 47px;
+}
+
+.sliderBtn:hover {
+    background-color: #83C75A;
+    color: white;
+}
+
+.AdminIcons {
+    display: none
+}
+
+.RubricStyles {
+    margin-top: 2%;
+    overflow: visible;
+    overflow-y: auto;
+    height: 377px;
+}
+
 /*
  * react-circular-progressbar styles
  *
@@ -1096,6 +1222,7 @@ button.logoutbtn {
 .CircularProgressbar .CircularProgressbar-background {
     fill: #d6d6d6;
 }
+
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
     fill: #3e98c7;
 }
@@ -1211,7 +1338,7 @@ button.logoutbtn {
     font-size: 119%;
 }
 
-.AdminProfile-wrapper div.profileImage{
+.AdminProfile-wrapper div.profileImage {
     width: 21%;
 }
 
@@ -1222,5 +1349,3 @@ button.logoutbtn {
     bottom: 11% !important;
     left: 6% !important;
 }
-
-

@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import { withRouter } from 'react-router-dom';
 
+@observer class MobileNav extends Component {
 
-@observer class MenuComponent extends Component {
+    handleLeftClick = () => {
+        var style = document.getElementsByClassName("mobile-sidebar-wrapper")[0].style
+        console.log("kajsipd" ,style.display)
+if ( style.display === "none" || style.display === "") {
+    style.display = "block"
+}
+
+else {
+    style.display = "none"
+    
+}
+    }
+
+    handleRightClick = () =>{
+
+    }
     render() {
         return (
-
-            <div className="sidebar-wrapper">
-                <Link to="/" title="Papris Logo">
-
-                    <div className="logo-wrapper">
-                        <div className="logo">
-                            <img src={`${process.env.PUBLIC_URL}/images/praips Logo.png`} alt="praips Logo" />
-
-                        </div>
-                    </div>
+            <div className=" ">
+            <div className="toggle-nav">
+                <span id="btn" 
+                className="toggle-left  col-sm-4 col-xs-4" 
+                onClick={() => this.handleLeftClick()}>
+                    <i className="fa fa-bars menu" aria-hidden="true"></i>
+                </span>
+                
+                    <span className="toggle-logo  col-sm-4 col-xs-4">
+                    <Link to="/" title="Papris Logo">
+                        <img src={`${process.env.PUBLIC_URL}/images/praips Logo.png`} alt="praips Logo" />
                 </Link>
-                <hr/>
+                        
+                    </span>
+
+                <span id="btn" className="toggle-right  col-sm-4 col-xs-4" onClick={() => this.handleRightClick()}>
+                    <i className="glyphicon glyphicon-th-large" aria-hidden="true"></i>
+                </span>
+
+                </div>
+
+                {/*mobile menu */}
+                <div className="mobile-sidebar-wrapper">
+               
                 <Link title="Frenquently Asked Questions" id="Frenquently Asked Questions" onClick={() => { this.props.store.searchInput = "" }} to="/faq">
                     <div className={this.props.location.pathname === "/faq" ? "menuitemsActive" :"menuitems" } >
                         <div >
@@ -37,7 +64,9 @@ import { withRouter } from 'react-router-dom';
                             <div className={this.props.location.pathname === "/install" ? "menuitemsActive" :"menuitems" }>
                                 <div >
                                     <div className= {this.props.location.pathname === "/install" ? "menuimageActive" : "menuimage"}>
-                                        <img src={`${process.env.PUBLIC_URL}/images/script icon.png`} alt="script icon" className ="installimg" />
+                                        <img src={`${process.env.PUBLIC_URL}/images/script icon.png`} alt="script icon" 
+                                        // className ="installimg"
+                                         />
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +77,9 @@ import { withRouter } from 'react-router-dom';
                             <div className={this.props.location.pathname === "/dashboard" ? "menuitemsActive" :"menuitems" }>
                                 <div>
                                     <div className= {this.props.location.pathname === "/dashboard" ? "menuimageActive" : "menuimage"}>
-                                        <img src={`${process.env.PUBLIC_URL}/images/analytics icon.png`} alt="analytics icon" className="analyticsimg"/>
+                                        <img src={`${process.env.PUBLIC_URL}/images/analytics icon.png`} alt="analytics icon" 
+                                        // className="analyticsimg"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +87,11 @@ import { withRouter } from 'react-router-dom';
                     </div> : null
                 }
             </div>
+            </div>
+
         )
     }
 }
 
-export default withRouter(MenuComponent);
+
+export default withRouter(MobileNav);

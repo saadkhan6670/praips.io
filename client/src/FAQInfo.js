@@ -131,7 +131,7 @@ var x = document.getElementsByClassName("mySlides");
             <div className="content-wrapper" id="intro">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-md-12 col-sm-12">
+                        <div className="col-md-12 col-sm-12 col-xs-12">
                             <div className="head_text">
                                 <h1 onClick={this.checking}>Frenquently Asked Questions</h1>
                             </div>
@@ -139,7 +139,7 @@ var x = document.getElementsByClassName("mySlides");
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-12 col-sm-12">
+                        <div className="col-md-12 col-sm-12 col-xs-12">
                             <div className="subText">
                                 <p>Tips and Answer from the {this.props.store.About.name} Team</p>
                             </div>
@@ -182,16 +182,16 @@ var x = document.getElementsByClassName("mySlides");
 
                         </div> : filteredContent.map((data, key) => {
                             return (<div>
-                                <div className="col-md-12"
+                                <div className="col-md-12 col-sm-12 col-xs-12"
                                     // onMouseOver={(e) => { this.mouseHover(e, key) }}
                                     // onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                     key={key}>
 
-                                    <div className="col-md-8" >
+                                    <div className="col-md-8 col-sm-8  col-xs-8 " >
 
                                         <h5><b>{data.question}</b>  </h5>
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="col-md-3 col-sm-3 col-xs-3">
                                     <div className="AdminIcons" style={{ padding: "3px 0 0 6%" }}>
                                         {this.props.store.redirect ?
                                             <div>
@@ -203,7 +203,7 @@ var x = document.getElementsByClassName("mySlides");
                                             : null}
                                     </div>
                                     </div>
-                                    <div className="col-md-1" style={{ padding: "0.5% 0 0px 1%" }}>
+                                    <div className="col-md-1 col-sm-1 col-xs-1" style={{ padding: "0.5% 0 0px 1%" }}>
                                         <img src="/images/plus icon.png" alt="plus icon"
                                             ref={`plus${key}`}
                                             // handling the answer toggle and view update with its id
@@ -212,7 +212,7 @@ var x = document.getElementsByClassName("mySlides");
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-12">
+                                <div className="col-md-12 col-sm-12 col-sx-12">
 
                                     <p ref={`answer${key}`}>{data.answer}</p>
                                     <hr className="FaqInfoHr" />
@@ -223,12 +223,12 @@ var x = document.getElementsByClassName("mySlides");
                     }
                 </div>
 
-                <div className="col-md-12" style={{
+                <div className="col-md-12 col-sm-12 col-sx-12" style={{
                     width:"100%",
                     
                     marginTop: "25%",
                 }}>
-                    <div className="col-md-1 col-sm-1" style = {{ cursor : "pointer"}}>
+                    <div className="col-md-1 col-sm-1 col-xs-1" style = {{ cursor : "pointer"}}>
                         
                         <img onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/left arrow.png`} alt="left arrow" />
                     
@@ -236,7 +236,7 @@ var x = document.getElementsByClassName("mySlides");
 
                     {this.props.store.Rubrics.map((data, key) => {
                         return (<div key={key}>
-                            <div className="col-md-4 col-sm-4 mySlides" style={{marginLeft : "5%"}}>
+                            <div className="col-md-4 col-sm-4 col-xs-4 mySlides" style={{marginLeft : "5%"}}>
                                 <div>
                                     <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" style={{}} > {data.name} </button> </Link>
                                 </div>
@@ -244,7 +244,7 @@ var x = document.getElementsByClassName("mySlides");
                         </div>)
                     })}
 
-                    <div className="col-md-1 col-sm-1" style = {{ cursor : "pointer" , marginLeft:"2%" }}>
+                    <div className="col-md-1 col-sm-1 col-xs-1" style = {{ cursor : "pointer" , marginLeft:"2%" }}>
                         
                         <img onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/right arrow.png`} alt="right arrow" />
                     
