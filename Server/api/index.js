@@ -41,6 +41,7 @@ router.post('/sortRubrics' , controller.sortRubrics)
 //APIs for Rucric Content
 router.post('/createRubcricContent', controller.createRubcricContent);
 router.post('/updateRubcricContent', controller.updateRubcricContent);
+router.post('/removeRubricContent', controller.removeRubricContent);
 router.post('/updateViews', controller.updateViews);
 
 

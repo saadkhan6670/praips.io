@@ -116,12 +116,11 @@ exports.updateRubcric = (req, res) => {
 }
 
 exports.removeRubrics = (req, res) => {
-  console.log(req.body)
 
-  Rubrics.findByIdAndRemove(req.body._id, (err, data) => {
+  Rubrics.findByIdAndRemove(req.body.id, (err, data) => {
 
     if (!data) {
-      res.send("No rubric found to update")
+      res.send("No rubric found to remove")
     }
 
     else {
@@ -174,14 +173,12 @@ exports.createRubcricContent = (req, res) => {
     }
   })
   io.emit('update', { api: 'RubricsChanged' })
-
-
 }
 
 exports.updateRubcricContent = (req, res) => {
-  RubricContent.findByIdAndUpdate(req.query.id, {
+  RubricContent.findByIdAndUpdate(req.body.id, {
     $set:
-    { name: req.body.name, question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
+    { question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
   },
 
     { new: true }, (err, data) => {
@@ -196,9 +193,27 @@ exports.updateRubcricContent = (req, res) => {
     })
 
   io.emit('update', { api: 'RubricsChanged' })
+}
 
+
+exports.removeRubricContent = (req, res) => {
+
+  RubricContent.findByIdAndRemove(req.body.id, (err, data) => {
+
+    if (!data) {
+      res.send("No rubric Content found to remove")
+    }
+
+    else {
+      res.send("Rubric Content Removed");
+    }
+  })
+
+  io.emit('update', { api: 'RubricsChanged' })
 
 }
+
+// Rubric content ends
 
 exports.createAbout = (req, res) => {
   let NewAbout = new About(req.body);

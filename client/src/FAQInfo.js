@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-
+import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
+var {
+    sortBy
+} = require('lodash')
 var slideIndex = 1;
 var slideIndex2 = 2;
 
@@ -13,7 +16,15 @@ var x = document.getElementsByClassName("mySlides");
         super();
 
         this.state = {
-
+            question: '',
+            questionId: '',
+            answer: '',            
+            Message: '',
+            ModalComponent: '',
+            Show: false,
+            RubricId: '',
+            redirect: false,
+            SearchValue: ''
         }
     }
 
@@ -87,7 +98,6 @@ var x = document.getElementsByClassName("mySlides");
 
     }
 
-
     plusDivs(n) {
 
         this.showDivs(slideIndex += n, slideIndex2 += n);
@@ -108,25 +118,82 @@ var x = document.getElementsByClassName("mySlides");
 
         this.props.store.createResearch(searchInput)
     }
+    handleModalClose = () => {
+        this.setState({
+            Show: false
+        })
+    }
+
+    handleModalShow = () => {
+        this.setState({ Show: true });
+    }
+
+    editHandle(event, data, index) {
+        this.handleModalShow()
+        this.setState({
+            question: data.question,
+            answer : data.answer,
+            questionId: data._id
+        })
+    }
+
+    deleteHandle(event, data) {
+        this.props.store.RemoveRubricContent(data._id)
+        this.props.store.getRubrics()        
+    }
+
+    // upHandle(event, data, index) {
+    //     if (index !== 0) {
+    //         var sortFrom = data.sort;
+    //         var sortTo = data.sort - 1;
+    //         var sortFromIndex = index;
+    //         var sortToindex = sortFromIndex - 1
+    //         var sortToId = this.props.store.Rubrics[sortToindex]._id;
+
+    //         this.props.store.Rubrics[sortToindex].sort = sortFrom;
+    //         this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+
+    //         // this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
+    //         // this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
+
+    //     }
+
+    // }
+
+    // downHandle(event, data, index) {
+
+    //     if (index !== this.props.store.Rubrics.length - 1) {
+    //         var sortFrom = data.sort; //3
+    //         var sortTo = data.sort + 1; //4 
+    //         var sortFromIndex = index;//2
+    //         var sortToindex = sortFromIndex + 1 //3 
+    //         var sortToId = this.props.store.Rubrics[sortToindex]._id;
+
+    //         this.props.store.Rubrics[sortToindex].sort = sortFrom;
+    //         this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+
+    //         // this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
+    //         // this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
+
+    //     }
+
+    // }
 
     mouseHover(event, id) {
-        document.getElementsByClassName("AdminIcons")[id].style.display = "block"
+        document.getElementsByClassName("AdminIcons")[id].style.visibility = "visible"
     }
 
     mouseOut(event, id) {
-        document.getElementsByClassName("AdminIcons")[id].style.display = "none"
+        document.getElementsByClassName("AdminIcons")[id].style.visibility = "hidden"
     }
 
-
-
     render() {
-        console.log("re render")
         let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
+        // sortBy(content, [function (o) {
+        //     return o.sort;
+        // }])
         let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
-
-        // let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/odio` }))
-        // let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
-
+        // console.log(content)
         return (
             <div className="content-wrapper" id="intro">
                 <div className="container-fluid">
@@ -183,8 +250,8 @@ var x = document.getElementsByClassName("mySlides");
                         </div> : filteredContent.map((data, key) => {
                             return (<div>
                                 <div className="col-md-12 col-sm-12 col-xs-12"
-                                    // onMouseOver={(e) => { this.mouseHover(e, key) }}
-                                    // onMouseLeave={(e) => { this.mouseOut(e, key) }}
+                                    onMouseOver={(e) => { this.mouseHover(e, key) }}
+                                    onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                     key={key}>
 
                                     <div className="col-md-8 col-sm-8  col-xs-8 " >
@@ -196,7 +263,7 @@ var x = document.getElementsByClassName("mySlides");
                                         {this.props.store.redirect ?
                                             <div>
                                                 <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
-                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                <img onClick={(e) => this.deleteHandle(e, data)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
                                                 <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
                                                 <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
                                             </div>
@@ -223,36 +290,91 @@ var x = document.getElementsByClassName("mySlides");
                     }
                 </div>
 
-                <div className="col-md-12 col-sm-12 col-sx-12" style={{
-                    width:"100%",
-                    
-                    marginTop: "25%",
-                }}>
-                    <div className="col-md-1 col-sm-1 col-xs-1" style = {{ cursor : "pointer"}}>
+                <div className="col-md-12 col-sm-12 col-sx-12 slider">
+                    <div className="col-md-1 col-sm-1 col-xs-1">
                         
-                        <img onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/left arrow.png`} alt="left arrow" />
+                        <img className="leftArrow" onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/left arrow.png`} alt="left arrow" />
                     
                     </div>
 
                     {this.props.store.Rubrics.map((data, key) => {
                         return (<div key={key}>
-                            <div className="col-md-4 col-sm-4 col-xs-4 mySlides" style={{marginLeft : "5%"}}>
+                            <div className="col-md-4 col-sm-4 col-xs-4 mySlides">
                                 <div>
-                                    <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" style={{}} > {data.name} </button> </Link>
+                                    <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" > {data.name} </button> </Link>
                                 </div>
                             </div>
                         </div>)
                     })}
 
-                    <div className="col-md-1 col-sm-1 col-xs-1" style = {{ cursor : "pointer" , marginLeft:"2%" }}>
+                    <div className="col-md-1 col-sm-1 col-xs-1 rightArrow">
                         
-                        <img onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/right arrow.png`} alt="right arrow" />
+                        <img  className="rightArrow" onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/right arrow.png`} alt="right arrow" />
                     
                     </div>
                     
+                    <div className="row contactbtn">Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
 
                 </div>
-                <div className="row contactbtn">Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
+                
+                {/* Modal component */}
+                <Modal show={this.state.Show} onHide={this.handleModalClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit your Question or Answer</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <form>
+                            <FormGroup
+                                controlId="formBasicText"
+                            >
+                            
+                        <Modal.Title>Question</Modal.Title>
+                            
+                                <FormControl
+                                    style={{height: '100px'}}
+                                    componentClass="textarea"
+                                    value={this.state.question}
+                                    placeholder="Enter text"
+                                    onChange={(e) => {
+                                        this.setState({
+                                            question: e.target.value
+                                        })
+                                    }}
+                                />
+                                <FormControl.Feedback />
+                            </FormGroup>
+
+                            <FormGroup
+                                controlId="formBasicText"
+                            >
+                        <Modal.Title>Answer</Modal.Title>
+                            
+                                <FormControl
+                                   style={{height: '200px'}}
+                                   componentClass="textarea"
+                                    value={this.state.answer}
+                                    placeholder="Enter text"
+                                    onChange={(e) => {
+                                        this.setState({
+                                            answer: e.target.value
+                                        })
+                                    }}
+                                />
+                                <FormControl.Feedback />
+                            </FormGroup>
+                        </form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={(e) => {
+                             this.props.store.UpdateRubricContent(this.state.questionId, this.state.question, this.state.answer)
+                            this.setState({
+                                Show: false,
+                            })
+                            this.props.store.getRubrics()
+                        }}>Change</Button>
+                    </Modal.Footer>
+                </Modal>
+                {/* Modal component */}
             </div>
         )
     }
