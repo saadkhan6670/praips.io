@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 var labelStyles = {
     display: "flex",
     fontWeight: "550",
-    color : "grey"
+    color: "grey"
 }
 
 var textAreaStyle = {
@@ -13,7 +13,7 @@ var textAreaStyle = {
     borderRadius: "5px",
     padding: "0px 0px 2px",
     backgroundColor: "inherit"
-    
+
 
 }
 
@@ -52,56 +52,56 @@ var backToSearchBtnStyles = {
 var contactAlertDiv = {
     padding: "1px",
     textAlign: "center",
-  display: "none"
+    display: "none"
 }
 
 class Contact extends Component {
-  render() {
-    return (
-   
-<div className="container-fluid">
+    render() {
+        return (
+
+            <div className="container-fluid">
                 {/* <h2 id="headingMsg">Submit a Feature Request</h2> */}
-                
-                    <form id="contactForm"  onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
-                        <div >
-                            <label style={labelStyles}>How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" className="reqMsg"></span>
-                            <textarea name="message" style={textAreaStyle} ref='Message'
-                                onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
-                        </div>
 
-                        <div>
-                            <label style={labelStyles}>Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" className="reqMsg"></span>
-                            <input type="text" name="name" style={inputFieldStyles} ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
-                        </div>
+                <form id="contactForm" onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
+                    <div >
+                        <label style={labelStyles}>How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" className="reqMsg"></span>
+                        <textarea name="message" style={textAreaStyle} ref='Message'
+                            onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
+                    </div>
 
-                        <div >
-                            <label style={labelStyles}>Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
-                            <input type="text"  name="email"  style={inputFieldStyles} ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
-                        </div>
+                    <div>
+                        <label style={labelStyles}>Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" className="reqMsg"></span>
+                        <input type="text" name="name" style={inputFieldStyles} ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
+                    </div>
 
-                        <div style={contactBtnsDivStyles}>
+                    <div >
+                        <label style={labelStyles}>Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
+                        <input type="text" name="email" style={inputFieldStyles} ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
+                    </div>
 
-                           
-                                <input type="button" style={backToSearchBtnStyles} value="Back to Search" />
-                     
-                            <input type="submit" style={sendBtnStyles}  value="Send" />
+                    <div style={contactBtnsDivStyles}>
 
-                        </div>
-                    </form>
 
-                    <div className="row" id="spacingDiv" ></div>
+                        <input type="button" style={backToSearchBtnStyles} value="Back to Search" />
 
-                    <div id="contactAlert" style={contactAlertDiv} >
-
-                  <p>One of our agent will contact you shortly by email </p>
-                  <input type="submit" style={sendBtnStyles} value="Help"  /> 
-                        
+                        <input type="submit" style={sendBtnStyles} value="Send" />
 
                     </div>
+                </form>
+
+                <div className="row" id="spacingDiv" ></div>
+
+                <div id="contactAlert" style={contactAlertDiv} >
+
+                    <p>One of our agent will contact you shortly by email </p>
+                    <input type="submit" style={sendBtnStyles} value="Help" />
+
+
                 </div>
-   
-    );
-  }
+            </div>
+
+        );
+    }
 }
 
 export default Contact;
