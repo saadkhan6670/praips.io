@@ -215,14 +215,19 @@ exports.createAbout = (req, res) => {
 }
 
 exports.updateAbout = (req, res) => {
-  About.findOneAndUpdate({ name: req.body.name }, { new: true }, (err, doc) => {
+  About.findByIdAndUpdate(req.body._id,{ $set : {
+    name: req.body.name , 
+    logoPath: req.body.logoPath, 
+    description: req.body.description,
+    slogan:req.body.slogan,
+    siteUrl : req.body.siteUrl}}, { new: true }, (err, doc) => {
 
     if (!doc) {
       res.send(err);
     }
 
     else {
-      res.send("About updated successfully !");
+      res.send(doc);
     }
   })
 

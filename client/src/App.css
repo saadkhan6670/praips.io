@@ -13,7 +13,14 @@ body {
 
 h2 {
     font-weight: bold;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    hyphens: auto;
 }
+
 
 td {
     border: none;
@@ -187,7 +194,9 @@ td {
 .content-wrapper .search_row {
     padding: 0px 61px 0 51px;
 }
-
+.form-group {
+    text-align: left;
+}
 .content-wrapper .form-group input {
     text-indent: 20px;
     border-radius: 4px;
@@ -531,7 +540,74 @@ button {
     background: #63a952;
 }
 
+
+
+
+/* LogIn page CSS */
+#logInFormWrapper {
+    width: 48%;
+    margin: 0 auto;
+    padding-top: 32%;
+}
+
+.loginInputs input[id="email"]{
+    width: 100%;
+    border-radius: 24px !important;
+    height: 44px !important;
+    text-indent: 43px;
+}
+
+.loginInputs input[id="password"]{
+    width: 100%;
+    border-radius: 24px !important;
+    height: 44px !important;
+    text-indent: 43px;
+}
+
+
+.logInSendBtn {
+    text-align: right;
+}
+.logInSendBtn button {
+    background-color: #83C75A;
+    padding: 9px 65px;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    height: 46px;
+}
+
+.logInSendBtn button:hover {
+    background-color: white;
+    padding: 9px 65px;
+    color: #83C75A;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+   
+    
+}
+/* -------------------------------> */
+
+
+
+
 /* Contact CSS */
+
+.Successbtn {
+    background-color: #83C75A;
+    padding: 9px 31px;
+    color: white;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.Successbtn:hover {
+    background-color:white ;
+    color:  #83C75A;
+}
 
 .submit_btn input[type=submit] {
     background-color: #83C75A;
@@ -569,8 +645,7 @@ button {
 
 .about_btns {
     text-align: center;
-    margin-top: 40px;
-    word-spacing: 1em;
+    margin-top: 8px;
 }
 
 .about_btns input[type=submit] {
@@ -614,6 +689,7 @@ button {
 #contactAlert {
     display: none;
     text-align: center;
+    line-height: 99px;
 }
 
 #contactForm {
@@ -919,23 +995,8 @@ button {
         margin-top: 1.4% !important;
         height: 42px !important;
     }
-    .Success {
-        position: absolute;
-        bottom: 36%;
-        left: 131%;
-    }
-    .Successpara {
-        position: absolute;
-        top: 89%;
-        left: 54%;
-        font-size: 16px;
-        width: 182%;
-    }
-    .Successbtn {
-        position: absolute;
-        top: 128%;
-        left: 113%;
-    }
+
+    
 }
 
 @media (max-width: 1500px) {
@@ -1100,6 +1161,24 @@ button {
         display: none;
         width: 100%;
         margin-top: 20px;
+    }
+
+    /* login PAge responsive */
+
+    .logInSendBtn {
+        text-align: center;
+    }
+
+    .logInSendBtn button {
+        padding: 9px 44px;
+    }
+
+    #logInFormWrapper {
+  
+        padding-top: 16%;
+    }
+    #logInFormWrapper h2{
+        font-size: 23px;
     }
 }
 

@@ -35,14 +35,30 @@ import { Link } from 'react-router-dom';
     }
 
     handleChange(event, fieldName) {
-        this.props.store[fieldName] = event.target.value
+        this.props.store.About[fieldName] = event.target.value
+
+        
+    }
+
+    handleEnterKey (e) {
+        if(e.keyCode === 13) {
+            this.editSubmit(e)
+        }
+    }
+    editSubmit (e) {
+        e.preventDefault()
+        this.props.store.updateAbout()
+        document.getElementById('aboutData').style.display = "block"
+        document.getElementById('aboutForm').style.display = "none"
+      
     }
     render() {
         return (
             <div>
                 {this.props.store.redirect ? <div className="AdminProfile">
                     <div className="AdminProfile-wrapper">
-                        <div className="col-md-3 col-sm-3 col-xs-3 profileImage" style={{ backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}${this.props.store.User.profilePath})`, height: "inherit", borderTopLeftRadius: "inherit", borderBottomLeftRadius: "inherit" }}>
+                        <div className="col-md-3 col-sm-3 col-xs-3 profileImage"
+                         style={{ backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}${this.props.store.User.profilePath})`, height: "inherit", borderTopLeftRadius: "inherit", borderBottomLeftRadius: "inherit" }}>
 
                         </div>
                         <div className="col-md-6 col-sm-6 col-xs-6 profileNamediv">
@@ -103,31 +119,31 @@ import { Link } from 'react-router-dom';
                         </div>
                     </div>
 
-                    <div className="container-fluid" id="aboutForm">
+                    <div className="container-fluid" id="aboutForm" >
 
-                        <form onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
+                        <form  onKeyDown={(e) => this.handleEnterKey(e)} style={{textAlign: "center"}}>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
                                 <label >Logo  </label> <span ref="nameReq" className="reqMsg"></span>
-                                <input type="text" name="name" className="form-control" />
+                                <input type="text" className="form-control" value={this.props.store.About.logoPath} onChange={(e) => this.handleChange(e,'logPath')}/>
                             </div>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
                                 <label >Name  </label> <span ref="nameReq" className="reqMsg"></span>
-                                <input type="text" name="name" className="form-control" value={this.props.store.About.name} />
+                                <input type="text"  className="form-control" value={this.props.store.About.name} onChange={(e) => this.handleChange(e,'name')} />
                             </div>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
                                 <label >Slogan(100 characters) </label> <span ref="emailReq" className="reqMsg"></span>
-                                <input type="text" name="email" className="form-control" value={this.props.store.About.slogan} />
+                                <input type="text"  className="form-control" value={this.props.store.About.slogan} onChange={(e) => this.handleChange(e,'slogan')} />
                             </div>
                             <div className="col-md-12 col-sm-12 col-xs-12 form-group">
                                 <label >Site web</label> <span ref="emailReq" className="reqMsg"></span>
-                                <input type="text" name="email" className="form-control" value={this.props.store.About.siteUrl} />
+                                <input type="text" className="form-control" value={this.props.store.About.siteUrl} onChange={(e) => this.handleChange(e,'siteUrl')} />
                             </div>
                             <div className="col-md-12 col-sm-12 col-xs-12 form-group">
                                 <label >Description </label> <span ref="messageReq" className="reqMsg"></span>
-                                <textarea name="message" className="form-control" style={{ height: "150px" }} value={this.props.store.About.description}></textarea>
+                                <textarea  className="form-control" style={{ height: "150px" }} value={this.props.store.About.description} onChange={(e) => this.handleChange(e,'description')}></textarea>
                             </div>
                             <div className="col-md-12 col-sm-12 col-xs-12 about_btns">
-                                <input type="submit" className="btn btn-lg" value="Edit" />
+                                <input type="submit" className="btn btn-lg" value="Edit" onClick={(e) => { this.editSubmit(e) }}/>
                                 <input type="button" className="btn btn-lg" value="Cancel" onClick={() => { this.handleCancel() }} />
 
                             </div>

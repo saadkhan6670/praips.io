@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import axios from 'axios'
 
+
 @observer class AdminLogin extends Component {
 
     constructor(props) {
@@ -87,52 +88,47 @@ import axios from 'axios'
     render() {
         return (
             <div className="content-wrapper" id="intro">
-                <div className="container-fluid" style={{ textAlign: "center" , padding: "171px 153px 0 167px"}}>
-                    <div className="row">
-                        <div className="col-md-12 col-sm-12">
-                            <div className="subText">
-                                <p>Are You an administrator of Lorem Ipsum?</p>
-
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12 col-sm-12">
-                                <div className="">
-                                    <h1>Log In</h1>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="form-group has-success has-feedback">
-
-                                <div className="col-md-12">
-                                    <input id="email" type="text" className="" placeholder="Email Address" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="form-group has-success has-feedback">
-
-                                <div className="col-md-12">
-                                    <input id="password" type="text" className="" placeholder="Password" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="form-group has-success has-feedback">
-
-                                <div className="col-md-12">
-                                    <button type="button" onClick={(e) => this.handleLogin(e)} class="btn btn-primary">SEND</button>
-
-                                </div>
-                            </div>
-                        </div>
                         {this.state.Message}
+            
+                <div className="container-fluid" style={{}}>
+                    <div id="logInFormWrapper">
+                            <div className="subText">
+                                <p>Are You an administrator of {this.props.store.About.name} ?</p>
 
+                            </div>
+                  
+                                <div style={{textAlign: "center"}}>
+                                    <h2 style={{marginTop: "0px"}}>Log In</h2>
+
+                            </div>
+                            <div className="form-group">
+
+                                <div className=" loginInputs">
+                                    <input id="email" type="text" className="form-control"  placeholder="Email Address" 
+                                    style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/user-icon.png)` , backgroundSize: "19px",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "14px",}}/>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+
+                                <div className="loginInputs">
+                                    <input  id="password" type="text" className="form-control" placeholder="Password"
+                                    style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/pass-icon.png)`, backgroundSize: "16px",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "14px",}}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+
+                                <div className="logInSendBtn">
+                                    <button type="button" className="btn form-control" onClick={(e) => this.handleLogin(e)}>SEND</button>
+
+                                </div>
+                            </div>
                     </div>
                 </div>
         </div>

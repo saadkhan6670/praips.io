@@ -158,7 +158,7 @@ import { observer } from 'mobx-react';
 
                         </div>
                     </form>
-                    <div className="row" id="spacingDiv" style={{ minHeight: "250px" }}></div>
+                    <div className="row" id="spacingDiv" style={{ minHeight: "95px" }}></div>
                     <div id="request-process"><h4>Processing your request</h4>
                         <span className="fa fa-spinner fa-spin fa-3x fa-fw"></span>
                     </div>
@@ -168,7 +168,7 @@ import { observer } from 'mobx-react';
                         <span  >
                             <p className="Successpara" >One of our agent will contact you shortly by email </p>
 
-                            <Link className="Successbtn" to="/faq">   <input type="submit" className="btn btn-lg" value="BACK TO FAQ" /> </Link>
+                            <Link  to="/faq">   <input type="submit" className="btn btn-lg Successbtn" value="BACK TO FAQ" /> </Link>
 
                         </span>
 

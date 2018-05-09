@@ -194,6 +194,18 @@ class PraipsStore {
             })
     }
 
+    updateAbout () {
+         axios.post(`${process.env.apiURL}/api/updateAbout`, this.About).then((response) => {
+
+            console.log(response.data)
+
+        })
+        .catch((error) => {
+
+            console.log(error)
+        })
+    }
+
 }
 
 const store = new PraipsStore();
