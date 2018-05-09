@@ -23,7 +23,7 @@ import { withRouter } from 'react-router-dom';
                     <div className={this.props.location.pathname === "/faq" ? "menuitemsActive" :"menuitems" } >
                         <div >
                             <div className= {this.props.location.pathname === "/faq" ? "menuimageActive" : "menuimage"}>
-                                <img src={`${process.env.PUBLIC_URL}/images/info.png`} alt="info icon" />
+                                <img src={`${process.env.PUBLIC_URL}/images/info.png`} alt="info icon" className="faqimg" />
                             </div>
                         </div>
                     </div>

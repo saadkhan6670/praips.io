@@ -27,7 +27,7 @@ td {
 }
 
 #wrapper {
-    padding-top: 38px;
+    padding-top: 20px;
     padding-left: 11%;
     padding-bottom: 0px;
     background: #252525;
@@ -76,7 +76,10 @@ td {
 }
 
 .sidebar-wrapper .menuitemsActive .menuimageActive {
-    margin-top: 8px;
+    margin-top: 4px;
+}
+.faqimg{
+    width: 37%;
 }
 
 .sidebar-wrapper .menuitemsActive:hover {
@@ -100,11 +103,11 @@ td {
 }
 
 .analyticsimg {
-    width: 83%
+    width: 78%
 }
 
 .installimg {
-    width: 64%;
+    width: 61%;
 }
 
 /* Mobile styles */
@@ -237,10 +240,10 @@ td {
 button.logoutbtn {
     background-color: rgb(131, 199, 90);
     color: white;
-    width: 8.8% !important;
-    margin-left: 0 !important;
-    margin-top: 1.3% !important;
-    height: 56px !important;
+    width: 8.8% ;
+    margin-left: 0 ;
+    margin-top: 1.3% ;
+    height: 53px ;
     font-size: 17px;
 }
 
@@ -308,10 +311,33 @@ button.logoutbtn {
     font-weight: bold;
     border-radius: 10px;
 }
+.AddRubric{
+    margin-top: 95px;
+}
+.add_btn{
+    text-align: center;
+
+}
+
+.add_btn button:hover {
+    background: #63a952;
+    color: whitesmoke;
+}
+.add_btn button:active {
+    background: #63a952;
+    color: whitesmoke;
+}
+.add_btn button {
+    background-color: #83C75A;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 144px;
+}
 
 .content-wrapper .right_btn {
     text-align: center;
-    margin-top: 62px;
+    margin-top: 39px;
 }
 
 .content-wrapper .right_btn button {
@@ -397,6 +423,46 @@ button {
     color: white;
 }
 
+.slider{
+    width: 100%;
+    margin-top: 213px;
+}
+
+.sliderBtn {
+    background-color: white;
+    color: #83C75A;
+    border-radius: 16px;
+    border: 1px #83C75A solid;
+    -webkit-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+    width: 216px;
+    height: 47px;
+}
+
+
+.contactbtn {
+    height: 10px;
+    text-align: center;
+    margin-top: 89px;
+    font-size: 15px;
+}
+.sliderBtn:hover {
+    background-color: #83C75A;
+    color: white;
+}
+
+.mySlides{
+    margin-left : 5%;
+}
+.rightArrow{
+    cursor : pointer; 
+    margin-left: 2%;
+}
+.leftArrow{
+    cursor : pointer;     
+}
+
 .searchInput {
     font-size: 124%;
     background-color: "#fdfdfd";
@@ -420,7 +486,7 @@ button {
 
 .AdminRight-wrapper {
     background-color: white;
-    height: 810px;
+    height: 813px;
     float: left;
     border-radius: 8px;
     width: 24.7%;
@@ -502,8 +568,9 @@ button {
 }
 
 .profileName {
-    margin-top: 0%;
-    margin-left: 0%;
+    margin-top: 6%;
+    margin-left: 8%;
+    font-size: 16px;
 }
 
 /* Admin About container Css */
@@ -520,7 +587,7 @@ button {
 
 .AdminProfile-wrapper {
     background-color: white;
-    height: 56px;
+    height: 53px;
     margin-top: 1.3%;
     margin-right: 0.7%;
     float: left;
@@ -653,6 +720,7 @@ button {
     padding: 9px 45px;
     color: white;
     border: none;
+    margin-right: 30px;
     border-radius: 9px;
     cursor: pointer;
 }
@@ -668,6 +736,7 @@ button {
 
 .about_btns input[type="button"] {
     background-color: #ccc;
+    padding: 9px 45px;    
     color: white;
     border: none;
     border-radius: 9px;
@@ -698,6 +767,114 @@ button {
 
 #spacingDiv {
     display: none;
+}
+.profileNamediv{
+    padding: 0;
+}
+
+
+.FaqInfoHr {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-right: 97px;
+    /* border: 0; */
+    width: 102%;
+    border-top: 1px solid #eee;
+}
+
+.Plus {
+    cursor: pointer;
+    position: absolute;
+}
+
+.Minus {
+    cursor: pointer;
+    position: absolute;
+}
+
+/* Scroll bar css */
+
+.scrollbar {
+    height: 370px;
+    overflow-y: scroll;
+}
+
+#style-3::-webkit-scrollbar {
+    width: 6px;
+}
+
+#style-3::-webkit-scrollbar-thumb {
+    background-color: #7fc857;
+}
+
+.RubricName {
+    color: grey;
+    font-size: 138%;
+    padding: 61px 0 0px 35px;
+}
+
+.RubricContent {
+    padding: 18px 25px 0px 28px;
+    height: 250px;
+    margin-right: 0px;
+}
+
+.RubricContent h5 {
+    font-size: 14px;
+}
+
+.RubricContent p {
+    display: none;
+    font-size: 14px;
+    line-height: 164%;
+    padding: 2.5% 0 0 2.5%;
+}
+
+.contact h2 {
+    padding: 16px 0px 0px 15px;
+    font-size: 224%;
+}
+
+.contact .label1 {
+    font-size: 134%;
+    margin: 65px 0px 12px 16px;
+}
+
+.contact .label2 {
+    font-size: 134%;
+    margin-left: 16px;
+}
+
+.contact .label3 {
+    font-size: 134%;
+    margin-left: 16px;
+    margin-top: 15px;
+}
+
+.contact .textarea {
+    height: 269px;
+    background-color: #fdfdfd;
+}
+
+.backToFaq:hover {
+    background-color: #a9a8a8;
+    color: white;
+}
+
+.leftarrow {
+    cursor: pointer
+}
+
+.AdminProfile-wrapper div.profileImage {
+    width: 21%;
+}
+
+.AdminProfile-wrapper span.profileRole {
+    font-size: 13px ;
+    color: lightgray;
+    position: absolute ;
+    bottom: 2px ;
+    left: 8px ;
 }
 
 /* end content wrapper */
@@ -745,6 +922,25 @@ button {
 }
 
 @media (max-width: 1650px) {
+
+    .slider{
+        width: 100%;
+        margin-top: 154px;
+    }
+    
+    .mySlides{
+        margin-left : 5%;
+    }
+    .rightArrow{
+       width: 42px; 
+    }
+    .leftArrow{
+        width: 42px;
+    }
+    .sliderBtn{
+        width: 150px;
+    }
+
     .profileNamediv {
         height: inherit;
         font-size: 14px;
@@ -938,8 +1134,8 @@ button {
         font-weight: bold;
     }
     .contactbtn {
-        margin-top: 37% !important;
-        font-size: 14px !important;
+        margin-top: 71px ;
+        font-size: 14px ;
     }
     .AdminRight-wrapper {
         height: 635px;
@@ -1244,25 +1440,10 @@ button {
     float: right;
 }
 
-.sliderBtn {
-    background-color: white;
-    color: #83C75A;
-    border-radius: 16px;
-    border: 1px #83C75A solid;
-    -webkit-transition: opacity 1s ease-out;
-    -o-transition: opacity 1s ease-out;
-    transition: opacity 1s ease-out;
-    width: 165px;
-    height: 47px;
-}
-
-.sliderBtn:hover {
-    background-color: #83C75A;
-    color: white;
-}
 
 .AdminIcons {
-    display: none
+    /* display: none; */
+    visibility: hidden;
 }
 
 .RubricStyles {
@@ -1316,115 +1497,4 @@ button {
 
 .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
     stroke: transparent;
-}
-
-.FaqInfoHr {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-right: 97px;
-    /* border: 0; */
-    width: 102%;
-    border-top: 1px solid #eee;
-}
-
-.Plus {
-    cursor: pointer;
-    position: absolute;
-}
-
-.Minus {
-    cursor: pointer;
-    position: absolute;
-}
-
-/* Scroll bar css */
-
-.scrollbar {
-    height: 370px;
-    overflow-y: scroll;
-}
-
-#style-3::-webkit-scrollbar {
-    width: 6px;
-}
-
-#style-3::-webkit-scrollbar-thumb {
-    background-color: #7fc857;
-}
-
-.RubricName {
-    color: grey;
-    font-size: 138%;
-    padding: 61px 0 0px 35px;
-}
-
-.RubricContent {
-    padding: 18px 25px 0px 28px;
-    height: 250px;
-    margin-right: 0px;
-}
-
-.RubricContent h5 {
-    font-size: 122%;
-}
-
-.RubricContent p {
-    display: none;
-    font-size: 116%;
-    line-height: 164%;
-    padding: 2.5% 0 0 2.5%;
-}
-
-.contact h2 {
-    padding: 16px 0px 0px 15px;
-    font-size: 224%;
-}
-
-.contact .label1 {
-    font-size: 134%;
-    margin: 65px 0px 12px 16px;
-}
-
-.contact .label2 {
-    font-size: 134%;
-    margin-left: 16px;
-}
-
-.contact .label3 {
-    font-size: 134%;
-    margin-left: 16px;
-    margin-top: 15px;
-}
-
-.contact .textarea {
-    height: 269px;
-    background-color: #fdfdfd;
-}
-
-.backToFaq:hover {
-    background-color: #a9a8a8;
-    color: white;
-}
-
-.leftarrow {
-    cursor: pointer
-}
-
-.contactbtn {
-    height: 10px;
-    text-align: center;
-    margin-top: 12%;
-    font-size: 119%;
-}
-
-.AdminProfile-wrapper div.profileImage {
-    width: 21%;
-}
-
-.AdminProfile-wrapper span.profileRole {
-    font-size: 13px !important;
-    color: lightgray;
-    position: absolute !important;
-    bottom: 11% !important;
-    left: 6% !important;
 }

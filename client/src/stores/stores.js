@@ -26,8 +26,6 @@ class PraipsStore {
                 this.Rubrics = sortBy(response.data, [function (o) {
                     return o.sort;
                 }])
-
-
             })
             .catch((error) => {
                 console.log(error)
@@ -42,7 +40,6 @@ class PraipsStore {
                 console.log(error)
             })
     }
-
 
     async checkKey() {
         await axios.get(`${process.env.apiURL}/api/LogKeyAuth?LogKey=${this.LoginKey}`).then((response) => {
@@ -127,7 +124,7 @@ class PraipsStore {
 
     RemoveRubric(id) {
         axios.post(`${process.env.apiURL}/api/removeRubrics`, {
-                _id: id
+                id: id
             })
             .then((response) => {
                 return
@@ -186,10 +183,34 @@ class PraipsStore {
 
         axios.get(`${process.env.apiURL}/api/getUserData/${getCookie('user_id')}`).then((response) => {
                 this.User = response.data
-
             })
             .catch((error) => {
+                console.log(error)
+            })
+    }
 
+   async UpdateRubricContent(id, question, answer) {
+        await axios.post(`${process.env.apiURL}/api/updateRubcricContent`, {
+                id: id,
+                question: question,
+                answer: answer
+            })
+            .then((response) => {
+                return
+
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
+    RemoveRubricContent(id) {
+        axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
+                id: id
+            })
+            .then((response) => {
+                return
+
+            }).catch((error) => {
                 console.log(error)
             })
     }

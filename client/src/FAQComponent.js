@@ -85,11 +85,11 @@ var { sortBy } = require('lodash')
     }
 
     mouseHover(event, id) {
-        document.getElementsByClassName("AdminIcons")[id].style.display = "block"
+        document.getElementsByClassName("AdminIcons")[id].style.visibility = "visible"
     }
 
     mouseOut(event, id) {
-        document.getElementsByClassName("AdminIcons")[id].style.display = "none"
+        document.getElementsByClassName("AdminIcons")[id].style.visibility = "hidden"
     }
 
     handleModalClose = () => {
@@ -219,42 +219,39 @@ var { sortBy } = require('lodash')
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="row" style={{ height: "40px" }}></div>
                     {this.props.store.searchInput.length !== 0 ? <Search store={this.props.store} /> :
                         <div className=" row RubricStyles scrollbar" id="style-3">
                             {
                                 this.props.store.Rubrics.map((data, key) => {
                                     return (
-                                        <div key={key} className="col-md-6 col-sm-6 col-xs-6 ">
+                                        <div key={key} className="col-md-6 col-sm-6 col-xs-6">
+
                                             <div
 
-                                                key={key}>
-                                                <div
+                                                // onMouseOverCapture={(e) => { this.mouseHover(e, key) }}
 
-                                                    onMouseOverCapture={(e) => { this.mouseHover(e, key) }}
+                                                onMouseOver={(e) => { this.mouseHover(e, key) }}
+                                                onMouseLeave={(e) => { this.mouseOut(e, key) }}
+                                                className="right_btn">
+                                                <span className="AdminIcons ">
+                                                    {this.props.store.redirect ?
+                                                        <div>
+                                                            <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                            <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                            <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
+                                                            <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
+                                                        </div>
+                                                        : null}
+                                                </span>
+                                                <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
 
-                                                    // onMouseOver={(e) => { this.mouseHover(e, key) }}
-                                                    onMouseLeave={(e) => { this.mouseOut(e, key) }}
-                                                    className="right_btn">
-                                                    <div className="AdminIcons ">
-                                                        {this.props.store.redirect ?
-                                                            <div>
-                                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
-                                                                <img onClick={(e) => this.deleteHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
-                                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
-                                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
-                                                            </div>
-                                                            : null}
-                                                    </div>
-                                                    <Link style={{ textDecoration: "none", }} to={`/faq${data.slug}`} >
-
-                                                        <button
-                                                            className="btn btn-lg" >
-                                                            {data.name.toUpperCase()}
-                                                        </button>
-                                                    </Link>
-                                                </div>
+                                                    <button
+                                                        className="btn btn-lg" >
+                                                        {data.name.toUpperCase()}
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     )
@@ -265,8 +262,8 @@ var { sortBy } = require('lodash')
 
                     {
                         this.props.store.redirect ?
-                            <div className="col-md-12 ">
-                                <div className="col-md-8 col-sm-8">
+                            <div className="col-md-12 col-sm-12 col-xs-12 AddRubric">
+                                <div className="col-md-8 col-sm-8 col-sx-8">
 
                                     <div className="form-group has-success has-feedback">
 
@@ -274,22 +271,16 @@ var { sortBy } = require('lodash')
                                     </div>
                                 </div>
 
-                                <div className="col-md-4 col-sm-64" >
-                                    <div className="right_btn">
-
-                                        <button onClick={(e) => this.handleAddBtn(e)} style={{ width: "140px" }} className="btn btn-lg" >
-                                            ADD
+                                <div className="col-md-4 col-sm-4 col-xs-4 add_btn" >
+                                    <button onClick={(e) => this.handleAddBtn(e)} className="btn btn-lg" >
+                                        ADD
                                         </button>
-                                    </div>
                                 </div>
-
                             </div> : null
                     }
 
                     <div className="row">
-
-
-                        <div className="col-md-6 col-sm-6" >
+                        <div className="col-md-12 col-sm-12 col-xs-12" >
                             <div className="right_btn">
                                 {this.state.Message}
                             </div>
