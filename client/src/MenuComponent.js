@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom';
 
                     <div className="logo-wrapper">
                         <div className="logo">
-                            <img src={`${process.env.PUBLIC_URL}/images/praips Logo.png`} alt="praips Logo" />
+                            <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`} alt="praips Logo" width="60%" />
 
                         </div>
                     </div>

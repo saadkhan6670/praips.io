@@ -20,13 +20,13 @@ class PraipsStore {
     @observable id = ''
     @observable searchInput = '';
 
-
+    //  action={`${process.env.apiURL}/api/uploadImg?user_id=${this.props.store.User._id}`}
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
-                this.Rubrics = sortBy(response.data, [function (o) {
-                    return o.sort;
-                }])
-            })
+            this.Rubrics = sortBy(response.data, [function (o) {
+                return o.sort;
+            }])
+        })
             .catch((error) => {
                 console.log(error)
             })
@@ -34,8 +34,8 @@ class PraipsStore {
 
     async getAbout() {
         await axios.get(`${process.env.apiURL}/api/getAbout`).then((response) => {
-                this.About = response.data
-            })
+            this.About = response.data
+        })
             .catch((error) => {
                 console.log(error)
             })
@@ -73,9 +73,9 @@ class PraipsStore {
 
         axios.get(`${process.env.apiURL}/api/getAllContacts`).then((response) => {
 
-                this.Contacts = response.data
+            this.Contacts = response.data
 
-            })
+        })
             .catch((error) => {
 
                 console.log(error)
@@ -86,9 +86,9 @@ class PraipsStore {
 
     updateViews(id, views) {
         axios.post(`${process.env.apiURL}/api/updateViews`, {
-                id: id,
-                views: views
-            }).then((response) => {})
+            id: id,
+            views: views
+        }).then((response) => { })
             .catch((error) => {
                 console.log(error)
             })
@@ -96,10 +96,10 @@ class PraipsStore {
 
     UpdateRubric(id, name, slug) {
         axios.post(`${process.env.apiURL}/api/updateRubcric`, {
-                id: id,
-                name: name,
-                slug: slug
-            })
+            id: id,
+            name: name,
+            slug: slug
+        })
             .then((response) => {
                 return
 
@@ -110,11 +110,11 @@ class PraipsStore {
 
     SortRubric(sortFromId, sortTo, sortToId, sortFrom) {
         axios.post(`${process.env.apiURL}/api/sortRubrics`, {
-                toId: sortFromId,
-                toSort: sortTo,
-                fromId: sortToId,
-                fromSort: sortFrom
-            })
+            toId: sortFromId,
+            toSort: sortTo,
+            fromId: sortToId,
+            fromSort: sortFrom
+        })
             .then((response) => {
                 return
 
@@ -125,8 +125,8 @@ class PraipsStore {
 
     RemoveRubric(id) {
         axios.post(`${process.env.apiURL}/api/removeRubrics`, {
-                id: id
-            })
+            id: id
+        })
             .then((response) => {
                 return
 
@@ -157,10 +157,10 @@ class PraipsStore {
     createResearch(content) {
 
         return axios.post(`${process.env.apiURL}/api/createResearch`, {
-                content: content
-            }).then((response) => {
+            content: content
+        }).then((response) => {
 
-            })
+        })
             .catch((error) => {
 
                 console.log(error)
@@ -171,9 +171,9 @@ class PraipsStore {
 
         axios.get(`${process.env.apiURL}/api/getAllResearches`).then((response) => {
 
-                this.Researches = response.data
+            this.Researches = response.data
 
-            })
+        })
             .catch((error) => {
 
                 console.log(error)
@@ -183,19 +183,19 @@ class PraipsStore {
     getUserData() {
 
         axios.get(`${process.env.apiURL}/api/getUserData/${getCookie('user_id')}`).then((response) => {
-                this.User = response.data
-            })
+            this.User = response.data
+        })
             .catch((error) => {
                 console.log(error)
             })
     }
 
-   async UpdateRubricContent(id, question, answer) {
+    async UpdateRubricContent(id, question, answer) {
         await axios.post(`${process.env.apiURL}/api/updateRubcricContent`, {
-                id: id,
-                question: question,
-                answer: answer
-            })
+            id: id,
+            question: question,
+            answer: answer
+        })
             .then((response) => {
                 return
 
@@ -206,8 +206,8 @@ class PraipsStore {
 
     RemoveRubricContent(id) {
         axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
-                id: id
-            })
+            id: id
+        })
             .then((response) => {
                 return
 
@@ -231,9 +231,10 @@ class PraipsStore {
                 console.log(error)
             })
     }
+    
+    updateAbout() {
+        axios.post(`${process.env.apiURL}/api/updateAbout`, this.About).then((response) => {
 
-    updateAbout () {
-         axios.post(`${process.env.apiURL}/api/updateAbout`, this.About).then((response) => {
             console.log(response.data)
         })
         .catch((error) => {
@@ -253,6 +254,37 @@ class PraipsStore {
         }).catch((error) => {
             console.log(error)
         })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+    uploadImages(formData, uploadName) {
+console.log(uploadName)
+        switch (uploadName) {
+            case 'profile':
+                return axios.post(`${process.env.apiURL}/api/uploadProfileImg?user_id=${this.User._id}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+
+            case 'logo':
+            console.log(this.About._id)
+                return axios.post(`${process.env.apiURL}/api/uploadLogoImg?about_id=${this.About._id}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+
+                default : 
+                return;
+
+        }
+
+
+
     }
 
 }

@@ -190,7 +190,6 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     render() {
-        console.log(this.props.store.Rubrics)
 
          content = this.props.store.Rubrics === undefined ?
             null :
