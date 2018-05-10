@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import { CreateRubric, CreateRubricSlug } from './Services'
+import { CreateRubric, slugify } from './Services'
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
 import Search from './Search'
 var { sortBy } = require('lodash')
@@ -45,7 +45,7 @@ var { sortBy } = require('lodash')
 
         await this.setState({
             RubricInput: CreateRubric(e.target.value),
-            RubricSlug: CreateRubricSlug(e.target.value)
+            RubricSlug: slugify(e.target.value)
         })
 
     }
@@ -345,7 +345,7 @@ var { sortBy } = require('lodash')
                             <Modal.Footer>
                                 <Button onClick={(e) => {
                                     this.props.store.Rubrics[this.state.RubricIndex].name = this.state.Modalvalue
-                                    this.props.store.UpdateRubric(this.state.RubricId, this.state.Modalvalue, CreateRubricSlug(this.state.Modalvalue))
+                                    this.props.store.UpdateRubric(this.state.RubricId, this.state.Modalvalue, slugify(this.state.Modalvalue))
                                     this.setState({
                                         Show: false,
                                         Modalvalue: ''

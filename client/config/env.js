@@ -81,6 +81,10 @@ function getClientEnvironment(publicUrl) {
         PUBLIC_URL: `http://${ip.address()}:5000`,
         apiURL: process.env.NODE_ENV === 'development' ? `http://${ip.address()}:5000` : ''
 
+        // PUBLIC_URL: `http://196.194.185.216:5000`,
+        // apiURL: process.env.NODE_ENV === 'development' ? `http://196.194.185.216:5000` : ''
+        
+
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

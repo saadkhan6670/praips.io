@@ -190,6 +190,7 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     render() {
+        console.log(this.props.store.Rubrics)
 
          content = this.props.store.Rubrics === undefined ?
             null :
@@ -304,6 +305,7 @@ var x = document.getElementsByClassName("mySlides");
                         })
                     }
                 </div>
+                {this.props.store.redirect ? 
                 <div className="RubricAdd" style={{ textAlign:"center"}}>
                 <label className="label1">How can we help? </label>
                 <form id="contactForm" >
@@ -321,7 +323,7 @@ var x = document.getElementsByClassName("mySlides");
                             <button className="btn btn-lg"  onClick= {this.AddRubricContent} > ADD </button>
                         </div>
                     </form>
-                    </div>
+                    </div> : null }
 
                 <div className="col-md-12 col-sm-12 col-sx-12 slider">
                     <div className="col-md-1 col-sm-1 col-xs-1">
@@ -330,7 +332,7 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
 
-                    {this.state.showSlider ? this.props.store.Rubrics.map((data, key) => {
+                     {this.props.store.Rubrics.map((data, key) => {
                         return (<div key={key}>
                             <div className="col-md-4 col-sm-4 col-xs-4 mySlides">
                                 <div>
@@ -338,7 +340,7 @@ var x = document.getElementsByClassName("mySlides");
                                 </div>
                             </div>
                         </div>)
-                    }) : null}
+                    }) }
 
                     <div className="col-md-1 col-sm-1 col-xs-1 rightArrow">
 
