@@ -21,7 +21,8 @@ var { sortBy } = require('lodash')
             RubricIndex: '',
             RubricId: '',
             redirect: false,
-            SearchValue: ''
+            SearchValue: '',
+            deleteconfirm: '',
         }
     }
 
@@ -94,8 +95,10 @@ var { sortBy } = require('lodash')
 
     handleModalClose = () => {
         this.setState({
-            Show: false
+            Show: false,
+            deleteconfirm: false,
         })
+
     }
 
     handleModalShow = () => {
@@ -103,6 +106,7 @@ var { sortBy } = require('lodash')
     }
 
     editHandle(event, data, index) {
+        console.log(this.state.deleteconfirm)
         this.handleModalShow()
         this.setState({
             RubricIndex: index,
@@ -112,9 +116,15 @@ var { sortBy } = require('lodash')
     }
 
 
-    deleteHandle(event, data, index) {
-        this.props.store.Rubrics.splice(index, 1)
-        this.props.store.RemoveRubric(data._id)
+    async deleteHandle(event, data, index) {
+        await this.setState({
+            deleteconfirm: true,
+            Modalvalue: data.name,
+            RubricIndex: index,
+            RubricId: data._id
+        })
+        this.handleModalShow()
+
     }
 
     upHandle(event, data, index) {
@@ -231,7 +241,6 @@ var { sortBy } = require('lodash')
                                             <div
 
                                                 // onMouseOverCapture={(e) => { this.mouseHover(e, key) }}
-
                                                 onMouseOver={(e) => { this.mouseHover(e, key) }}
                                                 onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                                 className="right_btn">
@@ -259,15 +268,17 @@ var { sortBy } = require('lodash')
                         </div>
                     }
 
-
                     {
                         this.props.store.redirect ?
                             <div className="col-md-12 col-sm-12 col-xs-12 AddRubric">
                                 <div className="col-md-8 col-sm-8 col-sx-8">
+                                    <div className="form-group">
 
-                                    <div className="form-group has-success has-feedback">
+                                        <div className="loginInputs">
 
-                                        <input onChange={(e) => { this.HandleChange(e) }} type="text" className="form-control" placeholder="enter the name of Rubric" />
+                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" className="form-control" placeholder="enter the name of Rubric" />
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -290,41 +301,60 @@ var { sortBy } = require('lodash')
 
                 {/* Modal component */}
                 <Modal show={this.state.Show} onHide={this.handleModalClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Enter The Name Of Rubric</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <form>
-                            <FormGroup
-                                controlId="formBasicText"
-                            >
-                                <FormControl
-                                    type="text"
-                                    value={this.state.Modalvalue}
-                                    placeholder="Enter text"
-                                    onChange={(e) => {
-                                        this.setState({
-                                            Modalvalue: e.target.value
-                                        })
-                                    }}
-                                />
-                                <FormControl.Feedback />
-                            </FormGroup>
-                        </form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={(e) => {
-                            this.props.store.Rubrics[this.state.RubricIndex].name = this.state.Modalvalue
-                            this.props.store.UpdateRubric(this.state.RubricId, this.state.Modalvalue, CreateRubricSlug(this.state.Modalvalue))
-                            this.setState({
-                                Show: false,
-                                Modalvalue: ''
-                            })
-                        }}>Change</Button>
-                    </Modal.Footer>
+                    {this.state.deleteconfirm === true ?
+                        <div>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete Confimrmation</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                Are sure you want to delete <Modal.Title>{this.state.Modalvalue} ?</Modal.Title>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={(e) => {
+                                    this.props.store.Rubrics.splice(this.state.RubricIndex, 1)
+                                    this.props.store.RemoveRubric(this.state.RubricId)
+                                    this.setState({
+                                        deleteconfirm: false,
+                                        Show: false,
+                                        Modalvalue: ''
+                                    })
+                                }}>Delete</Button>
+                            </Modal.Footer> </div> : <div>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Enter The Name Of Rubric</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form>
+                                    <FormGroup
+                                        controlId="formBasicText"
+                                    >
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.Modalvalue}
+                                            placeholder="Enter text"
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    Modalvalue: e.target.value
+                                                })
+                                            }}
+                                        />
+                                        <FormControl.Feedback />
+                                    </FormGroup>
+                                </form>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={(e) => {
+                                    this.props.store.Rubrics[this.state.RubricIndex].name = this.state.Modalvalue
+                                    this.props.store.UpdateRubric(this.state.RubricId, this.state.Modalvalue, CreateRubricSlug(this.state.Modalvalue))
+                                    this.setState({
+                                        Show: false,
+                                        Modalvalue: ''
+                                    })
+                                }}>Change</Button>
+                            </Modal.Footer> </div>}
+
                 </Modal>
                 {/* Modal component */}
-
             </div>
 
         )

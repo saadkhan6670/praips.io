@@ -89,13 +89,10 @@ exports.DelLogKey = (req, res) => {
 // API for Rubrics
 exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)
-
   New_Rubrics.save((err, rubric) => {
-
     res.send(rubric)
   })
   io.emit('update', { api: 'RubricsChanged' })
-
 }
 
 exports.updateRubcric = (req, res) => {
@@ -165,7 +162,7 @@ exports.createRubcricContent = (req, res) => {
       res.send(err)
     }
     else {
-      Rubrics.update({ _id: mongoose.Types.ObjectId(req.query.id) }, { $push: { content: data._id } }, (data) => {
+      Rubrics.update({ _id: mongoose.Types.ObjectId(req.body.id) }, { $push: { content: data._id } }, (data) => {
         return
       })
       res.send(data)
@@ -173,6 +170,15 @@ exports.createRubcricContent = (req, res) => {
     }
   })
   io.emit('update', { api: 'RubricsChanged' })
+}
+
+
+exports.SortRubricContent = (req,res)=> {
+  RubricContent.findByIdAndUpdate(req.body.toId, { $set: {sort :req.body.toSort} }, {new: true}, (err , data) => {
+    RubricContent.findByIdAndUpdate(req.body.fromId, { $set: {sort :req.body.fromSort} }, {new: true}, (err , data2) => {
+      res.send("Rubric Updated")
+    })
+  })
 }
 
 exports.updateRubcricContent = (req, res) => {

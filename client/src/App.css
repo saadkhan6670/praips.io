@@ -203,7 +203,7 @@ td {
 .content-wrapper .form-group input {
     text-indent: 20px;
     border-radius: 4px;
-    height: 51px;
+    height: 45px;
     background-color: #FBFBFB;
     border: 2px solid #E2E2E2;
 }
@@ -333,6 +333,7 @@ button.logoutbtn {
     font-weight: bold;
     border-radius: 10px;
     width: 144px;
+    height: 45px;
 }
 
 .content-wrapper .right_btn {
@@ -440,6 +441,10 @@ button {
     height: 47px;
 }
 
+.AdminIcons {
+    /* display: none; */
+    visibility: hidden;
+}
 
 .contactbtn {
     height: 10px;
@@ -813,6 +818,12 @@ button {
     padding: 61px 0 0px 35px;
 }
 
+.AdminRubricName {
+    color: grey;
+    font-size: 138%;
+    padding: 61px 0 0px 35px;
+}
+
 .RubricContent {
     padding: 18px 25px 0px 28px;
     height: 250px;
@@ -877,9 +888,62 @@ button {
     left: 8px ;
 }
 
+.editimg{
+    width: 16px;
+}
+
+/* Dashboard css */
+
+.dashcontainer {
+    padding-right: 30px;
+    padding-left: 26px;
+}
+
+.dashboard.headcol{
+    padding-left: 5px;
+}
+
+.dashboard h3.heading {
+    font-weight: 850;
+    font-weight: 850;
+    font-size: 28px;
+    margin-top: 21px;
+}
+
+.statsUpperBar{
+    border-left: 3px solid rgb(131, 199, 90);
+    /* font-size: 17px; */
+    margin-top: 7px;
+    /* margin-right: 28px; */
+    height: 41px;
+    font-weight: bold;
+}
+
 /* end content wrapper */
 
+
+.AdminRubricContent {
+    padding: 18px 25px 0px 28px;
+    height: 250px;
+    margin-right: 0px;
+}
+
+.AdminRubricContent h5 {
+    font-size: 14px;
+}
+
+.AdminRubricContent p {
+    display: none;
+    font-size: 14px;
+    line-height: 164%;
+    padding: 2.5% 0 0 2.5%;
+}
+
+
 @media screen and (max-width: 2560px) and (min-width: 1921px) {
+    .slider{
+        margin-left: 19px;
+    }
     .AdminProfile-wrapper div.profileImage {
         width: 21%;
     }
@@ -922,10 +986,20 @@ button {
 }
 
 @media (max-width: 1650px) {
-
+    .AddRubric{
+        margin-top: 54px;
+    }
+    .aboutedit{
+        right: 20%;
+    }
+    .profileName{
+        margin-top: 2%;
+    margin-left: 1px;
+    font-size: 15px;
+    }
     .slider{
         width: 100%;
-        margin-top: 154px;
+        margin-top: 175px;
     }
     
     .mySlides{
@@ -938,7 +1012,7 @@ button {
         width: 42px;
     }
     .sliderBtn{
-        width: 150px;
+        width: 174px;
     }
 
     .profileNamediv {
@@ -1018,7 +1092,7 @@ button {
     }
     .content-wrapper .right_btn {
         text-align: center;
-        margin-top: 48px;
+        margin-top: 16px;
     }
     .content-wrapper .right_btn button {
         width: 87%;
@@ -1082,6 +1156,53 @@ button {
         font-size: 19px !important;
         padding: 41px 0 0px 26px !important;
     }
+
+    .addContentbtn {
+        margin-top: 0;
+        float: right;
+        margin-right: 30px;
+    }
+    .addContentbtn button {
+        background-color: #83C75A;
+        padding: 9px 53px;
+        color: white;
+        border: 1px #83C75A solid;
+        border-radius: 9px;
+        cursor: pointer;
+    }
+    .AdminRubricName {
+        font-size: 19px !important;
+        padding: 15px 0 0px 26px !important;
+    }
+
+    .RubricAdd h2 {
+        padding: 9px 0px 0px 7px !important;
+        font-size: 27px !important;
+    }
+    .RubricAdd .label1 {
+        font-size: 16px ;
+        margin: 20px 0px 0px 0px ;
+    }
+    .RubricAdd .textarea {
+        height: 119px;
+    }
+    .questiontextarea{
+        padding: 19px 19px 0 19px;
+    margin: 0;
+    }
+    .answertextarea{
+        padding: 24px 21px 0px 12px;
+    }
+
+    .RubricAdd .form-control {
+        width: 96%;
+        margin: 0 0px 0px 10px;
+        border-top-left-radius: 2px ;
+        border-bottom-left-radius: 2px ;
+        border-top-right-radius: 2px ;
+        border-bottom-right-radius: 2px;
+    }
+
     .RubricContent {
         padding: 7px 25px 0px 28px !important;
         height: 188px !important;
@@ -1094,6 +1215,21 @@ button {
         font-size: 13px !important;
         padding: 1.5% 0px 0px 2.5% !important;
     }
+
+    .AdminRubricContent {
+        padding: 7px 25px 0px 28px ;
+        height: 77px ;
+    }
+    .AdminRubricContent h5 {
+        margin-top: 12px;
+        font-size: 13px ;
+    }
+    .AdminRubricContent p {
+        font-size: 13px ;
+        padding: 1.5% 0px 0px 2.5% ;
+    }
+
+    
     .contact h2 {
         padding: 9px 0px 0px 7px !important;
         font-size: 27px !important;
@@ -1208,7 +1344,10 @@ button {
     }
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1370px) {
+    .sliderBtn {
+        width: 155px;
+    }
     .sidebar-wrapper {
         width: 6.7%;
     }
@@ -1276,7 +1415,13 @@ button {
 
 @media( max-width: 768px) {}
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 999px) {
+    .sliderBtn{
+        width: 99%;
+    }
+    .AdminIcons{
+        visibility: visible;
+    }
     .mobile-sidebar-wrapper {
         width: 100%;
         display: none;
@@ -1311,7 +1456,7 @@ button {
     }
     .content-wrapper {
         width: 100%;
-        height: 0%;
+        /* height: 0%; */
         border-radius: 0px;
         margin-top: 0px;
         margin-right: 0px
@@ -1449,24 +1594,12 @@ button {
     float: right;
 }
 
-
-.AdminIcons {
-    /* display: none; */
-    visibility: hidden;
-}
-
 .RubricStyles {
     margin-top: 2%;
     overflow: visible;
     overflow-y: auto;
     height: 377px;
 }
-
-/*
- * react-circular-progressbar styles
- *
- * All of the styles in this file are optional and configurable!
- */
 
 .CircularProgressbar {
     width: 10%;
