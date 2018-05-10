@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
 // COmponents
-import AboutComponent from './AboutComponent'
+import About from './About/index'
 import MenuComponent from './MenuComponent'
 import FAQComponent from './FAQComponent'
 import FAQInfo from './FAQInfo'
@@ -41,7 +41,7 @@ import MobileNav from './MobileNav'
                 <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />
                 <Route path="/dashboard" render={(props) => { return <Dashboard store={this.props.store} {...props} /> }} />
               </Switch>
-              <AboutComponent store={this.props.store} />
+              <About store={this.props.store} />
             </div>
           </BrowserRouter>
         </div>

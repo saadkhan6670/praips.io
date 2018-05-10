@@ -1378,6 +1378,15 @@ button {
     }
 }
 
+@media (max-width: 426px) {
+.content-wrapper .right_btn button {
+    font-size: 12px;
+   
+}
+}
+
+
+
 .toggle-left {
     /* width: 100%; */
     /* position: absolute; */

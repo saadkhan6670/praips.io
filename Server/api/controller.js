@@ -41,7 +41,7 @@ exports.adminLogIn = (req, res) => {
       res.send(false)
     }
     else {
-   
+
       res.send(data)
     }
   })
@@ -148,9 +148,9 @@ exports.getAllRubrics = (req, res) => {
 
 }
 
-exports.sortRubrics = (req,res)=> {
-  Rubrics.findByIdAndUpdate(req.body.toId, { $set: {sort :req.body.toSort} }, {new: true}, (err , data) => {
-    Rubrics.findByIdAndUpdate(req.body.fromId, { $set: {sort :req.body.fromSort} }, {new: true}, (err , data2) => {
+exports.sortRubrics = (req, res) => {
+  Rubrics.findByIdAndUpdate(req.body.toId, { $set: { sort: req.body.toSort } }, { new: true }, (err, data) => {
+    Rubrics.findByIdAndUpdate(req.body.fromId, { $set: { sort: req.body.fromSort } }, { new: true }, (err, data2) => {
       res.send("Rubric Updated")
     })
   })
@@ -230,12 +230,15 @@ exports.createAbout = (req, res) => {
 }
 
 exports.updateAbout = (req, res) => {
-  About.findByIdAndUpdate(req.body._id,{ $set : {
-    name: req.body.name , 
-    logoPath: req.body.logoPath, 
-    description: req.body.description,
-    slogan:req.body.slogan,
-    siteUrl : req.body.siteUrl}}, { new: true }, (err, doc) => {
+  About.findByIdAndUpdate(req.body._id, {
+    $set: {
+      name: req.body.name,
+      logoPath: req.body.logoPath,
+      description: req.body.description,
+      slogan: req.body.slogan,
+      siteUrl: req.body.siteUrl
+    }
+  }, { new: true }, (err, doc) => {
 
     if (!doc) {
       res.send(err);
@@ -350,28 +353,58 @@ exports.getAllResearches = (req, res) => {
 }
 
 
-exports.uploadImg = (req, res) => {
-  console.log(req.body)
-if(req.file) {
-  console.log(req.file)
+exports.uploadProfileImg = (req, res) => {
+  // console.log(r)
+  if (req.file) {
+    Users.findByIdAndUpdate(req.query.user_id, { $set: { profilePath: `/images/${req.file.filename}` } }, (err, doc) => {
+      if (!doc) {
+        res.send("Cannot change profile picture at this moment")
+      }
+
+      else {
+        res.send(req.file.filename)
+      }
+    })
+  }
+
+  else {
+    console.log("No file uploaded")
+  }
+
 }
 
-else {
-  console.log("No file uploaded")
+exports.uploadLogoImg = (req, res) => {
+  // console.log(r)
+  if (req.file) {
+    About.findByIdAndUpdate(req.query.about_id, { $set: { logoPath: `/images/${req.file.filename}` } }, (err, doc) => {
+      if (!doc) {
+        res.send("Cannot change logo  at this moment")
+      }
+
+      else {
+        res.send(req.file.filename)
+      }
+    })
+  }
+
+  else {
+    console.log("No file uploaded")
+  }
+
 }
- 
-}
+
+
 
 exports.getUserData = (req, res) => {
- Users.findById(req.params.user_id).select('_id role profilePath username').exec( (err, user) => {
+  Users.findById(req.params.user_id).select('_id role profilePath username').exec((err, user) => {
 
-   if(!user ) {
-     res.send("No user found ")
-   }
+    if (!user) {
+      res.send("No user found ")
+    }
 
-   else {
-     res.send(user)
-   }
- } )
- 
+    else {
+      res.send(user)
+    }
+  })
+
 }

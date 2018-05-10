@@ -3,13 +3,15 @@ var app = express();
 const requestIp = require('request-ip');
 var router = express.Router();
 var controller = require('./controller');
-var multer = require('multer')
+
+var multer = require('multer');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, file.originalname.replace(/\s/g,'-'))
   }
 })
 var upload = multer({ storage: storage })
@@ -50,7 +52,9 @@ router.post('/createAbout', controller.createAbout);
 router.post('/updateAbout', controller.updateAbout);
 router.get('/getAbout', controller.getAbout);
 
-router.post('/uploadImg',upload.single('profile'), controller.uploadImg);
+router.post('/uploadProfileImg',upload.single('profile'), controller.uploadProfileImg);
+router.post('/uploadLogoImg',upload.single('logo'), controller.uploadLogoImg);
+
 
 
 // router.get('/getRubricContent/:slugName', controller.getRubricContent);
