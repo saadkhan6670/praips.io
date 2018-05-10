@@ -114,7 +114,7 @@ import axios from 'axios'
                             <div className="form-group">
 
                                 <div className="loginInputs">
-                                    <input  id="password" type="text" className="form-control" placeholder="Password"
+                                    <input  id="password" type="password" className="form-control" placeholder="Password"
                                     style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/pass-icon.png)`, backgroundSize: "16px",
                                     backgroundRepeat: "no-repeat",
                                     backgroundPosition: "14px",}}

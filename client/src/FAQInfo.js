@@ -22,7 +22,8 @@ var x = document.getElementsByClassName("mySlides");
             Show: false,
             RubricId: '',
             redirect: false,
-            SearchValue: ''
+            SearchValue: '',
+            showSlider : false
         }
     }
 
@@ -295,7 +296,7 @@ var x = document.getElementsByClassName("mySlides");
                     
                     </div>
 
-                    {this.props.store.Rubrics.map((data, key) => {
+                    {this.state.showSlider ? this.props.store.Rubrics.map((data, key) => {
                         return (<div key={key}>
                             <div className="col-md-4 col-sm-4 col-xs-4 mySlides">
                                 <div>
@@ -303,7 +304,7 @@ var x = document.getElementsByClassName("mySlides");
                                 </div>
                             </div>
                         </div>)
-                    })}
+                    }) : null}
 
                     <div className="col-md-1 col-sm-1 col-xs-1 rightArrow">
                         

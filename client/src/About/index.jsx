@@ -201,7 +201,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 <label >Description </label> <span ref="messageReq" className="reqMsg"></span>
                                 <textarea className="form-control" style={{ height: "150px" }} value={this.props.store.About.description} onChange={(e) => this.handleChange(e, 'description')}></textarea>
                             </div>
-                            <div className="col-md-12 col-sm-12 col-xs-12 about_btns">
+                            <div className=" form-group about_btns">
                                 <input type="submit" className="btn btn-lg" value="Edit" onClick={(e) => { this.editSubmit(e) }} />
                                 <input type="button" className="btn btn-lg" value="Cancel" onClick={() => { this.handleCancel() }} />
 
