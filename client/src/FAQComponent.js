@@ -243,7 +243,7 @@ var { sortBy } = require('lodash')
                                                 // onMouseOverCapture={(e) => { this.mouseHover(e, key) }}
                                                 onMouseOver={(e) => { this.mouseHover(e, key) }}
                                                 onMouseLeave={(e) => { this.mouseOut(e, key) }}
-                                                className="right_btn">
+                                                className="right_btn" style={{marginTop: this.props.store.redirect ? '16px' : '43px'}}>
                                                 <span className="AdminIcons ">
                                                     {this.props.store.redirect ?
                                                         <div>
