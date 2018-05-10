@@ -93,38 +93,38 @@ import {Redirect} from 'react-router-dom'
 
         return   this.props.store.redirect ?  (
 
-            <div className="content-wrapper" style={{ background: "#eee" }}>
-                <div className="container-fluid" style={{ paddingRight: "30px", paddingLeft: "32px" }}>
-                    <div className="row" style={{ height: "45px" }}>
-                        <div className="col-md-12 col-sm-12">
+            <div className="content-wrapper dashboard" style={{ background: "#eee" }}>
+                <div className="container-fluid dashcontainer">
+                    <div className="row">
+                        <div className="col-md-12 col-sm-12 col-xs-12 headcol">
 
-                            <h3 style={{ fontWeight: "850" }}>Dashboard</h3>
+                            <h3 className="heading">Dashboard</h3>
 
 
 
                         </div>
                     </div>
-                    <div className="row" style={{ height: "60px", }}>
-                        <div className="col-md-12 col-sm-12">
-                            <p>Follow in real time the performance of your FAQ</p>
+                    <div className="row" style={{ height: "53px" }}>
+                        <div className="col-md-12 col-sm-12 col-xs-12">
+                            <p style={{ marginTop: "4px"}}>Follow in real time the performance of your FAQ</p>
                         </div>
                     </div>
                     <div className="row" style={{ minHeight: "55px", backgroundColor: "white", paddingLeft: "10px", borderRadius: '4px' }}>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12 statsUpperBar">
 
-                            {this.props.store.Researches.length}      <br />
+                            {this.props.store.Researches.length}<br />
 
-                            <span style={{ fontSize: "12px", color: '#80808096' }}>  Research done by users </span>
+                            <span style={{ fontSize: "11px", color: '#80808096' }}>  Research done by users </span>
 
                         </div>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
 
 
                             {this.props.store.Contacts.length}   <br />
                             <span style={{ fontSize: "12px", color: '#80808096' }}>  Message Sent </span>
 
                         </div>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
                             {/* <h4 >60</h4>
                             <p style={{ fontSize: "12px" }}>Questions in FAQ</p> */}
                             {content.length}<br />
@@ -144,7 +144,7 @@ import {Redirect} from 'react-router-dom'
                     <div className="row" style={{ minHeight: "350px", backgroundColor: "white", padding: "14px 1px 0px", borderRadius: '4px' }}>
 
                         <div className="row" style={{ padding: "0px 15px 0px" }}>
-                            <div className="col-md-12 col-sm-12" style={{ textAlign: "left", fontWeight: "bold" }}>
+                            <div className="col-md-12 col-sm-12 col-xs-12" style={{ textAlign: "left", fontWeight: "bold" }}>
                                 OVERVIEW - QUESTION | ANSWER
                            <hr style={{ marginTop: "11px" }} />
 
@@ -188,7 +188,7 @@ import {Redirect} from 'react-router-dom'
                             </table>
                         </div>
                         <div className="row">
-                            <div className="col-md-12 col-sm-12"><a style={{ float: "right", color: " #8bc500", padding: "0px 29px", cursor: "pointer" }}>LOAD MORE...</a></div>
+                            <div className="col-md-12 col-sm-12 col-xs-12"><a style={{ float: "right", color: " #8bc500", padding: "0px 29px", cursor: "pointer" }}>LOAD MORE...</a></div>
                         </div>
                     </div>
 

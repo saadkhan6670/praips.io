@@ -5,11 +5,11 @@ import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
 var {
     sortBy
 } = require('lodash')
+
 var slideIndex = 1;
 var slideIndex2 = 2;
-
+let content ,filteredContent;
 var x = document.getElementsByClassName("mySlides");
-
 
 @observer class FAQInfo extends Component {
     constructor(props) {
@@ -18,13 +18,11 @@ var x = document.getElementsByClassName("mySlides");
         this.state = {
             question: '',
             questionId: '',
-            answer: '',            
+            answer: '',
             Message: '',
-            ModalComponent: '',
             Show: false,
-            RubricId: '',
             redirect: false,
-            SearchValue: ''
+            deleteconfirm: '',
         }
     }
 
@@ -118,10 +116,13 @@ var x = document.getElementsByClassName("mySlides");
 
         this.props.store.createResearch(searchInput)
     }
+
     handleModalClose = () => {
         this.setState({
-            Show: false
+            Show: false,
+            deleteconfirm: false,
         })
+
     }
 
     handleModalShow = () => {
@@ -132,52 +133,45 @@ var x = document.getElementsByClassName("mySlides");
         this.handleModalShow()
         this.setState({
             question: data.question,
-            answer : data.answer,
+            answer: data.answer,
             questionId: data._id
         })
     }
 
     deleteHandle(event, data) {
-        this.props.store.RemoveRubricContent(data._id)
-        this.props.store.getRubrics()        
+        this.setState({
+            questionId: data._id,
+            deleteconfirm: true,
+
+        })
+        this.handleModalShow()
     }
 
-    // upHandle(event, data, index) {
-    //     if (index !== 0) {
-    //         var sortFrom = data.sort;
-    //         var sortTo = data.sort - 1;
-    //         var sortFromIndex = index;
-    //         var sortToindex = sortFromIndex - 1
-    //         var sortToId = this.props.store.Rubrics[sortToindex]._id;
+    upHandle(event, data, index) {
+        if (index !== 0) {
+          var sortToData = filteredContent[index-1]
+          var sortFrom = data.sort;
+            var sortTo = sortToData.sort
 
-    //         this.props.store.Rubrics[sortToindex].sort = sortFrom;
-    //         this.props.store.Rubrics[sortFromIndex].sort = sortTo;
+            this.props.store.SortRubricContent(data._id, sortTo, sortToData._id, sortFrom)
+            this.props.store.getRubrics()
 
-    //         // this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
-    //         // this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
+        }
 
-    //     }
+    }
 
-    // }
+    downHandle(event, data, index) {
 
-    // downHandle(event, data, index) {
+        if (index !== filteredContent.length - 1) {
+            var sortToData = filteredContent[index+1]
+          var sortFrom = data.sort;
+            var sortTo = sortToData.sort
 
-    //     if (index !== this.props.store.Rubrics.length - 1) {
-    //         var sortFrom = data.sort; //3
-    //         var sortTo = data.sort + 1; //4 
-    //         var sortFromIndex = index;//2
-    //         var sortToindex = sortFromIndex + 1 //3 
-    //         var sortToId = this.props.store.Rubrics[sortToindex]._id;
+            this.props.store.SortRubricContent(data._id, sortTo, sortToData._id, sortFrom)
+            this.props.store.getRubrics()
+        }
 
-    //         this.props.store.Rubrics[sortToindex].sort = sortFrom;
-    //         this.props.store.Rubrics[sortFromIndex].sort = sortTo;
-
-    //         // this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
-    //         // this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
-
-    //     }
-
-    // }
+    }
 
     mouseHover(event, id) {
         document.getElementsByClassName("AdminIcons")[id].style.visibility = "visible"
@@ -187,13 +181,36 @@ var x = document.getElementsByClassName("mySlides");
         document.getElementsByClassName("AdminIcons")[id].style.visibility = "hidden"
     }
 
+    AddRubricContent = (event) => {
+         event.preventDefault()
+        if(this.refs.Question.value.length !== 0 && this.refs.Answer.value.length !== 0 ){
+            this.props.store.createRubricContent(this.refs.Question.value , this.refs.Answer.value , content._id)
+            this.props.store.getRubrics()
+        }
+    }
+
     render() {
-        let content = this.props.store.Rubrics === undefined ? null : this.props.store.Rubrics.find((data => { return data.slug === `/${this.props.match.params.slugName}` }))
-        // sortBy(content, [function (o) {
-        //     return o.sort;
-        // }])
-        let filteredContent = content === undefined ? null : content.content.filter((d) => { return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
-        // console.log(content)
+        console.log(this.props.store.Rubrics)
+
+         content = this.props.store.Rubrics === undefined ?
+            null :
+            this.props.store.Rubrics.find((data => {
+                return data.slug === `/${this.props.match.params.slugName}`
+
+            }))
+
+         filteredContent = content === undefined ?
+            null :
+            content.content.filter((d) => {
+                return d.question.toLowerCase()
+                    .indexOf(this.props.store.searchInput
+                        .toLowerCase()) !== -1
+            })
+
+            filteredContent =  sortBy(filteredContent, [function (o) {
+                return o.sort;
+            }])
+
         return (
             <div className="content-wrapper" id="intro">
                 <div className="container-fluid">
@@ -217,7 +234,7 @@ var x = document.getElementsByClassName("mySlides");
                         <div className="input-group" id="adv-search">
                             <input type="text" className="form-control searchInput" placeholder="How can we help" ref="searchInput"
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) : null }}
-                        
+
                             />
                             <div className="input-group-btn">
                                 <div className="btn-group" role="group">
@@ -232,10 +249,11 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
                 </div>
-                <h4 className="RubricName">{content === undefined ? null : content.name.toUpperCase()}</h4>
+                <h4 
+                className={this.props.store.redirect ? " AdminRubricName" : "row RubricName"} >
+                {content === undefined ? null : content.name.toUpperCase()}</h4>
 
-                <div className="row RubricContent scrollbar" id="style-3" >
-
+                <div className={this.props.store.redirect ? "row AdminRubricContent scrollbar" : "row RubricContent scrollbar"} id="style-3" >
                     {
                         filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
                             <h4>  We didn't find results for {this.props.store.searchInput} </h4>
@@ -246,7 +264,6 @@ var x = document.getElementsByClassName("mySlides");
                                 <li> Try different keywords.   </li>
                                 <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
                             </ul>
-
                         </div> : filteredContent.map((data, key) => {
                             return (<div>
                                 <div className="col-md-12 col-sm-12 col-xs-12"
@@ -255,20 +272,19 @@ var x = document.getElementsByClassName("mySlides");
                                     key={key}>
 
                                     <div className="col-md-8 col-sm-8  col-xs-8 " >
-
-                                        <h5><b>{data.question}</b>  </h5>
+                                        <h5><b>{data.question}</b></h5>
                                     </div>
-                                    <div className="col-md-3 col-sm-3 col-xs-3">
-                                    <div className="AdminIcons" style={{ padding: "3px 0 0 6%" }}>
-                                        {this.props.store.redirect ?
-                                            <div>
-                                                <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
-                                                <img onClick={(e) => this.deleteHandle(e, data)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
-                                                <img onClick={(e) => this.upHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
-                                                <img onClick={(e) => this.downHandle(e, data, key)} style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
-                                            </div>
-                                            : null}
-                                    </div>
+                                    <div className="col-md-3 col-sm-3 col-xs-3" style={{ padding: "0 0 0 0" }}>
+                                        <div className="AdminIcons" style={{ padding: "3px 0 0 0" }}>
+                                            {this.props.store.redirect ?
+                                                <div>
+                                                    <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "6px", width: "21px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                    <img onClick={(e) => this.deleteHandle(e, data)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                    <img onClick={(e) => this.upHandle(e,data,key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
+                                                    <img onClick={(e) => this.downHandle(e, data, key)} className="editimg" style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
+                                                </div>
+                                                : null}
+                                        </div>
                                     </div>
                                     <div className="col-md-1 col-sm-1 col-xs-1" style={{ padding: "0.5% 0 0px 1%" }}>
                                         <img src="/images/plus icon.png" alt="plus icon"
@@ -289,12 +305,30 @@ var x = document.getElementsByClassName("mySlides");
                         })
                     }
                 </div>
+                <div className="RubricAdd" style={{ textAlign:"center"}}>
+                <label className="label1">How can we help? </label>
+                <form id="contactForm" >
+                <div className="form-group questiontextarea">
+                            
+                <input type="text" placeholder="Question" style={{ margin: "0 0 0 0", height: "38px", backgroundColor: "#fdfdfd" }} 
+                className="form-control" ref="Question" />
+                        </div>
+                        <div className="form-group answertextarea">
+                            
+                            <textarea placeholder="Answer" className="form-control textarea" ref='Answer'></textarea>
+                        </div>
+
+                        <div className="addContentbtn">
+                            <button className="btn btn-lg"  onClick= {this.AddRubricContent} > ADD </button>
+                        </div>
+                    </form>
+                    </div>
 
                 <div className="col-md-12 col-sm-12 col-sx-12 slider">
                     <div className="col-md-1 col-sm-1 col-xs-1">
-                        
+
                         <img className="leftArrow" onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/left arrow.png`} alt="left arrow" />
-                    
+
                     </div>
 
                     {this.props.store.Rubrics.map((data, key) => {
@@ -308,71 +342,84 @@ var x = document.getElementsByClassName("mySlides");
                     })}
 
                     <div className="col-md-1 col-sm-1 col-xs-1 rightArrow">
-                        
-                        <img  className="rightArrow" onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/right arrow.png`} alt="right arrow" />
-                    
+
+                        <img className="rightArrow" onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/right arrow.png`} alt="right arrow" />
+
                     </div>
-                    
+
                     <div className="row contactbtn">Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
 
                 </div>
-                
+
                 {/* Modal component */}
                 <Modal show={this.state.Show} onHide={this.handleModalClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Edit your Question or Answer</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <form>
-                            <FormGroup
-                                controlId="formBasicText"
-                            >
-                            
-                        <Modal.Title>Question</Modal.Title>
-                            
-                                <FormControl
-                                    style={{height: '100px'}}
-                                    componentClass="textarea"
-                                    value={this.state.question}
-                                    placeholder="Enter text"
-                                    onChange={(e) => {
-                                        this.setState({
-                                            question: e.target.value
-                                        })
-                                    }}
-                                />
-                                <FormControl.Feedback />
-                            </FormGroup>
+                    {this.state.deleteconfirm === true ?
+                        <div>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete Confimrmation</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                Are sure you want to delete this question
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={(e) => {
+                                    this.props.store.RemoveRubricContent(this.state.questionId)
+                                    this.props.store.getRubrics()
+                                    this.setState({
+                                        deleteconfirm: false,
+                                        Show: false,
 
-                            <FormGroup
-                                controlId="formBasicText"
-                            >
-                        <Modal.Title>Answer</Modal.Title>
-                            
-                                <FormControl
-                                   style={{height: '200px'}}
-                                   componentClass="textarea"
-                                    value={this.state.answer}
-                                    placeholder="Enter text"
-                                    onChange={(e) => {
-                                        this.setState({
-                                            answer: e.target.value
-                                        })
-                                    }}
-                                />
-                                <FormControl.Feedback />
-                            </FormGroup>
-                        </form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={(e) => {
-                             this.props.store.UpdateRubricContent(this.state.questionId, this.state.question, this.state.answer)
-                            this.setState({
-                                Show: false,
-                            })
-                            this.props.store.getRubrics()
-                        }}>Change</Button>
-                    </Modal.Footer>
+                                    })
+                                }}>Delete</Button>
+                            </Modal.Footer> </div> : <div>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Edit your Question or Answer</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form>
+                                    <FormGroup controlId="formBasicText">
+                                        <Modal.Title>Question</Modal.Title>
+                                        <FormControl
+                                            style={{ height: '100px' }}
+                                            componentClass="textarea"
+                                            value={this.state.question}
+                                            placeholder="Enter text"
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    question: e.target.value
+                                                })
+                                            }}
+                                        />
+                                        <FormControl.Feedback />
+                                    </FormGroup>
+
+                                    <FormGroup controlId="formBasicText" >
+                                        <Modal.Title>Answer</Modal.Title>
+                                        <FormControl
+                                            style={{ height: '200px' }}
+                                            componentClass="textarea"
+                                            value={this.state.answer}
+                                            placeholder="Enter text"
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    answer: e.target.value
+                                                })
+                                            }}
+                                        />
+                                        <FormControl.Feedback />
+                                    </FormGroup>
+                                </form>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={(e) => {
+                                    this.props.store.UpdateRubricContent(this.state.questionId, this.state.question, this.state.answer)
+                                    this.setState({
+                                        Show: false,
+                                    })
+                                    this.props.store.getRubrics()
+                                }}>Change</Button>
+                            </Modal.Footer>
+                        </div>}
                 </Modal>
                 {/* Modal component */}
             </div>

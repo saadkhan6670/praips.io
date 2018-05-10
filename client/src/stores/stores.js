@@ -54,7 +54,8 @@ class PraipsStore {
     async createRubric(rubricName, rubricSlug) {
         await axios.post(`${process.env.apiURL}/api/createRubric`, {
             name: rubricName,
-            slug: rubricSlug
+            slug: rubricSlug,
+            sort : this.Rubrics.length+1
         }).then((response) => {
             return response.data
 
@@ -215,14 +216,41 @@ class PraipsStore {
             })
     }
 
+    SortRubricContent(sortFromId, sortTo, sortToId, sortFrom) {
+        
+        axios.post(`${process.env.apiURL}/api/SortRubricContent`, {
+                toId: sortFromId,
+                toSort: sortTo,
+                fromId: sortToId,
+                fromSort: sortFrom
+            })
+            .then((response) => {
+                return
+
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
     updateAbout () {
          axios.post(`${process.env.apiURL}/api/updateAbout`, this.About).then((response) => {
-
             console.log(response.data)
-
         })
         .catch((error) => {
+            console.log(error)
+        })
+    }
 
+    async createRubricContent(Question, Answer ,RubricId) {
+        await axios.post(`${process.env.apiURL}/api/createRubcricContent`, {
+            question: Question,
+            answer: Answer,
+            sort : this.Rubrics[0].content.length+1,
+            id : RubricId
+        }).then((response) => {
+            return response.data
+
+        }).catch((error) => {
             console.log(error)
         })
     }
