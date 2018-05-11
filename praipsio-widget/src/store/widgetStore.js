@@ -6,6 +6,7 @@ class widgetStore {
 
     @observable Rubrics = [];
     @observable searchInput = '';
+    @observable selectedQue = '';
 
 async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
@@ -18,7 +19,12 @@ async getRubrics() {
             })
     }
 
+    createContact(data) {
+        return axios.post(`${process.env.apiURL}/api/createContact`, data)
+    }   
 }
+
+
 
 const store = new widgetStore()
 

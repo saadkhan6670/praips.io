@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isEmail } from 'validator';
 
 var labelStyles = {
     display: "flex",
@@ -56,6 +57,127 @@ var contactAlertDiv = {
 }
 
 class Contact extends Component {
+    onChangeValidation(fieldName) {
+
+        switch (fieldName) {
+            case "name":
+                // validation for name field if user provide less than 3 chars
+                if (this.refs.Name.value.length < 3) {
+
+                    this.refs.nameReq.innerHTML = "name can't contain less than 3 characters or numbers"
+                    this.refs.Name.style.borderColor = "red"
+                }
+                if (this.refs.Name.value === "") {
+                    this.refs.nameReq.innerHTML = "name is required"
+                    this.refs.Name.style.borderColor = "red"
+                }
+                if (this.refs.Name.value.length >= 3) {
+
+                    this.refs.nameReq.innerHTML = null
+                    this.refs.Name.style.borderColor = "#ccc"
+                }
+                break;
+            case "email":
+
+                if (!isEmail(this.refs.Email.value)) {
+
+                    this.refs.emailReq.innerHTML = "invalid email"
+                    this.refs.Email.style.borderColor = "red"
+                }
+
+                if (this.refs.Email.value === "") {
+                    this.refs.emailReq.innerHTML = "email is required"
+                    this.refs.Email.style.borderColor = "red"
+                }
+                if (isEmail(this.refs.Email.value)) {
+                    this.refs.emailReq.innerHTML = null
+                    this.refs.Email.style.borderColor = "#ccc"
+                }
+                break;
+            case "message":
+                if (this.refs.Message.value === "") {
+                    this.refs.messageReq.innerHTML = "message is required"
+                    this.refs.Message.style.borderColor = "red"
+                }
+                else {
+                    this.refs.messageReq.innerHTML = null
+                    this.refs.Message.style.borderColor = "#ccc"
+                }
+                break;
+            default:
+                return;
+
+        }
+    }
+
+    contactSubmit(e) {
+        e.preventDefault();
+
+        if (this.refs.Name.value.length < 3) {
+            this.refs.nameReq.innerHTML = "name can't contain less than 3 characters or numbers"
+            this.refs.Name.style.borderColor = "red"
+        }
+
+        if (this.refs.Name.value === "") {
+            this.refs.nameReq.innerHTML = "name is required"
+            this.refs.Name.style.borderColor = "red"
+        }
+
+        if (!isEmail(this.refs.Email.value)) {
+
+            this.refs.emailReq.innerHTML = "invalid email"
+            this.refs.Email.style.borderColor = "red"
+        }
+
+        if (this.refs.Email.value === "") {
+
+            this.refs.emailReq.innerHTML = "email is required"
+            this.refs.Email.style.borderColor = "red"
+        }
+
+        if (this.refs.Message.value === "") {
+            this.refs.messageReq.innerHTML = "message is required"
+            this.refs.Message.style.borderColor = "red"
+
+        }
+
+
+        if (this.refs.Name.value !== "" && this.refs.Email.value !== "" && this.refs.Message.value !== "" && isEmail(this.refs.Email.value)) {
+            document.getElementById("contactForm").style.display = "none"
+            document.getElementById("spacingDiv").style.display = "block"
+        document.getElementById('helpText').innerHTML =  "Help"
+            
+            
+            
+
+            var data = {
+                visitorName: this.refs.Name.value,
+                toEmail: this.refs.Email.value,
+                content: this.refs.Message.value,
+            }
+            this.props.store.createContact(data).then((response) => {
+
+                document.getElementById('contactAlert').style.display = "block"
+            document.getElementById('helpText').innerHTML =  "Message Sent"
+      
+                
+
+
+            }).catch((error) => {
+
+                document.getElementById('contactAlert').style.display = "block"
+                document.getElementById('contactAlert').innerHTML = "<strong> Sorry </strong> We are unable to process your request at this moment"
+                document.getElementById('contactAlert').style.backgroundColor = "#f44336"
+            })
+        }
+
+    }
+
+    handleEnterKey(e) {
+        if (e.keyCode === 13) {
+            this.contactSubmit(e)
+        }
+    }
     render() {
         return (
 

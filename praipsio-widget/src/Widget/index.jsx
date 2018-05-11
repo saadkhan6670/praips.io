@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Contact from './components/Contact'
 import { observer } from 'mobx-react';
 
+var filteredContent = []
+
 var helpdivStyles = {
     position: "fixed",
     bottom: "5px",
@@ -20,7 +22,7 @@ var helpbtnStyles = {
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
 
-
+    cursor: "pointer"
 
 }
 var widgetContainerStyle = {
@@ -169,7 +171,17 @@ var backStyles = {
     display: "none"
 }
 
+var RemoveOverflow = (str, strlength) => {
+    if (str.length > strlength) {
+        str = str.substring(0, strlength) + "..."
+        return str;
+    }
+    else {
+        return str
+    }
 
+
+}
 
 @observer class Widget extends Component {
 
@@ -190,7 +202,7 @@ var backStyles = {
         this.refs.widgetHelpBtn.style.display = "none"
         this.refs.widgetContainer.style.display = "block"
         this.refs.widgetHeaderDiv.style.display = "block"
-        this.refs.helpText.innerHTML = "Help"
+        document.getElementById('helpText').innerHTML = "Help"
         this.refs.widgetSearchInput.style.display = "block"
         document.getElementById('searchInputDivId').focus()
 
@@ -198,21 +210,24 @@ var backStyles = {
 
 
     handleSearch() {
-        if(document.getElementsByClassName('widGetInput')[0].value.length !== 0) {
-     this.props.store.searchInput = document.getElementsByClassName('widGetInput')[0].value
+        if (document.getElementsByClassName('widGetInput')[0].value.length !== 0) {
+            this.props.store.searchInput = document.getElementsByClassName('widGetInput')[0].value
+            this.refs.searchResultDiv.style.display = "block"
+            this.refs.askQuestionBtnDiv.style.display = "block"
+            this.refs.widgetContainer.style.width = "25%"
+            this.refs.widgetSearchInput.style.backgroundColor = "rgb(131, 199, 90)"
+            this.refs.widgetHeaderDiv.style.height = "9px"
         }
-   
-        this.refs.searchResultDiv.style.display = "block"
-        this.refs.askQuestionBtnDiv.style.display = "block"
-        this.refs.widgetContainer.style.width = "25%"
-        this.refs.widgetSearchInput.style.backgroundColor = "rgb(131, 199, 90)"
-        this.refs.widgetHeaderDiv.style.height = "9px"
+        console.log(filteredContent.length)
+
+
 
     }
 
 
 
-    handleQuestionClick() {
+    handleQuestionClick(selectedQue) {
+        this.props.store.selectedQue = selectedQue
         this.refs.widgetSearchInput.style.display = "none"
 
         this.refs.searchResultDiv.style.display = "none"
@@ -229,7 +244,8 @@ var backStyles = {
         this.refs.searchResultDiv.style.display = "none"
         this.refs.questionAnswerDiv.style.display = "none"
         this.refs.askQuestionBtnDiv.style.display = "none"
-        this.refs.helpText.innerHTML = "Submit a Feature Request"
+        document.getElementById('helpText').innerHTML = "Submit a Feature Request"
+
         this.refs.backArrow.style.display = "block"
         this.refs.contactDiv.style.display = "block"
         this.refs.widgetHeaderDiv.style.height = "28px"
@@ -245,13 +261,16 @@ var backStyles = {
         this.refs.contactDiv.style.display = "none"
         this.refs.widgetContainer.style.width = "20%"
         this.refs.widgetHelpBtn.style.display = "block"
+        this.refs.widgetSearchInput.style.backgroundColor = ""
+        this.refs.widgetHeaderDiv.style.height = "28px"
+
+
 
     }
 
     handleBack() {
 
         if (this.refs.searchResultDiv.style.display === "none" && this.refs.questionAnswerDiv.style.display === "block") {
-            console.log("ye wala if chala")
             this.refs.questionAnswerDiv.style.display = "none"
             this.refs.searchResultDiv.style.display = "block"
             this.refs.widgetSearchInput.style.display = "block"
@@ -260,14 +279,15 @@ var backStyles = {
 
 
         if (this.refs.contactDiv.style.display === "block" && this.refs.searchResultDiv.style.display === "none") {
-            console.log("nahi ye wala if chala")
 
             this.refs.contactDiv.style.display = "none"
             this.refs.backArrow.style.display = "none"
             this.refs.searchResultDiv.style.display = "block"
             this.refs.widgetSearchInput.style.display = "block"
             this.refs.askQuestionBtnDiv.style.display = "block"
-            this.refs.helpText.innerHTML = "Help"
+           
+        document.getElementById('helpText').innerHTML =  "Help"
+            
         }
 
 
@@ -281,11 +301,17 @@ var backStyles = {
             })
 
         });
-        var filteredContent = content.length ? content.filter((d, i) => {
+        filteredContent = content.length ? content.filter((d, i) => {
             return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1;
         }) : null;
 
         var contentToDiplay = content.length ? filteredContent.filter((d, i) => { return i <= 3 }) : null;
+        var questionData = content.length ? filteredContent.find((d) => { return d.question === this.props.store.selectedQue }) : null
+
+        var relatedQues = content.length ? filteredContent.filter((d, i) => { return d.question !== this.props.store.selectedQue && i <= 1 }) : null
+
+
+        console.log(filteredContent)
         return (
             <div style={{ fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                 <style type="text/css"> {
@@ -317,7 +343,7 @@ var backStyles = {
 
                 </div>
                 <div ref="widgetContainer" style={widgetContainerStyle}>
-                    <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>  <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span> <span ref="helpText"></span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span> </div>
+                    <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>  <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span> <span id="helpText"></span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span> </div>
 
                     <div ref="widgetSearchInput" style={searchDivStyle}>
                         <div style={searchInnerDivStyle}>
@@ -336,20 +362,25 @@ var backStyles = {
 
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
-                        {/*<h5 style={{ padding: "0px 0px 0px 22px" }}>Best Asnwers</h5>*/}
-                        <ol>
+                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" }}>{filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
+                        <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
-                                filteredContent  === null ? <div> getting data..</div> : filteredContent.length !== 0 ? contentToDiplay.map(d => {
+                                filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ? contentToDiplay.map(d => {
                                     return (
-                            <li><a onClick={() => this.handleQuestionClick()} style={listAnchorStyle} href="#">{d.question}</a></li>
+                                        <li><a onClick={() => this.handleQuestionClick(d.question)} style={listAnchorStyle} href="#">{d.question}</a></li>
                                     )
-                                }) : 
-                                <ul style={{color : 'darkgray'}}>
-                                <h5>These tips might help: </h5>
-                              <li>  Try fewer words. Ex: Time delivery </li>
-                                <li> Try different keywords.   </li>
-                                <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
-                                 </ul>
+                                }) :
+                                <div style={{textAlign: "center"}}> 
+                                 <h4 style={{color : "black"}}>We didn't find result for {this.props.store.searchInput} </h4> 
+                                    <ul style={{ color: 'darkgray' , textAlign: "left"}}>
+                                      
+                                    
+                                        <h5>These tips might help: </h5>
+                                        <li>  Try fewer words. Ex: Time delivery </li>
+                                        <li> Try different keywords.   </li>
+                                        <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
+                                    </ul>
+                                    </div>
                             }
 
 
@@ -357,20 +388,28 @@ var backStyles = {
 
                     </div>
                     <div ref="questionAnswerDiv" style={questionAnswer}>
-                        <h5>Sed eu dictum est, a rhoncus lorem. In a turpis nunc. Fusce rutrum imperdiet eros, a vehicula justo viverra non</h5>
-                        <p style={{ fontSize: "13px" }}>Nulla pulvinar erat sed mi laoreet, eget aliquam leo hendrerit. Ut lacinia ultricies augue, vitae congue arcu tempus ut.</p>
+
+                        <h5>{questionData ? questionData.question : null}</h5>
+                        <p style={{ fontSize: "13px" }}>{questionData ? questionData.answer : null}</p>
+
+
                         <hr />
-                        <h6 style={{ color: "darkgray" }}>Related Articles</h6>
-                        <ul>
-                            <li style={{ fontSize: "13px" }}> Donec sed massa vitae est feugiat consequat et at purus. Quisque dapibus, diam in finibus congue</li>
-                            <li style={{ fontSize: "13px" }}> Donec sed massa vitae est feugiat consequat et at purus. Quisque dapibus, diam in finibus congue</li>
+                        <h6 style={{ color: "darkgray", margin: "12px 0px" }}>Related Articles</h6>
+                        <ul style={{ margin: "5px 0px" }}>
+
+                            {filteredContent === null ? null : relatedQues.map(d => {
+                                return (
+                                    <li style={{ fontSize: "13px", margin: "5px 0px" }}>{RemoveOverflow(d.question, 50)}</li>
+                                )
+                            })}
+
                         </ul>
 
 
                     </div>
 
                     <div ref="contactDiv" style={contactDivStyles}>
-                        <Contact />
+                        <Contact store={this.props.store}/>
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
                         <hr />
