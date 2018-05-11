@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div>
-    <Widget store = {store}/>
+    <Widget store={store}/>
       </div>
     );
   }

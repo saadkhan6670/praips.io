@@ -5,10 +5,10 @@ import axios from 'axios';
 class widgetStore {
 
     @observable Rubrics = [];
+    @observable searchInput = '';
 
 async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
-            console.log(response.data)
             this.Rubrics = response.data
 
 
