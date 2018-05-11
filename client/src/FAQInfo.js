@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
-var {
-    sortBy
-} = require('lodash')
+// var {
+//     sortBy
+// } = require('lodash')
 
 var slideIndex = 1;
 var slideIndex2 = 2;
@@ -207,9 +207,9 @@ var x = document.getElementsByClassName("mySlides");
                         .toLowerCase()) !== -1
             })
 
-            filteredContent =  sortBy(filteredContent, [function (o) {
-                return o.sort;
-            }])
+            // filteredContent =  sortBy(filteredContent, [function (o) {
+            //     return o.sort;
+            // }])
 
         return (
             <div className="content-wrapper" id="intro">

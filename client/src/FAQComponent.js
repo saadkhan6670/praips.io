@@ -106,7 +106,6 @@ var { sortBy } = require('lodash')
     }
 
     editHandle(event, data, index) {
-        console.log(this.state.deleteconfirm)
         this.handleModalShow()
         this.setState({
             RubricIndex: index,
@@ -140,7 +139,6 @@ var { sortBy } = require('lodash')
 
             this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
             this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
-
         }
 
     }
@@ -239,8 +237,6 @@ var { sortBy } = require('lodash')
                                         <div key={key} className="col-md-6 col-sm-6 col-xs-6">
 
                                             <div
-
-                                                // onMouseOverCapture={(e) => { this.mouseHover(e, key) }}
                                                 onMouseOver={(e) => { this.mouseHover(e, key) }}
                                                 onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                                 className="right_btn" style={{marginTop: this.props.store.redirect ? '16px' : '43px'}}>
@@ -311,13 +307,14 @@ var { sortBy } = require('lodash')
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
-                                    this.props.store.Rubrics.splice(this.state.RubricIndex, 1)
-                                    this.props.store.RemoveRubric(this.state.RubricId)
+                                    // this.props.store.Rubrics.splice(this.state.RubricIndex, 1)
+                                    this.props.store.RemoveRubric(this.state.RubricId , this.state.RubricIndex)
                                     this.setState({
                                         deleteconfirm: false,
                                         Show: false,
                                         Modalvalue: ''
                                     })
+                                    
                                 }}>Delete</Button>
                             </Modal.Footer> </div> : <div>
                             <Modal.Header closeButton>

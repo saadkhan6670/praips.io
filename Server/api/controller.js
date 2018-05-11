@@ -5,6 +5,9 @@ var Schema = mongoose.Schema;
 var server = require('http').createServer()
 const socketIO = require('socket.io')
 const uuidv1 = require('uuid/v1');
+var {
+  sortBy
+} = require('lodash')
 
 //Models
 const Rubrics = mongoose.model('Rubrics');
@@ -23,6 +26,12 @@ server.listen(8080)
 var io = socketIO.listen(server)
 
 
+exports.getdata = (req,res) => {
+  Rubrics.find({}).sort('sort').populate({path: 'content', options: { sort: { 'sort': 1 } } }).exec((err, data) => {
+    res.send(data);
+
+  })
+}
 
 //create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
@@ -114,6 +123,12 @@ exports.updateRubcric = (req, res) => {
 
 exports.removeRubrics = (req, res) => {
 
+      req.body.idArr.forEach(idData => {
+        Rubrics.findByIdAndUpdate(idData , {$inc: {'sort': -1}}, {new:true},(err,data) => {
+          return
+        })
+      })
+  
   Rubrics.findByIdAndRemove(req.body.id, (err, data) => {
 
     if (!data) {
@@ -130,8 +145,9 @@ exports.removeRubrics = (req, res) => {
 }
 
 
+
 exports.getAllRubrics = (req, res) => {
-  Rubrics.find({}).populate('content').exec((err, data) => {
+  Rubrics.find({}).sort('sort').populate({path: 'content', options: { sort: { 'sort': 1 } } }).exec((err, data) => {
 
     if (!data) {
       res.send(err)

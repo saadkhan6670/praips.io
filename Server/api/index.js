@@ -16,6 +16,7 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 
+router.get('/getdata' , controller.getdata);
 
 //APIs for User
 router.post('/createContact', controller.createContact);

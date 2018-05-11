@@ -11,14 +11,14 @@ import { withRouter } from 'react-router-dom';
             <div className="sidebar-wrapper">
                 <Link to="/" title="Papris Logo">
 
-                    <div className="logo-wrapper">
+                    <div className="logo-wrapper row">
                         <div className="logo">
-                            <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`} alt="praips Logo" width="60%" />
+                            <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`} alt="praips Logo" height= "45px" />
 
                         </div>
                     </div>
                 </Link>
-                <hr/>
+               
                 <Link title="Frenquently Asked Questions" id="Frenquently Asked Questions" onClick={() => { this.props.store.searchInput = "" }} to="/faq">
                     <div className={this.props.location.pathname === "/faq" ? "menuitemsActive" :"menuitems" } >
                         <div >
@@ -28,7 +28,7 @@ import { withRouter } from 'react-router-dom';
                         </div>
                     </div>
                 </Link>
-                <hr />
+               
 
                 {this.props.store.redirect ?
                     <div>
@@ -42,7 +42,7 @@ import { withRouter } from 'react-router-dom';
                                 </div>
                             </div>
                         </Link>
-                        <hr />
+                      
 
                         <Link title="FAQ Dashboard" to="/dashboard" id="FAQ Dashboard">
                             <div className={this.props.location.pathname === "/dashboard" ? "menuitemsActive" :"menuitems" }>
