@@ -3,6 +3,7 @@ import Contact from './components/Contact'
 import { observer } from 'mobx-react';
 
 var filteredContent = []
+var counter = 0;
 
 var helpdivStyles = {
     position: "fixed",
@@ -26,6 +27,7 @@ var helpbtnStyles = {
 
 }
 var widgetContainerStyle = {
+
     position: "fixed",
     bottom: "5px",
     right: "10px",
@@ -116,9 +118,11 @@ var askBtnStyles = {
 }
 
 var questionAnswer = {
+    height: "194px",
     textAlign: "left",
-    padding: "0px 10px",
-    display: "none"
+    padding: "7px 10px",
+    display: "none",
+    overflowY: "scroll"
 }
 
 var searchResultStyle = {
@@ -131,13 +135,14 @@ var searchResultStyle = {
 var askQuestionDiv = {
     textAlign: "right",
     display: "none",
-    padding: "8px"
+    padding: "10px",
+    borderTop : "2.7px solid lightgrey"
 }
 
 var contactDivStyles = {
     padding: "11px 19px",
     textAlign: "left",
-    lineHeight: "29px",
+    lineHeight: "31px",
     display: "none",
 
 }
@@ -169,6 +174,21 @@ var backStyles = {
     marginTop: "8px",
     cursor: "pointer",
     display: "none"
+}
+
+var relatedArticleListStyle = {
+
+    backgroundImage: `url(${process.env.PUBLIC_URL}/images/question-mark-icon.png)`,
+
+    display: "inline-block",
+    backgroundSize: "16px",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "left",
+
+    fontSize: "13px",
+    margin: "5px 0px 0px -37px",
+    listStyle: "none",
+    textIndent: "21px"
 }
 
 var RemoveOverflow = (str, strlength) => {
@@ -204,7 +224,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.widgetHeaderDiv.style.display = "block"
         document.getElementById('helpText').innerHTML = "Help"
         this.refs.widgetSearchInput.style.display = "block"
-        document.getElementById('searchInputDivId').focus()
+        document.getElementsByClassName('widGetInput')[0].focus()
 
     }
 
@@ -218,7 +238,6 @@ var RemoveOverflow = (str, strlength) => {
             this.refs.widgetSearchInput.style.backgroundColor = "rgb(131, 199, 90)"
             this.refs.widgetHeaderDiv.style.height = "9px"
         }
-        console.log(filteredContent.length)
 
 
 
@@ -227,6 +246,8 @@ var RemoveOverflow = (str, strlength) => {
 
 
     handleQuestionClick(selectedQue) {
+        counter++
+        console.log(counter)
         this.props.store.selectedQue = selectedQue
         this.refs.widgetSearchInput.style.display = "none"
 
@@ -239,6 +260,8 @@ var RemoveOverflow = (str, strlength) => {
     }
 
     handleAskQuestionClick() {
+        counter++
+        console.log(counter)
         this.refs.widgetSearchInput.style.display = "none"
 
         this.refs.searchResultDiv.style.display = "none"
@@ -269,7 +292,6 @@ var RemoveOverflow = (str, strlength) => {
     }
 
     handleBack() {
-
         if (this.refs.searchResultDiv.style.display === "none" && this.refs.questionAnswerDiv.style.display === "block") {
             this.refs.questionAnswerDiv.style.display = "none"
             this.refs.searchResultDiv.style.display = "block"
@@ -277,21 +299,32 @@ var RemoveOverflow = (str, strlength) => {
 
         }
 
+        if(this.refs.searchResultDiv.style.display === "block") {
+            this.refs.backArrow.style.display = "none"
+        }
 
-        if (this.refs.contactDiv.style.display === "block" && this.refs.searchResultDiv.style.display === "none") {
+
+        if (this.refs.contactDiv.style.display === "block") {
 
             this.refs.contactDiv.style.display = "none"
             this.refs.backArrow.style.display = "none"
             this.refs.searchResultDiv.style.display = "block"
             this.refs.widgetSearchInput.style.display = "block"
             this.refs.askQuestionBtnDiv.style.display = "block"
-           
-        document.getElementById('helpText').innerHTML =  "Help"
-            
+
+            document.getElementById('helpText').innerHTML = "Help"
+
         }
+        
 
 
     }
+
+    handleRelatedQue(selectedQue) {
+        this.props.store.selectedQue = selectedQue;
+    }
+
+
     render() {
         let content = [];
         this.props.store.Rubrics.forEach(element => {
@@ -308,10 +341,11 @@ var RemoveOverflow = (str, strlength) => {
         var contentToDiplay = content.length ? filteredContent.filter((d, i) => { return i <= 3 }) : null;
         var questionData = content.length ? filteredContent.find((d) => { return d.question === this.props.store.selectedQue }) : null
 
-        var relatedQues = content.length ? filteredContent.filter((d, i) => { return d.question !== this.props.store.selectedQue && i <= 1 }) : null
+        var relatedQues = content.length ? filteredContent.filter((d, i) => { 
+            return d.question !== this.props.store.selectedQue && i <= 1
+         }) : null
 
 
-        console.log(filteredContent)
         return (
             <div style={{ fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                 <style type="text/css"> {
@@ -343,13 +377,18 @@ var RemoveOverflow = (str, strlength) => {
 
                 </div>
                 <div ref="widgetContainer" style={widgetContainerStyle}>
-                    <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>  <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span> <span id="helpText"></span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span> </div>
+                    <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>
+                        <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span>
+                        <span id="helpText">Help</span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
+
+                    </div>
 
                     <div ref="widgetSearchInput" style={searchDivStyle}>
                         <div style={searchInnerDivStyle}>
                             <div style={searchInputDivStyle} id="searchInputDivId">
 
-                                <input className="widGetInput" type="text" placeholder="How can we help ?" onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearch() : null }} style={searchInputStyle} />
+                                <input className="widGetInput" type="text" placeholder="How can we help ?"
+                                    onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearch() : null }} style={searchInputStyle} />
 
                             </div>
 
@@ -362,24 +401,28 @@ var RemoveOverflow = (str, strlength) => {
 
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
-                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" }}>{filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
+                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" }}>
+                        {filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
-                                filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ? contentToDiplay.map(d => {
+                                filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ? 
+                                contentToDiplay.map(d => {
                                     return (
-                                        <li><a onClick={() => this.handleQuestionClick(d.question)} style={listAnchorStyle} href="#">{d.question}</a></li>
+                                        <li><a 
+                                        onClick={() => this.handleQuestionClick(d.question)} style={listAnchorStyle} href="#">{d.question}
+                                        </a></li>
                                     )
                                 }) :
-                                <div style={{textAlign: "center"}}> 
-                                 <h4 style={{color : "black"}}>We didn't find result for {this.props.store.searchInput} </h4> 
-                                    <ul style={{ color: 'darkgray' , textAlign: "left"}}>
-                                      
-                                    
-                                        <h5>These tips might help: </h5>
-                                        <li>  Try fewer words. Ex: Time delivery </li>
-                                        <li> Try different keywords.   </li>
-                                        <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
-                                    </ul>
+                                    <div style={{ textAlign: "center" }}>
+                                        <h4 style={{ color: "black" }}>We didn't find result for {this.props.store.searchInput} </h4>
+                                        <ul style={{ color: 'darkgray', textAlign: "left" }}>
+
+
+                                            <h5>These tips might help: </h5>
+                                            <li>  Try fewer words. Ex: Time delivery </li>
+                                            <li> Try different keywords.   </li>
+                                            <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
+                                        </ul>
                                     </div>
                             }
 
@@ -399,7 +442,9 @@ var RemoveOverflow = (str, strlength) => {
 
                             {filteredContent === null ? null : relatedQues.map(d => {
                                 return (
-                                    <li style={{ fontSize: "13px", margin: "5px 0px" }}>{RemoveOverflow(d.question, 50)}</li>
+                                    <li style={relatedArticleListStyle}
+                                        onClick={() => this.handleRelatedQue(d.question)}
+                                    > <a href='#' style={{ color: "black" }}>{RemoveOverflow(d.question, 50)} </a></li>
                                 )
                             })}
 
@@ -409,10 +454,9 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
 
                     <div ref="contactDiv" style={contactDivStyles}>
-                        <Contact store={this.props.store}/>
+                        <Contact store={this.props.store} />
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
-                        <hr />
 
                         <button style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
                     </div>
