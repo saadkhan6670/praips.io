@@ -147,7 +147,9 @@ exports.removeRubrics = (req, res) => {
 
 
 exports.getAllRubrics = (req, res) => {
-  Rubrics.find({}).sort('sort').populate({path: 'content', options: { sort: { 'sort': 1 } } }).exec((err, data) => {
+  Rubrics.find().sort('sort')
+  .populate({path : 'RubricContent.content' , model : 'RubricContent'})
+  .exec((err, data) => {
 
     if (!data) {
       res.send(err)
@@ -160,7 +162,6 @@ exports.getAllRubrics = (req, res) => {
 
 
 }
-
 exports.sortRubrics = (req, res) => {
   Rubrics.findByIdAndUpdate(req.body.toId, { $set: { sort: req.body.toSort } }, { new: true }, (err, data) => {
     Rubrics.findByIdAndUpdate(req.body.fromId, { $set: { sort: req.body.fromSort } }, { new: true }, (err, data2) => {

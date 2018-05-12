@@ -10,6 +10,9 @@ const Contact = mongoose.model('Contact');
 const Search = mongoose.model('Search');
 const About = mongoose.model('About');
 
+
+var sortKey = 0;
+
 console.log("connecting Database..")
 mongoose.connect(`mongodb://localhost/praipsDB`, { useMongoClient: true },function(err){
     if(err){
@@ -17,6 +20,7 @@ mongoose.connect(`mongodb://localhost/praipsDB`, { useMongoClient: true },functi
     }
     
 });
+
 
 console.log("Putting data in Rubrics")
 
@@ -34,7 +38,6 @@ RubricsJson.forEach(element => {
 console.log(RubricsJson.length + " rubrics saved in Database");
 
 RubricsContentJson.forEach( (element) => {
-
     let NewRubricContent = new RubricContent(element)
 
     NewRubricContent.save( (err, data) => {
@@ -43,11 +46,14 @@ RubricsContentJson.forEach( (element) => {
             console.log(err.message)
         }
         else {
-            Rubrics.updateMany({}, {$push: {content : data._id}}, (err, data) => {
+           sortKey++;
+            
+            Rubrics.updateMany({}, {$push: {rubricContent : { content : data._id , sort: sortKey}, }}, (err, data) => {
 
                 if(err) {
                     console.log(err.message)
                 }
+               
             })
         }
     })
