@@ -311,7 +311,7 @@ button.logoutbtn {
     border-radius: 10px;
 }
 .AddRubric{
-    margin-top: 95px;
+    margin-top: 65px;
 }
 .add_btn{
     text-align: center;
@@ -429,6 +429,23 @@ button {
 }
 
 .sliderBtn {
+    background-color: white;
+    color: #83C75A;
+    border-radius: 16px;
+    border: 1px #83C75A solid;
+    -webkit-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+    width: 216px;
+    height: 47px;
+}
+
+.AdminSlider{
+    width: 100%;
+    margin-top: 52px;
+}
+
+.AdminSliderbtn {
     background-color: white;
     color: #83C75A;
     border-radius: 16px;
@@ -820,7 +837,7 @@ button {
 .AdminRubricName {
     color: grey;
     font-size: 138%;
-    padding: 61px 0 0px 35px;
+    padding: 28px 0 0px 35px;
 }
 
 .RubricContent {
@@ -922,8 +939,8 @@ button {
 
 
 .AdminRubricContent {
-    padding: 18px 25px 0px 28px;
-    height: 250px;
+    padding: 18px 40px 0px 49px;
+    height: 440px;
     margin-right: 0px;
 }
 
@@ -938,6 +955,56 @@ button {
     padding: 2.5% 0 0 2.5%;
 }
 
+.AddRubricContent h2 {
+    padding: 9px 0px 0px 7px !important;
+    font-size: 27px !important;
+}
+.label1 {
+    font-size: 19px;
+    margin: 20px 0px 20px 0px ;
+}
+.AddRubricContent .answertextarea {
+height: 181px;
+background-color: #FBFBFB;
+border: 2px solid #E2E2E2;
+resize: none;
+border-radius: 4px;
+}
+.answertextareadiv{
+    padding: 24px 0px 0px 0px;
+}
+.questiontextareadiv{
+    padding: 23px 0px 0 0px;
+margin: 0;
+}
+.questiontextarea{
+    margin: 0 0 0 0;
+    height: 38px; 
+    background-color: #fdfdfd; 
+}
+
+.addContentbtn {
+    margin-top: 0;
+    float: right;
+    margin-right: 30px;
+}
+.addContentbtn button {
+    background-color: #83C75A;
+    padding: 9px 53px;
+    color: white;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.AddRubricContent .form-control {
+    width: 96%;
+    margin: 0 0px 0px 10px;
+    border-top-left-radius: 2px ;
+    border-bottom-left-radius: 2px ;
+    border-top-right-radius: 2px ;
+    border-bottom-right-radius: 2px;
+}
 
 @media screen and (max-width: 2560px) and (min-width: 1921px) {
     .slider{
@@ -1174,26 +1241,26 @@ button {
         padding: 15px 0 0px 26px !important;
     }
 
-    .RubricAdd h2 {
+    .AddRubricContent h2 {
         padding: 9px 0px 0px 7px !important;
         font-size: 27px !important;
     }
-    .RubricAdd .label1 {
+    .label1 {
         font-size: 16px ;
         margin: 20px 0px 0px 0px ;
     }
-    .RubricAdd .textarea {
+    .answertextarea {
         height: 119px;
     }
     .questiontextarea{
         padding: 19px 19px 0 19px;
     margin: 0;
     }
-    .answertextarea{
+    .answertextareadiv{
         padding: 24px 21px 0px 12px;
     }
 
-    .RubricAdd .form-control {
+    .AddRubricContent .form-control {
         width: 96%;
         margin: 0 0px 0px 10px;
         border-top-left-radius: 2px ;
@@ -1201,6 +1268,8 @@ button {
         border-top-right-radius: 2px ;
         border-bottom-right-radius: 2px;
     }
+
+    
 
     .RubricContent {
         padding: 7px 25px 0px 28px !important;
@@ -1228,7 +1297,6 @@ button {
         padding: 1.5% 0px 0px 2.5% ;
     }
 
-    
     .contact h2 {
         padding: 9px 0px 0px 7px !important;
         font-size: 27px !important;

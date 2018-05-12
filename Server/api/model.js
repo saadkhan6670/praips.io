@@ -38,8 +38,7 @@ var RubricsSchema = new Schema({
   updatedAt: {
     type: Date , default: null ,
   },
-  content: [{
-            
+  content: [{     
       type: Schema.Types.ObjectId, 
       ref: 'RubricContent',
       default : [],
@@ -48,6 +47,7 @@ var RubricsSchema = new Schema({
 });
 
 var RubricContentSchema = new Schema({
+
   question: String,
   answer: String,
   views: {type: Number, default: null},

@@ -267,6 +267,9 @@ var { sortBy } = require('lodash')
                     {
                         this.props.store.redirect ?
                             <div className="col-md-12 col-sm-12 col-xs-12 AddRubric">
+                            <div className="col-md-12 col-sm-12 col-xs-12" style={{textAlign:"center"}}>
+                            <label className="label1">Add A new Rubric </label>
+                            </div>
                                 <div className="col-md-8 col-sm-8 col-sx-8">
                                     <div className="form-group">
 

@@ -93,11 +93,9 @@ var x = document.getElementsByClassName("mySlides");
 
     componentWillUnmount() {
         this.props.store.searchInput = '';
-
     }
 
     plusDivs(n) {
-
         this.showDivs(slideIndex += n, slideIndex2 += n);
     }
 
@@ -138,13 +136,15 @@ var x = document.getElementsByClassName("mySlides");
         })
     }
 
-    deleteHandle(event, data) {
-        this.setState({
-            questionId: data._id,
-            deleteconfirm: true,
+    deleteHandle(event, data, index) {
+        console.log(index)
+        
+        // this.setState({
+        //     questionId: data._id,
+        //     deleteconfirm: true,
 
-        })
-        this.handleModalShow()
+        // })
+        // this.handleModalShow()
     }
 
     upHandle(event, data, index) {
@@ -154,21 +154,15 @@ var x = document.getElementsByClassName("mySlides");
             var sortTo = sortToData.sort
 
             this.props.store.SortRubricContent(data._id, sortTo, sortToData._id, sortFrom)
-            this.props.store.getRubrics()
-
         }
-
     }
 
     downHandle(event, data, index) {
-
         if (index !== filteredContent.length - 1) {
             var sortToData = filteredContent[index+1]
           var sortFrom = data.sort;
             var sortTo = sortToData.sort
-
             this.props.store.SortRubricContent(data._id, sortTo, sortToData._id, sortFrom)
-            this.props.store.getRubrics()
         }
 
     }
@@ -185,12 +179,10 @@ var x = document.getElementsByClassName("mySlides");
          event.preventDefault()
         if(this.refs.Question.value.length !== 0 && this.refs.Answer.value.length !== 0 ){
             this.props.store.createRubricContent(this.refs.Question.value , this.refs.Answer.value , content._id)
-            this.props.store.getRubrics()
         }
     }
 
     render() {
-        console.log(this.props.store.Rubrics)
 
          content = this.props.store.Rubrics === undefined ?
             null :
@@ -206,10 +198,6 @@ var x = document.getElementsByClassName("mySlides");
                     .indexOf(this.props.store.searchInput
                         .toLowerCase()) !== -1
             })
-
-            // filteredContent =  sortBy(filteredContent, [function (o) {
-            //     return o.sort;
-            // }])
 
         return (
             <div className="content-wrapper" id="intro">
@@ -279,7 +267,7 @@ var x = document.getElementsByClassName("mySlides");
                                             {this.props.store.redirect ?
                                                 <div>
                                                     <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "6px", width: "21px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
-                                                    <img onClick={(e) => this.deleteHandle(e, data)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                    <img onClick={(e) => this.deleteHandle(e, data,key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
                                                     <img onClick={(e) => this.upHandle(e,data,key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
                                                     <img onClick={(e) => this.downHandle(e, data, key)} className="editimg" style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
                                                 </div>
@@ -304,19 +292,17 @@ var x = document.getElementsByClassName("mySlides");
                             )
                         })
                     }
-                </div>
-                {this.props.store.redirect ? 
-                <div className="RubricAdd" style={{ textAlign:"center"}}>
-                <label className="label1">How can we help? </label>
-                <form id="contactForm" >
-                <div className="form-group questiontextarea">
+                    {this.props.store.redirect ? 
+                <div className="AddRubricContent "  style={{ textAlign:"center"}}>
+                <label className="label1">Add Question/Answer </label>
+                <form >
+                <div className="form-group questiontextareadiv">
                             
-                <input type="text" placeholder="Question" style={{ margin: "0 0 0 0", height: "38px", backgroundColor: "#fdfdfd" }} 
-                className="form-control" ref="Question" />
+                <input type="text" placeholder="Question" className="questiontextarea form-control" ref="Question" />
                         </div>
-                        <div className="form-group answertextarea">
+                        <div className="form-group answertextareadiv">
                             
-                            <textarea placeholder="Answer" className="form-control textarea" ref='Answer'></textarea>
+                            <textarea placeholder="Answer" className="answertextarea form-control scrollbar" id="style-3" ref='Answer'></textarea>
                         </div>
 
                         <div className="addContentbtn">
@@ -324,8 +310,10 @@ var x = document.getElementsByClassName("mySlides");
                         </div>
                     </form>
                     </div> : null }
+                </div>
+                
 
-                <div className="col-md-12 col-sm-12 col-sx-12 slider">
+                <div className={this.props.store.redirect ? "col-md-12 col-sm-12 col-sx-12 AdminSlider" : "col-md-12 col-sm-12 col-sx-12 slider"}>
                     <div className="col-md-1 col-sm-1 col-xs-1">
 
                         <img className="leftArrow" onClick={() => this.plusDivs(-1)} src={`${process.env.PUBLIC_URL}/images/left arrow.png`} alt="left arrow" />
@@ -336,7 +324,7 @@ var x = document.getElementsByClassName("mySlides");
                         return (<div key={key}>
                             <div className="col-md-4 col-sm-4 col-xs-4 mySlides">
                                 <div>
-                                    <Link to={`/faq${data.slug}`}>  <button className="btn btn-lg sliderBtn" > {data.name} </button> </Link>
+                                    <Link to={`/faq${data.slug}`}>  <button className={this.props.store.redirect ? "btn btn-lg AdminSliderbtn" : "btn btn-lg sliderBtn" } > {data.name} </button> </Link>
                                 </div>
                             </div>
                         </div>)
@@ -365,11 +353,9 @@ var x = document.getElementsByClassName("mySlides");
                             <Modal.Footer>
                                 <Button onClick={(e) => {
                                     this.props.store.RemoveRubricContent(this.state.questionId)
-                                    this.props.store.getRubrics()
                                     this.setState({
                                         deleteconfirm: false,
                                         Show: false,
-
                                     })
                                 }}>Delete</Button>
                             </Modal.Footer> </div> : <div>
@@ -417,7 +403,6 @@ var x = document.getElementsByClassName("mySlides");
                                     this.setState({
                                         Show: false,
                                     })
-                                    this.props.store.getRubrics()
                                 }}>Change</Button>
                             </Modal.Footer>
                         </div>}
