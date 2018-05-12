@@ -136,7 +136,7 @@ var askQuestionDiv = {
     textAlign: "right",
     display: "none",
     padding: "10px",
-    borderTop : "2.7px solid lightgrey"
+    borderTop: "2.7px solid lightgrey"
 }
 
 var contactDivStyles = {
@@ -292,30 +292,68 @@ var RemoveOverflow = (str, strlength) => {
     }
 
     handleBack() {
-        if (this.refs.searchResultDiv.style.display === "none" && this.refs.questionAnswerDiv.style.display === "block") {
-            this.refs.questionAnswerDiv.style.display = "none"
-            this.refs.searchResultDiv.style.display = "block"
-            this.refs.widgetSearchInput.style.display = "block"
+
+        console.log(counter)
+
+        if (counter === 1) {
+            if (this.refs.contactDiv.style.display === "block") {
+                this.refs.contactDiv.style.display = "none"
+                this.refs.searchResultDiv.style.display = "block"
+                this.refs.widgetSearchInput.style.display = "block"
+                this.refs.askQuestionBtnDiv.style.display = "block"
+                this.refs.backArrow.style.display = "none"
+
+                counter--;
+            }
+
+            if (this.refs.questionAnswerDiv.style.display === "block") {
+                this.refs.questionAnswerDiv.style.display = "none"
+                this.refs.searchResultDiv.style.display = "block"
+                this.refs.widgetSearchInput.style.display = "block"
+                this.refs.askQuestionBtnDiv.style.display = "block"
+                this.refs.backArrow.style.display = "none"
+
+                counter--;
+
+            }
 
         }
 
-        if(this.refs.searchResultDiv.style.display === "block") {
-            this.refs.backArrow.style.display = "none"
+        if (counter === 2) {
+            if (this.refs.contactDiv.style.display === "block") {
+                this.refs.contactDiv.style.display = "none"
+                this.refs.questionAnswerDiv.style.display = "block"
+                this.refs.askQuestionBtnDiv.style.display = "block"
+
+                counter--;
+
+
+            }
         }
+        // if (this.refs.searchResultDiv.style.display === "none" && this.refs.questionAnswerDiv.style.display === "block") {
+        //     this.refs.questionAnswerDiv.style.display = "none"
+        //     this.refs.searchResultDiv.style.display = "block"
+        //     this.refs.widgetSearchInput.style.display = "block"
+
+        // }
+
+        // if(this.refs.searchResultDiv.style.display === "block") {
+        //     this.refs.backArrow.style.display = "none"
+        // }
 
 
-        if (this.refs.contactDiv.style.display === "block") {
+        // if (this.refs.contactDiv.style.display === "block") {
 
-            this.refs.contactDiv.style.display = "none"
-            this.refs.backArrow.style.display = "none"
-            this.refs.searchResultDiv.style.display = "block"
-            this.refs.widgetSearchInput.style.display = "block"
-            this.refs.askQuestionBtnDiv.style.display = "block"
+        //     this.refs.contactDiv.style.display = "none"
+        //     this.refs.backArrow.style.display = "none"
+        //     this.refs.searchResultDiv.style.display = "block"
+        //     this.refs.widgetSearchInput.style.display = "block"
+        //     this.refs.askQuestionBtnDiv.style.display = "block"
 
-            document.getElementById('helpText').innerHTML = "Help"
+        //     document.getElementById('helpText').innerHTML = "Help"
 
-        }
-        
+        // }
+
 
 
     }
@@ -341,9 +379,9 @@ var RemoveOverflow = (str, strlength) => {
         var contentToDiplay = content.length ? filteredContent.filter((d, i) => { return i <= 3 }) : null;
         var questionData = content.length ? filteredContent.find((d) => { return d.question === this.props.store.selectedQue }) : null
 
-        var relatedQues = content.length ? filteredContent.filter((d, i) => { 
+        var relatedQues = content.length ? filteredContent.filter((d, i) => {
             return d.question !== this.props.store.selectedQue && i <= 1
-         }) : null
+        }) : null
 
 
         return (
@@ -402,17 +440,17 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
                         <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" }}>
-                        {filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
+                            {filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
-                                filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ? 
-                                contentToDiplay.map(d => {
-                                    return (
-                                        <li><a 
-                                        onClick={() => this.handleQuestionClick(d.question)} style={listAnchorStyle} href="#">{d.question}
-                                        </a></li>
-                                    )
-                                }) :
+                                filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ?
+                                    contentToDiplay.map(d => {
+                                        return (
+                                            <li><a
+                                                onClick={() => this.handleQuestionClick(d.question)} style={listAnchorStyle} href="#">{d.question}
+                                            </a></li>
+                                        )
+                                    }) :
                                     <div style={{ textAlign: "center" }}>
                                         <h4 style={{ color: "black" }}>We didn't find result for {this.props.store.searchInput} </h4>
                                         <ul style={{ color: 'darkgray', textAlign: "left" }}>

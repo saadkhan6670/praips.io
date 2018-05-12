@@ -37,7 +37,7 @@ import { observer } from 'mobx-react';
                 {this.props.store.redirect ?
                     <div>
 
-                        <Link title="FAQ Widget" to="/install">
+                        <Link title="FAQ Widget" to="/script">
                             <div className="menuitems">
                                 <div >
                                     <div className="menuimage">
