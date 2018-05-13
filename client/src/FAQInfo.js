@@ -16,6 +16,7 @@ var x = document.getElementsByClassName("mySlides");
         this.state = {
             question: '',
             questionId: '',
+            questionIndex: '',
             answer: '',
             Message: '',
             Show: false,
@@ -134,33 +135,32 @@ var x = document.getElementsByClassName("mySlides");
         })
     }
 
-    deleteHandle(event, data, index) {
-        console.log(index)
-        
-        this.setState({
-            questionId: data._id,
-            deleteconfirm: true,
+    deleteHandle(event, data, removeindex) {
 
+        this.setState({
+            questionId: data.content._id,
+            deleteconfirm: true,
+            questionIndex : removeindex
         })
         this.handleModalShow()
     }
 
     upHandle(event, data, index) {
         if (index !== 0) {
-          var sortToData = filteredContent[index-1]
+          var sortToData = sortedContent[index-1]
           var sortFrom = data.sort;
             var sortTo = sortToData.sort
 
-            this.props.store.SortRubricContent(data._id, sortTo, sortToData._id, sortFrom)
+            this.props.store.SortRubricContent(data.content._id, sortTo, sortToData.content._id, sortFrom)
         }
     }
 
     downHandle(event, data, index) {
-        if (index !== filteredContent.length - 1) {
-            var sortToData = filteredContent[index+1]
+        if (index !== sortedContent.length - 1) {
+            var sortToData = sortedContent[index+1]
           var sortFrom = data.sort;
             var sortTo = sortToData.sort
-            this.props.store.SortRubricContent(data._id, sortTo, sortToData._id, sortFrom)
+            this.props.store.SortRubricContent(data.content._id, sortTo, sortToData.content._id, sortFrom)
         }
 
     }
@@ -192,7 +192,6 @@ var x = document.getElementsByClassName("mySlides");
          filteredContent = content === undefined ?
             null :
             content.rubricContent.filter((d) => {
-                console.log()
                 return d.content.question.toLowerCase()
                     .indexOf(this.props.store.searchInput
                         .toLowerCase()) !== -1
@@ -200,6 +199,8 @@ var x = document.getElementsByClassName("mySlides");
             
             sortedContent  = content === undefined ?
             null : sortBy (filteredContent, [(d) => { return d.sort }])
+
+            
 
         return (
             <div className="content-wrapper" id="intro">
@@ -354,7 +355,16 @@ var x = document.getElementsByClassName("mySlides");
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
-                                    this.props.store.RemoveRubricContent(this.state.questionId)
+                                    var idArr = [];
+
+                                    sortedContent.filter((data, index) => {            
+                                        if (index > this.state.questionIndex) {
+                                          return idArr.push(data.content._id)
+                                        }
+                                    })
+                                    
+                                    this.props.store.RemoveRubricContent(content._id , this.state.questionId , idArr)
+
                                     this.setState({
                                         deleteconfirm: false,
                                         Show: false,

@@ -216,25 +216,30 @@ class PraipsStore {
             })
     }
 
-    RemoveRubricContent(id) {
+    RemoveRubricContent(RubricId , IdToremove , IdsToResort) {
+        console.log(IdsToResort)
+
         axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
-            id: id
+            RubricId: RubricId,
+            IdToremove : IdToremove,
+            IdsToResort: IdsToResort,
         })
             .then((response) => {
-               this.Rubrics = response.data
+                console.log(response.data)
+            //    this.Rubrics = response.data
 
             }).catch((error) => {
                 console.log(error)
             })
     }
 
-    SortRubricContent(sortFromId, sortTo, sortToId, sortFrom) {
+    SortRubricContent(sortFromId, sortToValue, sortToId, sortFromValue) {
 
         axios.post(`${process.env.apiURL}/api/SortRubricContent`, {
             toId: sortFromId,
-            toSort: sortTo,
+            toSort: sortToValue,
             fromId: sortToId,
-            fromSort: sortFrom
+            fromSort: sortFromValue
         })
             .then((response) => {
                 return this.getRubrics()

@@ -26,23 +26,23 @@ server.listen(8080)
 var io = socketIO.listen(server)
 
 
-exports.getdata = (req,res) => {
-  Rubrics.find({}).sort('sort').populate({path: 'content', options: { sort: { 'sort': 1 } } }).exec((err, data) => {
+exports.getdata = (req, res) => {
+  Rubrics.find({}).sort('sort').populate({ path: 'content', options: { sort: { 'sort': 1 } } }).exec((err, data) => {
     res.send(data);
 
   })
 }
 
-exports.tesAPI = (req,res) => {
-  Rubrics.findByIdAndUpdate(req.body.rubricId, {$pull : {rubricContent: {content: req.body.id} }}, (err , update) => {
-    if(update) {
-     res.send(update)
+exports.tesAPI = (req, res) => {
+  Rubrics.findByIdAndUpdate(req.body.rubricId, { $pull: { rubricContent: { content: req.body.id } } }, (err, update) => {
+    if (update) {
+      res.send(update)
     }
 
     else {
       res.send(err)
     }
-  } )
+  })
 }
 
 
@@ -136,12 +136,12 @@ exports.updateRubcric = (req, res) => {
 
 exports.removeRubrics = (req, res) => {
 
-      req.body.idArr.forEach(idData => {
-        Rubrics.findByIdAndUpdate(idData , {$inc: {'sort': -1}}, {new:true},(err,data) => {
-          return
-        })
-      })
-  
+  req.body.idArr.forEach(idData => {
+    Rubrics.findByIdAndUpdate(idData, { $inc: { 'sort': -1 } }, { new: true }, (err, data) => {
+      return
+    })
+  })
+
   Rubrics.findByIdAndRemove(req.body.id, (err, data) => {
 
     if (!data) {
@@ -161,17 +161,17 @@ exports.removeRubrics = (req, res) => {
 
 exports.getAllRubrics = (req, res) => {
   Rubrics.find().sort('sort')
-  .populate({path : 'rubricContent.content' , model : 'RubricContent'})
-  .exec((err, data) => {
+    .populate({ path: 'rubricContent.content', model: 'RubricContent' })
+    .exec((err, data) => {
 
-    if (!data) {
-      res.send(err)
-    }
+      if (!data) {
+        res.send(err)
+      }
 
-    else {
-      res.send(data);
-    }
-  })
+      else {
+        res.send(data);
+      }
+    })
 
 
 }
@@ -203,9 +203,9 @@ exports.createRubcricContent = (req, res) => {
 }
 
 
-exports.SortRubricContent = (req,res)=> {
-  RubricContent.findByIdAndUpdate(req.body.toId, { $set: {sort :req.body.toSort} }, {new: true}, (err , data) => {
-    RubricContent.findByIdAndUpdate(req.body.fromId, { $set: {sort :req.body.fromSort} }, {new: true}, (err , data2) => {
+exports.SortRubricContent = (req, res) => {
+  RubricContent.findByIdAndUpdate(req.body.toId, { $set: { sort: req.body.toSort } }, { new: true }, (err, data) => {
+    RubricContent.findByIdAndUpdate(req.body.fromId, { $set: { sort: req.body.fromSort } }, { new: true }, (err, data2) => {
       res.send("Rubric Updated")
     })
   })
@@ -214,17 +214,17 @@ exports.SortRubricContent = (req,res)=> {
 exports.updateRubcricContent = (req, res) => {
   RubricContent.findByIdAndUpdate(req.body.id, {
     $set:
-    { question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
+      { question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
   },
 
-    { new: true  }, (err, data) => {
+    { new: true }, (err, data) => {
 
       if (!data) {
         res.send("Rubric content not found to update")
       }
 
       else {
-        
+
         res.send("Rubric content updated");
       }
     })
@@ -235,33 +235,27 @@ exports.updateRubcricContent = (req, res) => {
 
 exports.removeRubricContent = (req, res) => {
 
-  RubricContent.findOneAndRemove({_id:req.body.id}, (err, data) => {
+  RubricContent.findOneAndRemove({ _id: req.body.IdToremove }, (err, data) => {
 
     if (!data) {
       res.send("No rubric Content found to remove")
     }
 
     else {
-      Rubrics.findByIdAndUpdate(req.body.rubricId, {$pull : {rubricContent: {content: req.body.id} }}, (err , update) => {
-        if(update) {
-          Rubrics.find()
-          .sort('sort')
-          .populate({path : 'rubricContent.content' , model : 'RubricContent'})
-          .exec((err, rubrics) => {
-        
-            if (!data) {
-              res.send(err)
+      Rubrics.findByIdAndUpdate(req.body.RubricId, { $pull: { rubricContent: { content: req.body.IdToremove } } }, (err, update) => {
+        if (update) {
+          // req.body.IdsToResort.forEach(idData => {
+            Rubrics.findByIdAndUpdate(req.body.RubricId, {$set:  { rubricContent: { sort : 1 } } }, (err, update) => {
+              return 
             }
-        
-            else {
-              res.send(rubrics);
-            }
-          })
+            )
+          // })
         }
-      } )
-   
+      })
     }
   })
+
+
 
   io.emit('update', { api: 'RubricsChanged' })
 
@@ -362,7 +356,7 @@ exports.getAllContacts = (req, res) => {
 }
 
 exports.updateViews = (req, res) => {
-  RubricContent.findByIdAndUpdate( mongoose.Types.ObjectId(req.body.id), { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
+  RubricContent.findByIdAndUpdate(mongoose.Types.ObjectId(req.body.id), { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
 
     if (err) {
       res.send(err)
