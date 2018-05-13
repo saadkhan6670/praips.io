@@ -90,6 +90,20 @@ exports.DelLogKey = (req, res) => {
 // Admin Api Ends
 
 // API for Rubrics
+exports.getAllRubrics = (req, res) => {
+  Rubrics.find().sort('sort')
+    .populate({ path: 'rubricContent.content', model: 'RubricContent' })
+    .exec((err, data) => {
+
+      if (!data) {
+        res.send(err)
+      }
+      else {
+        res.send(data);
+      }
+    })
+}
+
 exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)
   New_Rubrics.save((err, rubric) => {
@@ -99,18 +113,18 @@ exports.createRubric = (req, res) => {
 }
 
 exports.updateRubcric = (req, res) => {
-
   let date = new Date();
 
-  Rubrics.findByIdAndUpdate(req.body.id, { $set: { name: req.body.name, slug: req.body.slug, updatedAt: Date.now() } }, { new: true }, (err, data) => {
-    if (!data) {
-      res.send("No rubric found to update")
-    }
+  Rubrics.findByIdAndUpdate(req.body.id,
+    { $set: { name: req.body.name, slug: req.body.slug, updatedAt: Date.now() } }, { new: true }, (err, data) => {
+      if (!data) {
+        res.send("No rubric found to update")
+      }
 
-    else {
-      res.send("Rubric updated");
-    }
-  })
+      else {
+        res.send("Rubric updated");
+      }
+    })
   io.emit('update', { api: 'RubricsChanged' })
 
 }
@@ -138,24 +152,6 @@ exports.removeRubrics = (req, res) => {
 
 }
 
-
-
-exports.getAllRubrics = (req, res) => {
-  Rubrics.find().sort('sort')
-    .populate({ path: 'rubricContent.content', model: 'RubricContent' })
-    .exec((err, data) => {
-
-      if (!data) {
-        res.send(err)
-      }
-
-      else {
-        res.send(data);
-      }
-    })
-
-
-}
 exports.sortRubrics = (req, res) => {
   Rubrics.findByIdAndUpdate(req.body.toId, { $set: { sort: req.body.toSort } }, { new: true }, (err, data) => {
     Rubrics.findByIdAndUpdate(req.body.fromId, { $set: { sort: req.body.fromSort } }, { new: true }, (err, data2) => {
@@ -166,6 +162,8 @@ exports.sortRubrics = (req, res) => {
 
 // Api for Rubric ends
 
+// api for rubric content
+
 exports.createRubcricContent = (req, res) => {
   let NewRubricContent = new RubricContent(req.body);
   NewRubricContent.save((err, data) => {
@@ -173,13 +171,13 @@ exports.createRubcricContent = (req, res) => {
       res.send(err)
     }
     else {
-      
-      Rubrics.update({ _id: mongoose.Types.ObjectId(req.body.id) }, 
-      { $push: { rubricContent: { content: data._id , sort: req.body.contentLength + 1} } } , 
-      
-      (err, doc) => {
-        return
-      })
+
+      Rubrics.update({ _id: mongoose.Types.ObjectId(req.body.id) },
+        { $push: { rubricContent: { content: data._id, sort: req.body.contentLength + 1 } } },
+
+        (err, doc) => {
+          return
+        })
       res.send(data)
 
     }
@@ -189,9 +187,11 @@ exports.createRubcricContent = (req, res) => {
 
 
 exports.SortRubricContent = (req, res) => {
-  Rubrics.update({_id : req.body.rubricId, "rubricContent.content" : req.body.toId}, { $set:  { "rubricContent.$.sort": req.body.toSort }} , { new: true }, (err, data) => {
-    Rubrics.update({_id : req.body.rubricId, "rubricContent.content" : req.body.fromId}, { $set: { "rubricContent.$.sort": req.body.fromSort } }, { new: true }, (err, data2) => {
-      res.send("Rubric Updated")
+  Rubrics.update({ 'rubricContent.content': req.body.toId }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
+    console.log(data)
+    Rubrics.update({ 'rubricContent.content': req.body.fromId }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
+      res.send(data2)
+
     })
   })
 }
@@ -219,41 +219,29 @@ exports.updateRubcricContent = (req, res) => {
 
 
 exports.removeRubricContent = (req, res) => {
-console.log(req.body)
-
-
   RubricContent.findOneAndRemove({ _id: req.body.IdToremove }, (err, data) => {
-
     if (!data) {
       res.send("No rubric Content found to remove")
     }
 
     else {
-      console.log(req.body.IdToremove)
-    
-        // req.body.IdsToResort.forEach(IdToResort => {
-
-        //   //decreament in sort order
-        //   Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": IdToResort }, { $inc: { "rubricContent.$.sort": -1 } },
-        //     (err, doc) => {
-        //       if (doc) {
-        //       res.send(doc)
-        //       }
-        //     })})
+      req.body.IdsToResort.forEach(IdToResort => {
+        //decreament in sort order
+        Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": IdToResort }, { $inc: { "rubricContent.$.sort": -1 } },
+          (err, doc) => {
+            return
+          })
+      })
     }
   })
 
-  Rubrics.findByIdAndUpdate(req.body.RubricId, 
-          { $pull: { rubricContent: { content: req.body.IdToremove } } }, 
-          { new: true }, 
-            (err, update) => {
-             if (update) {
+  Rubrics.update({ _id: req.body.RubricId }, 
+    { "$pull": { "rubricContent": { "content": req.body.IdToremove } }}, 
+    { safe: true, multi:true }, function(err, obj) {
+    res.send(obj)
+});
 
-       console.log(update)
-        
-      }
-    })
-//for Dashboard
+  //for Dashboard
   io.emit('update', { api: 'RubricsChanged' })
 
 }

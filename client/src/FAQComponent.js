@@ -134,13 +134,9 @@ var { sortBy } = require('lodash')
             var sortToindex = sortFromIndex - 1
             var sortToId = this.props.store.Rubrics[sortToindex]._id;
 
-            this.props.store.Rubrics[sortToindex].sort = sortFrom;
-            this.props.store.Rubrics[sortFromIndex].sort = sortTo;
-
             this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
-            this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
-        }
 
+        }
     }
 
     downHandle(event, data, index) {
@@ -152,15 +148,12 @@ var { sortBy } = require('lodash')
             var sortToindex = sortFromIndex + 1 //3 
             var sortToId = this.props.store.Rubrics[sortToindex]._id;
 
-            this.props.store.Rubrics[sortToindex].sort = sortFrom;
-            this.props.store.Rubrics[sortFromIndex].sort = sortTo;
-
             this.props.store.SortRubric(data._id, sortTo, sortToId, sortFrom)
-            this.props.store.Rubrics = sortBy(this.props.store.Rubrics, [function (o) { return o.sort; }])
 
         }
 
     }
+
     handleSearchClick(searchInput) {
         if (this.state.SearchValue.length === 0) {
             this.setState({
@@ -310,7 +303,6 @@ var { sortBy } = require('lodash')
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
-                                    // this.props.store.Rubrics.splice(this.state.RubricIndex, 1)
                                     this.props.store.RemoveRubric(this.state.RubricId , this.state.RubricIndex)
                                     this.setState({
                                         deleteconfirm: false,
@@ -344,7 +336,7 @@ var { sortBy } = require('lodash')
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
-                                    this.props.store.Rubrics[this.state.RubricIndex].name = this.state.Modalvalue
+                                    
                                     this.props.store.UpdateRubric(this.state.RubricId, this.state.Modalvalue, slugify(this.state.Modalvalue))
                                     this.setState({
                                         Show: false,

@@ -199,7 +199,6 @@ var x = document.getElementsByClassName("mySlides");
 
             }))
 
-
         filteredContent = content === undefined ?
             null :
             content.rubricContent.filter((d) => {
@@ -207,9 +206,6 @@ var x = document.getElementsByClassName("mySlides");
             })
         sortedContent = content === undefined ?
             null : sortBy(filteredContent, [(d) => { return d.sort }])
-
-console.log(content === undefined ?
-    null : content._id)
 
         return (
             <div className="content-wrapper" id="intro">

@@ -19,7 +19,7 @@ class PraipsStore {
 
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
-console.log(response.data)
+            console.log("from get" ,response.data)
             this.Rubrics = response.data
         })
             .catch((error) => {
@@ -92,7 +92,7 @@ console.log(response.data)
         axios.post(`${process.env.apiURL}/api/updateViews`, {
             id: id,
             views: views
-        }).then((response) => { 
+        }).then((response) => {
             console.log(response.data)
         })
             .catch((error) => {
@@ -107,7 +107,7 @@ console.log(response.data)
             slug: slug
         })
             .then((response) => {
-                return
+                return this.getRubrics()
 
             }).catch((error) => {
                 console.log(error)
@@ -122,14 +122,14 @@ console.log(response.data)
             fromSort: sortFrom
         })
             .then((response) => {
-                return
+                return this.getRubrics()
 
             }).catch((error) => {
                 console.log(error)
             })
     }
 
-    async RemoveRubric(id, removeindex) {
+    RemoveRubric(id, removeindex) {
         var idArr = [];
 
         this.Rubrics.filter((data, index) => {
@@ -138,17 +138,81 @@ console.log(response.data)
             }
         })
 
-        await axios.post(`${process.env.apiURL}/api/removeRubrics`, {
+        axios.post(`${process.env.apiURL}/api/removeRubrics`, {
             id: id,
             idArr: idArr
         })
             .then((response) => {
-                this.getRubrics();
+                return this.getRubrics()
 
             }).catch((error) => {
                 console.log(error)
             })
 
+    }
+
+    async createRubricContent(Question, Answer, RubricId, contentLength) {
+        await axios.post(`${process.env.apiURL}/api/createRubcricContent`, {
+            question: Question,
+            answer: Answer,
+            id: RubricId,
+            contentLength: contentLength
+        }).then((response) => {
+            return this.getRubrics()
+
+
+        }).catch((error) => {
+            console.log(error)
+        })
+            .catch((error) => {
+
+                console.log(error)
+            })
+    }
+
+    UpdateRubricContent(id, question, answer) {
+        axios.post(`${process.env.apiURL}/api/updateRubcricContent`, {
+            id: id,
+            question: question,
+            answer: answer
+        })
+            .then((response) => {
+               return this.getRubrics()
+
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
+    async RemoveRubricContent(RubricId, IdToremove, IdsToResort) {
+        console.log(RubricId, IdToremove, IdsToResort)
+    //    await axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
+    //         RubricId: RubricId,
+    //         IdToremove: IdToremove,
+    //         IdsToResort: IdsToResort,
+    //     })
+    //         .then((response) => {
+    //             return this.getRubrics()
+
+    //         }).catch((error) => {
+    //             console.log(error)
+    //         })
+    }
+
+     async SortRubricContent(sortFromId, sortToValue, sortToId, sortFromValue, rubricId) {
+        await axios.post(`${process.env.apiURL}/api/SortRubricContent`, {
+            toId: sortFromId,
+            toSort: sortToValue,
+            fromId: sortToId,
+            fromSort: sortFromValue,
+            rubricId: rubricId
+        })
+            .then((response) => {
+              return this.getRubrics()
+
+            }).catch((error) => {
+                console.log(error)
+            })
     }
 
     async LogOutandDelKey() {
@@ -201,54 +265,6 @@ console.log(response.data)
             })
     }
 
-     UpdateRubricContent(id, question, answer) {
-         axios.post(`${process.env.apiURL}/api/updateRubcricContent`, {
-            id: id,
-            question: question,
-            answer: answer
-        })
-            .then((response) => {
-                this.getRubrics()
-
-
-            }).catch((error) => {
-                console.log(error)
-            })
-    }
-
-  async  RemoveRubricContent(RubricId , IdToremove , IdsToResort) {
-console.log(RubricId)
-   await    axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
-            RubricId: RubricId,
-            IdToremove : IdToremove,
-            IdsToResort: IdsToResort,
-        })
-            .then((response) => {
-             return  this.getRubrics()
-
-            }).catch((error) => {
-                console.log(error)
-            })
-    }
-
-  async  SortRubricContent(sortFromId, sortToValue, sortToId, sortFromValue, rubricId) {
-
-     await   axios.post(`${process.env.apiURL}/api/SortRubricContent`, {
-            toId: sortFromId,
-            toSort: sortToValue,
-            fromId: sortToId,
-            fromSort: sortFromValue,
-            rubricId : rubricId
-        })
-            .then((response) => {
-               return  this.getRubrics()
-
-
-            }).catch((error) => {
-                console.log(error)
-            })
-    }
-
     updateAbout() {
         axios.post(`${process.env.apiURL}/api/updateAbout`, this.About).then((response) => {
 
@@ -258,28 +274,6 @@ console.log(RubricId)
                 console.log(error)
             })
     }
-
-    async createRubricContent(Question, Answer, RubricId,contentLength) {
-        console.log(Question, Answer, RubricId,contentLength)
-        await axios.post(`${process.env.apiURL}/api/createRubcricContent`, {
-            question: Question,
-            answer: Answer,
-            id: RubricId,
-            contentLength : contentLength
-        }).then((response) => {
-            return this.getRubrics()
-
-
-        }).catch((error) => {
-            console.log(error)
-        })
-            .catch((error) => {
-
-                console.log(error)
-            })
-    }
-
-
 
     uploadImages(formData, uploadName) {
         switch (uploadName) {
@@ -301,9 +295,6 @@ console.log(RubricId)
                 return;
 
         }
-
-
-
     }
 
 }
