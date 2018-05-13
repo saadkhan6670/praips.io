@@ -45,22 +45,12 @@ RubricsContentJson.forEach( (element) => {
         if(err) {
             console.log(err.message)
         }
-        else {
-           sortKey++;
-            
-            Rubrics.updateMany({}, {$push: {rubricContent : { content : data._id , sort: sortKey}, }}, (err, data) => {
-
-                if(err) {
-                    console.log(err.message)
-                }
-               
-            })
-        }
+    
     })
 })
 console.log(RubricsContentJson.length + "contents saved in RubricsContent")
 
-let NewUser = new Users({email: 'abc@gmail.com', password: '12345678', username: 'Johny Sins',role: 'Administrator'});
+let NewUser = new Users({email: 'abc@gmail.com', password: '12345678', username: 'John Partel',role: 'Administrator'});
 
 NewUser.save((err , data) => {
 
