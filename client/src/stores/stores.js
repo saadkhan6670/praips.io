@@ -19,7 +19,7 @@ class PraipsStore {
 
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
-
+console.log(response.data)
             this.Rubrics = response.data
         })
             .catch((error) => {
@@ -216,33 +216,32 @@ class PraipsStore {
             })
     }
 
-    RemoveRubricContent(RubricId , IdToremove , IdsToResort) {
-        console.log(IdsToResort)
-
-        axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
+  async  RemoveRubricContent(RubricId , IdToremove , IdsToResort) {
+console.log(RubricId)
+   await    axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
             RubricId: RubricId,
             IdToremove : IdToremove,
             IdsToResort: IdsToResort,
         })
             .then((response) => {
-                console.log(response.data)
-            //    this.Rubrics = response.data
+             return  this.getRubrics()
 
             }).catch((error) => {
                 console.log(error)
             })
     }
 
-    SortRubricContent(sortFromId, sortToValue, sortToId, sortFromValue) {
+  async  SortRubricContent(sortFromId, sortToValue, sortToId, sortFromValue, rubricId) {
 
-        axios.post(`${process.env.apiURL}/api/SortRubricContent`, {
+     await   axios.post(`${process.env.apiURL}/api/SortRubricContent`, {
             toId: sortFromId,
             toSort: sortToValue,
             fromId: sortToId,
-            fromSort: sortFromValue
+            fromSort: sortFromValue,
+            rubricId : rubricId
         })
             .then((response) => {
-                return this.getRubrics()
+               return  this.getRubrics()
 
 
             }).catch((error) => {
@@ -260,12 +259,13 @@ class PraipsStore {
             })
     }
 
-    async createRubricContent(Question, Answer, RubricId) {
+    async createRubricContent(Question, Answer, RubricId,contentLength) {
+        console.log(Question, Answer, RubricId,contentLength)
         await axios.post(`${process.env.apiURL}/api/createRubcricContent`, {
             question: Question,
             answer: Answer,
-            sort: this.Rubrics[0].content.length + 1,
-            id: RubricId
+            id: RubricId,
+            contentLength : contentLength
         }).then((response) => {
             return this.getRubrics()
 
@@ -279,8 +279,9 @@ class PraipsStore {
             })
     }
 
+
+
     uploadImages(formData, uploadName) {
-        console.log(uploadName)
         switch (uploadName) {
             case 'profile':
                 return axios.post(`${process.env.apiURL}/api/uploadProfileImg?user_id=${this.User._id}`, formData, {
@@ -290,7 +291,6 @@ class PraipsStore {
                 })
 
             case 'logo':
-                console.log(this.About._id)
                 return axios.post(`${process.env.apiURL}/api/uploadLogoImg?about_id=${this.About._id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'

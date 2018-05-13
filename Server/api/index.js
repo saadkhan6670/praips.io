@@ -16,7 +16,6 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 
-router.get('/getdata' , controller.getdata);
 
 //APIs for User
 router.post('/createContact', controller.createContact);
@@ -32,7 +31,6 @@ router.post('/adminLogIn', controller.adminLogIn);
 router.get('/loginKey', controller.LoginKey);
 router.get('/LogKeyAuth', controller.LogKeyAuth);
 router.post('/DelLogKey', controller.DelLogKey);
-router.post('/tesAPI', controller.tesAPI);
 
 
 //APIs for Rubrics

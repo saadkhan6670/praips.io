@@ -57,7 +57,7 @@ var RubricContentSchema = new Schema({
 
   question: String,
   answer: String,
-  views: { type: Number, default: null },
+  views: { type: Number, default: 0 },
   createdAt: {
     type: Date, default: Date.now
   },

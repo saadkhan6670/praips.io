@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
-import {sortBy} from 'lodash'
+import { sortBy } from 'lodash'
 
 var slideIndex = 1;
 var slideIndex2 = 2;
-let content ,filteredContent , sortedContent;
+
+var ahsan = "hello";
+let content, filteredContent, sortedContent;
 var x = document.getElementsByClassName("mySlides");
 
 @observer class FAQInfo extends Component {
@@ -76,7 +78,7 @@ var x = document.getElementsByClassName("mySlides");
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
             views += 1;
-             this.props.store.updateViews(viewId, views)
+            this.props.store.updateViews(viewId, views)
         }
         else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
             this.refs[imgref].setAttribute('src', "/images/minu icon.png")
@@ -137,28 +139,30 @@ var x = document.getElementsByClassName("mySlides");
 
     deleteHandle(event, data, removeindex) {
 
+        event.preventDefault()
+
         this.setState({
             questionId: data.content._id,
             deleteconfirm: true,
-            questionIndex : removeindex
+            questionIndex: removeindex
         })
         this.handleModalShow()
     }
 
     upHandle(event, data, index) {
         if (index !== 0) {
-          var sortToData = sortedContent[index-1]
-          var sortFrom = data.sort;
+            var sortToData = sortedContent[index - 1]
+            var sortFrom = data.sort;
             var sortTo = sortToData.sort
 
-            this.props.store.SortRubricContent(data.content._id, sortTo, sortToData.content._id, sortFrom)
+            this.props.store.SortRubricContent(data.content._id, sortTo, sortToData.content._id, sortFrom, content._id)
         }
     }
 
     downHandle(event, data, index) {
         if (index !== sortedContent.length - 1) {
-            var sortToData = sortedContent[index+1]
-          var sortFrom = data.sort;
+            var sortToData = sortedContent[index + 1]
+            var sortFrom = data.sort;
             var sortTo = sortToData.sort
             this.props.store.SortRubricContent(data.content._id, sortTo, sortToData.content._id, sortFrom)
         }
@@ -174,33 +178,38 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     AddRubricContent = (event) => {
-         event.preventDefault()
-        if(this.refs.Question.value.length !== 0 && this.refs.Answer.value.length !== 0 ){
-            this.props.store.createRubricContent(this.refs.Question.value , this.refs.Answer.value , content._id)
+        event.preventDefault()
+
+        if (this.refs.Question.value.length !== 0 && this.refs.Answer.value.length !== 0) {
+
+            this.props.store.createRubricContent(
+                this.refs.Question.value,
+                this.refs.Answer.value,
+                content._id, 
+                content.rubricContent.length)
         }
     }
 
     render() {
 
-         content = this.props.store.Rubrics === undefined ?
+        content = this.props.store.Rubrics === undefined ?
             null :
             this.props.store.Rubrics.find((data => {
                 return data.slug === `/${this.props.match.params.slugName}`
 
             }))
 
-         filteredContent = content === undefined ?
+
+        filteredContent = content === undefined ?
             null :
             content.rubricContent.filter((d) => {
-                return d.content.question.toLowerCase()
-                    .indexOf(this.props.store.searchInput
-                        .toLowerCase()) !== -1
+                return d.content.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1
             })
-            
-            sortedContent  = content === undefined ?
-            null : sortBy (filteredContent, [(d) => { return d.sort }])
+        sortedContent = content === undefined ?
+            null : sortBy(filteredContent, [(d) => { return d.sort }])
 
-            
+console.log(content === undefined ?
+    null : content._id)
 
         return (
             <div className="content-wrapper" id="intro">
@@ -240,13 +249,13 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
                 </div>
-                <h4 
-                className={this.props.store.redirect ? " AdminRubricName" : "row RubricName"} >
-                {content === undefined ? null : content.name.toUpperCase()}</h4>
+                <h4
+                    className={this.props.store.redirect ? " AdminRubricName" : "row RubricName"} >
+                    {content === undefined ? null : content.name.toUpperCase()}</h4>
 
                 <div className={this.props.store.redirect ? "row AdminRubricContent scrollbar" : "row RubricContent scrollbar"} id="style-3" >
                     {
-                        filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
+                        filteredContent === null || content.rubricContent.length === 0 ? null : filteredContent.length === 0 ? <div>
                             <h4>  We didn't find results for {this.props.store.searchInput} </h4>
 
                             <b style={{ textAlign: "centre" }}>These tips might help :</b>
@@ -270,8 +279,8 @@ var x = document.getElementsByClassName("mySlides");
                                             {this.props.store.redirect ?
                                                 <div>
                                                     <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "6px", width: "21px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
-                                                    <img onClick={(e) => this.deleteHandle(e, data,key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
-                                                    <img onClick={(e) => this.upHandle(e,data,key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
+                                                    <img onClick={(e) => this.deleteHandle(e, data, key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                    <img onClick={(e) => this.upHandle(e, data, key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
                                                     <img onClick={(e) => this.downHandle(e, data, key)} className="editimg" style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
                                                 </div>
                                                 : null}
@@ -295,26 +304,26 @@ var x = document.getElementsByClassName("mySlides");
                             )
                         })
                     }
-                    {this.props.store.redirect ? 
-                <div className="AddRubricContent "  style={{ textAlign:"center"}}>
-                <label className="label1">Add Question/Answer </label>
-                <form >
-                <div className="form-group questiontextareadiv">
-                            
-                <input type="text" placeholder="Question" className="questiontextarea form-control" ref="Question" />
-                        </div>
-                        <div className="form-group answertextareadiv">
-                            
-                            <textarea placeholder="Answer" className="answertextarea form-control scrollbar" id="style-3" ref='Answer'></textarea>
-                        </div>
+                    {this.props.store.redirect ?
+                        <div className="AddRubricContent " style={{ textAlign: "center" }}>
+                            <label className="label1">Add Question/Answer </label>
+                            <form >
+                                <div className="form-group">
 
-                        <div className="addContentbtn">
-                            <button className="btn btn-lg"  onClick= {this.AddRubricContent} > ADD </button>
-                        </div>
-                    </form>
-                    </div> : null }
+                                    <input type="text" placeholder="Question" className="form-control" ref="Question" />
+                                </div>
+                                <div className="form-group">
+
+                                    <textarea placeholder="Answer" className="form-control scrollbar" id="style-3" ref='Answer'></textarea>
+                                </div>
+
+                                <div className="addContentbtn">
+                                    <button className="btn btn-lg" onClick={this.AddRubricContent} > ADD </button>
+                                </div>
+                            </form>
+                        </div> : null}
                 </div>
-                
+
 
                 <div className={this.props.store.redirect ? "col-md-12 col-sm-12 col-sx-12 AdminSlider" : "col-md-12 col-sm-12 col-sx-12 slider"}>
                     <div className="col-md-1 col-sm-1 col-xs-1">
@@ -323,15 +332,15 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
 
-                     {this.props.store.Rubrics.map((data, key) => {
+                    {this.props.store.Rubrics.map((data, key) => {
                         return (<div key={key}>
                             <div className="col-md-4 col-sm-4 col-xs-4 mySlides">
                                 <div>
-                                    <Link to={`/faq${data.slug}`}>  <button className={this.props.store.redirect ? "btn btn-lg AdminSliderbtn" : "btn btn-lg sliderBtn" } > {data.name} </button> </Link>
+                                    <Link to={`/faq${data.slug}`}>  <button className={this.props.store.redirect ? "btn btn-lg AdminSliderbtn" : "btn btn-lg sliderBtn"} > {data.name} </button> </Link>
                                 </div>
                             </div>
                         </div>)
-                    }) }
+                    })}
 
                     <div className="col-md-1 col-sm-1 col-xs-1 rightArrow">
 
@@ -355,15 +364,17 @@ var x = document.getElementsByClassName("mySlides");
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
+
+                                    e.preventDefault()
                                     var idArr = [];
 
-                                    sortedContent.filter((data, index) => {            
+                                    sortedContent.filter((data, index) => {
                                         if (index > this.state.questionIndex) {
-                                          return idArr.push(data.content._id)
+                                            return idArr.push(data.content._id)
                                         }
                                     })
-                                    
-                                    this.props.store.RemoveRubricContent(content._id , this.state.questionId , idArr)
+
+                                    this.props.store.RemoveRubricContent(content._id, this.state.questionId, idArr)
 
                                     this.setState({
                                         deleteconfirm: false,
