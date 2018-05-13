@@ -940,7 +940,7 @@ button {
 
 .AdminRubricContent {
     padding: 18px 40px 0px 49px;
-    height: 440px;
+    height: 45%;
     margin-right: 0px;
 }
 
@@ -1286,7 +1286,7 @@ margin: 0;
 
     .AdminRubricContent {
         padding: 7px 25px 0px 28px ;
-        height: 77px ;
+        height: 45% ;
     }
     .AdminRubricContent h5 {
         margin-top: 12px;

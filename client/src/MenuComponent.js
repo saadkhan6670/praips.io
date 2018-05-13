@@ -33,10 +33,10 @@ import { withRouter } from 'react-router-dom';
                 {this.props.store.redirect ?
                     <div>
 
-                        <Link title="FAQ Widget" to="/install" id="FAQ Widget">
-                            <div className={this.props.location.pathname === "/install" ? "menuitemsActive" :"menuitems" }>
+                        <Link title="FAQ Widget" to="/script" id="FAQ Widget">
+                            <div className={this.props.location.pathname === "/script" ? "menuitemsActive" :"menuitems" }>
                                 <div >
-                                    <div className= {this.props.location.pathname === "/install" ? "menuimageActive" : "menuimage"}>
+                                    <div className= {this.props.location.pathname === "/script" ? "menuimageActive" : "menuimage"}>
                                         <img src={`${process.env.PUBLIC_URL}/images/script icon.png`} alt="script icon" className ="installimg" />
                                     </div>
                                 </div>

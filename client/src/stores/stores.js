@@ -88,10 +88,13 @@ class PraipsStore {
 
 
     updateViews(id, views) {
+        console.log(id, views)
         axios.post(`${process.env.apiURL}/api/updateViews`, {
             id: id,
             views: views
-        }).then((response) => { })
+        }).then((response) => { 
+            console.log(response.data)
+        })
             .catch((error) => {
                 console.log(error)
             })
@@ -198,14 +201,14 @@ class PraipsStore {
             })
     }
 
-    async UpdateRubricContent(id, question, answer) {
-        await axios.post(`${process.env.apiURL}/api/updateRubcricContent`, {
+     UpdateRubricContent(id, question, answer) {
+         axios.post(`${process.env.apiURL}/api/updateRubcricContent`, {
             id: id,
             question: question,
             answer: answer
         })
             .then((response) => {
-                return this.getRubrics()
+                this.getRubrics()
 
 
             }).catch((error) => {
@@ -218,7 +221,7 @@ class PraipsStore {
             id: id
         })
             .then((response) => {
-                return this.getRubrics()
+               this.Rubrics = response.data
 
             }).catch((error) => {
                 console.log(error)

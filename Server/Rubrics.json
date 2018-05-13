@@ -28,35 +28,5 @@
         "slug": "/rutrum",
         "createdAt": "2017-10-10T19:08:10Z",
         "sort":5        
-    },
-    {
-        "name": "Engineering",
-        "slug": "/quis",
-        "createdAt": "2018-03-31T21:34:25Z",
-        "sort":6        
-    },
-    {
-        "name": "Accounting",
-        "slug": "/metus",
-        "createdAt": "2017-06-13T16:13:25Z",
-        "sort":7        
-    },
-    {
-        "name": "Technology",
-        "slug": "/sit",
-        "createdAt": "2017-05-11T21:13:00Z",
-        "sort":8        
-    },
-    {
-        "name": "Mechanism",
-        "slug": "/sapien",
-        "createdAt": "2017-06-14T19:53:49Z",
-        "sort":9        
-    },
-    {
-        "name": "Employees",
-        "slug": "/faucibus",
-        "createdAt": "2018-04-12T00:24:10Z",
-        "sort":10        
     }
 ]

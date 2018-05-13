@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
-// var {
-//     sortBy
-// } = require('lodash')
+import {sortBy} from 'lodash'
 
 var slideIndex = 1;
 var slideIndex2 = 2;
-let content ,filteredContent;
+let content ,filteredContent , sortedContent;
 var x = document.getElementsByClassName("mySlides");
 
 @observer class FAQInfo extends Component {
@@ -77,7 +75,7 @@ var x = document.getElementsByClassName("mySlides");
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
             views += 1;
-            return this.props.store.updateViews(viewId, views)
+             this.props.store.updateViews(viewId, views)
         }
         else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
             this.refs[imgref].setAttribute('src', "/images/minu icon.png")
@@ -130,21 +128,21 @@ var x = document.getElementsByClassName("mySlides");
     editHandle(event, data, index) {
         this.handleModalShow()
         this.setState({
-            question: data.question,
-            answer: data.answer,
-            questionId: data._id
+            question: data.content.question,
+            answer: data.content.answer,
+            questionId: data.content._id
         })
     }
 
     deleteHandle(event, data, index) {
         console.log(index)
         
-        // this.setState({
-        //     questionId: data._id,
-        //     deleteconfirm: true,
+        this.setState({
+            questionId: data._id,
+            deleteconfirm: true,
 
-        // })
-        // this.handleModalShow()
+        })
+        this.handleModalShow()
     }
 
     upHandle(event, data, index) {
@@ -193,11 +191,15 @@ var x = document.getElementsByClassName("mySlides");
 
          filteredContent = content === undefined ?
             null :
-            content.content.filter((d) => {
-                return d.question.toLowerCase()
+            content.rubricContent.filter((d) => {
+                console.log()
+                return d.content.question.toLowerCase()
                     .indexOf(this.props.store.searchInput
                         .toLowerCase()) !== -1
             })
+            
+            sortedContent  = content === undefined ?
+            null : sortBy (filteredContent, [(d) => { return d.sort }])
 
         return (
             <div className="content-wrapper" id="intro">
@@ -252,7 +254,7 @@ var x = document.getElementsByClassName("mySlides");
                                 <li> Try different keywords.   </li>
                                 <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
                             </ul>
-                        </div> : filteredContent.map((data, key) => {
+                        </div> : sortedContent.map((data, key) => {
                             return (<div>
                                 <div className="col-md-12 col-sm-12 col-xs-12"
                                     onMouseOver={(e) => { this.mouseHover(e, key) }}
@@ -260,7 +262,7 @@ var x = document.getElementsByClassName("mySlides");
                                     key={key}>
 
                                     <div className="col-md-8 col-sm-8  col-xs-8 " >
-                                        <h5><b>{data.question}</b></h5>
+                                        <h5><b>{data.content.question}</b></h5>
                                     </div>
                                     <div className="col-md-3 col-sm-3 col-xs-3" style={{ padding: "0 0 0 0" }}>
                                         <div className="AdminIcons" style={{ padding: "3px 0 0 0" }}>
@@ -278,14 +280,14 @@ var x = document.getElementsByClassName("mySlides");
                                         <img src="/images/plus icon.png" alt="plus icon"
                                             ref={`plus${key}`}
                                             // handling the answer toggle and view update with its id
-                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data._id, data.views)}
+                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data.content._id, data.content.views)}
                                             className="view Plus"
                                         />
                                     </div>
                                 </div>
                                 <div className="col-md-12 col-sm-12 col-sx-12">
 
-                                    <p ref={`answer${key}`}>{data.answer}</p>
+                                    <p ref={`answer${key}`}>{data.content.answer}</p>
                                     <hr className="FaqInfoHr" />
                                 </div>
                             </div>

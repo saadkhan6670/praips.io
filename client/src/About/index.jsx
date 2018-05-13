@@ -159,7 +159,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <div className="right_btn">
                                         <button className="btn btn-lg" style={{ textTransform: 'uppercase' }}>
-                                        <a 
+                                        <a style={{color : "white"}}
                                         href={`http://${this.props.store.About.siteUrl}`} 
                                         target="_blank"> {this.props.store.About.siteUrl} </a>
                                         </button>

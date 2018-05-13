@@ -33,6 +33,19 @@ exports.getdata = (req,res) => {
   })
 }
 
+exports.tesAPI = (req,res) => {
+  Rubrics.findByIdAndUpdate(req.body.rubricId, {$pull : {rubricContent: {content: req.body.id} }}, (err , update) => {
+    if(update) {
+     res.send(update)
+    }
+
+    else {
+      res.send(err)
+    }
+  } )
+}
+
+
 //create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -148,7 +161,7 @@ exports.removeRubrics = (req, res) => {
 
 exports.getAllRubrics = (req, res) => {
   Rubrics.find().sort('sort')
-  .populate({path : 'RubricContent.content' , model : 'RubricContent'})
+  .populate({path : 'rubricContent.content' , model : 'RubricContent'})
   .exec((err, data) => {
 
     if (!data) {
@@ -204,13 +217,14 @@ exports.updateRubcricContent = (req, res) => {
     { question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
   },
 
-    { new: true }, (err, data) => {
+    { new: true  }, (err, data) => {
 
       if (!data) {
         res.send("Rubric content not found to update")
       }
 
       else {
+        
         res.send("Rubric content updated");
       }
     })
@@ -221,14 +235,31 @@ exports.updateRubcricContent = (req, res) => {
 
 exports.removeRubricContent = (req, res) => {
 
-  RubricContent.findByIdAndRemove(req.body.id, (err, data) => {
+  RubricContent.findOneAndRemove({_id:req.body.id}, (err, data) => {
 
     if (!data) {
       res.send("No rubric Content found to remove")
     }
 
     else {
-      res.send("Rubric Content Removed");
+      Rubrics.findByIdAndUpdate(req.body.rubricId, {$pull : {rubricContent: {content: req.body.id} }}, (err , update) => {
+        if(update) {
+          Rubrics.find()
+          .sort('sort')
+          .populate({path : 'rubricContent.content' , model : 'RubricContent'})
+          .exec((err, rubrics) => {
+        
+            if (!data) {
+              res.send(err)
+            }
+        
+            else {
+              res.send(rubrics);
+            }
+          })
+        }
+      } )
+   
     }
   })
 
@@ -331,13 +362,14 @@ exports.getAllContacts = (req, res) => {
 }
 
 exports.updateViews = (req, res) => {
-  RubricContent.findByIdAndUpdate(req.body.id, { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
+  RubricContent.findByIdAndUpdate( mongoose.Types.ObjectId(req.body.id), { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
 
     if (err) {
       res.send(err)
     }
 
     else {
+      console.log('doc', doc)
       res.send(doc)
     }
   })

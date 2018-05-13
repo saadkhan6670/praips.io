@@ -32,6 +32,8 @@ router.post('/adminLogIn', controller.adminLogIn);
 router.get('/loginKey', controller.LoginKey);
 router.get('/LogKeyAuth', controller.LogKeyAuth);
 router.post('/DelLogKey', controller.DelLogKey);
+router.post('/tesAPI', controller.tesAPI);
+
 
 //APIs for Rubrics
 
