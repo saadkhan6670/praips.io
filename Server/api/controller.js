@@ -242,14 +242,13 @@ exports.removeRubricContent = (req, res) => {
     }
 
     else {
-      Rubrics.findByIdAndUpdate(req.body.RubricId, { $pull: { rubricContent: { content: req.body.IdToremove } } }, (err, update) => {
+      Rubrics.findByIdAndUpdate(req.body.RubricId, 
+        { $pull: { rubricContent: { content: req.body.IdToremove } } }, 
+        { }, 
+        (err, update) => {
         if (update) {
-          // req.body.IdsToResort.forEach(idData => {
-            Rubrics.findByIdAndUpdate(req.body.RubricId, {$set:  { rubricContent: { sort : 1 } } }, (err, update) => {
-              return 
-            }
-            )
-          // })
+          
+
         }
       })
     }
