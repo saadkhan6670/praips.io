@@ -270,7 +270,7 @@ var RemoveOverflow = (str, strlength) => {
         document.getElementById('helpText').innerHTML = "Submit a Feature Request"
 
         this.refs.backArrow.style.display = "block"
-        this.refs.contactDiv.style.display = "block"
+        document.getElementById('contactDiv').style.display = "block"
         this.refs.widgetHeaderDiv.style.height = "28px"
 
     }
@@ -281,7 +281,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.searchResultDiv.style.display = "none"
         this.refs.questionAnswerDiv.style.display = "none"
         this.refs.askQuestionBtnDiv.style.display = "none"
-        this.refs.contactDiv.style.display = "none"
+        document.getElementById('contactDiv').style.display = "none"
         this.refs.widgetContainer.style.width = "20%"
         this.refs.widgetHelpBtn.style.display = "block"
         this.refs.widgetSearchInput.style.backgroundColor = ""
@@ -293,11 +293,11 @@ var RemoveOverflow = (str, strlength) => {
 
     handleBack() {
 
-        console.log(counter)
 
         if (counter === 1) {
-            if (this.refs.contactDiv.style.display === "block") {
-                this.refs.contactDiv.style.display = "none"
+      
+        if (    document.getElementById('contactDiv').style.display === "block") {
+            document.getElementById('contactDiv').style.display = "none"
                 this.refs.searchResultDiv.style.display = "block"
                 this.refs.widgetSearchInput.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
@@ -320,8 +320,8 @@ var RemoveOverflow = (str, strlength) => {
         }
 
         if (counter === 2) {
-            if (this.refs.contactDiv.style.display === "block") {
-                this.refs.contactDiv.style.display = "none"
+            if ( document.getElementById('contactDiv').style.display === "block") {
+                 document.getElementById('contactDiv').style.display = "none"
                 this.refs.questionAnswerDiv.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
 
@@ -336,6 +336,15 @@ var RemoveOverflow = (str, strlength) => {
     handleRelatedQue(selectedQue) {
         this.props.store.selectedQue = selectedQue;
     }
+
+    handleBacktoSearch  = () => {
+        document.getElementById('contactDiv').style.display = "none"
+ 
+        this.refs.searchResultDiv.style.display = "block"
+        this.refs.widgetSearchInput.style.display = "block"
+        this.refs.askQuestionBtnDiv.style.display = "block"
+        
+    }   
 
 
     render() {
@@ -445,8 +454,8 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="questionAnswerDiv" style={questionAnswer}>
 
-                        <h5>{questionData ? questionData.question : null}</h5>
-                        <p style={{ fontSize: "13px" }}>{questionData ? questionData.answer : null}</p>
+                        <h5>{questionData ? questionData.content.question : null}</h5>
+                        <p style={{ fontSize: "13px" }}>{questionData ? questionData.content.answer : null}</p>
 
 
                         <hr />
@@ -456,8 +465,8 @@ var RemoveOverflow = (str, strlength) => {
                             {filteredContent === null ? null : relatedQues.map(d => {
                                 return (
                                     <li style={relatedArticleListStyle}
-                                        onClick={() => this.handleRelatedQue(d.question)}
-                                    > <a href='#' style={{ color: "black" }}>{RemoveOverflow(d.question, 50)} </a></li>
+                                        onClick={() => this.handleRelatedQue(d.content.question)}
+                                    > <a href='#' style={{ color: "black" }}>{RemoveOverflow(d.content.question, 50)} </a></li>
                                 )
                             })}
 
@@ -466,8 +475,8 @@ var RemoveOverflow = (str, strlength) => {
 
                     </div>
 
-                    <div ref="contactDiv" style={contactDivStyles}>
-                        <Contact store={this.props.store} />
+                    <div id="contactDiv" style={contactDivStyles}>
+                        <Contact store={this.props.store}      handleBacktoSearch = {this.handleBacktoSearch} />
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 

@@ -218,10 +218,7 @@ console.log(this.refs.Name.value.length, isNumeric(this.refs.Name.value) )
             this.contactSubmit(e)
         }
     }
-    handleBacktoSearch ( ){
-
-
-    }   
+   
     
     
     render() {
@@ -250,7 +247,7 @@ console.log(this.refs.Name.value.length, isNumeric(this.refs.Name.value) )
                     <div style={contactBtnsDivStyles}>
 
 
-                        <input type="button" style={backToSearchBtnStyles}  onClick={() => {this.handleBacktoSearch()}}value="Back to Search" />
+                        <input type="button" style={backToSearchBtnStyles}  onClick={() => {this.props.handleBacktoSearch()}}value="Back to Search" />
 
                         <input type="submit" style={sendBtnStyles} value="Send" />
 
