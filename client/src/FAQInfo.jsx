@@ -78,8 +78,12 @@ var x = document.getElementsByClassName("mySlides");
             this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/minus-icon.png`)
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
-            views += 1;
-            this.props.store.updateViews(viewId, views)
+           
+            if(this.props.store.redirect) {
+                views += 1;
+                this.props.store.updateViews(viewId, views)
+            }
+           
         }
         else if (this.refs[imgref].getAttribute('src') === `${process.env.PUBLIC_URL}/images/plus-icon.png`) {
             this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/minus-icon.png`)
@@ -203,7 +207,7 @@ var x = document.getElementsByClassName("mySlides");
     }
 
     render() {
-
+    
         content = this.props.store.Rubrics === undefined ?
             null :
             this.props.store.Rubrics.find((data => {
@@ -317,7 +321,7 @@ var x = document.getElementsByClassName("mySlides");
                                     {this.props.store.redirect ?
                                     <div className="questionDiv">
                                     <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/eye-icon.png)`}}> 
-                                     {data.content.views}
+                                     <span style={{margin : "0 1px 0 1px"}}> {data.content.views} </span>
                                     
                                     </div> 
                                                </div>

@@ -16,11 +16,13 @@ import {Redirect} from 'react-router-dom'
     }
 
     componentDidMount() {
+        console.log(process.env.socketURL)
         this.props.store.getAllResearches();
         this.props.store.getAllContacts();
         this.props.store.getRubrics();
 
      let socket =   io.connect(process.env.socketURL);
+     console.log(socket)
 
     socket.on('update', (data) => {
       switch(data.api) {

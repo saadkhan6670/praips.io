@@ -458,6 +458,12 @@ button {
     height: 47px;
 }
 
+.AdminSliderbtn:hover {
+    color: white;
+    background-color: #83C75A;
+    text-decoration: none;
+}
+
 .AdminIcons {
     /* display: none; */
     visibility: hidden;
@@ -1016,10 +1022,10 @@ margin: 0;
 }
 
 .questionDiv div {
-    background-size: 16px;
+    background-size: 24px;
     background-repeat: no-repeat;
-    background-position: 510px;
-    text-align:  right;
+    background-position: 98%;
+    text-align: right;
 
 }
 #alertMessage { 

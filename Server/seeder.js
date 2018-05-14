@@ -26,7 +26,15 @@ console.log("Putting data in Rubrics")
 
 RubricsJson.forEach(element => {
     let NewRubric = new Rubrics(element);
-
+    
+    NewRubric.rubricContent =  NewRubric.rubricContent.map( element2 => {
+        var contentsend = {
+            content :  mongoose.Types.ObjectId( element2.content),
+            sort :  element2.sort
+        }
+      
+       return   contentsend;
+    })
     NewRubric.save( (err, data) => {
 
         if(err)  {

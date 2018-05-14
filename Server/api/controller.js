@@ -21,9 +21,13 @@ const LogKey = mongoose.model('LogKey');
 
 
 
-server.listen(8080)
+server.listen(8081)
 
 var io = socketIO.listen(server)
+
+io.on('connection' , ( ) => {
+  console.log('Socket connected')
+})
 
 
 
@@ -31,8 +35,8 @@ var io = socketIO.listen(server)
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ahsankhan1911@gmail.com',
-    pass: ''
+    user: 'lawdow123@gmail.com',
+    pass: 'ahsan12345678'
   }
 });
 
@@ -186,10 +190,10 @@ exports.createRubcricContent = (req, res) => {
 
 
 exports.SortRubricContent = (req, res) => {
-  console.log(req.body)
-  Rubrics.update({ 'rubricContent.content': req.body.toId }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
-    console.log(data)
-    Rubrics.update({ 'rubricContent.content': req.body.fromId }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
+
+  Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId( req.body.toId) }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
+
+    Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId( req.body.fromId) }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
       res.send(data2)
 
     })
@@ -223,24 +227,25 @@ exports.removeRubricContent = (req, res) => {
     if (!data) {
       res.send("No rubric Content found to remove")
     }
-
     else {
       req.body.IdsToResort.forEach(IdToResort => {
         //decreament in sort order
-        Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": IdToResort }, { $inc: { "rubricContent.$.sort": -1 } },
+        Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": mongoose.Types.ObjectId( IdToResort) }, { $inc: { "rubricContent.$.sort": -1 } },
           (err, doc) => {
-            return
+              
           })
       })
+
+      Rubrics.update({ _id: req.body.RubricId }, 
+        { "$pull": { "rubricContent": { "content":mongoose.Types.ObjectId( req.body.IdToremove) } }}, 
+        { safe: true, multi:true }, function(err, obj) {
+        res.send(obj)
+    });
     }  
   
   })
 
-  Rubrics.update({ _id: req.body.RubricId }, 
-    { "$pull": { "rubricContent": { "content": req.body.IdToremove } }}, 
-    { safe: true, multi:true }, function(err, obj) {
-    res.send(obj)
-});
+ 
 
   //for Dashboard
   io.emit('update', { api: 'RubricsChanged' })
@@ -310,18 +315,34 @@ exports.createContact = (req, res) => {
       res.send(err);
     }
     else {
-      let mailOptions = {
-        from: 'ahsankhan1911@gmail.com', // sender address
+      let mailOptionsForAdmin = {
+        from: req.body.toEmail, // sender address
         to: 'safbusiness2017@gmail.com', // list of receivers
         subject: 'New Contact Request', // Subject line
-        html: "<h1>New Contact Request </h1>   <p><b>Name: </b>" + req.body.visitorName + "</p> <p><b>Email: </b>" + req.body.toEmail + "</p> <p><b>Mesage: </b>" + req.body.content + "</p>"
+        html: "<h1>New Contact Request </h1>   <p>" + req.body.visitorName + " needs your help from Praips </p>  <p><b>Content: </b>" + req.body.content + "</p>"
       };
 
-      transporter.sendMail(mailOptions, (error, info) => {
+      let mailOptionsForUser = {
+        from: 'safbusiness2017@gmail.com', // sender address
+        to: req.body.toEmail, // list of receivers
+        subject: 'New Contact Request', // Subject line
+        html: "<p> We have received your requestion from " + req.body.visitorName + "<p><b>This is your message, </b>" + req.body.content + "</p>"
+      };
+
+      transporter.sendMail(mailOptionsForAdmin, (error, info) => {
         if (error) {
           return res.send(error);
         }
-        res.send(info);
+        else {
+          transporter.sendMail(mailOptionsForUser, (error, info) => {
+            if (error) {
+              return res.send(error);
+            }
+            else {
+           res.send(info)
+            }
+          });
+        }
       });
 
     }
@@ -391,7 +412,7 @@ exports.getAllResearches = (req, res) => {
 
 
 exports.uploadProfileImg = (req, res) => {
-  // console.log(r)
+
   if (req.file) {
     Users.findByIdAndUpdate(req.query.user_id, { $set: { profilePath: `/images/${req.file.filename}` } }, (err, doc) => {
       if (!doc) {
@@ -411,7 +432,7 @@ exports.uploadProfileImg = (req, res) => {
 }
 
 exports.uploadLogoImg = (req, res) => {
-  // console.log(r)
+
   if (req.file) {
     About.findByIdAndUpdate(req.query.about_id, { $set: { logoPath: `/images/${req.file.filename}` } }, (err, doc) => {
       if (!doc) {
