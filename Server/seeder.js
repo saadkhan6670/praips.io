@@ -10,6 +10,9 @@ const Contact = mongoose.model('Contact');
 const Search = mongoose.model('Search');
 const About = mongoose.model('About');
 
+
+var sortKey = 0;
+
 console.log("connecting Database..")
 mongoose.connect(`mongodb://localhost/praipsDB`, { useMongoClient: true },function(err){
     if(err){
@@ -18,11 +21,20 @@ mongoose.connect(`mongodb://localhost/praipsDB`, { useMongoClient: true },functi
     
 });
 
+
 console.log("Putting data in Rubrics")
 
 RubricsJson.forEach(element => {
     let NewRubric = new Rubrics(element);
-
+    
+    NewRubric.rubricContent =  NewRubric.rubricContent.map( element2 => {
+        var contentsend = {
+            content :  mongoose.Types.ObjectId( element2.content),
+            sort :  element2.sort
+        }
+      
+       return   contentsend;
+    })
     NewRubric.save( (err, data) => {
 
         if(err)  {
@@ -34,7 +46,6 @@ RubricsJson.forEach(element => {
 console.log(RubricsJson.length + " rubrics saved in Database");
 
 RubricsContentJson.forEach( (element) => {
-
     let NewRubricContent = new RubricContent(element)
 
     NewRubricContent.save( (err, data) => {
@@ -42,19 +53,12 @@ RubricsContentJson.forEach( (element) => {
         if(err) {
             console.log(err.message)
         }
-        else {
-            Rubrics.updateMany({}, {$push: {content : data._id}}, (err, data) => {
-
-                if(err) {
-                    console.log(err.message)
-                }
-            })
-        }
+    
     })
 })
 console.log(RubricsContentJson.length + "contents saved in RubricsContent")
 
-let NewUser = new Users({email: 'abc@gmail.com', password: '12345678', username: 'Johny Sins',role: 'Administrator'});
+let NewUser = new Users({email: 'abc@gmail.com', password: '12345678', username: 'John Partel',role: 'Administrator'});
 
 NewUser.save((err , data) => {
 

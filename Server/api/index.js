@@ -3,13 +3,15 @@ var app = express();
 const requestIp = require('request-ip');
 var router = express.Router();
 var controller = require('./controller');
-var multer = require('multer')
+
+var multer = require('multer');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, file.originalname.replace(/\s/g,'-'))
   }
 })
 var upload = multer({ storage: storage })
@@ -30,6 +32,7 @@ router.get('/loginKey', controller.LoginKey);
 router.get('/LogKeyAuth', controller.LogKeyAuth);
 router.post('/DelLogKey', controller.DelLogKey);
 
+
 //APIs for Rubrics
 
 router.post('/createRubric', controller.createRubric);
@@ -41,6 +44,8 @@ router.post('/sortRubrics' , controller.sortRubrics)
 //APIs for Rucric Content
 router.post('/createRubcricContent', controller.createRubcricContent);
 router.post('/updateRubcricContent', controller.updateRubcricContent);
+router.post('/SortRubricContent', controller.SortRubricContent);
+router.post('/removeRubricContent', controller.removeRubricContent);
 router.post('/updateViews', controller.updateViews);
 
 
@@ -49,7 +54,9 @@ router.post('/createAbout', controller.createAbout);
 router.post('/updateAbout', controller.updateAbout);
 router.get('/getAbout', controller.getAbout);
 
-router.post('/uploadImg',upload.single('profile'), controller.uploadImg);
+router.post('/uploadProfileImg',upload.single('profile'), controller.uploadProfileImg);
+router.post('/uploadLogoImg',upload.single('logo'), controller.uploadLogoImg);
+
 
 
 // router.get('/getRubricContent/:slugName', controller.getRubricContent);

@@ -10,10 +10,7 @@ import NetworkError from './NetworkError'
 
 async function checkKey() {
     await axios.get(`${process.env.apiURL}/api/LogKeyAuth?LogKey=${store.LoginKey}`).then((response) => {
-
         store.redirect = response.data
-
-
         ReactDOM.render(
             <App store={store} />
             , document.getElementById('root'));

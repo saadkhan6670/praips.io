@@ -5,6 +5,9 @@ var Schema = mongoose.Schema;
 var server = require('http').createServer()
 const socketIO = require('socket.io')
 const uuidv1 = require('uuid/v1');
+var {
+  sortBy
+} = require('lodash')
 
 //Models
 const Rubrics = mongoose.model('Rubrics');
@@ -18,9 +21,13 @@ const LogKey = mongoose.model('LogKey');
 
 
 
-server.listen(8080)
+server.listen(8081)
 
 var io = socketIO.listen(server)
+
+io.on('connection' , ( ) => {
+  console.log('Socket connected')
+})
 
 
 
@@ -28,8 +35,8 @@ var io = socketIO.listen(server)
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ahsankhan1911@gmail.com',
-    pass: ''
+    user: 'lawdow123@gmail.com',
+    pass: 'ahsan12345678'
   }
 });
 
@@ -41,7 +48,7 @@ exports.adminLogIn = (req, res) => {
       res.send(false)
     }
     else {
-   
+
       res.send(data)
     }
   })
@@ -87,41 +94,57 @@ exports.DelLogKey = (req, res) => {
 // Admin Api Ends
 
 // API for Rubrics
+exports.getAllRubrics = (req, res) => {
+  Rubrics.find().sort('sort')
+    .populate({ path: 'rubricContent.content', model: 'RubricContent' })
+    .exec((err, data) => {
+
+      if (!data) {
+        res.send(err)
+      }
+      else {
+        res.send(data);
+      }
+    })
+}
+
 exports.createRubric = (req, res) => {
   let New_Rubrics = new Rubrics(req.body)
-
   New_Rubrics.save((err, rubric) => {
-
     res.send(rubric)
   })
   io.emit('update', { api: 'RubricsChanged' })
-
 }
 
 exports.updateRubcric = (req, res) => {
-
   let date = new Date();
 
-  Rubrics.findByIdAndUpdate(req.body.id, { $set: { name: req.body.name, slug: req.body.slug, updatedAt: Date.now() } }, { new: true }, (err, data) => {
-    if (!data) {
-      res.send("No rubric found to update")
-    }
+  Rubrics.findByIdAndUpdate(req.body.id,
+    { $set: { name: req.body.name, slug: req.body.slug, updatedAt: Date.now() } }, { new: true }, (err, data) => {
+      if (!data) {
+        res.send("No rubric found to update")
+      }
 
-    else {
-      res.send("Rubric updated");
-    }
-  })
+      else {
+        res.send("Rubric updated");
+      }
+    })
   io.emit('update', { api: 'RubricsChanged' })
 
 }
 
 exports.removeRubrics = (req, res) => {
-  console.log(req.body)
 
-  Rubrics.findByIdAndRemove(req.body._id, (err, data) => {
+  req.body.idArr.forEach(idData => {
+    Rubrics.findByIdAndUpdate(idData, { $inc: { 'sort': -1 } }, { new: true }, (err, data) => {
+      return
+    })
+  })
+
+  Rubrics.findByIdAndRemove(req.body.id, (err, data) => {
 
     if (!data) {
-      res.send("No rubric found to update")
+      res.send("No rubric found to remove")
     }
 
     else {
@@ -133,31 +156,17 @@ exports.removeRubrics = (req, res) => {
 
 }
 
-
-exports.getAllRubrics = (req, res) => {
-  Rubrics.find({}).populate('content').exec((err, data) => {
-
-    if (!data) {
-      res.send(err)
-    }
-
-    else {
-      res.send(data);
-    }
-  })
-
-
-}
-
-exports.sortRubrics = (req,res)=> {
-  Rubrics.findByIdAndUpdate(req.body.toId, { $set: {sort :req.body.toSort} }, {new: true}, (err , data) => {
-    Rubrics.findByIdAndUpdate(req.body.fromId, { $set: {sort :req.body.fromSort} }, {new: true}, (err , data2) => {
+exports.sortRubrics = (req, res) => {
+  Rubrics.findByIdAndUpdate(req.body.toId, { $set: { sort: req.body.toSort } }, { new: true }, (err, data) => {
+    Rubrics.findByIdAndUpdate(req.body.fromId, { $set: { sort: req.body.fromSort } }, { new: true }, (err, data2) => {
       res.send("Rubric Updated")
     })
   })
 }
 
 // Api for Rubric ends
+
+// api for rubric content
 
 exports.createRubcricContent = (req, res) => {
   let NewRubricContent = new RubricContent(req.body);
@@ -166,22 +175,35 @@ exports.createRubcricContent = (req, res) => {
       res.send(err)
     }
     else {
-      Rubrics.update({ _id: mongoose.Types.ObjectId(req.query.id) }, { $push: { content: data._id } }, (data) => {
-        return
-      })
+
+        Rubrics.update({ _id: req.body.id }, 
+          { "$push": { "rubricContent": { "content": data._id , "sort": req.body.contentLength + 1 } }}, 
+          { safe: true, multi:true }, function(err, obj) {
+            return
+      });
       res.send(data)
 
     }
   })
   io.emit('update', { api: 'RubricsChanged' })
+}
 
 
+exports.SortRubricContent = (req, res) => {
+
+  Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId( req.body.toId) }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
+
+    Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId( req.body.fromId) }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
+      res.send(data2)
+
+    })
+  })
 }
 
 exports.updateRubcricContent = (req, res) => {
-  RubricContent.findByIdAndUpdate(req.query.id, {
+  RubricContent.findByIdAndUpdate(req.body.id, {
     $set:
-    { name: req.body.name, question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
+      { question: req.body.question, answer: req.body.answer, updatedAt: Date.now() }
   },
 
     { new: true }, (err, data) => {
@@ -191,14 +213,48 @@ exports.updateRubcricContent = (req, res) => {
       }
 
       else {
+
         res.send("Rubric content updated");
       }
     })
 
   io.emit('update', { api: 'RubricsChanged' })
+}
 
+
+exports.removeRubricContent = (req, res) => {
+  RubricContent.findOneAndRemove({ _id: req.body.IdToremove }, (err, data) => {
+    if (!data) {
+      res.send("No rubric Content found to remove")
+    }
+    else {
+      req.body.IdsToResort.forEach(IdToResort => {
+        //decreament in sort order
+        Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": mongoose.Types.ObjectId( IdToResort) }, { $inc: { "rubricContent.$.sort": -1 } },
+          (err, doc) => {
+              
+          })
+      })
+
+      Rubrics.update({ _id: req.body.RubricId }, 
+        { "$pull": { "rubricContent": { "content":mongoose.Types.ObjectId( req.body.IdToremove) } }}, 
+        { safe: true, multi:true }, function(err, obj) {
+        res.send(obj)
+    });
+    }  
+  
+  })
+
+ 
+
+  //for Dashboard
+  io.emit('update', { api: 'RubricsChanged' })
 
 }
+
+
+
+// Rubric content ends
 
 exports.createAbout = (req, res) => {
   let NewAbout = new About(req.body);
@@ -215,14 +271,22 @@ exports.createAbout = (req, res) => {
 }
 
 exports.updateAbout = (req, res) => {
-  About.findOneAndUpdate({ name: req.body.name }, { new: true }, (err, doc) => {
+  About.findByIdAndUpdate(req.body._id, {
+    $set: {
+      name: req.body.name,
+      logoPath: req.body.logoPath,
+      description: req.body.description,
+      slogan: req.body.slogan,
+      siteUrl: req.body.siteUrl
+    }
+  }, { new: true }, (err, doc) => {
 
     if (!doc) {
       res.send(err);
     }
 
     else {
-      res.send("About updated successfully !");
+      res.send(doc);
     }
   })
 
@@ -251,18 +315,34 @@ exports.createContact = (req, res) => {
       res.send(err);
     }
     else {
-      let mailOptions = {
-        from: 'ahsankhan1911@gmail.com', // sender address
+      let mailOptionsForAdmin = {
+        from: req.body.toEmail, // sender address
         to: 'safbusiness2017@gmail.com', // list of receivers
         subject: 'New Contact Request', // Subject line
-        html: "<h1>New Contact Request </h1>   <p><b>Name: </b>" + req.body.visitorName + "</p> <p><b>Email: </b>" + req.body.toEmail + "</p> <p><b>Mesage: </b>" + req.body.content + "</p>"
+        html: "<h1>New Contact Request </h1>   <p>" + req.body.visitorName + " needs your help from Praips </p>  <p><b>Content: </b>" + req.body.content + "</p>"
       };
 
-      transporter.sendMail(mailOptions, (error, info) => {
+      let mailOptionsForUser = {
+        from: 'safbusiness2017@gmail.com', // sender address
+        to: req.body.toEmail, // list of receivers
+        subject: 'New Contact Request', // Subject line
+        html: "<p> We have received your requestion from " + req.body.visitorName + "<p><b>This is your message, </b>" + req.body.content + "</p>"
+      };
+
+      transporter.sendMail(mailOptionsForAdmin, (error, info) => {
         if (error) {
           return res.send(error);
         }
-        res.send(info);
+        else {
+          transporter.sendMail(mailOptionsForUser, (error, info) => {
+            if (error) {
+              return res.send(error);
+            }
+            else {
+           res.send(info)
+            }
+          });
+        }
       });
 
     }
@@ -285,13 +365,14 @@ exports.getAllContacts = (req, res) => {
 }
 
 exports.updateViews = (req, res) => {
-  RubricContent.findByIdAndUpdate(req.body.id, { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
+  RubricContent.findByIdAndUpdate(mongoose.Types.ObjectId(req.body.id), { $set: { views: req.body.views } }, { new: true }, (err, doc) => {
 
     if (err) {
       res.send(err)
     }
 
     else {
+      console.log('doc', doc)
       res.send(doc)
     }
   })
@@ -330,28 +411,58 @@ exports.getAllResearches = (req, res) => {
 }
 
 
-exports.uploadImg = (req, res) => {
-  console.log(req.body)
-if(req.file) {
-  console.log(req.file)
+exports.uploadProfileImg = (req, res) => {
+
+  if (req.file) {
+    Users.findByIdAndUpdate(req.query.user_id, { $set: { profilePath: `/images/${req.file.filename}` } }, (err, doc) => {
+      if (!doc) {
+        res.send("Cannot change profile picture at this moment")
+      }
+
+      else {
+        res.send(req.file.filename)
+      }
+    })
+  }
+
+  else {
+    console.log("No file uploaded")
+  }
+
 }
 
-else {
-  console.log("No file uploaded")
+exports.uploadLogoImg = (req, res) => {
+
+  if (req.file) {
+    About.findByIdAndUpdate(req.query.about_id, { $set: { logoPath: `/images/${req.file.filename}` } }, (err, doc) => {
+      if (!doc) {
+        res.send("Cannot change logo  at this moment")
+      }
+
+      else {
+        res.send(req.file.filename)
+      }
+    })
+  }
+
+  else {
+    console.log("No file uploaded")
+  }
+
 }
- 
-}
+
+
 
 exports.getUserData = (req, res) => {
- Users.findById(req.params.user_id).select('_id role profilePath username').exec( (err, user) => {
+  Users.findById(req.params.user_id).select('_id role profilePath username').exec((err, user) => {
 
-   if(!user ) {
-     res.send("No user found ")
-   }
+    if (!user) {
+      res.send("No user found ")
+    }
 
-   else {
-     res.send(user)
-   }
- } )
- 
+    else {
+      res.send(user)
+    }
+  })
+
 }

@@ -7,7 +7,7 @@ var UsersSchema = new Schema({
     type: String,
     unique: true
   },
-  username : {
+  username: {
     type: String
   },
   password: {
@@ -17,10 +17,10 @@ var UsersSchema = new Schema({
     type: String,
   },
 
-  profilePath : {type : String , default: '/images/default-profile.jpg'},
-  
-  
- 
+  profilePath: { type: String, default: '/images/default-profile.jpg' },
+
+
+
 });
 
 var RubricsSchema = new Schema({
@@ -36,50 +36,56 @@ var RubricsSchema = new Schema({
     type: Date, default: Date.now,
   },
   updatedAt: {
-    type: Date , default: null ,
+    type: Date, default: null,
   },
-  content: [{
-            
-      type: Schema.Types.ObjectId, 
+  rubricContent: {
+
+    type: Array,
+    default: [],
+    content: {
+      type: Schema.Types.ObjectId,
       ref: 'RubricContent',
-      default : [],
-  }],
-  sort:{ type : Number},
+    },
+    sort: { type: Number },
+
+  }
+  ,
+  sort: { type: Number },
 });
 
 var RubricContentSchema = new Schema({
+
   question: String,
   answer: String,
-  views: {type: Number, default: null},
-  createdAt: { 
-    type: Date, default: Date.now 
+  views: { type: Number, default: 0 },
+  createdAt: {
+    type: Date, default: Date.now
   },
-  updatedAt:{
+  updatedAt: {
     type: Date, default: null
-  }, 
-  sort:{ type : Number},
-  
+  },
+
 })
 
 
 var ContactFormSchema = new Schema({
-  toEmail: {type: String},
-  visitorName: {type:String},
-  content: {type: String},
-  createdAt: {type : Date, default: Date.now}
+  toEmail: { type: String },
+  visitorName: { type: String },
+  content: { type: String },
+  createdAt: { type: Date, default: Date.now }
 })
 
 var SearchSchema = new Schema({
-  content: {type: String},
-  createdAt: {type: Date,default: Date.now }
+  content: { type: String },
+  createdAt: { type: Date, default: Date.now }
 })
 
 var AboutSchema = new Schema({
-  name: {type: String  , default: 'Name here..'},
-  logoPath: {type: String , default: null}, 
-  description: {type: String , default: 'Description here..'},
-  slogan: {type: String , default: 'Slogan here..'},
-  siteUrl : {type : String , default: 'WEbsite url here..' }
+  name: { type: String, default: 'Name here..' },
+  logoPath: { type: String, default: null },
+  description: { type: String, default: 'Description here..' },
+  slogan: { type: String, default: 'Slogan here..' },
+  siteUrl: { type: String, default: 'WEbsite url here..' }
 })
 
 var LogKeySchema = new Schema({
@@ -98,7 +104,7 @@ var LogKeySchema = new Schema({
 
 module.exports = mongoose.model('Users', UsersSchema);
 module.exports = mongoose.model('Rubrics', RubricsSchema);
-module.exports = mongoose.model('RubricContent', RubricContentSchema  );
+module.exports = mongoose.model('RubricContent', RubricContentSchema);
 module.exports = mongoose.model('Contact', ContactFormSchema);
 module.exports = mongoose.model('Search', SearchSchema);
 module.exports = mongoose.model('About', AboutSchema);
