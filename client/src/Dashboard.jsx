@@ -16,11 +16,13 @@ import {Redirect} from 'react-router-dom'
     }
 
     componentDidMount() {
+        console.log(process.env.socketURL)
         this.props.store.getAllResearches();
         this.props.store.getAllContacts();
         this.props.store.getRubrics();
 
-     let socket =   io.connect('http://localhost:8080');
+     let socket =   io.connect(process.env.socketURL);
+     console.log(socket)
 
     socket.on('update', (data) => {
       switch(data.api) {
@@ -34,7 +36,10 @@ import {Redirect} from 'react-router-dom'
 
         case 'ResearchChanged': 
         this.props.store.getAllResearches();
+        break; 
         
+        default:
+        return
       }
     })
 
@@ -48,7 +53,7 @@ import {Redirect} from 'react-router-dom'
 
     render() {
         let content = [];
-        let views;
+        let views = 0;
         let filteredContent = []
         let filteredResearches = []
 
@@ -58,10 +63,11 @@ import {Redirect} from 'react-router-dom'
 
         this.props.store.Rubrics.forEach(rubrics => {
 
-            rubrics.content.forEach(rubricsContent => {
+            rubrics.rubricContent.forEach(rubricsContent => {
                 content.push(rubricsContent)
-                if (rubricsContent.views !== 0) {
-                    views = rubricsContent.views
+                if (rubricsContent.content.views !== 0) {
+                    views += 1;
+                    console.log(views)
 
                 }
             })
@@ -81,47 +87,47 @@ import {Redirect} from 'react-router-dom'
 
 
         })
+        sortedContent =  filteredContent.length !== 0 ?  orderBy(filteredContent, (d) => {
 
-        sortedContent = orderBy(filteredContent, (d) => {
-
-            return d.content[0].views;
-        }, this.state.sortOrder)
+            return d.rubricContent[0].content.views;
+        }, this.state.sortOrder) : [];
 
 
+        console.log((views / content.length) * 100)
         return   this.props.store.redirect ?  (
 
-            <div className="content-wrapper" style={{ background: "#eee" }}>
-                <div className="container-fluid" style={{ paddingRight: "30px", paddingLeft: "32px" }}>
-                    <div className="row" style={{ height: "45px" }}>
-                        <div className="col-md-12 col-sm-12">
+            <div className="content-wrapper dashboard" style={{ background: "#eee" }}>
+                <div className="container-fluid dashcontainer">
+                    <div className="row">
+                        <div className="col-md-12 col-sm-12 col-xs-12 headcol">
 
-                            <h3 style={{ fontWeight: "850" }}>Dashboard</h3>
+                            <h3 className="heading">Dashboard</h3>
 
 
 
                         </div>
                     </div>
-                    <div className="row" style={{ height: "60px", }}>
-                        <div className="col-md-12 col-sm-12">
-                            <p>Follow in real time the performance of your FAQ</p>
+                    <div className="row" style={{ height: "53px" }}>
+                        <div className="col-md-12 col-sm-12 col-xs-12">
+                            <p style={{ marginTop: "4px"}}>Follow in real time the performance of your FAQ</p>
                         </div>
                     </div>
                     <div className="row" style={{ minHeight: "55px", backgroundColor: "white", paddingLeft: "10px", borderRadius: '4px' }}>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12 statsUpperBar">
 
-                            {this.props.store.Researches.length}      <br />
+                            {this.props.store.Researches.length}<br />
 
-                            <span style={{ fontSize: "12px", color: '#80808096' }}>  Research done by users </span>
+                            <span style={{ fontSize: "11px", color: '#80808096' }}>  Research done by users </span>
 
                         </div>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
 
 
                             {this.props.store.Contacts.length}   <br />
                             <span style={{ fontSize: "12px", color: '#80808096' }}>  Message Sent </span>
 
                         </div>
-                        <div className="col-md-4 col-sm-4" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #83C75A solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
                             {/* <h4 >60</h4>
                             <p style={{ fontSize: "12px" }}>Questions in FAQ</p> */}
                             {content.length}<br />
@@ -141,7 +147,7 @@ import {Redirect} from 'react-router-dom'
                     <div className="row" style={{ minHeight: "350px", backgroundColor: "white", padding: "14px 1px 0px", borderRadius: '4px' }}>
 
                         <div className="row" style={{ padding: "0px 15px 0px" }}>
-                            <div className="col-md-12 col-sm-12" style={{ textAlign: "left", fontWeight: "bold" }}>
+                            <div className="col-md-12 col-sm-12 col-xs-12" style={{ textAlign: "left", fontWeight: "bold" }}>
                                 OVERVIEW - QUESTION | ANSWER
                            <hr style={{ marginTop: "11px" }} />
 
@@ -150,7 +156,7 @@ import {Redirect} from 'react-router-dom'
 
                         <div className="row" style={{ textAlign: " center" }}>
                             <h6 style={{ textAlign: "center", marginTop: "0px" }}>QUESTIONS SEEN</h6>
-                            <CircularProgressbar percentage={views / content.length * 100} />
+                            <CircularProgressbar percentage={Math.round((views / content.length) * 100)} />
                         </div>
 
                         <div className="container-fluid" style={{ padding: "13px 0px 28px 84px", height: "151px" }}>
@@ -173,8 +179,8 @@ import {Redirect} from 'react-router-dom'
                                             return (
                                                 <tr>
                                                     <td style={{ borderTop: "none" }}>{d.name}</td>
-                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{RemoveOverflow(d.content[0].question, 25)}</td>
-                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{d.content[0].views}</td>
+                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{RemoveOverflow(d.rubricContent[0].content.question, 25)}</td>
+                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{d.rubricContent[0].content.views}</td>
                                                 </tr>
                                             )
                                         })}
@@ -185,7 +191,7 @@ import {Redirect} from 'react-router-dom'
                             </table>
                         </div>
                         <div className="row">
-                            <div className="col-md-12 col-sm-12"><a style={{ float: "right", color: " #8bc500", padding: "0px 29px", cursor: "pointer" }}>LOAD MORE...</a></div>
+                            <div className="col-md-12 col-sm-12 col-xs-12"><a style={{ float: "right", color: " #8bc500", padding: "0px 29px", cursor: "pointer" }}>LOAD MORE...</a></div>
                         </div>
                     </div>
 
