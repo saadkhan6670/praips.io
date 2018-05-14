@@ -330,31 +330,6 @@ var RemoveOverflow = (str, strlength) => {
 
             }
         }
-        // if (this.refs.searchResultDiv.style.display === "none" && this.refs.questionAnswerDiv.style.display === "block") {
-        //     this.refs.questionAnswerDiv.style.display = "none"
-        //     this.refs.searchResultDiv.style.display = "block"
-        //     this.refs.widgetSearchInput.style.display = "block"
-
-        // }
-
-        // if(this.refs.searchResultDiv.style.display === "block") {
-        //     this.refs.backArrow.style.display = "none"
-        // }
-
-
-        // if (this.refs.contactDiv.style.display === "block") {
-
-        //     this.refs.contactDiv.style.display = "none"
-        //     this.refs.backArrow.style.display = "none"
-        //     this.refs.searchResultDiv.style.display = "block"
-        //     this.refs.widgetSearchInput.style.display = "block"
-        //     this.refs.askQuestionBtnDiv.style.display = "block"
-
-        //     document.getElementById('helpText').innerHTML = "Help"
-
-        // }
-
-
 
     }
 
@@ -367,20 +342,20 @@ var RemoveOverflow = (str, strlength) => {
         let content = [];
         this.props.store.Rubrics.forEach(element => {
 
-            element.content.forEach(rubricsContent => {
+            element.rubricContent.forEach(rubricsContent => {
                 content.push(rubricsContent)
             })
 
         });
         filteredContent = content.length ? content.filter((d, i) => {
-            return d.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1;
+            return d.content.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1;
         }) : null;
 
         var contentToDiplay = content.length ? filteredContent.filter((d, i) => { return i <= 3 }) : null;
-        var questionData = content.length ? filteredContent.find((d) => { return d.question === this.props.store.selectedQue }) : null
+        var questionData = content.length ? filteredContent.find((d) => { return d.content.question === this.props.store.selectedQue }) : null
 
         var relatedQues = content.length ? filteredContent.filter((d, i) => {
-            return d.question !== this.props.store.selectedQue && i <= 1
+            return d.content.question !== this.props.store.selectedQue && i <= 1
         }) : null
 
 
@@ -447,7 +422,7 @@ var RemoveOverflow = (str, strlength) => {
                                     contentToDiplay.map(d => {
                                         return (
                                             <li><a
-                                                onClick={() => this.handleQuestionClick(d.question)} style={listAnchorStyle} href="#">{d.question}
+                                                onClick={() => this.handleQuestionClick(d.content.question)} style={listAnchorStyle} href="#">{d.content.question}
                                             </a></li>
                                         )
                                     }) :
