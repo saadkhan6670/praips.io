@@ -47,29 +47,17 @@ class PraipsStore {
 
 
     createRubric(rubricName, rubricSlug) {
-        var number = 1;
 
-        this.Rubrics.some(data => {
-            if (data.sort !== number) {
                 axios.post(`${process.env.apiURL}/api/createRubric`, {
                     name: rubricName,
                     slug: rubricSlug,
-                    sort: number
+                    sort: this.Rubrics.length + 1
                 }).then((response) => {
-                    return response.data
+                    return this.getRubrics();
 
                 }).catch((error) => {
                     console.log(error)
                 })
-
-                this.getRubrics();
-                return true
-            }
-            // console.log("from else", number)
-            ++number
-        })
-
-
     }
 
     createContact(data) {
@@ -186,17 +174,17 @@ class PraipsStore {
 
     async RemoveRubricContent(RubricId, IdToremove, IdsToResort) {
         console.log(RubricId, IdToremove, IdsToResort)
-    //    await axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
-    //         RubricId: RubricId,
-    //         IdToremove: IdToremove,
-    //         IdsToResort: IdsToResort,
-    //     })
-    //         .then((response) => {
-    //             return this.getRubrics()
+       await axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
+            RubricId: RubricId,
+            IdToremove: IdToremove,
+            IdsToResort: IdsToResort,
+        })
+            .then((response) => {
+                return this.getRubrics()
 
-    //         }).catch((error) => {
-    //             console.log(error)
-    //         })
+            }).catch((error) => {
+                console.log(error)
+            })
     }
 
      async SortRubricContent(sortFromId, sortToValue, sortToId, sortFromValue, rubricId) {

@@ -200,13 +200,14 @@ td {
     text-align: left;
 }
 .content-wrapper .form-group input {
-    text-indent: 20px;
     border-radius: 4px;
     height: 45px;
-    background-color: #FBFBFB;
-    border: 2px solid #E2E2E2;
 }
 
+.content-wrapper .form-group textarea {
+    border-radius: 4px;
+    height: 100px;
+}
 .content-wrapper .form-group input::-webkit-input-placeholder {
     /* Chrome */
     color: #A3A3A3;
@@ -795,7 +796,7 @@ button {
 
 
 .FaqInfoHr {
-    margin-top: 12px;
+    margin-top: 7px;
     margin-bottom: 12px;
     margin-right: 97px;
     /* border: 0; */
@@ -952,7 +953,7 @@ button {
     display: none;
     font-size: 14px;
     line-height: 164%;
-    padding: 2.5% 0 0 2.5%;
+    padding: 0 0 0 2.5%;
 }
 
 .AddRubricContent h2 {
@@ -996,6 +997,14 @@ margin: 0;
     border-radius: 9px;
     cursor: pointer;
 }
+.addContentbtn button:hover {
+    background-color: white;
+    padding: 9px 53px;
+    color:#83C75A  ;
+    border: 1px #83C75A solid;
+    border-radius: 9px;
+    cursor: pointer;
+}
 
 .AddRubricContent .form-control {
     width: 96%;
@@ -1004,6 +1013,17 @@ margin: 0;
     border-bottom-left-radius: 2px ;
     border-top-right-radius: 2px ;
     border-bottom-right-radius: 2px;
+}
+
+.questionDiv div {
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 510px;
+    text-align:  right;
+
+}
+#alertMessage { 
+visibility: hidden;
 }
 
 @media screen and (max-width: 2560px) and (min-width: 1921px) {
@@ -1114,7 +1134,7 @@ margin: 0;
       
     }
     .RubricStyles {
-        height: 300px !important;
+        height: 235px !important;
     }
     .sidebar-wrapper {
         height: 700px;
@@ -1236,6 +1256,15 @@ margin: 0;
         border-radius: 9px;
         cursor: pointer;
     }
+
+    .addContentbtn button:hover {
+        background-color: white;
+        padding: 9px 53px;
+        color:#83C75A  ;
+        border: 1px #83C75A solid;
+        border-radius: 9px;
+        cursor: pointer;
+    }
     .AdminRubricName {
         font-size: 19px !important;
         padding: 15px 0 0px 26px !important;
@@ -1294,7 +1323,7 @@ margin: 0;
     }
     .AdminRubricContent p {
         font-size: 13px ;
-        padding: 1.5% 0px 0px 2.5% ;
+        padding: 0 0px 0px 2.5% ;
     }
 
     .contact h2 {
@@ -1665,7 +1694,7 @@ margin: 0;
     margin-top: 2%;
     overflow: visible;
     overflow-y: auto;
-    height: 377px;
+    height: 305px;
 }
 
 .CircularProgressbar {

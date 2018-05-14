@@ -14,7 +14,6 @@ var { sortBy } = require('lodash')
         this.state = {
             RubricInput: '',
             RubricSlug: '',
-            Message: '',
             ModalComponent: '',
             Show: false,
             Modalvalue: '',
@@ -54,33 +53,35 @@ var { sortBy } = require('lodash')
 
         // Logic to handel ADD button
         if (this.state.RubricInput.length === 0) {
-            this.setState({
-                Message: <div className="alert alert-danger">
-                    <strong >Warning: Rubric Name Can't be empty </strong>
-                </div>
-            })
+         
+
+            document.getElementById('alertMessage').style.visibility = "visible"
+            document.getElementById('alertMessage').innerHTML = "<strong>Warning: Rubric Name Can't be empty</strong>"
+            
 
             setTimeout(() => {
-                this.setState({
-                    Message: ''
-                });
+            document.getElementById('alertMessage').style.visibility = "hidden"
+              
             }, 3000);
         }
         else {
             await this.props.store.createRubric(this.state.RubricInput, this.state.RubricSlug)
             await this.props.store.getRubrics()
 
-            this.setState({
-                Message: <div class="alert alert-success">
-                    <strong>Rubric Added successful</strong>
-                </div>
-            })
+            document.getElementById('alertMessage').style.visibility = "visible"
+            document.getElementById('alertMessage').innerHTML = "<strong>Rubric Added successfully</strong>"
+            
 
             setTimeout(() => {
-                this.setState({
-                    Message: ''
-                });
+            document.getElementById('alertMessage').style.visibility = "hidden"
+              
             }, 3000);
+           
+            this.setState({
+                RubricInput : ''
+            })
+        console.log("addbtn",this.state.RubricInput)
+           
         }
         // Logic ends
     }
@@ -163,6 +164,7 @@ var { sortBy } = require('lodash')
                 pathname: '/faq',
                 search: ''
             })
+            this.props.store.searchInput = ''
         }
         else {
             this.props.store.searchInput = this.state.SearchValue;
@@ -260,15 +262,20 @@ var { sortBy } = require('lodash')
                     {
                         this.props.store.redirect ?
                             <div className="col-md-12 col-sm-12 col-xs-12 AddRubric">
-                            <div className="col-md-12 col-sm-12 col-xs-12" style={{textAlign:"center"}}>
+                                 <div id="alertMessage" className="alert alert-danger">
+            <strong >Warning: Rubric Name Can't be empty </strong>
+        </div>
+                            
+                            <div className="col-md-12 col-sm-12 col-xs-12" style={{textAlign:"center" ,paddingBottom : "9px"}}>
                             <label className="label1">Add A new Rubric </label>
                             </div>
                                 <div className="col-md-8 col-sm-8 col-sx-8">
+                                
                                     <div className="form-group">
 
                                         <div className="loginInputs">
 
-                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" className="form-control" placeholder="enter the name of Rubric" />
+                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" value={this.state.RubricInput} className="form-control" placeholder="enter the name of Rubric" />
 
                                         </div>
                                     </div>
@@ -285,7 +292,6 @@ var { sortBy } = require('lodash')
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12" >
                             <div className="right_btn">
-                                {this.state.Message}
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@ import {Redirect} from 'react-router-dom'
         this.props.store.getAllContacts();
         this.props.store.getRubrics();
 
-     let socket =   io.connect('http://localhost:8080');
+     let socket =   io.connect(process.env.socketURL);
 
     socket.on('update', (data) => {
       switch(data.api) {
@@ -51,7 +51,7 @@ import {Redirect} from 'react-router-dom'
 
     render() {
         let content = [];
-        let views;
+        let views = 0;
         let filteredContent = []
         let filteredResearches = []
 
@@ -61,10 +61,11 @@ import {Redirect} from 'react-router-dom'
 
         this.props.store.Rubrics.forEach(rubrics => {
 
-            rubrics.content.forEach(rubricsContent => {
+            rubrics.rubricContent.forEach(rubricsContent => {
                 content.push(rubricsContent)
-                if (rubricsContent.views !== 0) {
-                    views = rubricsContent.views
+                if (rubricsContent.content.views !== 0) {
+                    views += 1;
+                    console.log(views)
 
                 }
             })
@@ -84,13 +85,13 @@ import {Redirect} from 'react-router-dom'
 
 
         })
+        sortedContent =  filteredContent.length !== 0 ?  orderBy(filteredContent, (d) => {
 
-        sortedContent = orderBy(filteredContent, (d) => {
-
-            return d.content[0].views;
-        }, this.state.sortOrder)
+            return d.rubricContent[0].content.views;
+        }, this.state.sortOrder) : [];
 
 
+        console.log((views / content.length) * 100)
         return   this.props.store.redirect ?  (
 
             <div className="content-wrapper dashboard" style={{ background: "#eee" }}>
@@ -153,7 +154,7 @@ import {Redirect} from 'react-router-dom'
 
                         <div className="row" style={{ textAlign: " center" }}>
                             <h6 style={{ textAlign: "center", marginTop: "0px" }}>QUESTIONS SEEN</h6>
-                            <CircularProgressbar percentage={views / content.length * 100} />
+                            <CircularProgressbar percentage={Math.round((views / content.length) * 100)} />
                         </div>
 
                         <div className="container-fluid" style={{ padding: "13px 0px 28px 84px", height: "151px" }}>
@@ -176,8 +177,8 @@ import {Redirect} from 'react-router-dom'
                                             return (
                                                 <tr>
                                                     <td style={{ borderTop: "none" }}>{d.name}</td>
-                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{RemoveOverflow(d.content[0].question, 25)}</td>
-                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{d.content[0].views}</td>
+                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{RemoveOverflow(d.rubricContent[0].content.question, 25)}</td>
+                                                    <td style={{ borderTop: "none", padding: '0px 0px 14px' }}>{d.rubricContent[0].content.views}</td>
                                                 </tr>
                                             )
                                         })}

@@ -79,7 +79,9 @@ function getClientEnvironment(publicUrl) {
         // images into the `src` and `import` them in code to get their paths.
 
         PUBLIC_URL: `http://${ip.address()}:5000`,
-        apiURL: process.env.NODE_ENV === 'development' ? `http://${ip.address()}:5000` : ''
+        apiURL: process.env.NODE_ENV === 'development' ? `http://${ip.address()}:5000` : '',
+        socketURL: `http://${ip.address()}:8080`,
+        
 
         // PUBLIC_URL: `http://196.194.185.216:5000`,
         // apiURL: process.env.NODE_ENV === 'development' ? `http://196.194.185.216:5000` : ''

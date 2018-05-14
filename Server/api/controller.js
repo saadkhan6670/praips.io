@@ -172,12 +172,11 @@ exports.createRubcricContent = (req, res) => {
     }
     else {
 
-      Rubrics.update({ _id: mongoose.Types.ObjectId(req.body.id) },
-        { $push: { rubricContent: { content: data._id, sort: req.body.contentLength + 1 } } },
-
-        (err, doc) => {
-          return
-        })
+        Rubrics.update({ _id: req.body.id }, 
+          { "$push": { "rubricContent": { "content": data._id , "sort": req.body.contentLength + 1 } }}, 
+          { safe: true, multi:true }, function(err, obj) {
+            return
+      });
       res.send(data)
 
     }
@@ -187,6 +186,7 @@ exports.createRubcricContent = (req, res) => {
 
 
 exports.SortRubricContent = (req, res) => {
+  console.log(req.body)
   Rubrics.update({ 'rubricContent.content': req.body.toId }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
     console.log(data)
     Rubrics.update({ 'rubricContent.content': req.body.fromId }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
@@ -232,7 +232,8 @@ exports.removeRubricContent = (req, res) => {
             return
           })
       })
-    }
+    }  
+  
   })
 
   Rubrics.update({ _id: req.body.RubricId }, 

@@ -7,7 +7,6 @@ import { sortBy } from 'lodash'
 var slideIndex = 1;
 var slideIndex2 = 2;
 
-var ahsan = "hello";
 let content, filteredContent, sortedContent;
 var x = document.getElementsByClassName("mySlides");
 
@@ -71,26 +70,30 @@ var x = document.getElementsByClassName("mySlides");
 
     }
 
+
+
     handleContentOnOff(imgref, pRef, viewId, views) {
 
-        if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png" & this.refs[imgref].className === "view Plus") {
-            this.refs[imgref].setAttribute('src', "/images/minu icon.png")
+        if (this.refs[imgref].getAttribute('src') === `${process.env.PUBLIC_URL}/images/plus-icon.png` & this.refs[imgref].className === "view Plus") {
+            this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/minus-icon.png`)
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
             views += 1;
             this.props.store.updateViews(viewId, views)
         }
-        else if (this.refs[imgref].getAttribute('src') === "/images/plus icon.png") {
-            this.refs[imgref].setAttribute('src', "/images/minu icon.png")
+        else if (this.refs[imgref].getAttribute('src') === `${process.env.PUBLIC_URL}/images/plus-icon.png`) {
+            this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/minus-icon.png`)
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
         }
         else {
             this.refs[imgref].className = "Plus"
-            this.refs[imgref].setAttribute('src', "/images/plus icon.png")
+            this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/plus-icon.png`)
             this.refs[pRef].style.display = "none"
         }
     }
+
+
 
     componentWillUnmount() {
         this.props.store.searchInput = '';
@@ -100,21 +103,26 @@ var x = document.getElementsByClassName("mySlides");
         this.showDivs(slideIndex += n, slideIndex2 += n);
     }
 
+
+
     handleClick(searchInput) {
         if (searchInput.length === 0) {
             this.props.history.push({
-                pathname: '/faq',
                 search: ''
             })
+            this.props.store.searchInput = ''
         }
         this.props.store.searchInput = searchInput
         this.props.history.push({
-            pathname: '/faq/penatibus',
+            pathname: `/faq/${this.props.match.params.slugName}`,
             search: `search=${this.props.store.searchInput}`
         })
 
         this.props.store.createResearch(searchInput)
     }
+
+
+
 
     handleModalClose = () => {
         this.setState({
@@ -187,6 +195,10 @@ var x = document.getElementsByClassName("mySlides");
                 this.refs.Answer.value,
                 content._id, 
                 content.rubricContent.length)
+
+                this.refs.Question.value = ''
+                this.refs.Answer.value = ''
+                
         }
     }
 
@@ -267,7 +279,7 @@ var x = document.getElementsByClassName("mySlides");
                                     onMouseLeave={(e) => { this.mouseOut(e, key) }}
                                     key={key}>
 
-                                    <div className="col-md-8 col-sm-8  col-xs-8 " >
+                                    <div className="col-md-8 col-sm-8  col-xs-8" >
                                         <h5><b>{data.content.question}</b></h5>
                                     </div>
                                     <div className="col-md-3 col-sm-3 col-xs-3" style={{ padding: "0 0 0 0" }}>
@@ -282,20 +294,38 @@ var x = document.getElementsByClassName("mySlides");
                                                 : null}
                                         </div>
                                     </div>
+
+
+                                    {/* Question/Answer hide and show and views update */}
+
                                     <div className="col-md-1 col-sm-1 col-xs-1" style={{ padding: "0.5% 0 0px 1%" }}>
-                                        <img src="/images/plus icon.png" alt="plus icon"
+                                        <img src={`${process.env.PUBLIC_URL}/images/plus-icon.png`} alt="plus icon"
                                             ref={`plus${key}`}
                                             // handling the answer toggle and view update with its id
                                             onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data.content._id, data.content.views)}
                                             className="view Plus"
-                                        />
+                                        /><br/>
+                                       
+                                        
                                     </div>
+                                    
+                                    
                                 </div>
                                 <div className="col-md-12 col-sm-12 col-sx-12">
 
                                     <p ref={`answer${key}`}>{data.content.answer}</p>
-                                    <hr className="FaqInfoHr" />
+                                    {this.props.store.redirect ?
+                                    <div className="questionDiv">
+                                    <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/eye-icon.png)`}}> 
+                                     {data.content.views}
+                                    
+                                    </div> 
+                                               </div>
+                                                : null}
+                                    <hr className="FaqInfoHr"  />
                                 </div>
+                                {/* -------- */}
+    
                             </div>
                             )
                         })
