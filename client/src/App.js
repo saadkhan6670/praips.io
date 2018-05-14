@@ -10,7 +10,9 @@ import FAQInfo from './FAQInfo'
 import AdminLogin from './AdminLogin'
 import Dashboard from './Dashboard'
 import Contact from './Contact'
+import Script from './Script'
 import MobileNav from './MobileNav'
+
 
 @observer class App extends Component {
   constructor(props){

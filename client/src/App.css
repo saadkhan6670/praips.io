@@ -1633,6 +1633,20 @@ visibility: hidden;
 }
 
 
+.copyBtn {
+border : 1px solid rgb(131, 199, 90);
+    background-color: rgb(131, 199, 90);
+    color: white;
+    padding: 6px 22px;
+}
+
+.copyBtn:hover {
+
+    background-color: white;
+    color: rgb(131, 199, 90) ;
+    
+}
+
 
 .toggle-left {
     /* width: 100%; */

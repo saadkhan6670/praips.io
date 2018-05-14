@@ -9,7 +9,7 @@ var {
   sortBy
 } = require('lodash')
 
-//Models
+//Modelsw
 const Rubrics = mongoose.model('Rubrics');
 const RubricContent = mongoose.model('RubricContent');
 const Users = mongoose.model('Users');
