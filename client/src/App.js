@@ -32,6 +32,8 @@ import Contact from './Contact'
                 <Route path="/login" render={(props) => { return <AdminLogin store={this.props.store} {...props} /> }} />
                 <Route path="/contact" render={(props) => { return <Contact store={this.props.store} {...props} /> }} />                
                 <Route path="/dashboard" render={(props) => {  return <Dashboard store={this.props.store} {...props} /> }} />
+                <Route path="/script" render={(props) => {  return <Script store={this.props.store} {...props} /> }} />
+                
               </Switch>
              <AboutComponent store={this.props.store}/>
               
