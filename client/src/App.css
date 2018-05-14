@@ -204,9 +204,11 @@ td {
     height: 45px;
 }
 
-.content-wrapper .form-group textarea {
+.form-group textarea {
     border-radius: 4px;
     height: 100px;
+    resize: vertical;
+    min-height: 80px;
 }
 .content-wrapper .form-group input::-webkit-input-placeholder {
     /* Chrome */
@@ -311,9 +313,7 @@ button.logoutbtn {
     font-weight: bold;
     border-radius: 10px;
 }
-.AddRubric{
-    margin-top: 65px;
-}
+
 .add_btn{
     text-align: center;
 
@@ -824,7 +824,6 @@ button {
 
 .scrollbar {
     height: 370px;
-    overflow-y: scroll;
 }
 
 #style-3::-webkit-scrollbar {
@@ -1078,9 +1077,7 @@ visibility: hidden;
 }
 
 @media (max-width: 1650px) {
-    .AddRubric{
-        margin-top: 54px;
-    }
+  
     .aboutedit{
         right: 20%;
     }
@@ -1712,8 +1709,7 @@ border : 1px solid rgb(131, 199, 90);
 
 .RubricStyles {
     margin-top: 2%;
-    overflow: visible;
-    overflow-y: auto;
+
     height: 305px;
 }
 

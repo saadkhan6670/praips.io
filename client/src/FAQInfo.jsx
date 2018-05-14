@@ -224,7 +224,7 @@ var x = document.getElementsByClassName("mySlides");
             null : sortBy(filteredContent, [(d) => { return d.sort }])
 
         return (
-            <div className="content-wrapper" id="intro">
+            <div className="content-wrapper" id="intro" style={{overflowY : "scroll" , overflowX : "hidden"}}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
@@ -419,33 +419,25 @@ var x = document.getElementsByClassName("mySlides");
                                 <form>
                                     <FormGroup controlId="formBasicText">
                                         <Modal.Title>Question</Modal.Title>
-                                        <FormControl
-                                            style={{ height: '100px' }}
-                                            componentClass="textarea"
-                                            value={this.state.question}
-                                            placeholder="Enter text"
-                                            onChange={(e) => {
+                                      
+                                    <input type="text"   onChange={(e) => {
                                                 this.setState({
                                                     question: e.target.value
                                                 })
-                                            }}
-                                        />
+                                            }} placeholder="Enter text"  value={this.state.question} className="form-control" ref="Question" />
+                                        
                                         <FormControl.Feedback />
                                     </FormGroup>
 
                                     <FormGroup controlId="formBasicText" >
-                                        <Modal.Title>Answer</Modal.Title>
-                                        <FormControl
-                                            style={{ height: '200px' }}
-                                            componentClass="textarea"
-                                            value={this.state.answer}
-                                            placeholder="Enter text"
-                                            onChange={(e) => {
+                                    <Modal.Title>Answer</Modal.Title>
+                               
+                                    <textarea  placeholder="Enter text"  onChange={(e) => {
                                                 this.setState({
                                                     answer: e.target.value
                                                 })
-                                            }}
-                                        />
+                                            }} className="form-control"  value={this.state.answer}  ref='Answer'></textarea>
+                                        
                                         <FormControl.Feedback />
                                     </FormGroup>
                                 </form>

@@ -160,7 +160,8 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                     <div className="right_btn">
                                         <button className="btn btn-lg" style={{ textTransform: 'uppercase' }}>
                                         <a style={{color : "white"}}
-                                        href={`http://${this.props.store.About.siteUrl}`} 
+                                        href='#'
+                                        onClick={() => {window.open(`http://${this.props.store.About.siteUrl}` , '_blank'); console.log("running")}}
                                         target="_blank"> {this.props.store.About.siteUrl} </a>
                                         </button>
                                     </div>

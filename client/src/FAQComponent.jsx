@@ -70,16 +70,16 @@ var { sortBy } = require('lodash')
 
             document.getElementById('alertMessage').style.visibility = "visible"
             document.getElementById('alertMessage').innerHTML = "<strong>Rubric Added successfully</strong>"
-            
+            document.getElementById('alertMessage').className = "  alert alert-success"
+          
 
             setTimeout(() => {
             document.getElementById('alertMessage').style.visibility = "hidden"
               
             }, 3000);
+        
+                this.refs.rubricInput.value = '';
            
-            this.setState({
-                RubricInput : ''
-            })
         console.log("addbtn",this.state.RubricInput)
            
         }
@@ -180,7 +180,7 @@ var { sortBy } = require('lodash')
     }
     render() {
         return (
-            <div className="content-wrapper" id="intro">
+            <div className="content-wrapper" id="intro" style={{overflowY : "scroll"}}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
@@ -261,7 +261,7 @@ var { sortBy } = require('lodash')
 
                     {
                         this.props.store.redirect ?
-                            <div className="col-md-12 col-sm-12 col-xs-12 AddRubric">
+                            <div className="col-md-12 col-sm-12 col-xs-12 AddRubric" style={{paddingTop: "15px"}}>
                                  <div id="alertMessage" className="alert alert-danger">
             <strong >Warning: Rubric Name Can't be empty </strong>
         </div>
@@ -275,7 +275,7 @@ var { sortBy } = require('lodash')
 
                                         <div className="loginInputs">
 
-                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" value={this.state.RubricInput} className="form-control" placeholder="enter the name of Rubric" />
+                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" ref="rubricInput"  className="form-control" placeholder="enter the name of Rubric" />
 
                                         </div>
                                     </div>

@@ -9,7 +9,7 @@ class widgetStore {
     @observable selectedQue = '';
 
 async getRubrics() {
-        await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
+        await axios.get(`http://103.11.2.67:5000/api/getAllRubrics`).then((response) => {
             this.Rubrics = response.data
 
 
@@ -20,7 +20,7 @@ async getRubrics() {
     }
 
     createContact(data) {
-        return axios.post(`${process.env.apiURL}/api/createContact`, data)
+        return axios.post(`http://103.11.2.67:5000/api/createContact`, data)
     }   
 }
 
