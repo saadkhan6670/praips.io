@@ -104,7 +104,11 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 
     }
 
-
+handleUrlClick (e) {
+    e.preventDefault()
+    console.log("running")
+    window.open(`http://${this.props.store.About.siteUrl}` , '_blank');
+}
 
     render() {
         return (
@@ -158,11 +162,11 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                             <div className="row">
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <div className="right_btn">
-                                        <button className="btn btn-lg" style={{ textTransform: 'uppercase' }}>
-                                        <a style={{color : "white"}}
-                                        href='#'
-                                        onClick={() => {window.open(`http://${this.props.store.About.siteUrl}` , '_blank'); console.log("running")}}
-                                        target="_blank"> {this.props.store.About.siteUrl} </a>
+                                        <button  
+                                        onClick={(e) => {this.handleUrlClick(e)}}
+                                        className="btn btn-lg" style={{ textTransform: 'uppercase' }}>
+
+                                        {this.props.store.About.siteUrl}
                                         </button>
                                     </div>
                                 </div>
@@ -256,9 +260,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                             </FormGroup>
                         </form>
                     </Modal.Body>
-                    <Modal.Footer>
 
-                    </Modal.Footer>
                 </Modal>
             </div>
 

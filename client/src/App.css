@@ -26,6 +26,7 @@ td {
     border: none;
 }
 
+
 #wrapper {
     padding-top: 20px;
     padding-left: 11%;
@@ -495,15 +496,31 @@ button {
     font-size: 124%;
     background-color: "#fdfdfd";
 }
+.searchInput:focus {
+    border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);;
+  border-right: none !important;
+
+}
 
 .searchBtn {
     background: #fdfdfd;
     color: #ccc;
     border-left: none;
     border-color: #ccc;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    
+}
+.searchBtn:focus {
+    border: 1px solid #ccc;
+    border-left: none !important;
+    
+    -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .075);;
+
 }
 
 .searchBtn:hover {
@@ -840,11 +857,7 @@ button {
     padding: 61px 0 0px 35px;
 }
 
-.AdminRubricName {
-    color: grey;
-    font-size: 138%;
-    padding: 28px 0 0px 35px;
-}
+
 
 .RubricContent {
     padding: 18px 25px 0px 28px;
@@ -1023,12 +1036,28 @@ margin: 0;
 .questionDiv div {
     background-size: 24px;
     background-repeat: no-repeat;
-    background-position: 98%;
+    background-position: 96.7%;
     text-align: right;
 
 }
 #alertMessage { 
 visibility: hidden;
+}
+
+.modalDashboard {
+    height: 220px;
+    overflow-y: scroll;
+}
+
+.modalDashboard-btn {
+    width: 21%;
+    font-size: 113%;
+    margin-right: 0;
+    color: white;
+    border: 1px solid #7fc857;
+    border-radius: 7px;
+    background-color: #7fc857;
+    height: 45px;
 }
 
 @media screen and (max-width: 2560px) and (min-width: 1921px) {
@@ -1103,6 +1132,10 @@ visibility: hidden;
     .sliderBtn{
         width: 174px;
     }
+    .AdminSliderbtn { 
+        width: 174px;
+        
+    }
 
     .profileNamediv {
         height: inherit;
@@ -1167,18 +1200,7 @@ visibility: hidden;
     .input-group {
         margin-top: 9px;
     }
-    .searchInput {
-        width: 104.5% !important;
-        height: 47px !important;
-        margin-top: 0 !important;
-        font-size: 15px;
-        background-color: rgb(253, 253, 253);
-    }
-    .searchBtn {
-        font-size: 17px;
-        height: 47px;
-        padding: 4px 22px 0 0;
-    }
+   
     .content-wrapper .right_btn {
         text-align: center;
         margin-top: 16px;
@@ -1243,7 +1265,7 @@ visibility: hidden;
     }
     .RubricName {
         font-size: 19px !important;
-        padding: 41px 0 0px 26px !important;
+        padding: 41px 0 0px 41px !important;
     }
 
     .addContentbtn {

@@ -372,7 +372,6 @@ exports.updateViews = (req, res) => {
     }
 
     else {
-      console.log('doc', doc)
       res.send(doc)
     }
   })

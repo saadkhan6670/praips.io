@@ -3,11 +3,13 @@ import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
 import { sortBy } from 'lodash'
+import Search from './Search'
+
 
 var slideIndex = 1;
 var slideIndex2 = 2;
 
-let content, filteredContent, sortedContent;
+let content, displayContent, sortedContent;
 var x = document.getElementsByClassName("mySlides");
 
 @observer class FAQInfo extends Component {
@@ -109,20 +111,23 @@ var x = document.getElementsByClassName("mySlides");
 
 
 
-    handleClick(searchInput) {
+    handleSearchClick(searchInput) {
         if (searchInput.length === 0) {
             this.props.history.push({
                 search: ''
             })
             this.props.store.searchInput = ''
         }
-        this.props.store.searchInput = searchInput
-        this.props.history.push({
-            pathname: `/faq/${this.props.match.params.slugName}`,
-            search: `search=${this.props.store.searchInput}`
-        })
-
-        this.props.store.createResearch(searchInput)
+        else {
+            this.props.store.searchInput = searchInput
+            this.props.history.push({
+                pathname: `/faq/${this.props.match.params.slugName}`,
+                search: `search=${this.props.store.searchInput}`
+            })
+    
+            this.props.store.createResearch(searchInput)
+        }
+     
     }
 
 
@@ -215,13 +220,13 @@ var x = document.getElementsByClassName("mySlides");
 
             }))
 
-        filteredContent = content === undefined ?
+        displayContent = content === undefined ?
             null :
-            content.rubricContent.filter((d) => {
-                return d.content.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1
+            content.rubricContent.map((d) => {
+                return d;
             })
         sortedContent = content === undefined ?
-            null : sortBy(filteredContent, [(d) => { return d.sort }])
+            null : sortBy(displayContent, [(d) => { return d.sort }])
 
         return (
             <div className="content-wrapper" id="intro" style={{overflowY : "scroll" , overflowX : "hidden"}}>
@@ -245,14 +250,14 @@ var x = document.getElementsByClassName("mySlides");
 
                         <div className="input-group" id="adv-search">
                             <input type="text" className="form-control searchInput" placeholder="How can we help" ref="searchInput"
-                                onKeyDown={(e) => { return e.keyCode === 13 ? this.handleClick(this.refs.searchInput.value) : null }}
+                                onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(this.refs.searchInput.value) : null }}
 
                             />
                             <div className="input-group-btn">
                                 <div className="btn-group" role="group">
 
                                     <button title="Click to Search.." type="button"
-                                        onClick={() => this.handleClick(this.refs.searchInput.value)} className="btn btn-primary searchBtn">
+                                        onClick={() => this.handleSearchClick(this.refs.searchInput.value)} className="btn searchBtn">
                                         <span className="glyphicon glyphicon-search"></span>
                                     </button>
                                 </div>
@@ -261,23 +266,18 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
                 </div>
+               
                 <h4
-                    className={this.props.store.redirect ? " AdminRubricName" : "row RubricName"} >
+                    className="row RubricName" style={{display :this.props.store.searchInput.length !== 0  ? "none" : "block" }} >
                     {content === undefined ? null : content.name.toUpperCase()}</h4>
-
                 <div className={this.props.store.redirect ? "row AdminRubricContent scrollbar" : "row RubricContent scrollbar"} id="style-3" >
                     {
-                        filteredContent === null || content.rubricContent.length === 0 ? null : filteredContent.length === 0 ? <div>
-                            <h4>  We didn't find results for {this.props.store.searchInput} </h4>
-
-                            <b style={{ textAlign: "centre" }}>These tips might help :</b>
-                            <ul>
-                                <li>  Try fewer words. Ex: Time delivery </li>
-                                <li> Try different keywords.   </li>
-                                <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
-                            </ul>
-                        </div> : sortedContent.map((data, key) => {
+                        displayContent === null || content.rubricContent.length === 0 ? null : this.props.store.searchInput.length !== 0 ? 
+                        <Search store={this.props.store} />
+                        
+                        :  sortedContent.map((data, key) => {
                             return (<div>
+                                
                                 <div className="col-md-12 col-sm-12 col-xs-12"
                                     onMouseOver={(e) => { this.mouseHover(e, key) }}
                                     onMouseLeave={(e) => { this.mouseOut(e, key) }}

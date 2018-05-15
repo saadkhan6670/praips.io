@@ -19,7 +19,6 @@ class PraipsStore {
 
     async getRubrics() {
         await axios.get(`${process.env.apiURL}/api/getAllRubrics`).then((response) => {
-            console.log("from get" ,response.data)
             this.Rubrics = response.data
         })
             .catch((error) => {
@@ -76,7 +75,6 @@ class PraipsStore {
 
 
     updateViews(id, views) {
-        console.log(id, views)
         axios.post(`${process.env.apiURL}/api/updateViews`, {
             id: id,
             views: views
@@ -152,10 +150,6 @@ class PraipsStore {
         }).catch((error) => {
             console.log(error)
         })
-            .catch((error) => {
-
-                console.log(error)
-            })
     }
 
     UpdateRubricContent(id, question, answer) {
@@ -173,7 +167,6 @@ class PraipsStore {
     }
 
     async RemoveRubricContent(RubricId, IdToremove, IdsToResort) {
-        console.log(RubricId, IdToremove, IdsToResort)
        await axios.post(`${process.env.apiURL}/api/removeRubricContent`, {
             RubricId: RubricId,
             IdToremove: IdToremove,

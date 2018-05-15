@@ -45,9 +45,8 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-console.log(process.env)
 
-app.listen(process.env.PORT, "192.168.1.104",function () {
+app.listen(process.env.PORT,function () {
   console.log('Running server on ' + process.env.PORT);
 });
 

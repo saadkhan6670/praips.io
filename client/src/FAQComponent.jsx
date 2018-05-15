@@ -200,7 +200,7 @@ var { sortBy } = require('lodash')
 
                     <div className="row search_row">
                         <div className="input-group" id="adv-search">
-                            <input type="text" className="form-control searchInput" ref="searchInput"
+                            <input  type="text" className="form-control searchInput" ref="searchInput"
                                 value={this.state.SearchValue}
                                 onChange={(e) => {
                                     this.setState({
@@ -214,7 +214,7 @@ var { sortBy } = require('lodash')
                                 <div className="btn-group" >
 
                                     <button title="Click to Search.."
-                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn btn-primary searchBtn">
+                                        onClick={(e) => { this.handleSearchClick(e) }} type="button" className="btn searchBtn">
                                         <span className="glyphicon glyphicon-search"> </span>
                                     </button>
 
