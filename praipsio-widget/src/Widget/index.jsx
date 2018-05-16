@@ -369,9 +369,21 @@ var RemoveOverflow = (str, strlength) => {
 
 
         return (
-            <div style={{ fontFamily: "'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+            <div id="widgetParent" >
                 <style type="text/css"> {
                     "\
+                    #widgetParent {\
+                        font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;\
+                    }\
+                    #widgetPArent input ,textarea {\
+                            -webkit-box-sizing: content-box;\
+                            -moz-box-sizing:content-box;\
+                            box-sizing: content-box;\
+                            line-height: normal;\
+                    }\
+                    #widgetPArent button {\
+                        height: unset;\
+                }\
             .widGetInput::placeholder {\
                 color: lightgrey;\
                 opacity: 1;\
@@ -430,7 +442,9 @@ var RemoveOverflow = (str, strlength) => {
                                 filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ?
                                     contentToDiplay.map(d => {
                                         return (
+                                               // eslint-disable-next-line
                                             <li><a
+                                         
                                                 onClick={() => this.handleQuestionClick(d.content.question)} style={listAnchorStyle} href="#">{d.content.question}
                                             </a></li>
                                         )
@@ -466,6 +480,7 @@ var RemoveOverflow = (str, strlength) => {
                                 return (
                                     <li style={relatedArticleListStyle}
                                         onClick={() => this.handleRelatedQue(d.content.question)}
+                                           // eslint-disable-next-line
                                     > <a href='#' style={{ color: "black" }}>{RemoveOverflow(d.content.question, 50)} </a></li>
                                 )
                             })}
