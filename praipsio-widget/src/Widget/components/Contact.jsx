@@ -24,7 +24,8 @@ var inputFieldStyles = {
     border: "1px solid #ccc",
     borderRadius: "2px",
     height: "30px",
-    backgroundColor: "inherit"
+    backgroundColor: "inherit",
+    lineHeight: "normal"
 }
 
 var contactBtnsDivStyles = {
@@ -37,7 +38,9 @@ var sendBtnStyles = {
     color: "white",
     border: "1px #83C75A solid",
     borderRadius: "9px",
-    cursor: "pointer"
+    cursor: "pointer",
+    lineHeight: "normal"
+    
 }
 
 var backToSearchBtnStyles = {
@@ -47,6 +50,7 @@ var backToSearchBtnStyles = {
     color: "rgb(204, 204, 204)",
     border: "1px solid rgb(204, 204, 204)",
     borderRadius: "9px",
+    lineHeight: "normal",
     cursor: "pointer"
 
 }
@@ -230,7 +234,7 @@ console.log(this.refs.Name.value.length, isNumeric(this.refs.Name.value) )
                 <form id="contactForm"  onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
                     <div >
                         <label style={labelStyles}>How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" style={reqMsgStyle}></span>
-                        <textarea name="message" style={textAreaStyle} ref='Message'
+                        <textarea className="widgetTextarea" name="message" style={textAreaStyle} ref='Message'
                             onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
                     </div>
 

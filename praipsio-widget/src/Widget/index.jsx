@@ -372,17 +372,34 @@ var RemoveOverflow = (str, strlength) => {
             <div id="widgetParent" >
                 <style type="text/css"> {
                     "\
+                    * {\
+                    -webkit-box-sizing: content-box;\
+                    -moz-box-sizing: content-box;\
+                    box-sizing: content-box;\
+                }\
                     #widgetParent {\
                         font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;\
+                      \
+                        line-height: normal;\
                     }\
-                    #widgetPArent input ,textarea {\
-                            -webkit-box-sizing: content-box;\
+               \
+                    #widgetPArent button {\
+                        height: unset;\
+                }\
+                .widGetInput {\
+                    -webkit-box-sizing: content-box;\
                             -moz-box-sizing:content-box;\
                             box-sizing: content-box;\
                             line-height: normal;\
-                    }\
-                    #widgetPArent button {\
-                        height: unset;\
+                }\
+                .widgetTextarea {\
+                    -webkit-box-sizing: content-box;\
+                    -moz-box-sizing:content-box;\
+                    box-sizing: content-box;\
+                    line-height: normal;\
+                }\
+                .widgetBtn {\
+                    height: unset;\
                 }\
             .widGetInput::placeholder {\
                 color: lightgrey;\
@@ -435,7 +452,7 @@ var RemoveOverflow = (str, strlength) => {
 
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
-                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" }}>
+                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" ,fontWeight: "bold"}}>
                             {filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
@@ -468,7 +485,7 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="questionAnswerDiv" style={questionAnswer}>
 
-                        <h5>{questionData ? questionData.content.question : null}</h5>
+                        <h5 style={{fontWeight: "bold"}}>{questionData ? questionData.content.question : null}</h5>
                         <p style={{ fontSize: "13px" }}>{questionData ? questionData.content.answer : null}</p>
 
 
@@ -495,7 +512,7 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
-                        <button style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
+                        <button style={{height : "unset"}}  className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
                     </div>
 
                 </div>
