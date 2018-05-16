@@ -372,15 +372,14 @@ var RemoveOverflow = (str, strlength) => {
             <div id="widgetParent" >
                 <style type="text/css"> {
                     "\
-                    * {\
-                    -webkit-box-sizing: content-box;\
-                    -moz-box-sizing: content-box;\
-                    box-sizing: content-box;\
-                }\
+              \
                     #widgetParent {\
                         font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;\
                       \
                         line-height: normal;\
+                        -webkit-box-sizing: content-box;\
+                        -moz-box-sizing: content-box;\
+                        box-sizing: content-box;\
                     }\
                \
                     #widgetPArent button {\
