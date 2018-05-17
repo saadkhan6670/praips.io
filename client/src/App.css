@@ -427,7 +427,8 @@ button {
 
 .slider{
     width: 100%;
-    margin-top: 213px;
+    margin-top: 137px;
+    margin-bottom: 27px;
 }
 
 .sliderBtn {
@@ -1507,7 +1508,7 @@ visibility: hidden;
     }
 }
 
-@media (max-width: 1199px) and (min-width: 1000px) {
+@media (max-width: 1024px)  {
     .footer .footer_text .text {
         font-size: 11px;
         right: 109px;
@@ -1524,7 +1525,7 @@ visibility: hidden;
         margin-left: 0;
     }
     .content-wrapper {
-        width: 54.59%;
+        width: 51.59%;
     }
     .installimg {
         width: 70%;
@@ -1532,11 +1533,71 @@ visibility: hidden;
     .analyticsimg {
         width: 87%;
     }
+    .footer .footer_text .text {
+        font-size: 11px;
+        right: 144px;
+    }
 }
 
-@media( max-width: 768px) {}
 
 @media screen and (max-width: 999px) {
+   
+    .sidebar-wrapper {
+        height: 658px;
+        width: 8.7%;
+        margin-left: -4.5%;
+    }
+    
+    .content-wrapper {
+        width: 48.59%;
+        height: 658px;
+    }
+    .content-wrapper .head_text h1 {
+        font-size: 23px;
+    }
+
+    .content-wrapper .subText p {
+        font-size: 11px;
+    }
+    .input-group input, button {
+        height: 40px;
+    }
+
+    .content-wrapper .right_btn button {
+        width: 86%;
+        font-size: 10px;  
+        height: 40px;
+    }
+
+    .right-wrapper {
+        height: 658px;
+    }
+    .right-wrapper .right_btn button {
+        font-size: 11px;
+        height: 35px;
+    }
+    .right-wrapper .right_text h4 {
+        font-size: 16px;
+    }
+    .right-wrapper .right_text p {
+        font-size: 10px;
+    }
+
+    .right-wrapper .content_text .desc p {
+        font-size: 11px;
+    }
+    .right-wrapper .content_text .desc h4 {
+        font-size: 16px;
+    }
+
+    .footer .footer_text .text {
+        right: 118px;
+        font-size: 10px;
+    }
+}
+
+
+@media( max-width: 768px) {
     .sliderBtn{
         width: 99%;
     }
@@ -1589,6 +1650,10 @@ visibility: hidden;
         display: none;
         width: 100%;
         margin-top: 20px;
+    }
+
+    .footer_text { 
+        display: none;
     }
     .search_row {
         padding: 0 30px 0 30px !important;
@@ -1643,6 +1708,8 @@ visibility: hidden;
         font-size: 23px;
     }
 }
+
+
 
 @media (max-width: 426px) {
 .content-wrapper .right_btn button {
