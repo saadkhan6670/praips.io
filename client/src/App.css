@@ -34,7 +34,7 @@ td {
     background: #252525;
 }
 
-#wrapper .footer p {
+#wrapper .App p {
     color: white;
     text-align: center;
 }
@@ -257,7 +257,7 @@ button.logoutbtn {
     border-radius: 8px;
     width: 25.26%;
     margin-top: 1.3%;
-    display: inline-block
+    display: inline-block;
 }
 
 .right-wrapper .about_text {
@@ -405,7 +405,7 @@ button {
     margin-top: 9px;
 }
 
-.footer .footer_text .text {
+.App .footer_text .text {
     margin-top: 10px;
     /* margin-left: 3px; */
     /* float: right; */
@@ -415,12 +415,12 @@ button {
     font-size: 107%;
 }
 
-.footer .footer_text .text p {
+.App .footer_text .text p {
     /* text-align: right; */
     color: white;
 }
 
-.footer .footer_text .text p a {
+.App .footer_text .text p a {
     text-decoration: underline;
     color: white;
 }
@@ -1061,6 +1061,18 @@ visibility: hidden;
     height: 45px;
 }
 
+#mySidenav {
+    display: none;
+}
+
+#main { 
+    display: none;
+}
+
+aboutData { 
+    display : none;
+}
+
 @media screen and (max-width: 2560px) and (min-width: 1921px) {
     .slider{
         margin-left: 19px;
@@ -1089,7 +1101,7 @@ visibility: hidden;
     .right-wrapper {
         width: 24.26%;
     }
-    .footer .footer_text .text {
+    .App .footer_text .text {
         right: 126px;
     }
     .content-wrapper {
@@ -1218,7 +1230,7 @@ visibility: hidden;
         width: 25.6%;
         height: 700px;
     }
-    .footer .footer_text .text {
+    .App .footer_text .text {
         margin-top: 7px;
         position: absolute;
         right: 200px;
@@ -1503,13 +1515,13 @@ visibility: hidden;
     .analyticsimg {
         width: 87%;
     }
-    .footer .footer_text .text {
+    .App .footer_text .text {
         right: 247px;
     }
 }
 
 @media (max-width: 1024px)  {
-    .footer .footer_text .text {
+    .App .footer_text .text {
         font-size: 11px;
         right: 109px;
     }
@@ -1533,7 +1545,7 @@ visibility: hidden;
     .analyticsimg {
         width: 87%;
     }
-    .footer .footer_text .text {
+    .App .footer_text .text {
         font-size: 11px;
         right: 144px;
     }
@@ -1590,14 +1602,19 @@ visibility: hidden;
         font-size: 16px;
     }
 
-    .footer .footer_text .text {
+    .App .footer_text .text {
         right: 118px;
         font-size: 10px;
     }
 }
 
 
-@media( max-width: 768px) {
+@media ( max-width: 768px) {
+    .right-wrapper {
+        width: 100%;
+    }
+    
+    
     .sliderBtn{
         width: 99%;
     }
@@ -1631,7 +1648,6 @@ visibility: hidden;
     .AdminRight-wrapper {
         width: 100%;
         margin-top: 20px;
-        display: none;
     }
     .AdminProfile {
         display: none;
@@ -1640,21 +1656,15 @@ visibility: hidden;
         width: 100%;
         /* height: 0%; */
         border-radius: 0px;
-        margin-top: 0px;
+        margin-top: -21px;
         margin-right: 0px
     }
     .content-wrapper .subText {
         width: 80%;
     }
-    .right-wrapper {
-        display: none;
-        width: 100%;
-        margin-top: 20px;
-    }
+  
 
-    .footer_text { 
-        display: none;
-    }
+  
     .search_row {
         padding: 0 30px 0 30px !important;
     }
@@ -1662,7 +1672,7 @@ visibility: hidden;
         text-align: center;
         margin-top: 25px;
     }
-    .footer .footer_text .text p {
+    .App .footer_text .text p {
         text-align: center;
     }
     .toggle-left {
@@ -1684,11 +1694,7 @@ visibility: hidden;
         height: auto;
         margin-top: 20px;
     }
-    .right-wrapper {
-        display: none;
-        width: 100%;
-        margin-top: 20px;
-    }
+    
 
     /* login PAge responsive */
 
@@ -1707,6 +1713,68 @@ visibility: hidden;
     #logInFormWrapper h2{
         font-size: 23px;
     }
+
+    .menuimageActive img {
+        padding: 12px;
+    }
+
+    .menuimage {
+        padding: 12px;
+    }
+
+    .sidenav {
+        display: block;
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        right: 0;
+        background-color:white ;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+    
+    .sidenav a {
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+    
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+    
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+    #mySidenav {
+        display: block;
+    }
+
+    #main {
+        display: block;
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 60px;
+    }
+
+    #about {
+        display: none;
+    }
+    
 }
 
 

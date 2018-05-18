@@ -4,7 +4,6 @@ import { observer } from 'mobx-react';
 import { CreateRubric, slugify } from './Services'
 import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
 import Search from './Search'
-var { sortBy } = require('lodash')
 
 
 @observer class FAQComponent extends Component {

@@ -34,7 +34,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
         this.props.store.LogOutandDelKey()
     }
 
-    editHandle() {
+    editHandle = () =>  {
         document.getElementById('aboutData').style.display = "none"
         document.getElementById('aboutForm').style.display = "block"
     }
@@ -104,31 +104,29 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 
     }
 
-
+    handleUrlClick (e) {
+        e.preventDefault()
+        window.open(`http://${this.props.store.About.siteUrl}` , '_blank');
+    }
 
     render() {
         return (
             <div>
-                {this.props.store.redirect ? <div className="AdminProfile">
+                 {this.props.store.redirect ? <div className="AdminProfile">
                     <div className="AdminProfile-wrapper">
                         <div className="col-md-3 col-sm-3 col-xs-3 profileImage"
                             style={{ backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}${this.props.store.User.profilePath})`, height: "inherit", borderTopLeftRadius: "inherit", borderBottomLeftRadius: "inherit" }}>
-
                         </div>
                         <div className="col-md-6 col-sm-6 col-xs-6 profileNamediv">
                             < div className="profileName">{this.props.store.User.username}</div>
                             <br />
                             <span className="profileRole">{this.props.store.User.role}</span>
                         </div>
-
                         <div className="col-md-3 col-sm-3 col-xs-3" onClick={() => this.handleModalShow('profile', 'Upload your Proflie Photo')}
                             style={{ cursor: "pointer", borderLeft: "1px solid lightgrey", height: "inherit", borderTopRightRadius: "inherit", borderBottomRightRadius: "inherit", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}/images/camera.png)` }}></div>
                     </div>
-
-
                     <button onClick={() => this.handleLogOut()} className="btn logoutbtn"><span>LOGOUT</span></button>
                 </div> : null}
-
                 <div className={this.props.store.redirect ? "AdminRight-wrapper" : "right-wrapper"} id="intro">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12 ">
@@ -139,11 +137,10 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                         </div>
                     </div>
                     <div className={this.state.cssToggle ? "container-fluid AdminAboutContainer" : "container-fluid"} id="aboutData">
-
                         <div >
                             <div className="row">
                                 {this.props.store.redirect ?
-                                    <img onClick={(e) => this.editHandle(e)} className="aboutedit" src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                    <img onClick={this.editHandle} className="aboutedit" src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
                                     : null}
                                 <div className="right_log">
                                     <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`} alt="" />
@@ -158,13 +155,13 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                             <div className="row">
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <div className="right_btn">
-                                        <button className="btn btn-lg" style={{ textTransform: 'uppercase' }}>
-                                        <a href={this.props.store.About.siteUrl} target="_blank"> {this.props.store.About.siteUrl} </a>
+                                        <button  
+                                        onClick={(e) => {this.handleUrlClick(e)}}
+                                        className="btn btn-lg" style={{ textTransform: 'uppercase' }}>
+                                        {this.props.store.About.siteUrl}
                                         </button>
-                                        
                                     </div>
                                 </div>
-
                             </div>
                             <div className="row">
                                 <div className="col-md-12 col-sm-12 col-xs-12">
@@ -173,15 +170,12 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                             <h4>Description</h4>
                                             <p>{this.props.store.About.description}</p>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div className="container-fluid" id="aboutForm" >
-
                         <form onKeyDown={(e) => this.handleEnterKey(e)} style={{ textAlign: "center" }}>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
                                 <label >Logo  </label> <span ref="nameReq" className="reqMsg"></span>
@@ -204,10 +198,9 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 <label >Description </label> <span ref="messageReq" className="reqMsg"></span>
                                 <textarea className="form-control" style={{ height: "150px" }} value={this.props.store.About.description} onChange={(e) => this.handleChange(e, 'description')}></textarea>
                             </div>
-                            <div className="col-md-12 col-sm-12 col-xs-12 about_btns">
+                            <div className=" form-group about_btns">
                                 <input type="submit" className="btn btn-lg" value="Edit" onClick={(e) => { this.editSubmit(e) }} />
                                 <input type="button" className="btn btn-lg" value="Cancel" onClick={() => { this.handleCancel() }} />
-
                             </div>
                         </form>
                     </div>
@@ -221,7 +214,6 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 </div>
                             </div>
                         </div>
-
                     </div>}
                 <Modal show={this.state.Show} onHide={this.handleModalClose}>
                     <Modal.Header closeButton>
@@ -229,7 +221,6 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                     </Modal.Header>
                     <Modal.Body>
                         <form onSubmit={(e) => { e.preventDefault() }}  >
-
                             <FormGroup
                                 controlId="formBasicText"
                             >
@@ -237,11 +228,9 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                     type="file"
                                     name={this.state.uploadName}
                                     id="imageFile"
-
                                 />
                                 <FormControl.Feedback />
                             </FormGroup>
-
                             <FormGroup
                                 controlId="formBasicText"
                             >
@@ -254,9 +243,6 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                             </FormGroup>
                         </form>
                     </Modal.Body>
-                    <Modal.Footer>
-
-                    </Modal.Footer>
                 </Modal>
             </div>
 

@@ -5,7 +5,7 @@ import { RemoveOverflow } from './Services';
 import { orderBy } from 'lodash'
 import io from 'socket.io-client';
 import { Redirect } from 'react-router-dom'
-import { Modal, Button, FormGroup, FormControl, OverlayTrigger, } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 
 @observer class Dashboard extends Component {

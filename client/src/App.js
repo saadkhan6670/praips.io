@@ -25,7 +25,7 @@ import MobileNav from './MobileNav'
 
   render() {
     return (
-      <div className="footer">
+      <div className="App">
         <div id="wrapper">
 
           <BrowserRouter>
