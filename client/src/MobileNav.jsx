@@ -44,7 +44,7 @@ import AboutComponent from './About/components/AboutComponent'
 
                     <div id="mySidenav" className="sidenav">
                         <a href="javascript:void(0)" className="closebtn" onClick={this.handlecloseNav}>&times;</a>
-                        <AboutComponent store={this.props.store}/>
+                        {/* <AboutComponent store={this.props.store}/> */}
                     </div>
                     <div id="main"></div>
                    
