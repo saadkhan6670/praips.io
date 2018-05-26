@@ -247,7 +247,6 @@ var RemoveOverflow = (str, strlength) => {
 
     handleQuestionClick(selectedQue) {
         counter++
-        console.log(counter)
         this.props.store.selectedQue = selectedQue
         this.refs.widgetSearchInput.style.display = "none"
 
@@ -261,7 +260,6 @@ var RemoveOverflow = (str, strlength) => {
 
     handleAskQuestionClick() {
         counter++
-        console.log(counter)
         this.refs.widgetSearchInput.style.display = "none"
 
         this.refs.searchResultDiv.style.display = "none"

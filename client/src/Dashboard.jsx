@@ -82,7 +82,7 @@ import { Modal, Button } from 'react-bootstrap';
                         <tr>
                             <th scope="row">{i + 1}</th>
                             <td>{d.name}</td>
-                            <td>{RemoveOverflow(d.rubricContent[0].content.question, 25)}</td>
+                            <td>{RemoveOverflow(d.rubricContent[0].content.question, 50)}</td>
                             <td>{d.rubricContent[0].content.views}</td>
                         </tr>
                     )

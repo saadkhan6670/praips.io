@@ -40,8 +40,9 @@ var textAreaStyle = {
                 <div className="form-group">
                             <label style={{color : "#c7c2c2"}}>Copy paste this code into an HTML element on your page     or HTML file </label>
                             <textarea name="message" className="form-control" id='scriptValue' style={textAreaStyle}
-                              value={`<script src="${process.env.PUBLIC_URL}/static/js/widget.js"></script>
-                              <div id="praipsWidget"></div>
+                              value={`
+                              <div id="praipsWidget"></div>         
+                              <script src="${process.env.PUBLIC_URL}/static/js/widget.js"></script>
                               `}
                                ></textarea>
                         </div>
