@@ -108,7 +108,7 @@ var listAnchorStyle = {
 }
 
 var askBtnStyles = {
-    backgroundColor: "#83C75A",
+    // backgroundColor: "#83C75A",
     color: "white",
     padding: "10px 36px",
     borderRadius: "19px",
@@ -418,6 +418,15 @@ var RemoveOverflow = (str, strlength) => {
             }\
             #searchInputDivId:focus {\
                  outline : 'blue'\
+                 @media (max-width: 1024px) { \
+                    #widgetParent {\
+                        color : red\
+                    }\
+                      \
+                    .widgetBtn {\
+                        background-color: red;\
+                    }\
+                 }\
             }\
             "}</style>
                 <div style={helpdivStyles} ref="widgetHelpBtn">
