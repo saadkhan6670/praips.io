@@ -6,9 +6,7 @@ import store from './store/widgetStore'
 class App extends Component {
   render() {
     return (
-      <div>
     <Widget store={store}/>
-      </div>
     );
   }
 }
