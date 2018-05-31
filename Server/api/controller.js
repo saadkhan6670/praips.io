@@ -154,7 +154,7 @@ exports.removeRubrics = (req, res) => {
 
   io.emit('update', { api: 'RubricsChanged' })
 
-}
+} 
 
 exports.sortRubrics = (req, res) => {
   Rubrics.findByIdAndUpdate(req.body.toId, { $set: { sort: req.body.toSort } }, { new: true }, (err, data) => {
