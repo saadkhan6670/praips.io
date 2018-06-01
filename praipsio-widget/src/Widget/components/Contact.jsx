@@ -93,7 +93,6 @@ var processGif = {
 }
 class Contact extends Component {
     onChangeValidation(fieldName) {
-console.log(this.refs.Name.value.length, isNumeric(this.refs.Name.value) )
         switch (fieldName) {
             case "name":
                 // validation for name field if user provide less than 3 chars

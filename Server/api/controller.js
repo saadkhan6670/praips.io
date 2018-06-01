@@ -25,7 +25,7 @@ server.listen(8081)
 
 var io = socketIO.listen(server)
 
-io.on('connection' , ( ) => {
+io.on('connection', () => {
   console.log('Socket connected')
 })
 
@@ -148,6 +148,12 @@ exports.removeRubrics = (req, res) => {
     }
 
     else {
+      data.rubricContent.forEach(rubricContent => {
+        RubricContent.findByIdAndRemove(rubricContent.content, (err, doc) => {
+          return;
+        })
+      })
+
       res.send("Rubric Removed");
     }
   })
@@ -176,11 +182,11 @@ exports.createRubcricContent = (req, res) => {
     }
     else {
 
-        Rubrics.update({ _id: req.body.id }, 
-          { "$push": { "rubricContent": { "content": data._id , "sort": req.body.contentLength + 1 } }}, 
-          { safe: true, multi:true }, function(err, obj) {
-            return
-      });
+      Rubrics.update({ _id: req.body.id },
+        { "$push": { "rubricContent": { "content": data._id, "sort": req.body.contentLength + 1 } } },
+        { safe: true, multi: true }, function (err, obj) {
+          return
+        });
       res.send(data)
 
     }
@@ -191,9 +197,9 @@ exports.createRubcricContent = (req, res) => {
 
 exports.SortRubricContent = (req, res) => {
 
-  Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId( req.body.toId) }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
+  Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId(req.body.toId) }, { $set: { 'rubricContent.$.sort': req.body.toSort } }, (err, data) => {
 
-    Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId( req.body.fromId) }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
+    Rubrics.update({ 'rubricContent.content': mongoose.Types.ObjectId(req.body.fromId) }, { $set: { 'rubricContent.$.sort': req.body.fromSort } }, (err, data2) => {
       res.send(data2)
 
     })
@@ -230,22 +236,22 @@ exports.removeRubricContent = (req, res) => {
     else {
       req.body.IdsToResort.forEach(IdToResort => {
         //decreament in sort order
-        Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": mongoose.Types.ObjectId( IdToResort) }, { $inc: { "rubricContent.$.sort": -1 } },
+        Rubrics.update({ "_id": req.body.RubricId, "rubricContent.content": mongoose.Types.ObjectId(IdToResort) }, { $inc: { "rubricContent.$.sort": -1 } },
           (err, doc) => {
-              
+
           })
       })
 
-      Rubrics.update({ _id: req.body.RubricId }, 
-        { "$pull": { "rubricContent": { "content":mongoose.Types.ObjectId( req.body.IdToremove) } }}, 
-        { safe: true, multi:true }, function(err, obj) {
-        res.send(obj)
-    });
-    }  
-  
+      Rubrics.update({ _id: req.body.RubricId },
+        { "$pull": { "rubricContent": { "content": mongoose.Types.ObjectId(req.body.IdToremove) } } },
+        { safe: true, multi: true }, function (err, obj) {
+          res.send(obj)
+        });
+    }
+
   })
 
- 
+
 
   //for Dashboard
   io.emit('update', { api: 'RubricsChanged' })
@@ -339,7 +345,7 @@ exports.createContact = (req, res) => {
               return res.send(error);
             }
             else {
-           res.send(info)
+              res.send(info)
             }
           });
         }
