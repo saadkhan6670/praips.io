@@ -364,7 +364,6 @@ var RemoveOverflow = (str, strlength) => {
 
     handleBack() {
 
-
         if (counter === 1) {
       
         if (    document.getElementById('contactDiv').style.display === "block") {
@@ -374,6 +373,8 @@ var RemoveOverflow = (str, strlength) => {
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 this.refs.backArrow.style.display = "none"
                 document.getElementById('helpText').innerHTML = "Help"
+                this.refs.widgetHeaderDiv.style.height = "9px"
+                
              
                 counter--;
             }
@@ -398,6 +399,7 @@ var RemoveOverflow = (str, strlength) => {
                 this.refs.questionAnswerDiv.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 document.getElementById('helpText').innerHTML = "Help"
+                this.refs.widgetHeaderDiv.style.height = "9px"
 
                 counter--;
 
@@ -419,8 +421,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.askQuestionBtnDiv.style.display = "block"
         document.getElementById('helpText').innerHTML = "Help"
         this.refs.widgetHeaderDiv.style.height = "9px"
-        
-        
+        this.refs.backArrow.style.display = "none"
     }   
 
 
@@ -450,7 +451,7 @@ var RemoveOverflow = (str, strlength) => {
                 <style type="text/css"> {
                     "\
               \
-                    #widgetParent * {\
+                    #widgetParent div {\
                         font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;\
                       \
                         line-height: normal;\
@@ -460,8 +461,11 @@ var RemoveOverflow = (str, strlength) => {
                        \
                     }\
                \
-                    #widgetPArent button {\
+                    #widgetParent{\
                         height: unset;\
+                        -webkit-box-sizing: border-box!important;\
+                        -moz-box-sizing: border-box!important;\
+                        box-sizing: border-box!important;\
                 }\
                 .widGetInput {\
                             line-height: normal;\
@@ -522,14 +526,14 @@ var RemoveOverflow = (str, strlength) => {
                     }\
                  }\
             "}</style>
-                <div style={helpdivStyles} ref="widgetHelpBtn">
+                <div className="helpBtn" style={helpdivStyles} ref="widgetHelpBtn">
                     <button style={helpbtnStyles} onClick={() => this.handleHelp()}></button>
 
                 </div>
                 <div className="widgetContainerDiv" ref="widgetContainer" style={widgetContainerStyle}>
                     <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>
                         <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span>
-                        <span id="helpText">Help</span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
+                        <span id="helpText">Help</span>   <span  style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
 
                     </div>
 
