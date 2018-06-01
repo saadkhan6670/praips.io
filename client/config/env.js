@@ -77,9 +77,10 @@ function getClientEnvironment(publicUrl) {
         // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
-        PUBLIC_URL: process.env.NODE_ENV === 'development' ? `http://localhost:5000` : `http://${ip.address()}:5000`,
-        apiURL: process.env.NODE_ENV === 'development' ? `http://localhost:5000` : `http://${ip.address()}:5000`,
-        socketURL: process.env.NODE_ENV === 'development' ? `http://localhost:8081`  : `http://${ip.address()}:8081`,
+
+        PUBLIC_URL: process.env.NODE_ENV === 'development' ? `http://localhost:5000` : `http://68.66.218.228:56000`,
+        apiURL: process.env.NODE_ENV === 'development' ? `http://localhost:5000` : `http://68.66.218.228:56000`,
+        socketURL: process.env.NODE_ENV === 'development' ?`http://localhost:8081` : `http://68.66.218.228:8081`,
         
 
         // PUBLIC_URL: `http://103.11.2.67:5000`,

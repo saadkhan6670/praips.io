@@ -630,6 +630,15 @@ button {
 #aboutForm {
     display: none;
 }
+#aboutFormMob {
+    display: none;
+}
+aboutData { 
+    display : none;
+}
+aboutDataMob { 
+    display : none;
+}
 
 .AdminProfile-wrapper {
     background-color: white;
@@ -660,7 +669,7 @@ button {
 #logInFormWrapper {
     width: 48%;
     margin: 0 auto;
-    padding-top: 32%;
+    padding-top: 24%;
 }
 
 .loginInputs input[id="email"]{
@@ -1069,8 +1078,12 @@ visibility: hidden;
     display: none;
 }
 
-aboutData { 
-    display : none;
+#logInErrorMsg {
+    visibility: hidden;
+}
+
+.menuimageActive {
+    height: 113px;
 }
 
 @media screen and (max-width: 2560px) and (min-width: 1921px) {
@@ -1205,7 +1218,7 @@ aboutData {
         margin-top: 2px;
     }
     .content-wrapper .subText p {
-        font-size: 15px;
+        font-size: 14px;
     }
     .content-wrapper .search_row {
         padding: 0px 44px 0 23px;
@@ -1707,6 +1720,7 @@ aboutData {
     }
 
     #logInFormWrapper {
+        width: 70%;
   
         padding-top: 16%;
     }
@@ -1774,6 +1788,17 @@ aboutData {
     #about {
         display: none;
     }
+
+    .about_btns input[type=submit] {
+        padding: 8px 30px;
+        margin-right: 12px;
+    }
+    
+   
+    
+    .about_btns input[type="button"] {
+        padding: 8px 20px;
+    }
     
 }
 
@@ -1784,7 +1809,73 @@ aboutData {
     font-size: 12px;
    
 }
+
+.about_btns input[type=submit] {
+    padding: 9px 33px;
+    margin-right: 12px;
 }
+
+input[type=submit] {
+    font-size: 13px;
+}
+
+.about_btns input[type="button"] {
+    padding: 9px 25px;
+}
+
+input[type="button"] {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.AdminRight-wrapper .right_btn button {
+    width: 51% !important;
+    height: 42px !important;
+    font-size: 10px !important;
+}
+
+.AdminRight-wrapper .about_text h4 {
+    font-size: 14px;
+  
+}
+.AdminRight-wrapper .right_text h4 {
+    font-size: 14px;
+}
+.AdminRight-wrapper .right_text p {
+    font-size: 12px;
+}
+
+.text {
+    padding: 0px 26px;
+    font-size: 11px;
+}
+.text a {
+    font-size: 12px;
+    display: inline;
+}
+}
+
+
+
+@media (max-width: 376px) {
+    .content-wrapper .right_btn button {
+        font-size: 12px;
+       
+    }
+    
+    .about_btns input[type=submit] {
+        padding: 8px 24px;
+        margin-right: 12px;
+    }
+    
+   
+    
+    .about_btns input[type="button"] {
+        padding: 8px 18px;
+    }
+    
+  
+    }
 
 
 .copyBtn {
