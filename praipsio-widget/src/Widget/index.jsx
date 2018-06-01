@@ -373,7 +373,7 @@ var RemoveOverflow = (str, strlength) => {
                 this.refs.widgetSearchInput.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 this.refs.backArrow.style.display = "none"
-        document.getElementById('helpText').innerHTML = "Help"
+                document.getElementById('helpText').innerHTML = "Help"
              
                 counter--;
             }
@@ -384,6 +384,7 @@ var RemoveOverflow = (str, strlength) => {
                 this.refs.widgetSearchInput.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 this.refs.backArrow.style.display = "none"
+                this.refs.widgetHeaderDiv.style.height = "9px"
 
                 counter--;
 
@@ -416,6 +417,9 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.searchResultDiv.style.display = "block"
         this.refs.widgetSearchInput.style.display = "block"
         this.refs.askQuestionBtnDiv.style.display = "block"
+        document.getElementById('helpText').innerHTML = "Help"
+        this.refs.widgetHeaderDiv.style.height = "9px"
+        
         
     }   
 
@@ -442,17 +446,17 @@ var RemoveOverflow = (str, strlength) => {
 
 
         return (
-            <div id="widgetParent" style={{boxSizing : "content-box"}}>
+            <div id="widgetParent">
                 <style type="text/css"> {
                     "\
               \
-                    #widgetParent {\
+                    #widgetParent * {\
                         font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;\
                       \
                         line-height: normal;\
-                        -webkit-box-sizing: content-box;\
-                        -moz-box-sizing: content-box;\
-                        box-sizing: content-box;\
+                        -webkit-box-sizing: content-box!important;\
+                        -moz-box-sizing: content-box!important;\
+                        box-sizing: content-box!important;\
                        \
                     }\
                \
@@ -503,18 +507,18 @@ var RemoveOverflow = (str, strlength) => {
                     }\
                  }\
                  @media (max-width: 426px) { \
-                    .widgetContainerDiv {\
-                        width: 70%;\
+                    #widgetParent {\
+                        display: none;\
                     }\
                  }\
                  @media (max-width: 376px) { \
-                    .widgetContainerDiv {\
-                        width: 80%;\
+                    #widgetParent {\
+                        display: none;\
                     }\
                  }\
                  @media (max-width: 321px) { \
-                    .widgetContainerDiv {\
-                        width: 85%;\
+                    #widgetParent {\
+                        display: none;\
                     }\
                  }\
             "}</style>

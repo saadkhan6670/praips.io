@@ -36,50 +36,38 @@ import axios from 'axios'
                             this.props.store.redirect = true
 
                             this.props.store.id = response2.data._id
-                            
+
 
                             var now = new Date();
                             var time = now.getTime();
                             var expireTime = time + 1000 * 100000;
-                            now.setTime(expireTime);                           
+                            now.setTime(expireTime);
                             document.cookie = `key=${this.props.store.LoginKey};  expires=${now.toGMTString()} path=/`;
                             document.cookie = `user_id=${response.data._id};  expires=${now.toGMTString()} path=/`;
-                        this.props.store.getUserData()
-                            
-                       this.props.history.push({
-                           pathname : '/'
-                       })
+                            this.props.store.getUserData()
 
-             
-                        }).catch(() => {
-                            this.setState({
-
-                                Message:
-                                    <div className="alert alert-danger">
-                                        <strong >Please Check Your Internet Connection...</strong>
-                                    </div>
+                            this.props.history.push({
+                                pathname: '/'
                             })
+
+
+                        }).catch(() => {
+
+                            document.getElementById('logInErrorMsg').style.visibility = "visible"
+                            document.getElementById('logInErrorMsg').innerHTML = "<strong >Please Check Your Internet Connection...</strong>"
                         })
                 }
                 else {
 
-                    this.setState({
-
-                        Message:
-                            <div className="alert alert-danger">
-                                <strong >Invalid username or password</strong>
-                            </div>
-                    })
+                    document.getElementById('logInErrorMsg').style.visibility = "visible"
+                    document.getElementById('logInErrorMsg').innerHTML = "<strong >Invalid username or password</strong>"
                 }
 
             }).catch(() => {
-                this.setState({
-                
-                    Message:
-                    <div className="alert alert-danger">
-                        <strong >Please Check Your Internet Connection...</strong>
-                    </div>
-                })
+
+                document.getElementById('logInErrorMsg').style.visibility = "visible"
+                document.getElementById('logInErrorMsg').innerHTML = "<strong >Please Check Your Internet Connection...</strong>"
+
             })
 
     }
@@ -88,50 +76,56 @@ import axios from 'axios'
     render() {
         return (
             <div className="content-wrapper" id="intro">
-                        {this.state.Message}
-            
+                <div id="logInErrorMsg" className="alert alert-danger">
+                <strong >Please Check Your Internet Connection...</strong>
+                </div>
+
                 <div className="container-fluid" style={{}}>
                     <div id="logInFormWrapper">
-                            <div className="subText">
-                                <p>Are You an administrator of {this.props.store.About.name} ?</p>
+                        <div className="subText">
+                            <p>Are You an administrator of {this.props.store.About.name} ?</p>
+
+                        </div>
+
+                        <div style={{ textAlign: "center" }}>
+                            <h2 style={{ marginTop: "0px" }}>Log In</h2>
+
+                        </div>
+                        <div className="form-group">
+
+                            <div className=" loginInputs">
+                                <input id="email" type="text" className="form-control" placeholder="Email Address"
+                                    style={{
+                                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/user-icon.png)`, backgroundSize: "19px",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundPosition: "14px",
+                                    }} />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+
+                            <div className="loginInputs">
+                                <input id="password" type="password" className="form-control" placeholder="Password"
+                                    style={{
+                                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/pass-icon.png)`, backgroundSize: "16px",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundPosition: "14px",
+                                    }}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+
+                            <div className="logInSendBtn">
+                                <button type="button" className="btn form-control" onClick={(e) => this.handleLogin(e)}>SEND</button>
 
                             </div>
-                  
-                                <div style={{textAlign: "center"}}>
-                                    <h2 style={{marginTop: "0px"}}>Log In</h2>
-
-                            </div>
-                            <div className="form-group">
-
-                                <div className=" loginInputs">
-                                    <input id="email" type="text" className="form-control"  placeholder="Email Address" 
-                                    style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/user-icon.png)` , backgroundSize: "19px",
-                                    backgroundRepeat: "no-repeat",
-                                    backgroundPosition: "14px",}}/>
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-
-                                <div className="loginInputs">
-                                    <input  id="password" type="password" className="form-control" placeholder="Password"
-                                    style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/pass-icon.png)`, backgroundSize: "16px",
-                                    backgroundRepeat: "no-repeat",
-                                    backgroundPosition: "14px",}}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-
-                                <div className="logInSendBtn">
-                                    <button type="button" className="btn form-control" onClick={(e) => this.handleLogin(e)}>SEND</button>
-
-                                </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
-        </div>
+            </div>
         )
     }
 }

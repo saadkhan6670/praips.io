@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import AboutComponent from './About/components/AboutComponent'
+import AboutForMobile from './About/components/AboutForMobile'
 
 @observer class MobileNav extends Component {
 
@@ -18,13 +18,28 @@ import AboutComponent from './About/components/AboutComponent'
     }
 
     handleRightClick = () => {
-        document.getElementById("mySidenav").style.width = "40%";
+        if(window.screen.width <= 768) {
+            document.getElementById("mySidenav").style.width = "40%";
 
-        window.setTimeout( () => {
-            document.getElementById("main").style.width = "60%";
-        
-            document.getElementById("main").style.backgroundColor = "rgba(0,0,0,0.4)";
-        }, 350)
+            window.setTimeout( () => {
+                document.getElementById("main").style.width = "60%";
+            
+                document.getElementById("main").style.backgroundColor = "rgba(0,0,0,0.4)";
+            }, 350)
+
+        }
+
+        if(window.screen.width <= 425) {
+            document.getElementById("mySidenav").style.width = "60%";
+
+            window.setTimeout( () => {
+                document.getElementById("main").style.width = "40%";
+            
+                document.getElementById("main").style.backgroundColor = "rgba(0,0,0,0.4)";
+            }, 350)
+
+        }
+      
        
     }
 
@@ -44,7 +59,7 @@ import AboutComponent from './About/components/AboutComponent'
 
                     <div id="mySidenav" className="sidenav">
                         <a href="javascript:void(0)" className="closebtn" onClick={this.handlecloseNav}>&times;</a>
-                        {/* <AboutComponent store={this.props.store}/> */}
+                       <AboutForMobile store={this.props.store}/> 
                     </div>
                     <div id="main"></div>
                    
