@@ -1,2 +1,6 @@
 cd ..\client
-npm run build
+start npm run build
+
+cd ..\praipsio-widget
+start npm run build
+exit
