@@ -323,16 +323,16 @@ exports.createContact = (req, res) => {
     else {
       let mailOptionsForAdmin = {
         from: req.body.toEmail, // sender address
-        to: 'safbusiness2017@gmail.com', // list of receivers
+        to: 'lawdow123@gmail.com', // list of receivers
         subject: 'New Contact Request', // Subject line
         html: "<h1>New Contact Request </h1>   <p>" + req.body.visitorName + " needs your help from Praips </p>  <p><b>Content: </b>" + req.body.content + "</p>"
       };
 
       let mailOptionsForUser = {
-        from: 'safbusiness2017@gmail.com', // sender address
+        from: 'lawdow123@gmail.com', // sender address
         to: req.body.toEmail, // list of receivers
-        subject: 'New Contact Request', // Subject line
-        html: "<p> We have received your requestion from " + req.body.visitorName + "<p><b>This is your message, </b>" + req.body.content + "</p>"
+        subject: 'Thanks for Contacting', // Subject line
+        html: "<p> We have received your request from " + req.body.visitorName + "<p><b>This is your message, </b>" + req.body.content + "</p>"
       };
 
       transporter.sendMail(mailOptionsForAdmin, (error, info) => {

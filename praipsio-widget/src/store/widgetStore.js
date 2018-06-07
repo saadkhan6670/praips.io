@@ -22,6 +22,28 @@ async getRubrics() {
     createContact(data) {
         return axios.post(`${process.env.apiURL}/api/createContact`, data)
     }   
+
+    createResearch(content) {
+
+        return axios.post(`${process.env.apiURL}/api/createResearch`, {
+            content: content
+        }).then((response) => {
+        })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    updateViews(id, views) {
+        axios.post(`${process.env.apiURL}/api/updateViews`, {
+            id: id,
+            views: views
+        }).then((response) => {
+        })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 }
 
 

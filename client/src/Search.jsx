@@ -40,7 +40,6 @@ import { observer } from 'mobx-react';
 
 
         let filteredContent = content === undefined ? null : content.filter((d) => { return d.content.question.toLowerCase().indexOf(this.props.store.searchInput.toLowerCase()) !== -1 })
-console.log(filteredContent)
         return (
             <div>
                 <h4 className="RubricName">RESULTS</h4>

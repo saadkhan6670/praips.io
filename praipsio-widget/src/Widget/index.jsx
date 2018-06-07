@@ -232,47 +232,49 @@ var RemoveOverflow = (str, strlength) => {
             this.refs.widgetSearchInput.style.backgroundColor = "rgb(131, 199, 90)"
             this.refs.widgetHeaderDiv.style.height = "9px"
 
-            if(window.screen.width <= 1755) {
+            if (window.screen.width <= 1755) {
                 this.refs.widgetContainer.style.width = "25%"
-               
-                    
-                }
 
-            if(window.screen.width <= 1536) {
-                this.refs.widgetContainer.style.width = "25%"
-               
-                    
-                }
-           
-            if(window.screen.width <= 1440) {
-                this.refs.widgetContainer.style.width = "30%"
-               
-                    
-                }
-            if(window.screen.width <= 1024) {
-                this.refs.widgetContainer.style.width = "42%"
-               
-                    
-                }
-            if(window.screen.width <= 768) {
-                this.refs.widgetContainer.style.width = "57%"
-               
-                    
-                }
-            if(window.screen.width <= 425) {
-                this.refs.widgetContainer.style.width = "95.5%"
-                    
-                }
-            if(window.screen.width <= 375) {
-                this.refs.widgetContainer.style.width = "95%"
 
-                }
-            if(window.screen.width <= 320) {
-            this.refs.widgetContainer.style.width = "94%"
-                
             }
 
-            
+            if (window.screen.width <= 1536) {
+                this.refs.widgetContainer.style.width = "25%"
+
+
+            }
+
+            if (window.screen.width <= 1440) {
+                this.refs.widgetContainer.style.width = "30%"
+
+
+            }
+            if (window.screen.width <= 1024) {
+                this.refs.widgetContainer.style.width = "42%"
+
+
+            }
+            if (window.screen.width <= 768) {
+                this.refs.widgetContainer.style.width = "57%"
+
+
+            }
+            if (window.screen.width <= 425) {
+                this.refs.widgetContainer.style.width = "95.5%"
+
+            }
+            if (window.screen.width <= 375) {
+                this.refs.widgetContainer.style.width = "95%"
+
+            }
+            if (window.screen.width <= 320) {
+                this.refs.widgetContainer.style.width = "94%"
+
+            }
+            this.props.store.createResearch(document.getElementsByClassName('widGetInput')[0].value)
+
+
+
         }
 
 
@@ -281,7 +283,7 @@ var RemoveOverflow = (str, strlength) => {
 
 
 
-    handleQuestionClick(selectedQue) {
+    handleQuestionClick(selectedQue,questionId, questionViews, questionRef) {
         counter++
         this.props.store.selectedQue = selectedQue
         this.refs.widgetSearchInput.style.display = "none"
@@ -291,6 +293,11 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.backArrow.style.display = "block"
         this.refs.widgetHeaderDiv.style.height = "28px"
 
+        if(this.refs[questionRef].className === "view Plus") {
+            questionViews += 1;
+            this.props.store.updateViews(questionId, questionViews)
+        }
+        
 
     }
 
@@ -316,48 +323,50 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.questionAnswerDiv.style.display = "none"
         this.refs.askQuestionBtnDiv.style.display = "none"
         document.getElementById('contactDiv').style.display = "none"
+        document.getElementById('contactAlert').style.display = "none"
+        
         this.refs.widgetHelpBtn.style.display = "block"
         this.refs.widgetSearchInput.style.backgroundColor = ""
         this.refs.widgetHeaderDiv.style.height = "28px"
 
-        if(window.screen.width <= 1755) {
+        if (window.screen.width <= 1755) {
             this.refs.widgetContainer.style.width = "20%"
-           
-                
-            }
 
-        if(window.screen.width <= 1536) {
+
+        }
+
+        if (window.screen.width <= 1536) {
             this.refs.widgetContainer.style.width = "20%"
-           
-                
-            }
-       
-        if(window.screen.width <= 1440) {
+
+
+        }
+
+        if (window.screen.width <= 1440) {
             this.refs.widgetContainer.style.width = "22%"
-           
-                
-            }
-        if(window.screen.width <= 1024) {
+
+
+        }
+        if (window.screen.width <= 1024) {
             this.refs.widgetContainer.style.width = "27%"
-           
-                
-            }
-        if(window.screen.width <= 768) {
+
+
+        }
+        if (window.screen.width <= 768) {
             this.refs.widgetContainer.style.width = "36%"
-           
-                
-            }
-        if(window.screen.width <= 425) {
+
+
+        }
+        if (window.screen.width <= 425) {
             this.refs.widgetContainer.style.width = "70%"
-                
-            }
-        if(window.screen.width <= 375) {
+
+        }
+        if (window.screen.width <= 375) {
             this.refs.widgetContainer.style.width = "80%"
 
-            }
-        if(window.screen.width <= 320) {
-        this.refs.widgetContainer.style.width = "85%"
-            
+        }
+        if (window.screen.width <= 320) {
+            this.refs.widgetContainer.style.width = "85%"
+
         }
 
     }
@@ -365,17 +374,17 @@ var RemoveOverflow = (str, strlength) => {
     handleBack() {
 
         if (counter === 1) {
-      
-        if (    document.getElementById('contactDiv').style.display === "block") {
-            document.getElementById('contactDiv').style.display = "none"
+
+            if (document.getElementById('contactDiv').style.display === "block") {
+                document.getElementById('contactDiv').style.display = "none"
                 this.refs.searchResultDiv.style.display = "block"
                 this.refs.widgetSearchInput.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 this.refs.backArrow.style.display = "none"
                 document.getElementById('helpText').innerHTML = "Help"
                 this.refs.widgetHeaderDiv.style.height = "9px"
-                
-             
+
+
                 counter--;
             }
 
@@ -394,8 +403,8 @@ var RemoveOverflow = (str, strlength) => {
         }
 
         if (counter === 2) {
-            if ( document.getElementById('contactDiv').style.display === "block") {
-                 document.getElementById('contactDiv').style.display = "none"
+            if (document.getElementById('contactDiv').style.display === "block") {
+                document.getElementById('contactDiv').style.display = "none"
                 this.refs.questionAnswerDiv.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 document.getElementById('helpText').innerHTML = "Help"
@@ -409,23 +418,29 @@ var RemoveOverflow = (str, strlength) => {
 
     }
 
-    handleRelatedQue(selectedQue) {
+    handleRelatedQue(selectedQue,questionId, questionViews, questionRef) {
         this.props.store.selectedQue = selectedQue;
+        if(this.refs[questionRef].className === "view Plus") {
+            questionViews += 1;
+            this.props.store.updateViews(questionId, questionViews)
+        }
     }
 
-    handleBacktoSearch  = () => {
+    handleBacktoSearch = () => {
         document.getElementById('contactDiv').style.display = "none"
- 
+
         this.refs.searchResultDiv.style.display = "block"
         this.refs.widgetSearchInput.style.display = "block"
         this.refs.askQuestionBtnDiv.style.display = "block"
         document.getElementById('helpText').innerHTML = "Help"
         this.refs.widgetHeaderDiv.style.height = "9px"
         this.refs.backArrow.style.display = "none"
-    }   
+    }
 
 
     render() {
+        console.log(process.env.AHSAN)
+        
         let content = [];
         this.props.store.Rubrics.forEach(element => {
 
@@ -439,7 +454,9 @@ var RemoveOverflow = (str, strlength) => {
         }) : null;
 
         var contentToDiplay = content.length ? filteredContent.filter((d, i) => { return i <= 3 }) : null;
-        var questionData = content.length ? filteredContent.find((d) => { return d.content.question === this.props.store.selectedQue }) : null
+        var questionData = content.length ? filteredContent.find((d) => { 
+            return d.content.question === this.props.store.selectedQue 
+        }) : null
 
         var relatedQues = content.length ? filteredContent.filter((d, i) => {
             return d.content.question !== this.props.store.selectedQue && i <= 1
@@ -454,7 +471,6 @@ var RemoveOverflow = (str, strlength) => {
                     #widgetParent div {\
                         font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;\
                       \
-                        line-height: normal;\
                         -webkit-box-sizing: content-box!important;\
                         -moz-box-sizing: content-box!important;\
                         box-sizing: content-box!important;\
@@ -533,7 +549,7 @@ var RemoveOverflow = (str, strlength) => {
                 <div className="widgetContainerDiv" ref="widgetContainer" style={widgetContainerStyle}>
                     <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>
                         <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span>
-                        <span id="helpText">Help</span>   <span  style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
+                        <span id="helpText">Help</span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
 
                     </div>
 
@@ -555,17 +571,20 @@ var RemoveOverflow = (str, strlength) => {
 
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
-                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" ,fontWeight: "bold"}}>
+                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px", fontWeight: "bold" }}>
                             {filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
                                 filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ?
-                                    contentToDiplay.map(d => {
+                                    contentToDiplay.map((d,i) => {
                                         return (
-                                               // eslint-disable-next-line
+                                            // eslint-disable-next-line
                                             <li><a
-                                         
-                                                onClick={() => this.handleQuestionClick(d.content.question)} style={listAnchorStyle} href="#">{d.content.question}
+                                            className="view Plus"
+                                                ref={`question${i}`}
+                                                onClick={ () => this.handleQuestionClick(d.content.question,d.content._id, d.content.views , `question${i}`)} 
+                                                style={listAnchorStyle} href="#">
+                                                {d.content.question}
                                             </a></li>
                                         )
                                     }) :
@@ -588,7 +607,7 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="questionAnswerDiv" style={questionAnswer}>
 
-                        <h5 style={{fontWeight: "bold"}}>{questionData ? questionData.content.question : null}</h5>
+                        <h5 style={{ fontWeight: "bold" }}>{questionData ? questionData.content.question : null}</h5>
                         <p style={{ fontSize: "13px" }}>{questionData ? questionData.content.answer : null}</p>
 
 
@@ -596,11 +615,14 @@ var RemoveOverflow = (str, strlength) => {
                         <h6 style={{ color: "darkgray", margin: "12px 0px" }}>Related Articles</h6>
                         <ul style={{ margin: "5px 0px" }}>
 
-                            {filteredContent === null ? null : relatedQues.map(d => {
+                            {filteredContent === null ? null : relatedQues.map((d,i) => {
                                 return (
                                     <li style={relatedArticleListStyle}
-                                        onClick={() => this.handleRelatedQue(d.content.question)}
-                                           // eslint-disable-next-line
+                                    className="view Plus"
+                                    
+                                    ref={`relQuestion${i}`}
+                                 onClick={() => this.handleRelatedQue(d.content.question,d.content._id, d.content.views , `question${i}`)}
+                                    // eslint-disable-next-line
                                     > <a href='#' style={{ color: "black" }}>{RemoveOverflow(d.content.question, 50)} </a></li>
                                 )
                             })}
@@ -611,11 +633,11 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
 
                     <div id="contactDiv" style={contactDivStyles}>
-                        <Contact store={this.props.store}      handleBacktoSearch = {this.handleBacktoSearch} />
+                        <Contact store={this.props.store} handleBacktoSearch={this.handleBacktoSearch} handleSuccessHelpBtn/>
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
-                        <button  className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
+                        <button className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
                     </div>
 
                 </div>

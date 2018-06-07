@@ -75,11 +75,11 @@ class PraipsStore {
 
 
     updateViews(id, views) {
+    
         axios.post(`${process.env.apiURL}/api/updateViews`, {
             id: id,
             views: views
         }).then((response) => {
-            console.log(response.data)
         })
             .catch((error) => {
                 console.log(error)
@@ -249,7 +249,6 @@ class PraipsStore {
     updateAbout() {
         axios.post(`${process.env.apiURL}/api/updateAbout`, this.About).then((response) => {
 
-            console.log(response.data)
         })
             .catch((error) => {
                 console.log(error)

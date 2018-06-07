@@ -35,7 +35,6 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
     }
 
     editHandle = () =>  {
-        console.log("running")
         document.getElementById('aboutData').style.display = "none"
         document.getElementById('aboutForm').style.display = "block"
     }

@@ -79,7 +79,6 @@ import Search from './Search'
         
                 this.refs.rubricInput.value = '';
            
-        console.log("addbtn",this.state.RubricInput)
            
         }
         // Logic ends

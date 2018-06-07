@@ -221,6 +221,8 @@ class Contact extends Component {
             this.contactSubmit(e)
         }
     }
+
+    
    
     
     
@@ -265,7 +267,7 @@ class Contact extends Component {
                 <div id="contactAlert" style={contactAlertDiv} >
                   <div style={successIconStyle}></div>
                     <p style={{fontSize : "14px"}}>One of our agent will contact you shortly by email </p>
-                    <input type="submit" style={sendBtnStyles} value="Help" />
+                    <input type="submit" onClick={() => {this.props.handleBacktoSearch()}} style={sendBtnStyles} value="Help" />
 
 
                 </div>
