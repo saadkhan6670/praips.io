@@ -66,7 +66,7 @@ import { Modal, Button } from 'react-bootstrap';
 
     handleRubricsModal = () => {
         this.setState({
-            modalContent:   <table class="table">
+            modalContent:   <table className="table">
             <thead>
                 <tr>
                     <th scope="col">Sno.</th>
@@ -82,7 +82,7 @@ import { Modal, Button } from 'react-bootstrap';
                         <tr>
                             <th scope="row">{i + 1}</th>
                             <td>{d.name}</td>
-                            <td>{RemoveOverflow(d.rubricContent[0].content.question, 50)}</td>
+                            <td style={{width : "290px"}}>{d.rubricContent[0].content.question}</td>
                             <td>{d.rubricContent[0].content.views}</td>
                         </tr>
                     )
@@ -103,7 +103,7 @@ import { Modal, Button } from 'react-bootstrap';
     handleResearchLoad = () => {
 
   this.setState({
-            modalContent:   <table class="table">
+            modalContent:   <table className="table">
             <thead>
                 <tr>
                     <th scope="col">Sno.</th>
@@ -117,7 +117,7 @@ import { Modal, Button } from 'react-bootstrap';
                     return (
                         <tr>
                             <th scope="row">{i + 1}</th>
-                            <td>{RemoveOverflow(d.content, 30)}</td>
+                            <td style={{width : "290px"}}>{d.content}</td>
                             <td>{new Date(d.createdAt).toDateString()}</td>
                         </tr>
                     )

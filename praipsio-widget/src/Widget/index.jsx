@@ -293,7 +293,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.backArrow.style.display = "block"
         this.refs.widgetHeaderDiv.style.height = "28px"
 
-        if(this.refs[questionRef].className === "view Plus") {
+        if(this.refs[questionRef].className === "view") {
             questionViews += 1;
             this.props.store.updateViews(questionId, questionViews)
         }
@@ -420,7 +420,7 @@ var RemoveOverflow = (str, strlength) => {
 
     handleRelatedQue(selectedQue,questionId, questionViews, questionRef) {
         this.props.store.selectedQue = selectedQue;
-        if(this.refs[questionRef].className === "view Plus") {
+        if(this.refs[questionRef].className === "view") {
             questionViews += 1;
             this.props.store.updateViews(questionId, questionViews)
         }
@@ -580,7 +580,7 @@ var RemoveOverflow = (str, strlength) => {
                                         return (
                                             // eslint-disable-next-line
                                             <li><a
-                                            className="view Plus"
+                                            className="view"
                                                 ref={`question${i}`}
                                                 onClick={ () => this.handleQuestionClick(d.content.question,d.content._id, d.content.views , `question${i}`)} 
                                                 style={listAnchorStyle} href="#">
@@ -618,7 +618,7 @@ var RemoveOverflow = (str, strlength) => {
                             {filteredContent === null ? null : relatedQues.map((d,i) => {
                                 return (
                                     <li style={relatedArticleListStyle}
-                                    className="view Plus"
+                                    className="view"
                                     
                                     ref={`relQuestion${i}`}
                                  onClick={() => this.handleRelatedQue(d.content.question,d.content._id, d.content.views , `question${i}`)}
