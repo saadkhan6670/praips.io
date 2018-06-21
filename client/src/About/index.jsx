@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import { Link } from 'react-router-dom';
-import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import AboutComponent from './components/AboutComponent' 
 
 

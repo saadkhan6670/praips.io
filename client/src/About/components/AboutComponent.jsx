@@ -125,13 +125,13 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                         <div className="col-md-3 col-sm-3 col-xs-3" onClick={() => this.handleModalShow('profile', 'Upload your Proflie Photo')}
                             style={{ cursor: "pointer", borderLeft: "1px solid lightgrey", height: "inherit", borderTopRightRadius: "inherit", borderBottomRightRadius: "inherit", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}/images/camera.png)` }}></div>
                     </div>
-                    <button onClick={() => this.handleLogOut()} className="btn logoutbtn"><span>LOGOUT</span></button>
+                    <button onClick={() => this.handleLogOut()} className="btn logoutbtn"><span>CONNECTEZOUT</span></button>
                 </div> : null}
                 <div className={this.props.store.redirect ? "AdminRight-wrapper" : "right-wrapper"} id="intro">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12 ">
                             <div className="about_text">
-                                <h4>ABOUT</h4>
+                                <h4>A propos</h4>
                                 <hr className="hr_about" />
                             </div>
                         </div>
@@ -140,7 +140,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                         <div >
                             <div className="row">
                                 {this.props.store.redirect ?
-                                    <img onClick={this.editHandle} className="aboutedit" src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                    <img title="Edit About" onClick={this.editHandle} className="aboutedit" src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
                                     : null}
                                 <div className="right_log">
                                     <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`} alt="" />
@@ -167,7 +167,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <div className="content_text">
                                         <div className="desc">
-                                            <h4>Description</h4>
+                                            <h4>La description</h4>
                                             <p>{this.props.store.About.description}</p>
                                         </div>
                                     </div>
@@ -183,11 +183,11 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                     onClick={() => this.handleModalShow('logo', 'Upload your Logo')} />
                             </div>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label >Name  </label> <span ref="nameReq" className="reqMsg"></span>
+                                <label >Prénom  </label> <span ref="nameReq" className="reqMsg"></span>
                                 <input type="text" className="form-control" value={this.props.store.About.name} onChange={(e) => this.handleChange(e, 'name')} />
                             </div>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label >Slogan(100 characters) </label> <span ref="emailReq" className="reqMsg"></span>
+                                <label >Slogan (100 caractères) </label> <span ref="emailReq" className="reqMsg"></span>
                                 <input type="text" className="form-control" value={this.props.store.About.slogan} onChange={(e) => this.handleChange(e, 'slogan')} />
                             </div>
                             <div className="col-md-12 col-sm-12 col-xs-12 form-group">
@@ -195,12 +195,12 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 <input type="text" className="form-control" value={this.props.store.About.siteUrl} onChange={(e) => this.handleChange(e, 'siteUrl')} />
                             </div>
                             <div className="col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label >Description </label> <span ref="messageReq" className="reqMsg"></span>
+                                <label >La description </label> <span ref="messageReq" className="reqMsg"></span>
                                 <textarea className="form-control" style={{ height: "150px" }} value={this.props.store.About.description} onChange={(e) => this.handleChange(e, 'description')}></textarea>
                             </div>
                             <div className=" form-group about_btns">
-                                <input type="submit" className="btn btn-lg" value="Edit" onClick={(e) => { this.editSubmit(e) }} />
-                                <input type="button" className="btn btn-lg" value="Cancel" onClick={() => { this.handleCancel() }} />
+                                <input type="submit" className="btn btn-lg" value="Modifier" onClick={(e) => { this.editSubmit(e) }} />
+                                <input type="button" className="btn btn-lg" value="Annuler" onClick={() => { this.handleCancel() }} />
                             </div>
                         </form>
                     </div>
@@ -210,7 +210,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                         <div className="row">
                             <div className="col-md-12 col-sm-12">
                                 <div className="text">
-                                    <p>Are you an admin of this page? <Link to="/login"> Login In</Link></p>
+                                    <p>Êtes-vous un administrateur de cette page? <Link to="/login"> Se connecter</Link></p>
                                 </div>
                             </div>
                         </div>

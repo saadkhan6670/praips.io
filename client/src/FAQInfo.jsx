@@ -234,7 +234,7 @@ var x = document.getElementsByClassName("mySlides");
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
                             <div className="head_text">
-                                <h1 onClick={this.checking}>Frenquently Asked Questions</h1>
+                                <h1 onClick={this.checking}>Questions fréquemment posées</h1>
                             </div>
 
                         </div>
@@ -242,21 +242,21 @@ var x = document.getElementsByClassName("mySlides");
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
                             <div className="subText">
-                                <p>Tips and Answer from the {this.props.store.About.name} Team</p>
+                                <p>Astuces et réponses de {this.props.store.About.name} équipe</p>
                             </div>
                         </div>
                     </div>
                     <div className="row search_row">
 
                         <div className="input-group" id="adv-search">
-                            <input type="text" className="form-control searchInput" placeholder="How can we help" ref="searchInput"
+                            <input type="text" className="form-control searchInput" placeholder="Comment pouvons-nous vous aider" ref="searchInput"
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(this.refs.searchInput.value) : null }}
 
                             />
                             <div className="input-group-btn">
                                 <div className="btn-group" role="group">
 
-                                    <button title="Click to Search.." type="button"
+                                    <button title="Cliquer pour chercher.." type="button"
                                         onClick={() => this.handleSearchClick(this.refs.searchInput.value)} className="btn searchBtn">
                                         <span className="glyphicon glyphicon-search"></span>
                                     </button>
@@ -336,7 +336,7 @@ var x = document.getElementsByClassName("mySlides");
                     }
                     {this.props.store.redirect ?
                         <div className="AddRubricContent " style={{ textAlign: "center" }}>
-                            <label className="label1">Add Question/Answer </label>
+                            <label className="label1">Ajouter une question / réponse </label>
                             <form >
                                 <div className="form-group">
 
@@ -378,7 +378,8 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
 
-                    <div className="row contactbtn">Can't find what you looking for? <Link to="/contact" style={{ color: "#83C75A" }} >Submit a feature request</Link></div>
+                    <div className="row contactbtn">Vous n’avez pas trouvé votre réponse? <Link to="/contact" style={{ color: "#be0d0d" }} >envoyernous
+votre question</Link></div>
 
                 </div>
 
@@ -387,10 +388,12 @@ var x = document.getElementsByClassName("mySlides");
                     {this.state.deleteconfirm === true ?
                         <div>
                             <Modal.Header closeButton>
-                                <Modal.Title>Delete Confimrmation</Modal.Title>
+                                <Modal.Title>
+Supprimer Confimrmation</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                Are sure you want to delete this question
+                            Êtes-vous sûr de vouloir supprimer cette question
+?
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
@@ -410,10 +413,11 @@ var x = document.getElementsByClassName("mySlides");
                                         deleteconfirm: false,
                                         Show: false,
                                     })
-                                }}>Delete</Button>
+                                }}>Effacer</Button>
                             </Modal.Footer> </div> : <div>
                             <Modal.Header closeButton>
-                                <Modal.Title>Edit your Question or Answer</Modal.Title>
+                                <Modal.Title>
+Modifier votre question ou réponse</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 <form>
@@ -430,7 +434,7 @@ var x = document.getElementsByClassName("mySlides");
                                     </FormGroup>
 
                                     <FormGroup controlId="formBasicText" >
-                                    <Modal.Title>Answer</Modal.Title>
+                                    <Modal.Title>Répondre</Modal.Title>
                                
                                     <textarea  placeholder="Enter text"  onChange={(e) => {
                                                 this.setState({
@@ -448,7 +452,7 @@ var x = document.getElementsByClassName("mySlides");
                                     this.setState({
                                         Show: false,
                                     })
-                                }}>Change</Button>
+                                }}>Changement</Button>
                             </Modal.Footer>
                         </div>}
                 </Modal>
