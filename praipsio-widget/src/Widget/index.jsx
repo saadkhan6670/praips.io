@@ -575,7 +575,7 @@ var RemoveOverflow = (str, strlength) => {
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
                                 filteredContent === null ? <div> obtenir des données..</div> : filteredContent.length !== 0 ?
-                                    contentToDiplay.map(d => {
+                                    contentToDiplay.map((d,i) => {
                                         return (
                                             // eslint-disable-next-line
                                             <li><a
