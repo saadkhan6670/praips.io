@@ -12,11 +12,11 @@ var helpdivStyles = {
 }
 
 var helpbtnStyles = {
-    backgroundColor: "#83C75A",
+    backgroundColor: "#be0d0d",
     color: "white",
     padding: "22px 65px",
     borderRadius: "11px",
-    border: "1px solid #83C75A",
+    border: "1px solid #be0d0d",
     fontSize: "19px",
     backgroundImage: `url(${process.env.PUBLIC_URL}/images/help-icon.png)`,
     backgroundSize: "75px",
@@ -40,7 +40,7 @@ var widgetContainerStyle = {
 var widgetHeaderStyle = {
     height: "28px",
     width: "auto",
-    backgroundColor: "#83C75A",
+    backgroundColor: "#be0d0d",
     textAlign: "center",
     fontSize: "19px",
     color: "white",
@@ -98,17 +98,17 @@ var searchInputStyle = {
 
 
 var listAnchorStyle = {
-    color: "#83C75A",
+    color: "#be0d0d",
 
     fontSize: "13px"
 }
 
 var askBtnStyles = {
-    backgroundColor: "#83C75A",
+    backgroundColor: "#be0d0d",
     color: "white",
     padding: "10px 36px",
     borderRadius: "19px",
-    border: "1px solid #83C75A",
+    border: "1px solid #be0d0d",
     fontSize: "14px"
 
 }
@@ -229,7 +229,7 @@ var RemoveOverflow = (str, strlength) => {
             this.props.store.searchInput = document.getElementsByClassName('widGetInput')[0].value
             this.refs.searchResultDiv.style.display = "block"
             this.refs.askQuestionBtnDiv.style.display = "block"
-            this.refs.widgetSearchInput.style.backgroundColor = "rgb(131, 199, 90)"
+            this.refs.widgetSearchInput.style.backgroundColor = "#be0d0d"
             this.refs.widgetHeaderDiv.style.height = "9px"
 
             if(window.screen.width <= 1755) {

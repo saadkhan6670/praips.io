@@ -33,10 +33,10 @@ var contactBtnsDivStyles = {
     padding: "26px 0px 0px 0px"
 }
 var sendBtnStyles = {
-    backgroundColor: "#83C75A",
+    backgroundColor: "#be0d0d",
     padding: "10px 41px",
     color: "white",
-    border: "1px #83C75A solid",
+    border: "1px #be0d0d solid",
     borderRadius: "9px",
     cursor: "pointer",
     lineHeight: "normal"
