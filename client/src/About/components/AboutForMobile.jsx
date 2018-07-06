@@ -137,7 +137,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12 ">
                             <div className="about_text">
-                                <h4>ABOUT</h4>
+                                <h4>A propos</h4>
                                 <hr className="hr_about" />
                             </div>
                         </div>
@@ -173,7 +173,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <div className="content_text">
                                         <div className="desc">
-                                            <h4>Description</h4>
+                                            <h4>Le Description</h4>
                                             <p>{this.props.store.About.description}</p>
                                         </div>
                                     </div>
@@ -189,11 +189,11 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                                     onClick={() => this.handleModalShow('logo', 'Upload your Logo')} />
                             </div>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label >Name  </label> <span ref="nameReq" className="reqMsg"></span>
+                                <label >Prénom  </label> <span ref="nameReq" className="reqMsg"></span>
                                 <input type="text" className="form-control" value={this.props.store.About.name} onChange={(e) => this.handleChange(e, 'name')} />
                             </div>
                             <div className=" col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label >Slogan(100 characters) </label> <span ref="emailReq" className="reqMsg"></span>
+                                <label >Slogan(100 caractères) </label> <span ref="emailReq" className="reqMsg"></span>
                                 <input type="text" className="form-control" value={this.props.store.About.slogan} onChange={(e) => this.handleChange(e, 'slogan')} />
                             </div>
                             <div className="col-md-12 col-sm-12 col-xs-12 form-group">
@@ -215,7 +215,9 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                         <div className="row">
                             <div className="col-md-12 col-sm-12">
                                 <div className="text">
-                                    <p>Are you an admin of this page? <Link to="/login" onClick={() => this.handleLogIn()}> Login In</Link></p>
+                                    <p>
+Êtes-vous un administrateur de cette page? <Link to="/login" onClick={() => this.handleLogIn()}> 
+Se connecter</Link></p>
                                 </div>
                             </div>
                         </div>

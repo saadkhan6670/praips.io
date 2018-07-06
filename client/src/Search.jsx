@@ -43,18 +43,20 @@ import { observer } from 'mobx-react';
 console.log(filteredContent)
         return (
             <div>
-                <h4 className="RubricName">RESULTS</h4>
+                <h4 className="RubricName">RÉSULTATS
+</h4>
 
                 <div className="row RubricContent scrollbar" id="style-3" >
 
                     {
-                        filteredContent === null ? <p>getting data...</p> : filteredContent.length === 0 ? <div>
-                            <h4>  We didn't find results for <b>{this.props.store.searchInput} </b></h4>
+                        filteredContent === null ? <p>obtenir des données...</p> : filteredContent.length === 0 ? <div>
+                            <h4> 
+Nous n'avons pas trouvé de résultats pour <b>{this.props.store.searchInput} </b></h4>
 
-                            <b>These tips might help :</b>
+                            <b>Ces conseils pourraient aider :</b>
                             <ul>
-                                <li>  Try fewer words. Ex: Time delivery </li>
-                                <li> Try different keywords.   </li>
+                                <li>  Essayez moins de mots. Ex: Délais de livraison </li>
+                                <li> Essayez différents mots-clés.   </li>
                                 <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
                             </ul>
 

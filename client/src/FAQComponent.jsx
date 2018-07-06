@@ -55,7 +55,7 @@ import Search from './Search'
          
 
             document.getElementById('alertMessage').style.visibility = "visible"
-            document.getElementById('alertMessage').innerHTML = "<strong>Warning: Rubric Name Can't be empty</strong>"
+            document.getElementById('alertMessage').innerHTML = "<strong>Attention: le nom de la rubrique ne peut pas être vide</strong>"
             
 
             setTimeout(() => {
@@ -68,7 +68,7 @@ import Search from './Search'
             await this.props.store.getRubrics()
 
             document.getElementById('alertMessage').style.visibility = "visible"
-            document.getElementById('alertMessage').innerHTML = "<strong>Rubric Added successfully</strong>"
+            document.getElementById('alertMessage').innerHTML = "<strong>Rubrique ajoutée avec succès</strong>"
             document.getElementById('alertMessage').className = "  alert alert-success"
           
 
@@ -184,7 +184,7 @@ import Search from './Search'
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="head_text">
-                                <h1>Frenquently Asked Questions</h1>
+                                <h1>Questions fréquemment posées</h1>
                             </div>
 
                         </div>
@@ -192,7 +192,7 @@ import Search from './Search'
                     <div className="row">
                         <div className="col-md-12 col-sm-12">
                             <div className="subText">
-                                <p>Tips and Answer from the {this.props.store.About.name} Team</p>
+                                <p>Astuces et réponses de {this.props.store.About.name} équipe</p>
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@ import Search from './Search'
                                 }}
 
                                 onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearchClick(e) : null }}
-                                placeholder="How can we help" />
+                                placeholder="Comment pouvons-nous vous aider" />
                             <div className="input-group-btn">
                                 <div className="btn-group" >
 
@@ -262,11 +262,11 @@ import Search from './Search'
                         this.props.store.redirect ?
                             <div className="col-md-12 col-sm-12 col-xs-12 AddRubric" style={{paddingTop: "15px"}}>
                                  <div id="alertMessage" className="alert alert-danger">
-            <strong >Warning: Rubric Name Can't be empty </strong>
+            <strong >Attention: le nom de la rubrique ne peut pas être vide </strong>
         </div>
                             
                             <div className="col-md-12 col-sm-12 col-xs-12" style={{textAlign:"center" ,paddingBottom : "9px"}}>
-                            <label className="label1">Add A new Rubric </label>
+                            <label className="label1">Ajouter une nouvelle rubrique </label>
                             </div>
                                 <div className="col-md-8 col-sm-8 col-sx-8">
                                 
@@ -274,7 +274,7 @@ import Search from './Search'
 
                                         <div className="loginInputs">
 
-                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" ref="rubricInput"  className="form-control" placeholder="enter the name of Rubric" />
+                                            <input onChange={(e) => { this.HandleChange(e) }} type="text" ref="rubricInput"  className="form-control" placeholder="entrez le nom de la rubrique" />
 
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@ import Search from './Search'
 
                                 <div className="col-md-4 col-sm-4 col-xs-4 add_btn" >
                                     <button onClick={(e) => this.handleAddBtn(e)} className="btn btn-lg" >
-                                        ADD
+                                    AJOUTER
                                         </button>
                                 </div>
                             </div> : null
@@ -301,10 +301,11 @@ import Search from './Search'
                     {this.state.deleteconfirm === true ?
                         <div>
                             <Modal.Header closeButton>
-                                <Modal.Title>Delete Confimrmation</Modal.Title>
+                                <Modal.Title>
+Supprimer Confimrmation</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                Are sure you want to delete <Modal.Title>{this.state.Modalvalue} ?</Modal.Title>
+                            Êtes-vous sûr de vouloir supprimer <Modal.Title>{this.state.Modalvalue} ?</Modal.Title>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
@@ -315,10 +316,11 @@ import Search from './Search'
                                         Modalvalue: ''
                                     })
                                     
-                                }}>Delete</Button>
+                                }}>Effacer</Button>
                             </Modal.Footer> </div> : <div>
                             <Modal.Header closeButton>
-                                <Modal.Title>Enter The Name Of Rubric</Modal.Title>
+                                <Modal.Title>
+Entrez le nom de la rubrique</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 <form>
@@ -347,7 +349,7 @@ import Search from './Search'
                                         Show: false,
                                         Modalvalue: ''
                                     })
-                                }}>Change</Button>
+                                }}>Changement</Button>
                             </Modal.Footer> </div>}
 
                 </Modal>

@@ -97,19 +97,19 @@ class Contact extends Component {
             case "name":
                 // validation for name field if user provide less than 3 chars
                 if ( this.refs.Name.value.length < 3 ) {
-                    this.refs.nameReq.innerHTML = "name can't contain less than 3 characters or numbers"
+                    this.refs.nameReq.innerHTML = "le nom ne peut pas contenir moins de 3 caractères ou chiffres"
                     this.refs.Name.style.borderColor = "red"
 
                     
                 }
                 if ( isNumeric(this.refs.Name.value) ) {
-                    this.refs.nameReq.innerHTML = "name can't contain numbers"
+                    this.refs.nameReq.innerHTML = "le nom ne peut pas contenir de nombres"
                     this.refs.Name.style.borderColor = "red"
 
                     
                 }
                 if (this.refs.Name.value === "") {
-                    this.refs.nameReq.innerHTML = "name is required"
+                    this.refs.nameReq.innerHTML = "Le nom est requis"
                     this.refs.Name.style.borderColor = "red"
                 }
                 if (this.refs.Name.value.length >= 3) {
@@ -122,12 +122,12 @@ class Contact extends Component {
 
                 if (!isEmail(this.refs.Email.value)) {
 
-                    this.refs.emailReq.innerHTML = "invalid email"
+                    this.refs.emailReq.innerHTML = "email invalide"
                     this.refs.Email.style.borderColor = "red"
                 }
 
                 if (this.refs.Email.value === "") {
-                    this.refs.emailReq.innerHTML = "email is required"
+                    this.refs.emailReq.innerHTML = "email est requis"
                     this.refs.Email.style.borderColor = "red"
                 }
                 if (isEmail(this.refs.Email.value)) {
@@ -137,7 +137,7 @@ class Contact extends Component {
                 break;
             case "message":
                 if (this.refs.Message.value === "") {
-                    this.refs.messageReq.innerHTML = "message is required"
+                    this.refs.messageReq.innerHTML = "un message est requis"
                     this.refs.Message.style.borderColor = "red"
                 }
                 else {
@@ -155,29 +155,29 @@ class Contact extends Component {
         e.preventDefault();
 
         if (this.refs.Name.value.length < 3) {
-            this.refs.nameReq.innerHTML = "name can't contain less than 3 characters or numbers"
+            this.refs.nameReq.innerHTML = "le nom ne peut pas contenir moins de 3 caractères ou chiffres"
             this.refs.Name.style.borderColor = "red"
         }
 
         if (this.refs.Name.value === "") {
-            this.refs.nameReq.innerHTML = "name is required"
+            this.refs.nameReq.innerHTML = "Le nom est requis"
             this.refs.Name.style.borderColor = "red"
         }
 
         if (!isEmail(this.refs.Email.value)) {
 
-            this.refs.emailReq.innerHTML = "invalid email"
+            this.refs.emailReq.innerHTML = "email invalide"
             this.refs.Email.style.borderColor = "red"
         }
 
         if (this.refs.Email.value === "") {
 
-            this.refs.emailReq.innerHTML = "email is required"
+            this.refs.emailReq.innerHTML = "email est requis"
             this.refs.Email.style.borderColor = "red"
         }
 
         if (this.refs.Message.value === "") {
-            this.refs.messageReq.innerHTML = "message is required"
+            this.refs.messageReq.innerHTML = "un message est requis"
             this.refs.Message.style.borderColor = "red"
 
         }
@@ -188,7 +188,7 @@ class Contact extends Component {
             document.getElementById("request-process").style.display = "block"
 
             document.getElementById("spacingDiv").style.display = "block"
-            document.getElementById('helpText').innerHTML = "Help"
+            document.getElementById('helpText').innerHTML = "Aide"
 
             var data = {
                 visitorName: this.refs.Name.value,
@@ -203,13 +203,13 @@ class Contact extends Component {
                 document.getElementById("request-process").style.display = "none"
 
                 document.getElementById('contactAlert').style.display = "block"
-                document.getElementById('helpText').innerHTML = "Message Sent"
+                document.getElementById('helpText').innerHTML = "Message envoyé"
 
             }).catch((error) => {
                 document.getElementById("request-process").style.display = "none"
 
                 document.getElementById('contactAlert').style.display = "block"
-                document.getElementById('contactAlert').innerHTML = "<strong> Sorry </strong> We are unable to process your request at this moment"
+                document.getElementById('contactAlert').innerHTML = "<strong> Pardon </strong> Nous ne sommes pas en mesure de traiter votre demande en ce moment"
                 document.getElementById('contactAlert').style.backgroundColor = "#f44336"
             })
         }
@@ -232,27 +232,27 @@ class Contact extends Component {
 
                 <form id="contactForm"  onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
                     <div >
-                        <label style={labelStyles}>How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" style={reqMsgStyle}></span>
+                        <label style={labelStyles}>Comment pouvons-nous vous aider? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" style={reqMsgStyle}></span>
                         <textarea className="widgetTextarea" name="message" style={textAreaStyle} ref='Message'
                             onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
                     </div>
 
                     <div>
-                        <label style={labelStyles}>Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" style={reqMsgStyle}></span>
+                        <label style={labelStyles}>Votre nom <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" style={reqMsgStyle}></span>
                         <input type="text" name="name" style={inputFieldStyles} ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
                     </div>
 
                     <div >
-                        <label style={labelStyles}>Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" style={reqMsgStyle}></span>
+                        <label style={labelStyles}>Votre email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" style={reqMsgStyle}></span>
                         <input type="text" name="email" style={inputFieldStyles} ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
                     </div>
 
                     <div style={contactBtnsDivStyles}>
 
 
-                        <input type="button" style={backToSearchBtnStyles}  onClick={() => {this.props.handleBacktoSearch()}}value="Back to Search" />
+                        <input type="button" style={backToSearchBtnStyles}  onClick={() => {this.props.handleBacktoSearch()}}value="Retour" />
 
-                        <input type="submit" style={sendBtnStyles} value="Send" />
+                        <input type="submit" style={sendBtnStyles} value="Envoyer" />
 
                     </div>
                 </form>
@@ -264,8 +264,10 @@ class Contact extends Component {
                     </div>
                 <div id="contactAlert" style={contactAlertDiv} >
                   <div style={successIconStyle}></div>
-                    <p style={{fontSize : "14px"}}>One of our agent will contact you shortly by email </p>
-                    <input type="submit" style={sendBtnStyles} value="Help" />
+                    <p style={{fontSize : "14px"}}>Nous répondrons à vos questions le plus
+précisément possible et dans les plus brefs délais
+! </p>
+                    <input type="submit" style={sendBtnStyles} value="Aide" />
 
 
                 </div>

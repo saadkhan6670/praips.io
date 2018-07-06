@@ -54,19 +54,19 @@ import axios from 'axios'
                         }).catch(() => {
 
                             document.getElementById('logInErrorMsg').style.visibility = "visible"
-                            document.getElementById('logInErrorMsg').innerHTML = "<strong >Please Check Your Internet Connection...</strong>"
+                            document.getElementById('logInErrorMsg').innerHTML = "<strong >S'il vous plait, vérifiez votre connexion internet...</strong>"
                         })
                 }
                 else {
 
                     document.getElementById('logInErrorMsg').style.visibility = "visible"
-                    document.getElementById('logInErrorMsg').innerHTML = "<strong >Invalid username or password</strong>"
+                    document.getElementById('logInErrorMsg').innerHTML = "<strong >Nom d'utilisateur ou mot de passe invalide</strong>"
                 }
 
             }).catch(() => {
 
                 document.getElementById('logInErrorMsg').style.visibility = "visible"
-                document.getElementById('logInErrorMsg').innerHTML = "<strong >Please Check Your Internet Connection...</strong>"
+                document.getElementById('logInErrorMsg').innerHTML = "<strong >S'il vous plait, vérifiez votre connexion internet...</strong>"
 
             })
 
@@ -77,24 +77,24 @@ import axios from 'axios'
         return (
             <div className="content-wrapper" id="intro">
                 <div id="logInErrorMsg" className="alert alert-danger">
-                <strong >Please Check Your Internet Connection...</strong>
+                <strong >S'il vous plait, vérifiez votre connexion internet...</strong>
                 </div>
 
                 <div className="container-fluid" style={{}}>
                     <div id="logInFormWrapper">
                         <div className="subText">
-                            <p>Are You an administrator of {this.props.store.About.name} ?</p>
+                            <p>Êtes-vous un administrateur de {this.props.store.About.name} ?</p>
 
                         </div>
 
                         <div style={{ textAlign: "center" }}>
-                            <h2 style={{ marginTop: "0px" }}>Log In</h2>
+                            <h2 style={{ marginTop: "0px" }}>S'identifier</h2>
 
                         </div>
                         <div className="form-group">
 
                             <div className=" loginInputs">
-                                <input id="email" type="text" className="form-control" placeholder="Email Address"
+                                <input id="email" type="text" className="form-control" placeholder="Adresse e-mail"
                                     style={{
                                         backgroundImage: `url(${process.env.PUBLIC_URL}/images/user-icon.png)`, backgroundSize: "19px",
                                         backgroundRepeat: "no-repeat",
@@ -106,7 +106,7 @@ import axios from 'axios'
                         <div className="form-group">
 
                             <div className="loginInputs">
-                                <input id="password" type="password" className="form-control" placeholder="Password"
+                                <input id="password" type="password" className="form-control" placeholder="Mot de passe"
                                     style={{
                                         backgroundImage: `url(${process.env.PUBLIC_URL}/images/pass-icon.png)`, backgroundSize: "16px",
                                         backgroundRepeat: "no-repeat",
@@ -119,7 +119,7 @@ import axios from 'axios'
                         <div className="form-group">
 
                             <div className="logInSendBtn">
-                                <button type="button" className="btn form-control" onClick={(e) => this.handleLogin(e)}>SEND</button>
+                                <button type="button" className="btn form-control" onClick={(e) => this.handleLogin(e)}>ENVOYER</button>
 
                             </div>
                         </div>

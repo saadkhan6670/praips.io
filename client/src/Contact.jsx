@@ -15,11 +15,11 @@ import { observer } from 'mobx-react';
                 // validation for name field if user provide less than 3 chars
                 if (this.refs.Name.value.length < 3) {
 
-                    this.refs.nameReq.innerHTML = "name can't contain less than 3 characters or numbers"
+                    this.refs.nameReq.innerHTML = "le nom ne peut pas contenir moins de 3 caractères ou chiffres"
                     this.refs.Name.style.borderColor = "red"
                 }
                 if (this.refs.Name.value === "") {
-                    this.refs.nameReq.innerHTML = "name is required"
+                    this.refs.nameReq.innerHTML = "Le nom est requis"
                     this.refs.Name.style.borderColor = "red"
                 }
                 if (this.refs.Name.value.length >= 3) {
@@ -32,12 +32,12 @@ import { observer } from 'mobx-react';
 
                 if (!isEmail(this.refs.Email.value)) {
 
-                    this.refs.emailReq.innerHTML = "invalid email"
+                    this.refs.emailReq.innerHTML = "email invalide"
                     this.refs.Email.style.borderColor = "red"
                 }
 
                 if (this.refs.Email.value === "") {
-                    this.refs.emailReq.innerHTML = "email is required"
+                    this.refs.emailReq.innerHTML = "email est requis"
                     this.refs.Email.style.borderColor = "red"
                 }
                 if (isEmail(this.refs.Email.value)) {
@@ -47,7 +47,7 @@ import { observer } from 'mobx-react';
                 break;
             case "message":
                 if (this.refs.Message.value === "") {
-                    this.refs.messageReq.innerHTML = "message is required"
+                    this.refs.messageReq.innerHTML = "un message est requis"
                     this.refs.Message.style.borderColor = "red"
                 }
                 else {
@@ -108,13 +108,13 @@ import { observer } from 'mobx-react';
 
                 document.getElementById("request-process").style.display = "none"
                 document.getElementById('contactAlert').style.display = "block"
-                document.getElementById("headingMsg").innerHTML = "Message Sent"
+                document.getElementById("headingMsg").innerHTML = "Message envoyé"
 
             }).catch((error) => {
 
                 document.getElementById("request-process").style.display = "none"
                 document.getElementById('contactAlert').style.display = "block"
-                document.getElementById('contactAlert').innerHTML = "<strong> Sorry </strong> We are unable to process your request at this moment"
+                document.getElementById('contactAlert').innerHTML = "<strong> Pardon </strong> Nous ne sommes pas en mesure de traiter votre demande en ce moment"
                 document.getElementById('contactAlert').style.backgroundColor = "#f44336"
             })
         }
@@ -130,45 +130,47 @@ import { observer } from 'mobx-react';
         return (
             <div className="content-wrapper" id="intro">
                 <div className="container-fluid contact">
-                    <h2 id="headingMsg">Submit a Feature Request</h2>
+                    <h2 id="headingMsg">Envoyez-vous votre question</h2>
 
                     <form id="contactForm" onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
                         <div className="form-group">
-                            <label className="label1">How can we help? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" className="reqMsg"></span>
+                            <label className="label1">Comment pouvons-nous vous aider? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" className="reqMsg"></span>
                             <textarea name="message" className="form-control textarea" ref='Message'
                                 onChange={() => this.onChangeValidation(this.refs.Message.name)}></textarea>
                         </div>
 
                         <div className="form-group">
-                            <label className="label2">Your name <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" className="reqMsg"></span>
+                            <label className="label2">Votre nom <span style={{ color: "#1eace2" }}>*</span> </label> <span ref="nameReq" className="reqMsg"></span>
                             <input type="text" style={{ marginTop: "11px", height: "38px", backgroundColor: "#fdfdfd" }} name="name" className="form-control" ref="Name" onChange={() => this.onChangeValidation(this.refs.Name.name)} />
                         </div>
 
                         <div className="form-group">
-                            <label className="label3">Your email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
+                            <label className="label3">Votre email <span style={{ color: "#1eace2" }}>*</span></label> <span ref="emailReq" className="reqMsg"></span>
                             <input type="text" style={{ marginTop: "5px", height: "38px", backgroundColor: "#fdfdfd" }} name="email" className="form-control" ref="Email" onChange={() => this.onChangeValidation(this.refs.Email.name)} />
                         </div>
 
                         <div className="submit_btn">
 
                             <Link to="/faq" style={{ textDecoration: "none" }}>
-                                <input type="button" className="btn btn-lg backToFaq" value="BACK TO FAQ" />
+                                <input type="button" className="btn btn-lg backToFaq" value="RETOUR À LA FAQ" />
                             </Link>
-                            <input type="submit" className="btn btn-lg" value="SEND" />
+                            <input type="submit" className="btn btn-lg" value="ENVOYER" />
 
                         </div>
                     </form>
                     <div className="row" id="spacingDiv" style={{ minHeight: "95px" }}></div>
-                    <div id="request-process"><h4>Processing your request</h4>
+                    <div id="request-process"><h4>Traitement de votre demande</h4>
                         <span className="fa fa-spinner fa-spin fa-3x fa-fw"></span>
                     </div>
                     <div id="contactAlert">
                     <img className="Success" src={`${process.env.PUBLIC_URL}/images/success.png`} alt="" />
                         
                         <span  >
-                            <p className="Successpara" >One of our agent will contact you shortly by email </p>
+                            <p className="Successpara" >Nous répondrons à vos questions le plus
+précisément possible et dans les plus brefs délais
+! </p>
 
-                            <Link  to="/faq">   <input type="submit" className="btn btn-lg Successbtn" value="BACK TO FAQ" /> </Link>
+                            <Link  to="/faq">   <input type="submit" className="btn btn-lg Successbtn" value="RETOUR À LA FAQ" /> </Link>
 
                         </span>
 

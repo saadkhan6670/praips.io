@@ -217,7 +217,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.widgetHelpBtn.style.display = "none"
         this.refs.widgetContainer.style.display = "block"
         this.refs.widgetHeaderDiv.style.display = "block"
-        document.getElementById('helpText').innerHTML = "Help"
+        document.getElementById('helpText').innerHTML = "Aide"
         this.refs.widgetSearchInput.style.display = "block"
         document.getElementsByClassName('widGetInput')[0].focus()
 
@@ -301,7 +301,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.searchResultDiv.style.display = "none"
         this.refs.questionAnswerDiv.style.display = "none"
         this.refs.askQuestionBtnDiv.style.display = "none"
-        document.getElementById('helpText').innerHTML = "Submit a Feature Request"
+        document.getElementById('helpText').innerHTML = "Envoyez-vous votre question"
 
         this.refs.backArrow.style.display = "block"
         document.getElementById('contactDiv').style.display = "block"
@@ -372,7 +372,7 @@ var RemoveOverflow = (str, strlength) => {
                 this.refs.widgetSearchInput.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
                 this.refs.backArrow.style.display = "none"
-                document.getElementById('helpText').innerHTML = "Help"
+                document.getElementById('helpText').innerHTML = "Aide"
                 this.refs.widgetHeaderDiv.style.height = "9px"
                 
              
@@ -398,7 +398,7 @@ var RemoveOverflow = (str, strlength) => {
                  document.getElementById('contactDiv').style.display = "none"
                 this.refs.questionAnswerDiv.style.display = "block"
                 this.refs.askQuestionBtnDiv.style.display = "block"
-                document.getElementById('helpText').innerHTML = "Help"
+                document.getElementById('helpText').innerHTML = "Aide"
                 this.refs.widgetHeaderDiv.style.height = "9px"
 
                 counter--;
@@ -419,7 +419,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.searchResultDiv.style.display = "block"
         this.refs.widgetSearchInput.style.display = "block"
         this.refs.askQuestionBtnDiv.style.display = "block"
-        document.getElementById('helpText').innerHTML = "Help"
+        document.getElementById('helpText').innerHTML = "Aide"
         this.refs.widgetHeaderDiv.style.height = "9px"
         this.refs.backArrow.style.display = "none"
     }   
@@ -533,7 +533,7 @@ var RemoveOverflow = (str, strlength) => {
                 <div className="widgetContainerDiv" ref="widgetContainer" style={widgetContainerStyle}>
                     <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>
                         <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span>
-                        <span id="helpText">Help</span>   <span  style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
+                        <span id="helpText">Aide</span>   <span  style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
 
                     </div>
 
@@ -541,7 +541,7 @@ var RemoveOverflow = (str, strlength) => {
                         <div style={searchInnerDivStyle}>
                             <div style={searchInputDivStyle} id="searchInputDivId">
 
-                                <input className="widGetInput" type="text" placeholder="How can we help ?"
+                                <input className="widGetInput" type="text" placeholder="Comment pouvons-nous vous aider ?"
                                     onKeyDown={(e) => { return e.keyCode === 13 ? this.handleSearch() : null }} style={searchInputStyle} />
 
                             </div>
@@ -556,10 +556,10 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
                         <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" ,fontWeight: "bold"}}>
-                            {filteredContent !== null ? filteredContent.length !== 0 ? "Best Answers" : null : null}</h5>
+                            {filteredContent !== null ? filteredContent.length !== 0 ? "Les meilleures réponses" : null : null}</h5>
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
-                                filteredContent === null ? <div> getting data..</div> : filteredContent.length !== 0 ?
+                                filteredContent === null ? <div> obtenir des données..</div> : filteredContent.length !== 0 ?
                                     contentToDiplay.map(d => {
                                         return (
                                                // eslint-disable-next-line
@@ -570,14 +570,15 @@ var RemoveOverflow = (str, strlength) => {
                                         )
                                     }) :
                                     <div style={{ textAlign: "center" }}>
-                                        <h4 style={{ color: "black" }}>We didn't find result for {this.props.store.searchInput} </h4>
+                                        <h4 style={{ color: "black" }}>Nous n’avons pas trouvé de résultat pour {this.props.store.searchInput} </h4>
                                         <ul style={{ color: 'darkgray', textAlign: "left" }}>
 
 
-                                            <h5>These tips might help: </h5>
-                                            <li>  Try fewer words. Ex: Time delivery </li>
-                                            <li> Try different keywords.   </li>
-                                            <li> Try a more general search (ex: "games and apps" instead of "frontierville").  </li>
+                                            <h5>Ces conseils peuvent aider: </h5>
+                                            <li>  
+Essayez moins de mots. Ex: Délais de livraison </li>
+                                            <li> Essayez différents mots-clés.   </li>
+                                            <li> Essayez une recherche plus générale (ex: "jeux et applications" au lieu de "frontierville").  </li>
                                         </ul>
                                     </div>
                             }
@@ -593,7 +594,8 @@ var RemoveOverflow = (str, strlength) => {
 
 
                         <hr />
-                        <h6 style={{ color: "darkgray", margin: "12px 0px" }}>Related Articles</h6>
+                        <h6 style={{ color: "darkgray", margin: "12px 0px" }}>
+Articles Liés</h6>
                         <ul style={{ margin: "5px 0px" }}>
 
                             {filteredContent === null ? null : relatedQues.map(d => {
@@ -615,7 +617,7 @@ var RemoveOverflow = (str, strlength) => {
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
-                        <button  className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Ask a question</button>
+                        <button  className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Poser une question</button>
                     </div>
 
                 </div>
