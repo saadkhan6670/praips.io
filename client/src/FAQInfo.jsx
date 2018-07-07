@@ -378,7 +378,7 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
 
-                    <div className="row contactbtn">Vous n’avez pas trouvé votre réponse? <Link to="/contact" style={{ color: "#be0d0d" }} >envoyernous
+                    <div className="row contactbtn">Vous n’avez pas trouvé votre réponse? <Link to="/contact" style={{ color: "#d04f00" }} >envoyernous
 votre question</Link></div>
 
                 </div>

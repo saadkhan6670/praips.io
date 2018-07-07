@@ -61,7 +61,7 @@ td {
     width: 100%;
     text-align: center;
     height: 108px;
-    /* background-color: #be0d0d; */
+    /* background-color: #d04f00; */
 }
 
 .sidebar-wrapper .menuitemsActive {
@@ -70,7 +70,7 @@ td {
     width: 100%;
     text-align: center;
     height: 108px;
-    background-color: #be0d0d;
+    background-color: #d04f00;
 }
 
 .sidebar-wrapper .menuitems .menuimage {
@@ -87,7 +87,7 @@ td {
 }
 
 .sidebar-wrapper .menuitemsActive:hover {
-    background: #be0d0d;
+    background: #d04f00;
 }
 
 .sidebar-wrapper .menuitems:hover {
@@ -128,7 +128,7 @@ td {
     width: 100%;
     text-align: center;
     /* height: 108px; */
-    /* background-color: #be0d0d; */
+    /* background-color: #d04f00; */
 }
 
 .mobile-sidebar-wrapper .menuitemsActive {
@@ -137,8 +137,8 @@ td {
     width: 100%;
     text-align: center;
     /* height: 108px; */
-    /* background-color: #be0d0d; */
-    background-color: #be0d0d;
+    /* background-color: #d04f00; */
+    background-color: #d04f00;
 }
 
 .mobile-sidebar-wrapper .menuitems .menuimage {
@@ -148,7 +148,7 @@ td {
 }
 
 .mobile-sidebar-wrapper .menuitemsActive:hover {
-    background: #be0d0d;
+    background: #d04f00;
 }
 
 .mobile-sidebar-wrapper .menuitems:hover {
@@ -244,7 +244,7 @@ td {
 }
 
 button.logoutbtn {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white;
     width: 8.8% ;
     margin-left: 0 ;
@@ -307,12 +307,12 @@ button.logoutbtn {
 }
 
 .right-wrapper .right_btn button:hover {
-    background: #be0d0d;
+    background: #d04f00;
 }
 
 .right-wrapper .right_btn button {
     /* width: 231px; */
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white;
     font-weight: bold;
     border-radius: 10px;
@@ -324,15 +324,15 @@ button.logoutbtn {
 }
 
 .add_btn button:hover {
-    background: #be0d0d;
+    background: #d04f00;
     color: whitesmoke;
 }
 .add_btn button:active {
-    background: #be0d0d;
+    background: #d04f00;
     color: whitesmoke;
 }
 .add_btn button {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white;
     font-weight: bold;
     border-radius: 10px;
@@ -351,17 +351,17 @@ button.logoutbtn {
     font-size: 127%;
     margin-right: 7%;
     margin-left: 12%;
-    color: #be0d0d;
-    border: 1px solid #be0d0d;
+    color: #d04f00;
+    border: 1px solid #d04f00;
     border-radius: 17px;
 }
 
 .content-wrapper .right_btn button a {
-    color: #be0d0d;
+    color: #d04f00;
 }
 
 .content-wrapper .right_btn button:hover {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white !important;
 }
 
@@ -387,7 +387,7 @@ button {
     font-size: 20px;
     letter-spacing: 2px;
     font-weight: bold;
-    color: #be0d0d;
+    color: #d04f00;
 }
 
 .aboutedit {
@@ -398,9 +398,9 @@ button {
 
 .hr_about {
     margin-top: 0px;
-    border: 2px solid #be0d0d;
+    border: 2px solid #d04f00;
     width: 160px;
-    background: #be0d0d;
+    background: #d04f00;
 }
 
 .right-wrapper .content_text .desc p {
@@ -436,9 +436,9 @@ button {
 
 .sliderBtn {
     background-color: white;
-    color: #be0d0d;
+    color: #d04f00;
     border-radius: 16px;
-    border: 1px #be0d0d solid;
+    border: 1px #d04f00 solid;
     -webkit-transition: opacity 1s ease-out;
     -o-transition: opacity 1s ease-out;
     transition: opacity 1s ease-out;
@@ -453,9 +453,9 @@ button {
 
 .AdminSliderbtn {
     background-color: white;
-    color: #be0d0d;
+    color: #d04f00;
     border-radius: 16px;
-    border: 1px #be0d0d solid;
+    border: 1px #d04f00 solid;
     -webkit-transition: opacity 1s ease-out;
     -o-transition: opacity 1s ease-out;
     transition: opacity 1s ease-out;
@@ -465,7 +465,7 @@ button {
 
 .AdminSliderbtn:hover {
     color: white;
-    background-color: #be0d0d;
+    background-color: #d04f00;
     text-decoration: none;
 }
 
@@ -481,7 +481,7 @@ button {
     font-size: 15px;
 }
 .sliderBtn:hover {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white;
 }
 
@@ -588,12 +588,12 @@ button {
 }
 
 .AdminRight-wrapper .right_btn button:hover {
-    background: #be0d0d;
+    background: #d04f00;
 }
 
 .AdminRight-wrapper .right_btn button {
     /* width: 231px; */
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white;
     font-weight: bold;
     border-radius: 10px;
@@ -608,7 +608,7 @@ button {
     font-size: 20px;
     letter-spacing: 2px;
     font-weight: bold;
-    color: #be0d0d;
+    color: #d04f00;
 }
 
 .AdminRight-wrapper .content_text .desc p {
@@ -655,14 +655,14 @@ aboutDataMob {
 }
 
 .logout_btn {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     color: white;
     font-weight: bold;
     border-radius: 10px;
 }
 
 .logout_btn:hover {
-    background: #be0d0d;
+    background: #d04f00;
 }
 
 
@@ -694,7 +694,7 @@ aboutDataMob {
     text-align: right;
 }
 .logInSendBtn button {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     padding: 9px 65px;
     color: white;
     border: none;
@@ -706,8 +706,8 @@ aboutDataMob {
 .logInSendBtn button:hover {
     background-color: white;
     padding: 9px 65px;
-    color: #be0d0d;
-    border: 1px #be0d0d solid;
+    color: #d04f00;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
    
@@ -721,24 +721,24 @@ aboutDataMob {
 /* Contact CSS */
 
 .Successbtn {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     padding: 9px 31px;
     color: white;
-    border: 1px #be0d0d solid;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
 }
 
 .Successbtn:hover {
     background-color:white ;
-    color:  #be0d0d;
+    color:  #d04f00;
 }
 
 .submit_btn input[type=submit] {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     padding: 9px 53px;
     color: white;
-    border: 1px #be0d0d solid;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
 }
@@ -746,8 +746,8 @@ aboutDataMob {
 .submit_btn input[type=submit]:hover {
     background-color: white;
     padding: 9px 53px;
-    color: #be0d0d;
-    border: 1px #be0d0d solid;
+    color: #d04f00;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
 }
@@ -774,7 +774,7 @@ aboutDataMob {
 }
 
 .about_btns input[type=submit] {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     padding: 9px 40px;
     color: white;
     border: none;
@@ -786,8 +786,8 @@ aboutDataMob {
 .about_btns input[type=submit]:hover {
     background-color: white;
     padding: 9px 45px;
-    color: #be0d0d;
-    border: 1px #be0d0d solid;
+    color: #d04f00;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
 }
@@ -861,7 +861,7 @@ aboutDataMob {
 }
 
 #style-3::-webkit-scrollbar-thumb {
-    background-color: #be0d0d;
+    background-color: #d04f00;
 }
 
 .RubricName {
@@ -959,7 +959,7 @@ aboutDataMob {
 }
 
 .statsUpperBar{
-    border-left: 3px solid #be0d0d;
+    border-left: 3px solid #d04f00;
     /* font-size: 17px; */
     margin-top: 7px;
     /* margin-right: 28px; */
@@ -1021,18 +1021,18 @@ margin: 0;
     margin-right: 30px;
 }
 .addContentbtn button {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     padding: 9px 53px;
     color: white;
-    border: 1px #be0d0d solid;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
 }
 .addContentbtn button:hover {
     background-color: white;
     padding: 9px 53px;
-    color:#be0d0d  ;
-    border: 1px #be0d0d solid;
+    color:#d04f00  ;
+    border: 1px #d04f00 solid;
     border-radius: 9px;
     cursor: pointer;
 }
@@ -1067,9 +1067,9 @@ visibility: hidden;
     font-size: 113%;
     margin-right: 0;
     color: white;
-    border: 1px solid #be0d0d;
+    border: 1px solid #d04f00;
     border-radius: 7px;
-    background-color: #be0d0d;
+    background-color: #d04f00;
     height: 45px;
 }
 
@@ -1183,7 +1183,7 @@ visibility: hidden;
         width: 100%;
         text-align: center;
         height: 95px;
-        /* background-color: #be0d0d; */
+        /* background-color: #d04f00; */
     }
     .sidebar-wrapper .menuitemsActive {
         padding-top: 19%;
@@ -1191,7 +1191,7 @@ visibility: hidden;
         width: 100%;
         text-align: center;
         height: 95px;
-        background-color: #be0d0d;
+        background-color: #d04f00;
     }
     .sidebar-wrapper .logo-wrapper .logo {
         margin-top: 30px;
@@ -1305,10 +1305,10 @@ visibility: hidden;
         margin-right: 30px;
     }
     .addContentbtn button {
-        background-color: #be0d0d;
+        background-color: #d04f00;
         padding: 9px 53px;
         color: white;
-        border: 1px #be0d0d solid;
+        border: 1px #d04f00 solid;
         border-radius: 9px;
         cursor: pointer;
     }
@@ -1316,8 +1316,8 @@ visibility: hidden;
     .addContentbtn button:hover {
         background-color: white;
         padding: 9px 53px;
-        color:#be0d0d  ;
-        border: 1px #be0d0d solid;
+        color:#d04f00  ;
+        border: 1px #d04f00 solid;
         border-radius: 9px;
         cursor: pointer;
     }
@@ -1471,7 +1471,7 @@ visibility: hidden;
         left: 6% !important;
     }
     button.logoutbtn {
-        background-color: #be0d0d;
+        background-color: #d04f00;
         color: white;
         width: 9.1% !important;
         font-size: 12px;
@@ -1884,8 +1884,8 @@ input[type="button"] {
 
 
 .copyBtn {
-border : 1px solid #be0d0d;
-    background-color: #be0d0d;
+border : 1px solid #d04f00;
+    background-color: #d04f00;
     color: white;
     padding: 6px 22px;
 }
@@ -1893,7 +1893,7 @@ border : 1px solid #be0d0d;
 .copyBtn:hover {
 
     background-color: white;
-    color: #be0d0d ;
+    color: #d04f00 ;
     
 }
 
@@ -1904,7 +1904,7 @@ border : 1px solid #be0d0d;
     /* padding: 16px 20px; */
     text-align: left;
     box-sizing: border-box;
-    color: #be0d0d;
+    color: #d04f00;
     font-size: 30px;
     display: none;
 }
@@ -1919,13 +1919,13 @@ border : 1px solid #be0d0d;
     /* padding: 16px 20px; */
     text-align: right;
     box-sizing: border-box;
-    color: #be0d0d;
+    color: #d04f00;
     font-size: 30px;
     display: none;
 }
 
 .left {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -1941,7 +1941,7 @@ border : 1px solid #be0d0d;
 }
 
 .right {
-    background-color: #be0d0d;
+    background-color: #d04f00;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -1971,7 +1971,7 @@ border : 1px solid #be0d0d;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-    stroke: #be0d0d;
+    stroke: #d04f00;
     transition: stroke-dashoffset 0.5s ease 0s;
 }
 
