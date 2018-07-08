@@ -596,7 +596,6 @@ var RemoveOverflow = (str, strlength) => {
                                             <li>  
 Essayez moins de mots. Ex: Délais de livraison </li>
                                             <li> Essayez différents mots-clés.   </li>
-                                            <li> Essayez une recherche plus générale (ex: "jeux et applications" au lieu de "frontierville").  </li>
                                         </ul>
                                     </div>
                             }
