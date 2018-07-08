@@ -125,7 +125,7 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
                         <div className="col-md-3 col-sm-3 col-xs-3" onClick={() => this.handleModalShow('profile', 'Upload your Proflie Photo')}
                             style={{ cursor: "pointer", borderLeft: "1px solid lightgrey", height: "inherit", borderTopRightRadius: "inherit", borderBottomRightRadius: "inherit", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundImage: `url(${process.env.PUBLIC_URL}/images/camera.png)` }}></div>
                     </div>
-                    <button onClick={() => this.handleLogOut()} className="btn logoutbtn"><span>CONNECTEZOUT</span></button>
+                    <button onClick={() => this.handleLogOut()} className="btn logoutbtn"><span>DECONNECTER</span></button>
                 </div> : null}
                 <div className={this.props.store.redirect ? "AdminRight-wrapper" : "right-wrapper"} id="intro">
                     <div className="row">

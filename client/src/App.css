@@ -420,12 +420,12 @@ button {
 
 .App .footer_text .text p {
     /* text-align: right; */
-    color: white;
+    color: #d04f00;
 }
 
 .App .footer_text .text p a {
     text-decoration: underline;
-    color: white;
+    color: inherit;
 }
 
 .slider{

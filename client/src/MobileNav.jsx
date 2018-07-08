@@ -73,7 +73,7 @@ import AboutForMobile from './About/components/AboutForMobile'
 
                     <span className="toggle-logo  col-sm-4 col-xs-4">
                         <Link to="/" title="Papris Logo">
-                            <img src={`${process.env.PUBLIC_URL}/images/praips Logo.png`} alt="praips Logo" />
+                            <img src={`${process.env.PUBLIC_URL}${this.props.store.About.logoPath}`}   alt="praips Logo" />
                         </Link>
 
                     </span>

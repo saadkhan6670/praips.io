@@ -58,7 +58,7 @@ RubricsContentJson.forEach((element) => {
 })
 console.log(RubricsContentJson.length + "contents saved in RubricsContent")
 
-let NewUser = new Users({ email: 'bonjour@monsauveur.fr', password: 'monsauveur-praips', username: 'John Partel', role: 'Administrator' });
+let NewUser = new Users({ email: 'contact@lamaisondesantilles.com', password: 'maisondesantilles-praips', username: 'John Partel', role: 'Administrator' });
 
 NewUser.save((err, data) => {
 
