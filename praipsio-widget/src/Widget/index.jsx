@@ -634,7 +634,10 @@ Articles Liés</h6>
                     </div>
 
                     <div id="contactDiv" style={contactDivStyles}>
-                        <Contact store={this.props.store} handleBacktoSearch={this.handleBacktoSearch} handleSuccessHelpBtn/>
+                    <Contact 
+                        store={this.props.store} 
+                        handleBacktoSearch={this.handleBacktoSearch} 
+                        handleSuccessHelpBtn={this.handleSuccessHelpBtn}/>
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
