@@ -269,7 +269,7 @@ class Contact extends Component {
                     <p style={{fontSize : "14px"}}>Nous répondrons à vos questions le plus
 précisément possible et dans les plus brefs délais
 ! </p>
-                    <input type="submit" style={sendBtnStyles} value="Aide" />
+<input type="submit" onClick={ ()=> { this.props.handleSuccessHelpBtn()}} style={sendBtnStyles} value="Aide" />
 
 
                 </div>

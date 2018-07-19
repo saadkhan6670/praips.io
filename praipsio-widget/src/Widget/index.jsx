@@ -437,6 +437,16 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.backArrow.style.display = "none"
     }
 
+    handleSuccessHelpBtn = () =>  {
+        document.getElementById('contactDiv').style.display = "none"
+        this.refs.searchResultDiv.style.display = "block"
+        this.refs.widgetSearchInput.style.display = "block"
+        this.refs.askQuestionBtnDiv.style.display = "block"
+        this.refs.backArrow.style.display = "none"
+        document.getElementById('helpText').innerHTML = "Aide"
+        this.refs.widgetHeaderDiv.style.height = "28px"
+    }
+
 
     render() {
         
@@ -633,7 +643,10 @@ Articles Liés</h6>
                     </div>
 
                     <div id="contactDiv" style={contactDivStyles}>
-                        <Contact store={this.props.store} handleBacktoSearch={this.handleBacktoSearch} handleSuccessHelpBtn/>
+                    <Contact 
+                        store={this.props.store} 
+                        handleBacktoSearch={this.handleBacktoSearch} 
+                        handleSuccessHelpBtn={this.handleSuccessHelpBtn}/>
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
