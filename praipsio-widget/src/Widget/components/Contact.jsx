@@ -33,10 +33,10 @@ var contactBtnsDivStyles = {
     padding: "26px 0px 0px 0px"
 }
 var sendBtnStyles = {
-    backgroundColor: "#d04f00",
+    backgroundColor: "#00A79D",
     padding: "10px 41px",
     color: "white",
-    border: "1px #d04f00 solid",
+    border: "1px #00A79D solid",
     borderRadius: "9px",
     cursor: "pointer",
     lineHeight: "normal"
@@ -222,8 +222,7 @@ class Contact extends Component {
         }
     }
 
-    
-   
+  
     
     
     render() {
@@ -269,7 +268,7 @@ class Contact extends Component {
                     <p style={{fontSize : "14px"}}>Nous répondrons à vos questions le plus
 précisément possible et dans les plus brefs délais
 ! </p>
-                    <input type="submit" style={sendBtnStyles} value="Aide" />
+                    <input type="submit" onClick={ ()=> { this.props.handleSuccessHelpBtn()}} style={sendBtnStyles} value="Aide" />
 
 
                 </div>

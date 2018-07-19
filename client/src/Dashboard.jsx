@@ -203,14 +203,14 @@ import { Modal, Button } from 'react-bootstrap';
                             <span style={{ fontSize: "11px", color: '#80808096' }}>  Research done by users </span>
 
                         </div>
-                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #be0d0d solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #00A79D solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
 
 
                             {this.props.store.Contacts.length}   <br />
                             <span style={{ fontSize: "12px", color: '#80808096' }}>  Message Sent </span>
 
                         </div>
-                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #be0d0d solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
+                        <div className="col-md-4 col-sm-4 col-xs-12" style={{ borderLeft: "3px #00A79D solid", fontSize: "15px", marginTop: "7px", fontWeight: "bold" }}>
                             {/* <h4 >60</h4>
                             <p style={{ fontSize: "12px" }}>Questions in FAQ</p> */}
                             {content.length}<br />
@@ -275,7 +275,7 @@ import { Modal, Button } from 'react-bootstrap';
                         </div>
                         <div className="row">
                             <div className="col-md-12 col-sm-12 col-xs-12"><a
-                                style={{ float: "right", color: "#be0d0d", padding: "0px 29px", cursor: "pointer" }}
+                                style={{ float: "right", color: "#00A79D", padding: "0px 29px", cursor: "pointer" }}
                                 onClick={this.handleRubricsModal}
                             >LOAD MORE...</a></div>
                         </div>
@@ -314,7 +314,7 @@ import { Modal, Button } from 'react-bootstrap';
 
                         <div className="row">
                             <div className="col-md-12 col-sm-12"><a 
-                            style={{ float: "right", color: "#be0d0d", padding: "0px 29px", cursor: "pointer" }}
+                            style={{ float: "right", color: "#00A79D", padding: "0px 29px", cursor: "pointer" }}
                             onClick = {this.handleResearchLoad}
                             
                             >LOAD MORE...</a></div>

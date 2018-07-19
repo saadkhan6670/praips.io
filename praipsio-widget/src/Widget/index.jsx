@@ -12,11 +12,11 @@ var helpdivStyles = {
 }
 
 var helpbtnStyles = {
-    backgroundColor: "#d04f00",
+    backgroundColor: "#00A79D",
     color: "white",
     padding: "22px 65px",
     borderRadius: "11px",
-    border: "1px solid #d04f00",
+    border: "1px solid #00A79D",
     fontSize: "19px",
     backgroundImage: `url(${process.env.PUBLIC_URL}/images/help-icon.png)`,
     backgroundSize: "75px",
@@ -40,7 +40,7 @@ var widgetContainerStyle = {
 var widgetHeaderStyle = {
     height: "28px",
     width: "auto",
-    backgroundColor: "#d04f00",
+    backgroundColor: "#00A79D",
     textAlign: "center",
     fontSize: "19px",
     color: "white",
@@ -98,17 +98,17 @@ var searchInputStyle = {
 
 
 var listAnchorStyle = {
-    color: "#d04f00",
+    color: "#00A79D",
 
     fontSize: "13px"
 }
 
 var askBtnStyles = {
-    backgroundColor: "#d04f00",
+    backgroundColor: "#00A79D",
     color: "white",
     padding: "10px 36px",
     borderRadius: "19px",
-    border: "1px solid #d04f00",
+    border: "1px solid #00A79D",
     fontSize: "14px"
 
 }
@@ -229,7 +229,7 @@ var RemoveOverflow = (str, strlength) => {
             this.props.store.searchInput = document.getElementsByClassName('widGetInput')[0].value
             this.refs.searchResultDiv.style.display = "block"
             this.refs.askQuestionBtnDiv.style.display = "block"
-            this.refs.widgetSearchInput.style.backgroundColor = "#d04f00"
+            this.refs.widgetSearchInput.style.backgroundColor = "#00A79D"
             this.refs.widgetHeaderDiv.style.height = "9px"
 
             if (window.screen.width <= 1755) {
@@ -437,6 +437,16 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.backArrow.style.display = "none"
     }
 
+    handleSuccessHelpBtn = () =>  {
+        document.getElementById('contactDiv').style.display = "none"
+        this.refs.searchResultDiv.style.display = "block"
+        this.refs.widgetSearchInput.style.display = "block"
+        this.refs.askQuestionBtnDiv.style.display = "block"
+        this.refs.backArrow.style.display = "none"
+        document.getElementById('helpText').innerHTML = "Aide"
+        this.refs.widgetHeaderDiv.style.height = "28px"
+    }
+
 
     render() {
         
@@ -634,7 +644,10 @@ Articles Liés</h6>
                     </div>
 
                     <div id="contactDiv" style={contactDivStyles}>
-                        <Contact store={this.props.store} handleBacktoSearch={this.handleBacktoSearch} handleSuccessHelpBtn/>
+                        <Contact 
+                        store={this.props.store} 
+                        handleBacktoSearch={this.handleBacktoSearch} 
+                        handleSuccessHelpBtn={this.handleSuccessHelpBtn}/>
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
