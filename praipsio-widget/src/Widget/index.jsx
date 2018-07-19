@@ -283,7 +283,7 @@ var RemoveOverflow = (str, strlength) => {
 
 
 
-    handleQuestionClick(selectedQue,questionId, questionViews, questionRef) {
+    handleQuestionClick(selectedQue, questionId, questionViews, questionRef) {
         counter++
         this.props.store.selectedQue = selectedQue
         this.refs.widgetSearchInput.style.display = "none"
@@ -293,11 +293,11 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.backArrow.style.display = "block"
         this.refs.widgetHeaderDiv.style.height = "28px"
 
-        if(this.refs[questionRef].className === "view") {
+        if (this.refs[questionRef].className === "view") {
             questionViews += 1;
             this.props.store.updateViews(questionId, questionViews)
         }
-        
+
 
     }
 
@@ -324,7 +324,7 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.askQuestionBtnDiv.style.display = "none"
         document.getElementById('contactDiv').style.display = "none"
         document.getElementById('contactAlert').style.display = "none"
-        
+
         this.refs.widgetHelpBtn.style.display = "block"
         this.refs.widgetSearchInput.style.backgroundColor = ""
         this.refs.widgetHeaderDiv.style.height = "28px"
@@ -418,9 +418,9 @@ var RemoveOverflow = (str, strlength) => {
 
     }
 
-    handleRelatedQue(selectedQue,questionId, questionViews, questionRef) {
+    handleRelatedQue(selectedQue, questionId, questionViews, questionRef) {
         this.props.store.selectedQue = selectedQue;
-        if(this.refs[questionRef].className === "view") {
+        if (this.refs[questionRef].className === "view") {
             questionViews += 1;
             this.props.store.updateViews(questionId, questionViews)
         }
@@ -437,9 +437,18 @@ var RemoveOverflow = (str, strlength) => {
         this.refs.backArrow.style.display = "none"
     }
 
+    handleSuccessHelpBtn = () => {
+        document.getElementById('contactDiv').style.display = "none"
+        this.refs.searchResultDiv.style.display = "block"
+        this.refs.widgetSearchInput.style.display = "block"
+        this.refs.askQuestionBtnDiv.style.display = "block"
+        this.refs.backArrow.style.display = "none"
+        document.getElementById('helpText').innerHTML = "Aide"
+        this.refs.widgetHeaderDiv.style.height = "28px"
+    }
 
     render() {
-        
+
         let content = [];
         this.props.store.Rubrics.forEach(element => {
 
@@ -453,8 +462,8 @@ var RemoveOverflow = (str, strlength) => {
         }) : null;
 
         var contentToDiplay = content.length ? filteredContent.filter((d, i) => { return i <= 3 }) : null;
-        var questionData = content.length ? filteredContent.find((d) => { 
-            return d.content.question === this.props.store.selectedQue 
+        var questionData = content.length ? filteredContent.find((d) => {
+            return d.content.question === this.props.store.selectedQue
         }) : null
 
         var relatedQues = content.length ? filteredContent.filter((d, i) => {
@@ -548,7 +557,7 @@ var RemoveOverflow = (str, strlength) => {
                 <div className="widgetContainerDiv" ref="widgetContainer" style={widgetContainerStyle}>
                     <div ref="widgetHeaderDiv" style={widgetHeaderStyle}>
                         <span ref="backArrow" style={backStyles} onClick={() => this.handleBack()}></span>
-                        <span id="helpText">Aide</span>   <span  style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
+                        <span id="helpText">Aide</span>   <span style={minimizeStyles} onClick={() => this.handleMinimize()}></span>
 
                     </div>
 
@@ -570,18 +579,18 @@ var RemoveOverflow = (str, strlength) => {
 
                     </div>
                     <div ref="searchResultDiv" style={searchResultStyle}>
-                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px" ,fontWeight: "bold"}}>
+                        <h5 ref="searchResultHeading" style={{ padding: "0px 0px 0px 22px", fontWeight: "bold" }}>
                             {filteredContent !== null ? filteredContent.length !== 0 ? "Les meilleures réponses" : null : null}</h5>
                         <ol style={{ lineHeight: "1.7em", paddingLeft: "30px" }}>
                             {
                                 filteredContent === null ? <div> obtenir des données..</div> : filteredContent.length !== 0 ?
-                                    contentToDiplay.map((d,i) => {
+                                    contentToDiplay.map((d, i) => {
                                         return (
                                             // eslint-disable-next-line
                                             <li><a
-                                            className="view"
+                                                className="view"
                                                 ref={`question${i}`}
-                                                onClick={ () => this.handleQuestionClick(d.content.question,d.content._id, d.content.views , `question${i}`)} 
+                                                onClick={() => this.handleQuestionClick(d.content.question, d.content._id, d.content.views, `question${i}`)}
                                                 style={listAnchorStyle} href="#">
                                                 {d.content.question}
                                             </a></li>
@@ -593,10 +602,10 @@ var RemoveOverflow = (str, strlength) => {
 
 
                                             <h5>Ces conseils peuvent aider: </h5>
-                                            <li>  
-Essayez moins de mots. Ex: Délais de livraison </li>
+                                            <li>
+                                                Essayez moins de mots. Ex: Délais de livraison </li>
                                             <li> Essayez différents mots-clés.   </li>
-                                            
+
                                         </ul>
                                     </div>
                             }
@@ -613,16 +622,16 @@ Essayez moins de mots. Ex: Délais de livraison </li>
 
                         <hr />
                         <h6 style={{ color: "darkgray", margin: "12px 0px" }}>
-Articles Liés</h6>
+                            Articles Liés</h6>
                         <ul style={{ margin: "5px 0px" }}>
 
-                            {filteredContent === null ? null : relatedQues.map((d,i) => {
+                            {filteredContent === null ? null : relatedQues.map((d, i) => {
                                 return (
                                     <li style={relatedArticleListStyle}
-                                    className="view"
-                                    
-                                    ref={`relQuestion${i}`}
-                                 onClick={() => this.handleRelatedQue(d.content.question,d.content._id, d.content.views , `question${i}`)}
+                                        className="view"
+
+                                        ref={`relQuestion${i}`}
+                                        onClick={() => this.handleRelatedQue(d.content.question, d.content._id, d.content.views, `question${i}`)}
                                     // eslint-disable-next-line
                                     > <a href='#' style={{ color: "black" }}>{RemoveOverflow(d.content.question, 50)} </a></li>
                                 )
@@ -634,14 +643,14 @@ Articles Liés</h6>
                     </div>
 
                     <div id="contactDiv" style={contactDivStyles}>
-                    <Contact 
-                        store={this.props.store} 
-                        handleBacktoSearch={this.handleBacktoSearch} 
-                        handleSuccessHelpBtn={this.handleSuccessHelpBtn}/>
+                        <Contact
+                            store={this.props.store}
+                            handleBacktoSearch={this.handleBacktoSearch}
+                            handleSuccessHelpBtn={this.handleSuccessHelpBtn} />
                     </div>
                     <div ref="askQuestionBtnDiv" style={askQuestionDiv}>
 
-                        <button  className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Poser une question</button>
+                        <button className="widgetBtn" style={askBtnStyles} onClick={() => this.handleAskQuestionClick()}>Poser une question</button>
                     </div>
 
                 </div>

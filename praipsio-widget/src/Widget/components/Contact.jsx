@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isEmail , isNumeric} from 'validator';
+import { isEmail, isNumeric } from 'validator';
 
 var labelStyles = {
     display: "inline",
@@ -14,7 +14,7 @@ var textAreaStyle = {
     borderRadius: "2px",
     padding: "0px 0px 2px",
     backgroundColor: "inherit",
-    resize : "none"
+    resize: "none"
 
 
 }
@@ -40,7 +40,7 @@ var sendBtnStyles = {
     borderRadius: "9px",
     cursor: "pointer",
     lineHeight: "normal"
-    
+
 }
 
 var backToSearchBtnStyles = {
@@ -76,7 +76,7 @@ var successIconStyle = {
     backgroundSize: "53px",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-  
+
 }
 
 var contactGifStyle = {
@@ -89,24 +89,24 @@ var contactGifStyle = {
 
 
 var processGif = {
-    display : "none"
+    display: "none"
 }
 class Contact extends Component {
     onChangeValidation(fieldName) {
         switch (fieldName) {
             case "name":
                 // validation for name field if user provide less than 3 chars
-                if ( this.refs.Name.value.length < 3 ) {
+                if (this.refs.Name.value.length < 3) {
                     this.refs.nameReq.innerHTML = "le nom ne peut pas contenir moins de 3 caractères ou chiffres"
                     this.refs.Name.style.borderColor = "red"
 
-                    
+
                 }
-                if ( isNumeric(this.refs.Name.value) ) {
+                if (isNumeric(this.refs.Name.value)) {
                     this.refs.nameReq.innerHTML = "le nom ne peut pas contenir de nombres"
                     this.refs.Name.style.borderColor = "red"
 
-                    
+
                 }
                 if (this.refs.Name.value === "") {
                     this.refs.nameReq.innerHTML = "Le nom est requis"
@@ -198,20 +198,20 @@ class Contact extends Component {
 
 
             this.props.store.createContact(data)
-            
-            .then((response) => {
-                document.getElementById("request-process").style.display = "none"
 
-                document.getElementById('contactAlert').style.display = "block"
-                document.getElementById('helpText').innerHTML = "Message envoyé"
+                .then((response) => {
+                    document.getElementById("request-process").style.display = "none"
 
-            }).catch((error) => {
-                document.getElementById("request-process").style.display = "none"
+                    document.getElementById('contactAlert').style.display = "block"
+                    document.getElementById('helpText').innerHTML = "Message envoyé"
 
-                document.getElementById('contactAlert').style.display = "block"
-                document.getElementById('contactAlert').innerHTML = "<strong> Pardon </strong> Nous ne sommes pas en mesure de traiter votre demande en ce moment"
-                document.getElementById('contactAlert').style.backgroundColor = "#f44336"
-            })
+                }).catch((error) => {
+                    document.getElementById("request-process").style.display = "none"
+
+                    document.getElementById('contactAlert').style.display = "block"
+                    document.getElementById('contactAlert').innerHTML = "<strong> Pardon </strong> Nous ne sommes pas en mesure de traiter votre demande en ce moment"
+                    document.getElementById('contactAlert').style.backgroundColor = "#f44336"
+                })
         }
 
     }
@@ -222,17 +222,17 @@ class Contact extends Component {
         }
     }
 
-    
-   
-    
-    
+
+
+
+
     render() {
         return (
 
             <div className="container-fluid">
                 {/* <h2 id="headingMsg">Submit a Feature Request</h2> */}
 
-                <form id="contactForm"  onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
+                <form id="contactForm" onSubmit={(e) => { this.contactSubmit(e) }} onKeyDown={(e) => this.handleEnterKey(e)}>
                     <div >
                         <label style={labelStyles}>Comment pouvons-nous vous aider? <span style={{ color: "#1eace2" }}>*</span></label> <span ref="messageReq" style={reqMsgStyle}></span>
                         <textarea className="widgetTextarea" name="message" style={textAreaStyle} ref='Message'
@@ -252,7 +252,7 @@ class Contact extends Component {
                     <div style={contactBtnsDivStyles}>
 
 
-                        <input type="button" style={backToSearchBtnStyles}  onClick={() => {this.props.handleBacktoSearch()}}value="Retour" />
+                        <input type="button" style={backToSearchBtnStyles} onClick={() => { this.props.handleBacktoSearch() }} value="Retour" />
 
                         <input type="submit" style={sendBtnStyles} value="Envoyer" />
 
@@ -261,15 +261,15 @@ class Contact extends Component {
 
                 <div className="row" id="spacingDiv" ></div>
                 <div id="request-process" style={processGif}>
-                {/* <h4>Processing your request</h4> */}
-                        <div style={contactGifStyle}></div>
-                    </div>
+                    {/* <h4>Processing your request</h4> */}
+                    <div style={contactGifStyle}></div>
+                </div>
                 <div id="contactAlert" style={contactAlertDiv} >
-                  <div style={successIconStyle}></div>
-                    <p style={{fontSize : "14px"}}>Nous répondrons à vos questions le plus
+                    <div style={successIconStyle}></div>
+                    <p style={{ fontSize: "14px" }}>Nous répondrons à vos questions le plus
 précisément possible et dans les plus brefs délais
 ! </p>
-                    <input type="submit" style={sendBtnStyles} value="Aide" />
+                    <input type="submit" onClick={() => { this.props.handleSuccessHelpBtn() }} style={sendBtnStyles} value="Aide" />
 
 
                 </div>
