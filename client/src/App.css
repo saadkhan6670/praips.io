@@ -1965,6 +1965,25 @@ border : 1px solid #be0d0d;
 
     height: 305px;
 }
+.btnImg {
+    margin-right: 10px;
+    background-size: 17px;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 18px 0px 0px 25px;
+    float: right;
+    cursor: pointer;
+}
+.btnLink {
+  
+
+    background-size: 14px;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 18px 0px 0px 25px;
+    float: right;
+    cursor: pointer;
+}
 
 .CircularProgressbar {
     width: 10%;

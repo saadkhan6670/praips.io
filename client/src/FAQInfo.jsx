@@ -66,10 +66,11 @@ var x = document.getElementsByClassName("mySlides");
 
     }
 
+    
     componentDidMount() {
 
         this.getRubricsData()
-
+// console.log(document.getElementById('para'));
     }
 
 
@@ -80,12 +81,12 @@ var x = document.getElementsByClassName("mySlides");
             this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/minus-icon.png`)
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
-           
-            if(this.props.store.redirect) {
+
+            if (this.props.store.redirect) {
                 views += 1;
                 this.props.store.updateViews(viewId, views)
             }
-           
+
         }
         else if (this.refs[imgref].getAttribute('src') === `${process.env.PUBLIC_URL}/images/plus-icon.png`) {
             this.refs[imgref].setAttribute('src', `${process.env.PUBLIC_URL}/images/minus-icon.png`)
@@ -124,10 +125,10 @@ var x = document.getElementsByClassName("mySlides");
                 pathname: `/faq/${this.props.match.params.slugName}`,
                 search: `search=${this.props.store.searchInput}`
             })
-    
+
             this.props.store.createResearch(searchInput)
         }
-     
+
     }
 
 
@@ -202,17 +203,28 @@ var x = document.getElementsByClassName("mySlides");
             this.props.store.createRubricContent(
                 this.refs.Question.value,
                 this.refs.Answer.value,
-                content._id, 
+                content._id,
                 content.rubricContent.length)
 
-                this.refs.Question.value = ''
-                this.refs.Answer.value = ''
-                
+            this.refs.Question.value = ''
+            this.refs.Answer.value = ''
+
         }
     }
+    
+
+
+handleImageEnter = () => {
+console.log("helllo 2")
+}
+
+handleLinkEnter = () => {
+    console.log("helllo working 1")
+}
+
 
     render() {
-    
+        // console.log(this.refs.answer1);
         content = this.props.store.Rubrics === undefined ?
             null :
             this.props.store.Rubrics.find((data => {
@@ -226,10 +238,21 @@ var x = document.getElementsByClassName("mySlides");
                 return d;
             })
         sortedContent = content === undefined ?
-            null : sortBy(displayContent, [(d) => { return d.sort }])
+            null : sortBy(displayContent, [(d) => { return d.sort }]);
+
+// because react does not read html in a string so
+            if(sortedContent){
+
+                sortedContent.forEach( (d,i) => {
+                    if(this.refs[`answer${i}`]) {
+                        this.refs[`answer${i}`].innerHTML = d.content.answer
+                    }
+                   
+                })
+            }
 
         return (
-            <div className="content-wrapper" id="intro" style={{overflowY : "scroll" , overflowX : "hidden"}}>
+            <div className="content-wrapper" id="intro" style={{ overflowY: "scroll", overflowX: "hidden" }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
@@ -266,73 +289,73 @@ var x = document.getElementsByClassName("mySlides");
 
                     </div>
                 </div>
-               
+
                 <h4
-                    className="row RubricName" style={{display :this.props.store.searchInput.length !== 0  ? "none" : "block" }} >
+                    className="row RubricName" style={{ display: this.props.store.searchInput.length !== 0 ? "none" : "block" }} >
                     {content === undefined ? null : content.name.toUpperCase()}</h4>
                 <div className={this.props.store.redirect ? "row AdminRubricContent scrollbar" : "row RubricContent scrollbar"} id="style-3" >
                     {
-                        displayContent === null || content.rubricContent.length === 0 ? null : this.props.store.searchInput.length !== 0 ? 
-                        <Search store={this.props.store} />
-                        
-                        :  sortedContent.map((data, key) => {
-                            return (<div>
-                                
-                                <div className="col-md-12 col-sm-12 col-xs-12"
-                                    onMouseOver={(e) => { this.mouseHover(e, key) }}
-                                    onMouseLeave={(e) => { this.mouseOut(e, key) }}
-                                    key={key}>
+                        displayContent === null || content.rubricContent.length === 0 ? null : this.props.store.searchInput.length !== 0 ?
+                            <Search store={this.props.store} />
 
-                                    <div className="col-md-8 col-sm-8  col-xs-8" >
-                                        <h5><b>{data.content.question}</b></h5>
-                                    </div>
-                                    <div className="col-md-3 col-sm-3 col-xs-3" style={{ padding: "0 0 0 0" }}>
-                                        <div className="AdminIcons" style={{ padding: "3px 0 0 0" }}>
-                                            {this.props.store.redirect ?
-                                                <div>
-                                                    <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "6px", width: "21px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
-                                                    <img onClick={(e) => this.deleteHandle(e, data, key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
-                                                    <img onClick={(e) => this.upHandle(e, data, key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
-                                                    <img onClick={(e) => this.downHandle(e, data, key)} className="editimg" style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
-                                                </div>
-                                                : null}
+                            : sortedContent.map((data, key) => {
+                                return (<div>
+
+                                    <div className="col-md-12 col-sm-12 col-xs-12"
+                                        onMouseOver={(e) => { this.mouseHover(e, key) }}
+                                        onMouseLeave={(e) => { this.mouseOut(e, key) }}
+                                        key={key}>
+
+                                        <div className="col-md-8 col-sm-8  col-xs-8" >
+                                            <h5><b>{data.content.question}</b></h5>
                                         </div>
+                                        <div className="col-md-3 col-sm-3 col-xs-3" style={{ padding: "0 0 0 0" }}>
+                                            <div className="AdminIcons" style={{ padding: "3px 0 0 0" }}>
+                                                {this.props.store.redirect ?
+                                                    <div>
+                                                        <img onClick={(e) => this.editHandle(e, data, key)} style={{ cursor: "pointer", marginRight: "6px", width: "21px" }} src={`${process.env.PUBLIC_URL}/images/edit icon.png`} alt="" />
+                                                        <img onClick={(e) => this.deleteHandle(e, data, key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/trash.png`} alt="" />
+                                                        <img onClick={(e) => this.upHandle(e, data, key)} className="editimg" style={{ cursor: "pointer", marginRight: "10px" }} src={`${process.env.PUBLIC_URL}/images/up icon.png`} alt="" />
+                                                        <img onClick={(e) => this.downHandle(e, data, key)} className="editimg" style={{ cursor: "pointer" }} src={`${process.env.PUBLIC_URL}/images/down icon.png`} alt="" />
+                                                    </div>
+                                                    : null}
+                                            </div>
+                                        </div>
+
+
+                                        {/* Question/Answer hide and show and views update */}
+
+                                        <div className="col-md-1 col-sm-1 col-xs-1" style={{ padding: "0.5% 0 0px 1%" }}>
+                                            <img src={`${process.env.PUBLIC_URL}/images/plus-icon.png`} alt="plus icon"
+                                                ref={`plus${key}`}
+                                                // handling the answer toggle and view update with its id
+                                                onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data.content._id, data.content.views)}
+                                                className="view Plus"
+                                            /><br />
+
+
+                                        </div>
+
+
                                     </div>
+                                    <div className="col-md-12 col-sm-12 col-sx-12">
 
+                                        <p ref={`answer${key}`}></p>
+                                        {this.props.store.redirect ?
+                                            <div className="questionDiv">
+                                                <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/eye-icon.png)` }}>
+                                                    <span style={{ margin: "0 1px 0 1px" }}> {data.content.views} </span>
 
-                                    {/* Question/Answer hide and show and views update */}
-
-                                    <div className="col-md-1 col-sm-1 col-xs-1" style={{ padding: "0.5% 0 0px 1%" }}>
-                                        <img src={`${process.env.PUBLIC_URL}/images/plus-icon.png`} alt="plus icon"
-                                            ref={`plus${key}`}
-                                            // handling the answer toggle and view update with its id
-                                            onClick={() => this.handleContentOnOff(`plus${key}`, `answer${key}`, data.content._id, data.content.views)}
-                                            className="view Plus"
-                                        /><br/>
-                                       
-                                        
+                                                </div>
+                                            </div>
+                                            : null}
+                                        <hr className="FaqInfoHr" />
                                     </div>
-                                    
-                                    
-                                </div>
-                                <div className="col-md-12 col-sm-12 col-sx-12">
+                                    {/* -------- */}
 
-                                    <p ref={`answer${key}`}>{data.content.answer}</p>
-                                    {this.props.store.redirect ?
-                                    <div className="questionDiv">
-                                    <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/eye-icon.png)`}}> 
-                                     <span style={{margin : "0 1px 0 1px"}}> {data.content.views} </span>
-                                    
-                                    </div> 
-                                               </div>
-                                                : null}
-                                    <hr className="FaqInfoHr"  />
                                 </div>
-                                {/* -------- */}
-    
-                            </div>
-                            )
-                        })
+                                )
+                            })
                     }
                     {this.props.store.redirect ?
                         <div className="AddRubricContent " style={{ textAlign: "center" }}>
@@ -342,13 +365,30 @@ var x = document.getElementsByClassName("mySlides");
 
                                     <input type="text" placeholder="Question" className="form-control" ref="Question" />
                                 </div>
+                              
+                                 
+                              
+                               
                                 <div className="form-group">
+                                   <span 
+                                   onClick={this.handleImageEnter}
+                                      style={{
+                                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/img-button.png)`,
+                                   
+                                    }} className="btnImg"> </span>
+                                    <span
+                                    onClick={this.handleLinkEnter}
+                                    style={{
+                                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/link-button.png)`,     
+                                       
+
+                                    }} className="btnLink"> </span>
 
                                     <textarea placeholder="Answer" className="form-control scrollbar" id="style-3" ref='Answer'></textarea>
                                 </div>
 
                                 <div className="addContentbtn">
-                                    <button className="btn btn-lg" onClick={this.AddRubricContent} > ADD </button>
+                                    <button className="btn btn-lg" onClick={this.AddRubricContent} > Add </button>
                                 </div>
                             </form>
                         </div> : null}
@@ -389,11 +429,11 @@ votre question</Link></div>
                         <div>
                             <Modal.Header closeButton>
                                 <Modal.Title>
-Supprimer Confimrmation</Modal.Title>
+                                    Supprimer Confimrmation</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                            Êtes-vous sûr de vouloir supprimer cette question
-?
+                                Êtes-vous sûr de vouloir supprimer cette question
+    ?
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={(e) => {
@@ -417,31 +457,31 @@ Supprimer Confimrmation</Modal.Title>
                             </Modal.Footer> </div> : <div>
                             <Modal.Header closeButton>
                                 <Modal.Title>
-Modifier votre question ou réponse</Modal.Title>
+                                    Modifier votre question ou réponse</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 <form>
                                     <FormGroup controlId="formBasicText">
                                         <Modal.Title>Question</Modal.Title>
-                                      
-                                    <input type="text"   onChange={(e) => {
-                                                this.setState({
-                                                    question: e.target.value
-                                                })
-                                            }} placeholder="Enter text"  value={this.state.question} className="form-control" ref="Question" />
-                                        
+
+                                        <input type="text" onChange={(e) => {
+                                            this.setState({
+                                                question: e.target.value
+                                            })
+                                        }} placeholder="Enter text" value={this.state.question} className="form-control" ref="Question" />
+
                                         <FormControl.Feedback />
                                     </FormGroup>
 
                                     <FormGroup controlId="formBasicText" >
-                                    <Modal.Title>Répondre</Modal.Title>
-                               
-                                    <textarea  placeholder="Enter text"  onChange={(e) => {
-                                                this.setState({
-                                                    answer: e.target.value
-                                                })
-                                            }} className="form-control"  value={this.state.answer}  ref='Answer'></textarea>
-                                        
+                                        <Modal.Title>Répondre</Modal.Title>
+
+                                        <textarea placeholder="Enter text" onChange={(e) => {
+                                            this.setState({
+                                                answer: e.target.value
+                                            })
+                                        }} className="form-control" value={this.state.answer} ref='Answer'></textarea>
+
                                         <FormControl.Feedback />
                                     </FormGroup>
                                 </form>
