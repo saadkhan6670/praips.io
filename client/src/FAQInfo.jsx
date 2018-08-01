@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import { Modal, Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Modal, Button, FormGroup, FormControl, Overlay, Popover } from 'react-bootstrap';
 import { sortBy } from 'lodash'
 import Search from './Search'
+import { ValidateImageSize, ValidateImageType } from './Services'
 
 
 var slideIndex = 1;
@@ -11,6 +12,22 @@ var slideIndex2 = 2;
 
 let content, displayContent, sortedContent;
 var x = document.getElementsByClassName("mySlides");
+
+function insertTextAtCursor(el, text) {
+    var val = el.value, endIndex, range, doc = el.ownerDocument;
+    if (typeof el.selectionStart == "number"
+            && typeof el.selectionEnd == "number") {
+        endIndex = el.selectionEnd;
+        el.value = val.slice(0, endIndex) + text + val.slice(endIndex);
+        el.selectionStart = el.selectionEnd = endIndex + text.length;
+    } else if (doc.selection != "undefined" && doc.selection.createRange) {
+        el.focus();
+        range = doc.selection.createRange();
+        range.collapse(false);
+        range.text = text;
+        range.select();
+    }
+}
 
 @observer class FAQInfo extends Component {
     constructor(props) {
@@ -25,6 +42,11 @@ var x = document.getElementsByClassName("mySlides");
             Show: false,
             redirect: false,
             deleteconfirm: '',
+            showImgPopover: false,
+            showLinkPopover: false,
+            target: '',
+            uploadName: 'answer',
+            fileUploadMsg: ''
         }
     }
 
@@ -66,11 +88,10 @@ var x = document.getElementsByClassName("mySlides");
 
     }
 
-    
+
     componentDidMount() {
 
         this.getRubricsData()
-// console.log(document.getElementById('para'));
     }
 
 
@@ -195,7 +216,7 @@ var x = document.getElementsByClassName("mySlides");
         document.getElementsByClassName("AdminIcons")[id].style.visibility = "hidden"
     }
 
-    AddRubricContent = (event) => {
+    AddRubricContent(event) {
         event.preventDefault()
 
         if (this.refs.Question.value.length !== 0 && this.refs.Answer.value.length !== 0) {
@@ -206,21 +227,100 @@ var x = document.getElementsByClassName("mySlides");
                 content._id,
                 content.rubricContent.length)
 
+
+            //    var answerPara =  document.createElement("p");
+            //    answerPara.innerHTML = this.refs.Answer.value
+            //  var asnwerParent =   document.getElementById(`ansParent${content.rubricContent.length-1}`)
+            //  console.log(asnwerParent.childNodes[0])
+            //  asnwerParent.insertBefore(answerPara, asnwerParent.childNodes[0])
+
             this.refs.Question.value = ''
             this.refs.Answer.value = ''
 
         }
     }
+
+
+
+    handleImageEnter = (e) => {
+        this.setState({ target: e.target, showImgPopover: !this.state.showImgPopover });
+    }
+
+    handleLinkEnter = (e) => {
+        this.setState({ target: e.target, showLinkPopover: !this.state.showLinkPopover });
+    }
+
+    handleLink = () => {
+
+        var start = this.refs.Answer.selectionStart;
+        var end = this.refs.Answer.selectionEnd;
+        var selectedText = this.refs.Answer.value.substring(start, end)
+        if (this.refs.Answer.value.length) {
+            this.refs.Answer.value = this.refs.Answer.value.replace(selectedText, `<a target="_blank" href=${this.refs.linkText.value}>${selectedText}</a>`)
+
+        }
+
+        this.setState({
+            showLinkPopover: !this.state.showLinkPopover
+        })
+
+    }
+
+    handleImage = (e) => {
+        e.preventDefault()
+
+        this.setState({
+            fileUploadMsg: <span>Please wait...</span>
+        })
+        var formData = new FormData();
+        var imagefile = document.querySelector('#answerImg');
+
+        formData.append(this.state.uploadName, imagefile.files[0]);
+
+        if (ValidateImageSize(imagefile.files[0].size)) {
+
+            if(ValidateImageType(imagefile.files[0].type)) {
+
+                this.props.store.uploadImages(formData, this.state.uploadName).then((response) => {
+                    // var start = this.refs.Answer.selectionStart;
+                    // var end = this.refs.Answer.selectionEnd;
+                    // var selectedText = this.refs.Answer.value.substring(start, end)
+                    // if (this.refs.Answer.value.length) {
+                    //     this.refs.Answer.value = this.refs.Answer.value.replace(selectedText, `<br/><img  src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
     
+                    // }
+
+                    insertTextAtCursor(this.refs.Answer, `<br/><img width="100%" src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
+
+                    this.setState({
+                        showImgPopover: !this.state.showImgPopover,
+                        fileUploadMsg: ''
+                    })
+    
+                })
+                    .catch((error) => {
+                        this.setState({
+                            fileUploadMsg: <span style={{ color: "red" }}>An Error Occured !</span>
+                        })
+                    })
+            } 
+
+            else {
+                this.setState({
+                    fileUploadMsg: <span style={{ color: "red" }}>Accepts .png .jpg .jpeg only !</span>
+                })
+            }
+           
+        }
+
+        else {
+            this.setState({
+                fileUploadMsg: <span style={{ color: "red" }}>Max file size is 2MB !</span>
+            })
+        }
+    }
 
 
-handleImageEnter = () => {
-console.log("helllo 2")
-}
-
-handleLinkEnter = () => {
-    console.log("helllo working 1")
-}
 
 
     render() {
@@ -237,22 +337,28 @@ handleLinkEnter = () => {
             content.rubricContent.map((d) => {
                 return d;
             })
+
         sortedContent = content === undefined ?
             null : sortBy(displayContent, [(d) => { return d.sort }]);
 
-// because react does not read html in a string so
-            if(sortedContent){
+        // because react does not read html in a string so
+        if (sortedContent) {
 
-                sortedContent.forEach( (d,i) => {
-                    if(this.refs[`answer${i}`]) {
-                        this.refs[`answer${i}`].innerHTML = d.content.answer
-                    }
-                   
-                })
-            }
+            sortedContent.forEach((d, i) => {
+                // console.log("p ref is ",this.refs[`answer${i}`])
+
+                if (this.refs[`answer${i}`]) {
+
+
+                    this.refs[`answer${i}`].innerHTML = d.content.answer
+                }
+
+            })
+        }
 
         return (
             <div className="content-wrapper" id="intro" style={{ overflowY: "scroll", overflowX: "hidden" }}>
+
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
@@ -338,7 +444,7 @@ handleLinkEnter = () => {
 
 
                                     </div>
-                                    <div className="col-md-12 col-sm-12 col-sx-12">
+                                    <div id={`ansParent${key}`} className="col-md-12 col-sm-12 col-sx-12">
 
                                         <p ref={`answer${key}`}></p>
                                         {this.props.store.redirect ?
@@ -365,30 +471,64 @@ handleLinkEnter = () => {
 
                                     <input type="text" placeholder="Question" className="form-control" ref="Question" />
                                 </div>
-                              
-                                 
-                              
-                               
-                                <div className="form-group">
-                                   <span 
-                                   onClick={this.handleImageEnter}
-                                      style={{
-                                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/img-button.png)`,
-                                   
-                                    }} className="btnImg"> </span>
-                                    <span
-                                    onClick={this.handleLinkEnter}
-                                    style={{
-                                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/link-button.png)`,     
-                                       
 
-                                    }} className="btnLink"> </span>
+
+
+
+                                <div className="form-group">
+                                    <Overlay
+                                        show={this.state.showImgPopover}
+                                        target={this.state.target}
+                                        placement="top"
+                                        //   container='form-grou'
+                                        containerPadding={20}
+                                    >
+                                        <Popover id="popover-contained" title="Upload your picture">
+                                            <input type="file"
+                                                name={this.state.uploadName} id="answerImg" style={{ padding: "0px 0px 8px 1px" }} />
+                                            <Button
+                                                onClick={this.handleImage}
+                                                style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
+                                                bsSize="small">upload
+                                                 </Button> {this.state.fileUploadMsg}
+                                        </Popover>
+                                    </Overlay>
+                                    <Overlay
+                                        show={this.state.showLinkPopover}
+                                        target={this.state.target}
+                                        placement="top"
+                                        //   container='form-grou'
+                                        containerPadding={20}
+                                    >
+                                        <Popover id="popover-contained" title="Enter the link of text">
+                                            <input type="text" ref="linkText" />
+                                            <Button
+                                                onClick={this.handleLink}
+                                                style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
+                                                bsSize="small">enter
+                                                 </Button>
+                                        </Popover>
+                                    </Overlay>
+                                    <span
+                                        onClick={this.handleImageEnter}
+                                        style={{
+                                            backgroundImage: `url(${process.env.PUBLIC_URL}/images/img-button.png)`,
+
+                                        }} className="btnImg">
+                                    </span>
+                                    <span
+                                        onClick={this.handleLinkEnter}
+                                        style={{
+                                            backgroundImage: `url(${process.env.PUBLIC_URL}/images/link-button.png)`,
+
+
+                                        }} className="btnLink"> </span>
 
                                     <textarea placeholder="Answer" className="form-control scrollbar" id="style-3" ref='Answer'></textarea>
                                 </div>
 
                                 <div className="addContentbtn">
-                                    <button className="btn btn-lg" onClick={this.AddRubricContent} > Add </button>
+                                    <button className="btn btn-lg" onClick={(e) => this.AddRubricContent(e)} > Add </button>
                                 </div>
                             </form>
                         </div> : null}

@@ -62,4 +62,26 @@ export var RemoveOverflow = (str, strlength)  => {
     
 
 }
-// export var 
+// Accepts 5 mb image
+ export var ValidateImageSize = (imgSize) => {
+    var imageSize = (imgSize / 1000) / 1000;
+    console.log(imageSize)
+
+    if( imageSize <= 2  ) {
+       return true;
+    }
+
+    else {
+        return false;
+    }
+ }
+//Accepts .png and .jpeg or .jpg
+ export var ValidateImageType = (imgType) => {
+    if(imgType === "image/jpeg" || imgType === "image/png") {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+ }

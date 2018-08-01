@@ -48,16 +48,16 @@ router.post('/removeRubricContent', controller.removeRubricContent);
 router.post('/updateViews', controller.updateViews);
 
 
-//APS for About
+//APIs for About
 router.post('/createAbout', controller.createAbout);
 router.post('/updateAbout', controller.updateAbout);
 router.get('/getAbout', controller.getAbout);
 
+//APIs file upload 
 router.post('/uploadProfileImg',upload.single('profile'), controller.uploadProfileImg);
 router.post('/uploadLogoImg',upload.single('logo'), controller.uploadLogoImg);
+router.post('/uploadAnswerImg',upload.single('answer'), controller.uploadAnswerImg);
 
 
-
-// router.get('/getRubricContent/:slugName', controller.getRubricContent);
 
 module.exports = router;

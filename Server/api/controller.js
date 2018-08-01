@@ -456,6 +456,19 @@ exports.uploadLogoImg = (req, res) => {
 
 }
 
+exports.uploadAnswerImg = (req, res) => {
+
+  if (req.file) {
+    res.send(req.file.filename)
+   
+  }
+
+  else {
+    res.send("Cannot change logo  at this moment")
+  }
+  
+}
+
 
 
 exports.getUserData = (req, res) => {

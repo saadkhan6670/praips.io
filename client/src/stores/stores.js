@@ -271,6 +271,20 @@ class PraipsStore {
                     }
                 })
 
+                case 'logo':
+                return axios.post(`${process.env.apiURL}/api/uploadLogoImg?about_id=${this.About._id}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+
+                case 'answer':
+                return axios.post(`${process.env.apiURL}/api/uploadAnswerImg`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+
             default:
                 return;
 
