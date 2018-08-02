@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Modal, Button, FormGroup, FormControl, Overlay, Popover } from 'react-bootstrap';
 import { sortBy } from 'lodash'
 import Search from './Search'
-import { ValidateImageSize, ValidateImageType } from './Services'
+import { ValidateImageSize, ValidateImageType, insertTextAtCursor } from './Services'
 
 
 var slideIndex = 1;
@@ -13,21 +13,49 @@ var slideIndex2 = 2;
 let content, displayContent, sortedContent;
 var x = document.getElementsByClassName("mySlides");
 
-function insertTextAtCursor(el, text) {
-    var val = el.value, endIndex, range, doc = el.ownerDocument;
-    if (typeof el.selectionStart == "number"
-            && typeof el.selectionEnd == "number") {
-        endIndex = el.selectionEnd;
-        el.value = val.slice(0, endIndex) + text + val.slice(endIndex);
-        el.selectionStart = el.selectionEnd = endIndex + text.length;
-    } else if (doc.selection != "undefined" && doc.selection.createRange) {
-        el.focus();
-        range = doc.selection.createRange();
-        range.collapse(false);
-        range.text = text;
-        range.select();
-    }
-}
+const ImagePopOver = (props) => (
+    <Overlay
+        show={props.show}
+        target={props.target}
+        placement="top"
+        //   container='form-grou'
+        containerPadding={20}
+
+
+    >
+    {/* {console.log(props.ansRef)} */}
+
+        <Popover id="popover-contained" title="Upload your picture">
+            <input type="file"
+                name={props.uploadName} id={props.fileId} style={{ padding: "0px 0px 8px 1px" }} />
+            <Button
+                onClick={() => {props.handleImage(props.fileId, props.ansRef)}}
+                style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
+                bsSize="small">upload
+             </Button> {props.fileUploadMsg}
+        </Popover>
+    </Overlay>
+);
+
+const LinkPopOver = (props) => (
+    
+      <Overlay
+        show={props.show}
+        target={props.target}
+        placement="top"
+        //   container='form-grou'
+        containerPadding={20}
+    >
+        <Popover id="popover-contained" title="Enter the link of text">
+            <input type="text" id="linkText" />
+            <Button
+                onClick={props.handleLink}
+                style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
+                bsSize="small">enter
+             </Button>
+        </Popover>
+    </Overlay>
+)
 
 @observer class FAQInfo extends Component {
     constructor(props) {
@@ -37,7 +65,7 @@ function insertTextAtCursor(el, text) {
             question: '',
             questionId: '',
             questionIndex: '',
-            answer: '',
+            answer: {value : ''},
             Message: '',
             Show: false,
             redirect: false,
@@ -219,11 +247,11 @@ function insertTextAtCursor(el, text) {
     AddRubricContent(event) {
         event.preventDefault()
 
-        if (this.refs.Question.value.length !== 0 && this.refs.Answer.value.length !== 0) {
+        if (this.refs.Question.value.length !== 0 && this.refs.addAnswer.value.length !== 0) {
 
             this.props.store.createRubricContent(
                 this.refs.Question.value,
-                this.refs.Answer.value,
+                this.refs.addAnswer.value,
                 content._id,
                 content.rubricContent.length)
 
@@ -235,7 +263,7 @@ function insertTextAtCursor(el, text) {
             //  asnwerParent.insertBefore(answerPara, asnwerParent.childNodes[0])
 
             this.refs.Question.value = ''
-            this.refs.Answer.value = ''
+            this.refs.addAnswer.value = ''
 
         }
     }
@@ -251,12 +279,12 @@ function insertTextAtCursor(el, text) {
     }
 
     handleLink = () => {
-
+        var LinkText = document.getElementById('linkText')
         var start = this.refs.Answer.selectionStart;
         var end = this.refs.Answer.selectionEnd;
         var selectedText = this.refs.Answer.value.substring(start, end)
         if (this.refs.Answer.value.length) {
-            this.refs.Answer.value = this.refs.Answer.value.replace(selectedText, `<a target="_blank" href=${this.refs.linkText.value}>${selectedText}</a>`)
+            this.refs.Answer.value = this.refs.Answer.value.replace(selectedText, `<a target="_blank" href=${LinkText.value}>${selectedText}</a>`)
 
         }
 
@@ -266,51 +294,48 @@ function insertTextAtCursor(el, text) {
 
     }
 
-    handleImage = (e) => {
-        e.preventDefault()
+    handleImage =   (fileId, ansRef) =>   {
+        
 
         this.setState({
             fileUploadMsg: <span>Please wait...</span>
         })
         var formData = new FormData();
-        var imagefile = document.querySelector('#answerImg');
+        var imagefile = document.querySelector(`#${fileId}`);
 
         formData.append(this.state.uploadName, imagefile.files[0]);
 
         if (ValidateImageSize(imagefile.files[0].size)) {
 
-            if(ValidateImageType(imagefile.files[0].type)) {
+            if (ValidateImageType(imagefile.files[0].type)) {
 
                 this.props.store.uploadImages(formData, this.state.uploadName).then((response) => {
-                    // var start = this.refs.Answer.selectionStart;
-                    // var end = this.refs.Answer.selectionEnd;
-                    // var selectedText = this.refs.Answer.value.substring(start, end)
-                    // if (this.refs.Answer.value.length) {
-                    //     this.refs.Answer.value = this.refs.Answer.value.replace(selectedText, `<br/><img  src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
-    
-                    // }
+                    if (ansRef.value.length) {
 
-                    insertTextAtCursor(this.refs.Answer, `<br/><img width="100%" src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
-
+                        insertTextAtCursor(ansRef, `<br/><img width="100%" src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
+                    }
+                    else {
+                        insertTextAtCursor(ansRef, `<img width="100%" src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
+                    }
                     this.setState({
                         showImgPopover: !this.state.showImgPopover,
                         fileUploadMsg: ''
                     })
-    
+
                 })
                     .catch((error) => {
                         this.setState({
                             fileUploadMsg: <span style={{ color: "red" }}>An Error Occured !</span>
                         })
                     })
-            } 
+            }
 
             else {
                 this.setState({
                     fileUploadMsg: <span style={{ color: "red" }}>Accepts .png .jpg .jpeg only !</span>
                 })
             }
-           
+
         }
 
         else {
@@ -337,6 +362,7 @@ function insertTextAtCursor(el, text) {
             content.rubricContent.map((d) => {
                 return d;
             })
+
 
         sortedContent = content === undefined ?
             null : sortBy(displayContent, [(d) => { return d.sort }]);
@@ -405,7 +431,7 @@ function insertTextAtCursor(el, text) {
                             <Search store={this.props.store} />
 
                             : sortedContent.map((data, key) => {
-                                return (<div>
+                                return (<div key={key}>
 
                                     <div className="col-md-12 col-sm-12 col-xs-12"
                                         onMouseOver={(e) => { this.mouseHover(e, key) }}
@@ -476,39 +502,22 @@ function insertTextAtCursor(el, text) {
 
 
                                 <div className="form-group">
-                                    <Overlay
-                                        show={this.state.showImgPopover}
-                                        target={this.state.target}
-                                        placement="top"
-                                        //   container='form-grou'
-                                        containerPadding={20}
-                                    >
-                                        <Popover id="popover-contained" title="Upload your picture">
-                                            <input type="file"
-                                                name={this.state.uploadName} id="answerImg" style={{ padding: "0px 0px 8px 1px" }} />
-                                            <Button
-                                                onClick={this.handleImage}
-                                                style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
-                                                bsSize="small">upload
-                                                 </Button> {this.state.fileUploadMsg}
-                                        </Popover>
-                                    </Overlay>
-                                    <Overlay
-                                        show={this.state.showLinkPopover}
-                                        target={this.state.target}
-                                        placement="top"
-                                        //   container='form-grou'
-                                        containerPadding={20}
-                                    >
-                                        <Popover id="popover-contained" title="Enter the link of text">
-                                            <input type="text" ref="linkText" />
-                                            <Button
-                                                onClick={this.handleLink}
-                                                style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
-                                                bsSize="small">enter
-                                                 </Button>
-                                        </Popover>
-                                    </Overlay>
+                                    <ImagePopOver 
+                                    show={this.state.showImgPopover}
+                                    target={this.state.target}
+                                    handleImage = {this.handleImage}
+                                    uploadName ={this.state.uploadName}
+                                    fileUploadMsg = {this.state.fileUploadMsg}
+                                    fileId= "newAnsFile"
+                                    ansRef={this.refs.addAnswer}
+                                    />
+                                    <LinkPopOver
+                                      show={this.state.showLinkPopover}
+                                      target={this.state.target}
+                                   
+                                      handleLink = {this.handleLink}
+                                    />
+
                                     <span
                                         onClick={this.handleImageEnter}
                                         style={{
@@ -524,7 +533,7 @@ function insertTextAtCursor(el, text) {
 
                                         }} className="btnLink"> </span>
 
-                                    <textarea placeholder="Answer" className="form-control scrollbar" id="style-3" ref='Answer'></textarea>
+                                    <textarea placeholder="Answer" className="form-control scrollbar" id="style-3" ref='addAnswer'></textarea>
                                 </div>
 
                                 <div className="addContentbtn">
@@ -614,13 +623,45 @@ votre question</Link></div>
                                     </FormGroup>
 
                                     <FormGroup controlId="formBasicText" >
-                                        <Modal.Title>Répondre</Modal.Title>
+                                    <ImagePopOver 
+                                    show={this.state.showImgPopover}
+                                    target={this.state.target}
+                                    handleImage = {this.handleImage}
+                                    uploadName ={this.state.uploadName}
+                                    fileUploadMsg = {this.state.fileUploadMsg}
+                                    fileId="editAnsFile"
+                                    ansRef={this.refs.editAnswer}
+                                    />
+                                    <LinkPopOver
+                                      show={this.state.showLinkPopover}
+                                      target={this.state.target}
+                                   
+                                      handleLink = {this.handleLink}
+                                    />
+                                        <Modal.Title style={{display: "inline"}}>Répondre</Modal.Title>
 
-                                        <textarea placeholder="Enter text" onChange={(e) => {
-                                            this.setState({
-                                                answer: e.target.value
-                                            })
-                                        }} className="form-control" value={this.state.answer} ref='Answer'></textarea>
+                                        <span
+                                        onClick={this.handleImageEnter}
+                                        style={{
+                                            backgroundImage: `url(${process.env.PUBLIC_URL}/images/img-button.png)`,
+                                            padding : "24px 0px 0px 18px"
+
+                                        }} className="btnImg">
+                                    </span>
+                                    <span
+                                        onClick={this.handleLinkEnter}
+                                        style={{
+                                            backgroundImage: `url(${process.env.PUBLIC_URL}/images/link-button.png)`,
+                                             padding : "26px 0px 0px 25px"
+
+                                        }} className="btnLink"> </span>
+                                        <textarea placeholder="Enter text" 
+
+                                        onChange={(e) => {
+                                            this.setState(this.state.answer.value = e.target.value)
+                                        }} 
+                                        
+                                        className="form-control" value={this.state.answer} ref='editAnswer'></textarea>
 
                                         <FormControl.Feedback />
                                     </FormGroup>
