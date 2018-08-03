@@ -18,18 +18,14 @@ const ImagePopOver = (props) => (
         show={props.show}
         target={props.target}
         placement="top"
-        //   container='form-grou'
+
         containerPadding={20}
-
-
     >
-    {/* {console.log(props.ansRef)} */}
-
         <Popover id="popover-contained" title="Upload your picture">
             <input type="file"
                 name={props.uploadName} id={props.fileId} style={{ padding: "0px 0px 8px 1px" }} />
             <Button
-                onClick={() => {props.handleImage(props.fileId, props.ansRef)}}
+                onClick={() => { props.handleImage(props.fileId, props.ansRef) }}
                 style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
                 bsSize="small">upload
              </Button> {props.fileUploadMsg}
@@ -38,16 +34,15 @@ const ImagePopOver = (props) => (
 );
 
 const LinkPopOver = (props) => (
-    
-      <Overlay
+
+    <Overlay
         show={props.show}
         target={props.target}
         placement="top"
-        //   container='form-grou'
         containerPadding={20}
     >
         <Popover id="popover-contained" title="Enter the link of text">
-            <input type="text" id="linkText" />
+            <input  type="text"/>
             <Button
                 onClick={props.handleLink}
                 style={{ backgroundColor: "#be0d0d", color: "white", height: "30px", padding: "5px 11px" }}
@@ -65,7 +60,7 @@ const LinkPopOver = (props) => (
             question: '',
             questionId: '',
             questionIndex: '',
-            answer: {value : ''},
+            answer: { value: '' },
             Message: '',
             Show: false,
             redirect: false,
@@ -131,7 +126,7 @@ const LinkPopOver = (props) => (
             this.refs[imgref].className = "Minus"
             this.refs[pRef].style.display = "block"
 
-            if (this.props.store.redirect) {
+            if (!this.props.store.redirect) {
                 views += 1;
                 this.props.store.updateViews(viewId, views)
             }
@@ -280,11 +275,11 @@ const LinkPopOver = (props) => (
 
     handleLink = () => {
         var LinkText = document.getElementById('linkText')
-        var start = this.refs.Answer.selectionStart;
-        var end = this.refs.Answer.selectionEnd;
-        var selectedText = this.refs.Answer.value.substring(start, end)
-        if (this.refs.Answer.value.length) {
-            this.refs.Answer.value = this.refs.Answer.value.replace(selectedText, `<a target="_blank" href=${LinkText.value}>${selectedText}</a>`)
+        var start = this.refs.addAnswer.selectionStart;
+        var end = this.refs.addAnswer.selectionEnd;
+        var selectedText = this.refs.addAnswer.value.substring(start, end)
+        if (this.refs.addAnswer.value.length) {
+            this.refs.addAnswer.value = this.refs.addAnswer.value.replace(selectedText, `<a target="_blank" href=${LinkText.value}>${selectedText}</a>`)
 
         }
 
@@ -294,8 +289,7 @@ const LinkPopOver = (props) => (
 
     }
 
-    handleImage =   (fileId, ansRef) =>   {
-        
+    handleImage = (fileId, ansRef) => {
 
         this.setState({
             fileUploadMsg: <span>Please wait...</span>
@@ -313,6 +307,11 @@ const LinkPopOver = (props) => (
                     if (ansRef.value.length) {
 
                         insertTextAtCursor(ansRef, `<br/><img width="100%" src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
+                    
+                             this.setState({
+                                 answer: ansRef.value
+                             })
+                 
                     }
                     else {
                         insertTextAtCursor(ansRef, `<img width="100%" src=${process.env.PUBLIC_URL}/images/${response.data} alt="answerImg"/>`)
@@ -386,6 +385,12 @@ const LinkPopOver = (props) => (
             <div className="content-wrapper" id="intro" style={{ overflowY: "scroll", overflowX: "hidden" }}>
 
                 <div className="container-fluid">
+                {/* <LinkPopOver
+                                            show={true}
+                                            target={this.state.target}
+
+                                            handleLink={this.handleLink}
+                                        /> */}
                     <div className="row">
                         <div className="col-md-12 col-sm-12 col-xs-12">
                             <div className="head_text">
@@ -502,20 +507,20 @@ const LinkPopOver = (props) => (
 
 
                                 <div className="form-group">
-                                    <ImagePopOver 
-                                    show={this.state.showImgPopover}
-                                    target={this.state.target}
-                                    handleImage = {this.handleImage}
-                                    uploadName ={this.state.uploadName}
-                                    fileUploadMsg = {this.state.fileUploadMsg}
-                                    fileId= "newAnsFile"
-                                    ansRef={this.refs.addAnswer}
+                                    <ImagePopOver
+                                        show={this.state.showImgPopover}
+                                        target={this.state.target}
+                                        handleImage={this.handleImage}
+                                        uploadName={this.state.uploadName}
+                                        fileUploadMsg={this.state.fileUploadMsg}
+                                        fileId="newAnsFile"
+                                        ansRef={this.refs.addAnswer}
                                     />
                                     <LinkPopOver
-                                      show={this.state.showLinkPopover}
-                                      target={this.state.target}
-                                   
-                                      handleLink = {this.handleLink}
+                                        show={this.state.showLinkPopover}
+                                        target={this.state.target}
+
+                                        handleLink={this.handleLink}
                                     />
 
                                     <span
@@ -617,51 +622,56 @@ votre question</Link></div>
                                             this.setState({
                                                 question: e.target.value
                                             })
-                                        }} placeholder="Enter text" value={this.state.question} className="form-control" ref="Question" />
+                                        }} placeholder="Enter text"
+                                         value={this.state.question} 
+                                         className="form-control" ref="Question" />
 
                                         <FormControl.Feedback />
                                     </FormGroup>
 
                                     <FormGroup controlId="formBasicText" >
-                                    <ImagePopOver 
-                                    show={this.state.showImgPopover}
-                                    target={this.state.target}
-                                    handleImage = {this.handleImage}
-                                    uploadName ={this.state.uploadName}
-                                    fileUploadMsg = {this.state.fileUploadMsg}
-                                    fileId="editAnsFile"
-                                    ansRef={this.refs.editAnswer}
-                                    />
-                                    <LinkPopOver
-                                      show={this.state.showLinkPopover}
-                                      target={this.state.target}
-                                   
-                                      handleLink = {this.handleLink}
-                                    />
-                                        <Modal.Title style={{display: "inline"}}>Répondre</Modal.Title>
+                                        <ImagePopOver
+                                            show={this.state.showImgPopover}
+                                            target={this.state.target}
+                                            handleImage={this.handleImage}
+                                            uploadName={this.state.uploadName}
+                                            fileUploadMsg={this.state.fileUploadMsg}
+                                            fileId="editAnsFile"
+                                            ansRef={this.refs.editAnswer}
+                                        />
+                                        <LinkPopOver
+                                            show={this.state.showLinkPopover}
+                                            target={this.state.target}
+
+                                            handleLink={this.handleLink}
+                                        />
+                                        <Modal.Title style={{ display: "inline" }}>Répondre</Modal.Title>
 
                                         <span
-                                        onClick={this.handleImageEnter}
-                                        style={{
-                                            backgroundImage: `url(${process.env.PUBLIC_URL}/images/img-button.png)`,
-                                            padding : "24px 0px 0px 18px"
+                                            onClick={this.handleImageEnter}
+                                            style={{
+                                                backgroundImage: `url(${process.env.PUBLIC_URL}/images/img-button.png)`,
+                                                padding: "24px 0px 0px 18px"
 
-                                        }} className="btnImg">
-                                    </span>
-                                    <span
-                                        onClick={this.handleLinkEnter}
-                                        style={{
-                                            backgroundImage: `url(${process.env.PUBLIC_URL}/images/link-button.png)`,
-                                             padding : "26px 0px 0px 25px"
+                                            }} className="btnImg">
+                                        </span>
+                                        <span
+                                            onClick={this.handleLinkEnter}
+                                            style={{
+                                                backgroundImage: `url(${process.env.PUBLIC_URL}/images/link-button.png)`,
+                                                padding: "26px 0px 0px 25px"
 
-                                        }} className="btnLink"> </span>
-                                        <textarea placeholder="Enter text" 
+                                            }} className="btnLink"> </span>
+                                        <textarea placeholder="Enter text"
 
-                                        onChange={(e) => {
-                                            this.setState(this.state.answer.value = e.target.value)
-                                        }} 
-                                        
-                                        className="form-control" value={this.state.answer} ref='editAnswer'></textarea>
+                                            onChange={(e) => {
+                                                this.setState({ answer: e.target.value })
+                                                
+                                            }}
+
+                                            className="form-control" 
+                                            value={this.state.answer}
+                                             ref='editAnswer'></textarea>
 
                                         <FormControl.Feedback />
                                     </FormGroup>
